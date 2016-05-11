@@ -39,15 +39,15 @@ public class Category extends DomainEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Race> race;
+	private Collection<Race> racing;
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "category")
-	public Collection<Race> getRace() {
-		return race;
+	public Collection<Race> getRacing() {
+		return racing;
 	}
-	public void setRace(Collection<Race> race) {
-		this.race = race;
+	public void setRacing(Collection<Race> racing) {
+		this.racing = racing;
 	}
 }

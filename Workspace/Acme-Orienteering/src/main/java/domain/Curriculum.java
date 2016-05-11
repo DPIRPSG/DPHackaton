@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Curriculum extends CommentedEntity {
+public class Curriculum extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 
@@ -62,7 +62,7 @@ public class Curriculum extends CommentedEntity {
 
 	@Valid
 	@NotNull
-	@OneToOne(optional=false, mappedBy = "curriculum")
+	@OneToOne(optional = false, mappedBy = "curriculum")
 	public Actor getActor() {
 		return actor;
 	}

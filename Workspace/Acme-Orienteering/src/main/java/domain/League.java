@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -91,27 +92,49 @@ public class League extends CommentedEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Punishment> punishment;
-	private Collection<FeePayment> feePayment;
+	private Collection<Punishment> punishments;
+	private Collection<FeePayment> feePayments;
+	private Collection<Race> racing;
+	private Referee referee;
 
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "league")
-	public Collection<Punishment> getPunishment() {
-		return punishment;
+	public Collection<Punishment> getPunishments() {
+		return punishments;
 	}
-	public void setPunishment(Collection<Punishment> punishment) {
-		this.punishment = punishment;
+	public void setPunishments(Collection<Punishment> punishments) {
+		this.punishments = punishments;
 	}
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "league")
-	public Collection<FeePayment> getFeePayment() {
-		return feePayment;
+	public Collection<FeePayment> getFeePayments() {
+		return feePayments;
 	}
-	public void setFeePayment(Collection<FeePayment> feePayment) {
-		this.feePayment = feePayment;
+	public void setFeePayments(Collection<FeePayment> feePayments) {
+		this.feePayments = feePayments;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "league")
+	public Collection<Race> getRacing() {
+		return racing;
+	}
+	public void setRacing(Collection<Race> racing) {
+		this.racing = racing;
+	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Referee getReferee() {
+		return referee;
+	}
+	public void setReferee(Referee referee) {
+		this.referee = referee;
 	}
 }

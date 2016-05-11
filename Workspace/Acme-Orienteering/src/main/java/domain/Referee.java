@@ -18,15 +18,15 @@ public class Referee extends Actor {
 	// Attributes -------------------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
-	private Collection<League> league;
+	private Collection<League> leagues;
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "referee")
-	public Collection<League> getLeague() {
-		return league;
+	public Collection<League> getLeagues() {
+		return leagues;
 	}
-	public void setLeague(Collection<League> league) {
-		this.league = league;
+	public void setLeagues(Collection<League> leagues) {
+		this.leagues = leagues;
 	}
 }

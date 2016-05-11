@@ -8,7 +8,7 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Administrator;
-import domain.Customer;
+import domain.Runner;
 import domain.form.ActorForm;
 
 import security.UserAccount;
@@ -108,7 +108,7 @@ public class ActorFormService {
 			}
 			
 			if(isConsumer){
-				Customer result;
+				Runner result;
 				
 				result = customerService.findByPrincipal();
 				
@@ -139,7 +139,7 @@ public class ActorFormService {
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 
 			UserAccount acount;
-			Customer result;
+			Runner result;
 			
 			acount = userAccountService.createComplete(input.getUsername(), input.getPassword(), "CUSTOMER");
 			result = customerService.create();

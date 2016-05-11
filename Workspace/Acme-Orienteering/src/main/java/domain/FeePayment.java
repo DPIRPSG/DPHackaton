@@ -26,7 +26,6 @@ public class FeePayment extends DomainEntity {
 	private double amount;
 	private Date paymentMoment;
 	
-	
 	@Valid
 	@NotNull
 	public CreditCard getCreditCard() {
