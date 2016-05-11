@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="barter/list" extends="master.page">	
+		<put-attribute name="title" value="List of Barters" />
+		<put-attribute name="body" value="/views/barter/list.jsp" />
+	</definition>
+	
+	<definition name="barter/display" extends="master.page">	
+		<put-attribute name="title" value="List of Barters" />
+		<put-attribute name="body" value="/views/barter/display.jsp" />
+	</definition>
+	
+	<definition name="barter/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit a Barter" />
+		<put-attribute name="body" value="/views/barter/edit.jsp" />
+	</definition>
+	
+	<definition name="barter/create" extends="master.page">	
+		<put-attribute name="title" value="Create a Barter" />
+		<put-attribute name="body" value="/views/barter/create.jsp" />
+	</definition>
+	
+</tiles-definitions>

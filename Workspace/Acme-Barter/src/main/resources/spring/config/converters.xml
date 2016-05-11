@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * converters.xml
+ *
+ * Copyright (C) 2014 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		
+		<bean class="converters.UserToStringConverter" />
+		<bean class="converters.StringToUserConverter" />
+		
+		<bean class="converters.FolderToStringConverter" />
+		<bean class="converters.StringToFolderConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+		
+		<bean class="converters.AuditorToStringConverter" />
+		<bean class="converters.StringToAuditorConverter" />
+
+		<bean class="converters.AutoreplyToStringConverter" />
+		<bean class="converters.StringToAutoreplyConverter" />
+		
+		<bean class="converters.BarterToStringConverter" />
+		<bean class="converters.StringToBarterConverter" />
+		
+		<bean class="converters.MatchToStringConverter" />
+		<bean class="converters.StringToMatchConverter" />
+		
+		<bean class="converters.ItemToStringConverter" />
+		<bean class="converters.StringToItemConverter" />
+		
+		<bean class="converters.LegalTextToStringConverter" />
+		<bean class="converters.StringToLegalTextConverter" />
+		
+		<bean class="converters.AttributeToStringConverter" />
+		<bean class="converters.StringToAttributeConverter" />
+		
+		<bean class="converters.AttributeDescriptionToStringConverter" />
+		<bean class="converters.StringToAttributeDescriptionConverter" />
+		
+		<bean class="converters.ComplaintToStringConverter" />
+		<bean class="converters.StringToComplaintConverter" />
+	
+	</util:list>
+	
+</beans>
