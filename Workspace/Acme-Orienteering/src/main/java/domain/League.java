@@ -92,40 +92,40 @@ public class League extends CommentedEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Punishment> punishment;
-	private Collection<FeePayment> feePayment;
-	private Collection<Race> race;
+	private Collection<Punishment> punishments;
+	private Collection<FeePayment> feePayments;
+	private Collection<Race> racing;
 	private Referee referee;
 
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "league")
-	public Collection<Punishment> getPunishment() {
-		return punishment;
+	public Collection<Punishment> getPunishments() {
+		return punishments;
 	}
-	public void setPunishment(Collection<Punishment> punishment) {
-		this.punishment = punishment;
-	}
-	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "league")
-	public Collection<FeePayment> getFeePayment() {
-		return feePayment;
-	}
-	public void setFeePayment(Collection<FeePayment> feePayment) {
-		this.feePayment = feePayment;
+	public void setPunishments(Collection<Punishment> punishments) {
+		this.punishments = punishments;
 	}
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "league")
-	public Collection<Race> getRace() {
-		return race;
+	public Collection<FeePayment> getFeePayments() {
+		return feePayments;
 	}
-	public void setRace(Collection<Race> race) {
-		this.race = race;
+	public void setFeePayments(Collection<FeePayment> feePayments) {
+		this.feePayments = feePayments;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "league")
+	public Collection<Race> getRacing() {
+		return racing;
+	}
+	public void setRacing(Collection<Race> racing) {
+		this.racing = racing;
 	}
 	
 	@Valid

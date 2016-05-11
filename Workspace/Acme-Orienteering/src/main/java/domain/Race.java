@@ -56,19 +56,19 @@ public class Race extends CommentedEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Classification> classification;
+	private Collection<Classification> classifications;
 	private Category category;
 	private League league;
 	private Collection<Participates> participates;
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "club")
-	public Collection<Classification> getClassification() {
-		return classification;
+	@OneToMany(mappedBy = "race")
+	public Collection<Classification> getClassifications() {
+		return classifications;
 	}
-	public void setClassification(Collection<Classification> classification) {
-		this.classification = classification;
+	public void setClassifications(Collection<Classification> classifications) {
+		this.classifications = classifications;
 	}
 
 	@Valid

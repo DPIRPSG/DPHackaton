@@ -78,11 +78,11 @@ public class Club extends CommentedEntity {
 	
 	// Relationships ----------------------------------------------------------
 	private Manager manager;
-	private Collection<Bulletin> bulletin;
-	private Collection<Classification> classification;
+	private Collection<Bulletin> bulletins;
+	private Collection<Classification> classifications;
 	private Collection<Entered> entered;
-	private Collection<Punishment> punishment;
-	private Collection<FeePayment> feePayment;
+	private Collection<Punishment> punishments;
+	private Collection<FeePayment> feePayments;
 
 	@Valid
 	@NotNull
@@ -97,21 +97,21 @@ public class Club extends CommentedEntity {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "club")
-	public Collection<Bulletin> getBulletin() {
-		return bulletin;
+	public Collection<Bulletin> getBulletins() {
+		return bulletins;
 	}
-	public void setBulletin(Collection<Bulletin> bulletin) {
-		this.bulletin = bulletin;
+	public void setBulletins(Collection<Bulletin> bulletins) {
+		this.bulletins = bulletins;
 	}
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "club")
-	public Collection<Classification> getClassification() {
-		return classification;
+	public Collection<Classification> getClassifications() {
+		return classifications;
 	}
-	public void setClassification(Collection<Classification> classification) {
-		this.classification = classification;
+	public void setClassifications(Collection<Classification> classifications) {
+		this.classifications = classifications;
 	}
 	
 	@Valid
@@ -127,20 +127,20 @@ public class Club extends CommentedEntity {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "club")
-	public Collection<Punishment> getPunishment() {
-		return punishment;
+	public Collection<Punishment> getPunishments() {
+		return punishments;
 	}
-	public void setPunishment(Collection<Punishment> punishment) {
-		this.punishment = punishment;
+	public void setPunishments(Collection<Punishment> punishments) {
+		this.punishments = punishments;
 	}
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "club")
-	public Collection<FeePayment> getFeePayment() {
-		return feePayment;
+	public Collection<FeePayment> getFeePayments() {
+		return feePayments;
 	}
-	public void setFeePayment(Collection<FeePayment> feePayment) {
-		this.feePayment = feePayment;
+	public void setFeePayments(Collection<FeePayment> feePayments) {
+		this.feePayments = feePayments;
 	}
 }

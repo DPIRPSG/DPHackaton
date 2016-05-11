@@ -19,16 +19,16 @@ public abstract class CommentedEntity extends DomainEntity{
 	// Attributes -------------------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Comment> comment;	
+	private Collection<Comment> comments;	
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "actor")
-	public Collection<Comment> getComment() {
-		return comment;
+	public Collection<Comment> getComments() {
+		return comments;
 	}
-	public void setComment(Collection<Comment> comment) {
-		this.comment = comment;
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
 	}
 	
 	
