@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Customer;
+import domain.Runner;
 import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
@@ -43,11 +43,11 @@ public class CustomerService {
 	 * 
 	 */
 	// req: 10.1
-	public Customer create(){
-		Customer result;
+	public Runner create(){
+		Runner result;
 		UserAccount userAccount;
 
-		result = new Customer();
+		result = new Runner();
 		
 		userAccount = userAccountService.create("CUSTOMER");
 		result.setUserAccount(userAccount);
@@ -59,7 +59,7 @@ public class CustomerService {
 	 * Almacena en la base de datos el cambio
 	 */
 	// req: 10.1
-	public void save(Customer customer){
+	public void save(Runner customer){
 		Assert.notNull(customer);
 		
 		boolean result = true;
@@ -88,10 +88,10 @@ public class CustomerService {
 	 * Lista los customers registrados
 	 */
 	// req: 12.5
-	public Collection<Customer> findAll(){
+	public Collection<Runner> findAll(){
 		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list customers");
 		
-		Collection<Customer> result;
+		Collection<Runner> result;
 		
 		result = customerRepository.findAll();
 		
@@ -104,8 +104,8 @@ public class CustomerService {
 	 * Devuelve el customers que está realizando la operación
 	 */
 	//req: x
-	public Customer findByPrincipal(){
-		Customer result;
+	public Runner findByPrincipal(){
+		Runner result;
 		UserAccount userAccount;
 		
 		userAccount = LoginService.getPrincipal();

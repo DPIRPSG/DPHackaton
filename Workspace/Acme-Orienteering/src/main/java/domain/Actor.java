@@ -98,7 +98,7 @@ public abstract class Actor extends DomainEntity{
 	
 	@NotNull
 	@Valid
-	@ManyToMany(mappedBy = "recipient")
+	@ManyToMany
 	public Collection<Message> getReceived() {
 		return received;
 	}
@@ -117,7 +117,7 @@ public abstract class Actor extends DomainEntity{
 	}
 	
 	@Valid
-	@OneToOne(optional = true, mappedBy = "actor")
+	@OneToOne(optional = true)
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}
@@ -134,7 +134,4 @@ public abstract class Actor extends DomainEntity{
 	public void setComment(Collection<Comment> comment) {
 		this.comment = comment;
 	}
-	
-	
-
 }

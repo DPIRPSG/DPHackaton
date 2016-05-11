@@ -17,7 +17,7 @@ public class Participates extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private int result;
 
-	@Min(value = 1)
+	@Min(value = 0)
 	public int getResult() {
 		return result;
 	}

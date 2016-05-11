@@ -30,7 +30,6 @@ public class Folder extends DomainEntity {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -39,7 +38,6 @@ public class Folder extends DomainEntity {
 	public boolean getIsSystem() {
 		return isSystem;
 	}
-
 	public void setIsSystem(boolean isSystem) {
 		this.isSystem = isSystem;
 	}
@@ -60,20 +58,17 @@ public class Folder extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToMany
+	@ManyToMany(mappedBy = "folders")
 	@NotNull
 	public Collection<Message> getMessages() {
 		return messages;
 	}
-
 	public void setMessages(Collection<Message> messages) {
 		this.messages = messages;
 	}
-
 	public void addMessage(Message message) {
 		this.messages.add(message);
 	}
-
 	public void removeMessage(Message message) {
 		this.messages.remove(message);
 	}

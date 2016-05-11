@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -93,6 +94,8 @@ public class League extends CommentedEntity {
 	// Relationships ----------------------------------------------------------
 	private Collection<Punishment> punishment;
 	private Collection<FeePayment> feePayment;
+	private Collection<Race> race;
+	private Referee referee;
 
 	
 	@Valid
@@ -113,5 +116,25 @@ public class League extends CommentedEntity {
 	}
 	public void setFeePayment(Collection<FeePayment> feePayment) {
 		this.feePayment = feePayment;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "league")
+	public Collection<Race> getRace() {
+		return race;
+	}
+	public void setRace(Collection<Race> race) {
+		this.race = race;
+	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Referee getReferee() {
+		return referee;
+	}
+	public void setReferee(Referee referee) {
+		this.referee = referee;
 	}
 }

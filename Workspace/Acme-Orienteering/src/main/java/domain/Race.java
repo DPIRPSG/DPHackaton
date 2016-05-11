@@ -93,7 +93,7 @@ public class Race extends CommentedEntity {
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "participates")
+	@OneToMany(mappedBy = "race")
 	public Collection<Participates> getParticipates() {
 		return participates;
 	}

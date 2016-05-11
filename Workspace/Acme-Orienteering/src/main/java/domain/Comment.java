@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Comment extends CommentedEntity {
+public class Comment extends DomainEntity {
 
 	// Constructors -----------------------------------------------------------
 
@@ -83,7 +83,4 @@ public class Comment extends CommentedEntity {
 	public void setCommentedEntity(CommentedEntity commentedEntity) {
 		this.commentedEntity = commentedEntity;
 	}
-
-	
-	
 }

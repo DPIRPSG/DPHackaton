@@ -18,26 +18,26 @@ public class Runner extends Actor {
 	// Attributes -------------------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Club> entered;
-	private Collection<Race> participates;
+	private Collection<Entered> entered;
+	private Collection<Participates> participates;
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "runner")
-	public Collection<Club> getEntered() {
+	public Collection<Entered> getEntered() {
 		return entered;
 	}
-	public void setEntered(Collection<Club> entered) {
+	public void setEntered(Collection<Entered> entered) {
 		this.entered = entered;
 	}
 
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "runner")
-	public Collection<Race> getParticipates() {
+	public Collection<Participates> getParticipates() {
 		return participates;
 	}
-	public void setParticipates(Collection<Race> participates) {
+	public void setParticipates(Collection<Participates> participates) {
 		this.participates = participates;
 	}
 }
