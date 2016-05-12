@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.CustomerService;
+import services.RunnerService;
 import services.form.ActorFormService;
 
 import controllers.AbstractController;
@@ -24,7 +24,7 @@ public class CustomerController extends AbstractController {
 	// Services ----------------------------------------------------------
 
 	@Autowired
-	private CustomerService customerService;
+	private RunnerService customerService;
 	
 	@Autowired
 	private ActorFormService actorFormService;

@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="barter/administrator/edit.do" modelAttribute="category">
+<form:form action="category/administrator/edit.do" modelAttribute="category">
 	<!-- Hidden Attributes -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />
