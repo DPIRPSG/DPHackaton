@@ -1,5 +1,5 @@
 <%--
- * textbox.tag
+ * link.tag
  *
  * Copyright (C) 2014 Universidad de Sevilla
  * 
@@ -7,10 +7,10 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
-
+ 
 <%@ tag language="java" body-content="empty" %>
-
-<%-- Taglibs --%>
+ 
+ <%-- Taglibs --%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -22,26 +22,18 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="path" required="true" %>
-<%@ attribute name="code" required="true" %>
-
-<%@ attribute name="readonly" required="false" %>
-<%@ attribute name="pathValue" required="false" %>
-<%@ attribute name="size" required="false" %>
-
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
-</jstl:if>
-<%-- <jstl:if test="${pathValue == null}"> --%>
-<%-- 	<jstl:set var="pathValue" value="${path}" /> --%>
-<%-- </jstl:if> --%>
+<%@ attribute name="priority" required="true" %>
 
 <%-- Definition --%>
 
-<div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />: &nbsp;
-	</form:label>	
-	<form:input path="${path}" value="${pathValue}" readonly="${readonly}" size="${size}"/>	
-	<form:errors path="${path}" cssClass="error" />
-</div>	
+<jstl:choose>
+	<jstl:when test="${priority < 0}">
+		<spring:message code="message.priority.-1"/>
+	</jstl:when>
+	<jstl:when test="${priority == 0}">
+		<spring:message code="message.priority.0"/>
+	</jstl:when>
+		<jstl:when test="${priority > 0}">
+		<spring:message code="message.priority.+1"/>
+	</jstl:when>
+</jstl:choose>
