@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import domain.Runner;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Runner, Integer> {
+public interface RunnerRepository extends JpaRepository<Runner, Integer> {
 	
 	@Query("select c from Customer c where c.userAccount.id = ?1")
 	Runner findByUserAccountId(int userAccountId);
