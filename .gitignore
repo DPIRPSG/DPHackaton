@@ -5,7 +5,10 @@ Scrapbook
 *.class
 
 # Evitar subir cosas de Dolphin (Linux-KDE)
-.directory 
+.directory
+
+# Evitar subir cosas de Astah
+*.lock
 
 # Subir a pesar de las restricciones
 !Documentation/SampleWorkspace_1.4/.metadata/

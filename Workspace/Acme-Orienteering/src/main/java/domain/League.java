@@ -96,6 +96,7 @@ public class League extends CommentedEntity {
 	private Collection<FeePayment> feePayments;
 	private Collection<Race> racing;
 	private Referee referee;
+	private Collection<Finances> finances;
 
 	
 	@Valid
@@ -137,4 +138,16 @@ public class League extends CommentedEntity {
 	public void setReferee(Referee referee) {
 		this.referee = referee;
 	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "league")
+	public Collection<Finances> getFinances() {
+		return finances;
+	}
+	public void setFinances(Collection<Finances> finances) {
+		this.finances = finances;
+	}
+	
+	
 }
