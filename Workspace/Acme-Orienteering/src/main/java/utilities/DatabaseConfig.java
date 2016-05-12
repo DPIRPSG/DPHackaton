@@ -2,6 +2,6 @@ package utilities;
 
 public interface DatabaseConfig {
 
-	public final String PersistenceUnit = "Sample-Project-1.5";
+	public final String PersistenceUnit = "Acme-Orienteering";
 	
 }

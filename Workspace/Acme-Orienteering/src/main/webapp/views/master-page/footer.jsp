@@ -20,7 +20,7 @@
 <hr />
 <a href="about-us/index.do"><spring:message code="master.page.aboutUs" /></a>
 <b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" />
-	Sample Project 1.5 Co., Inc.
+	Acme Orienteering Co., Inc.
 </b>
 
 <script type="text/javascript">

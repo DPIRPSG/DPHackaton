@@ -30,7 +30,7 @@
 
 	<name>Acme Orienteering 1.0</name>
 	<url>http://www.acme-orienteering.com</url>
-	<description>This is a sample project 1.5.</description>
+	<description>This is an Acme Orienteering project.</description>
 	
 	<!-- Build commands -->
 
