@@ -51,7 +51,7 @@ public class Club extends CommentedEntity {
 	
 	@NotNull
 	@ElementCollection
-	@URL
+	//@URL
 	public Collection<String> getPictures() {
 		return pictures;
 	}
