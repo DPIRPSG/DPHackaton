@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Runner;
-import repositories.CustomerRepository;
+import repositories.RunnerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -21,7 +21,7 @@ public class CustomerService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private CustomerRepository customerRepository;
+	private RunnerRepository customerRepository;
 	
 	//Supporting services ----------------------------------------------------
 
