@@ -17,6 +17,14 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="categories" requestURI="${requestURI}" id="row_Category">
 	<!-- Action links -->
+	
+	<display:column>
+		<div>
+			<b><a href="category/administrator/edit.do?categoryId=${row_Category.id}"> <spring:message
+						code="category.edit" />
+			</a></b>
+		</div>
+	</display:column>
 
 	<!-- Attributes -->
 
@@ -31,5 +39,9 @@
 
 <!-- Action links -->
 
-
+<div>
+	<b><a href="category/administrator/create.do"> <spring:message
+				code="category.create" />
+	</a></b>
+</div>
 
