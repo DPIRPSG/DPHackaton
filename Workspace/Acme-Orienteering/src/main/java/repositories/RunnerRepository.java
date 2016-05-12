@@ -12,7 +12,7 @@ import domain.Runner;
 @Repository
 public interface RunnerRepository extends JpaRepository<Runner, Integer> {
 	
-	@Query("select c from Customer c where c.userAccount.id = ?1")
+	@Query("select r from Runner r where r.userAccount.id = ?1")
 	Runner findByUserAccountId(int userAccountId);
 	
 }
