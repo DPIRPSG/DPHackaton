@@ -15,7 +15,7 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
 import services.AdministratorService;
-import services.CustomerService;
+import services.RunnerService;
 
 @Service
 @Transactional
@@ -29,7 +29,7 @@ public class ActorFormService {
 		private ActorService actorService;
 		
 		@Autowired
-		private CustomerService customerService;
+		private RunnerService customerService;
 		
 		@Autowired
 		private AdministratorService administratorService;

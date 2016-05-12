@@ -17,7 +17,7 @@ import security.UserAccountService;
 
 @Service
 @Transactional
-public class CustomerService {
+public class RunnerService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class CustomerService {
 	
 	//Constructors -----------------------------------------------------------
 
-	public CustomerService(){
+	public RunnerService(){
 		super();
 	}
 	
