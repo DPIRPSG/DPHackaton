@@ -71,7 +71,7 @@ public class ClubService {
 		
 		result.setManager(manager);
 		result.setPictures(pictures);
-		result.setCrationMoment(new Date());
+		result.setCreationMoment(new Date());
 		result.setDeleted(false);
 		result.setBulletins(bulletins);
 		result.setClassifications(classifications);
@@ -107,7 +107,7 @@ public class ClubService {
 			comments = new ArrayList<Comment>();
 			
 			club.setManager(manager);
-			club.setCrationMoment(new Date());
+			club.setCreationMoment(new Date());
 			club.setDeleted(false);
 			club.setBulletins(bulletins);
 			club.setClassifications(classifications);

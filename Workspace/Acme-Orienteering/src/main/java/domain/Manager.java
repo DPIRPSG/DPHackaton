@@ -18,7 +18,7 @@ public class Manager extends Actor {
 	private Club club;
 
 	@Valid
-	@OneToOne(optional = true)
+	@OneToOne(optional = true, mappedBy="manager")
 	public Club getClub() {
 		return club;
 	}
