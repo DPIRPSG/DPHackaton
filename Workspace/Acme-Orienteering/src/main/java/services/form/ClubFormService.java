@@ -2,6 +2,7 @@ package services.form;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,7 @@ public class ClubFormService {
 			result.setName(clubForm.getName());
 			result.setDescription(clubForm.getDescription());
 			result.setPictures(clubForm.getPictures());
+			result.setCreationMoment(new Date());
 		} else if(clubForm.getClubId() != 0) {			
 			result = clubService.findOne(clubForm.getClubId());
 			result.setName(clubForm.getName());

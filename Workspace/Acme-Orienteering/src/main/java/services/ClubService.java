@@ -17,6 +17,7 @@ import domain.Entered;
 import domain.FeePayment;
 import domain.Manager;
 import domain.Punishment;
+import domain.Runner;
 
 import repositories.ClubRepository;
 
@@ -36,6 +37,9 @@ public class ClubService {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private RunnerService runnerService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -86,7 +90,38 @@ public class ClubService {
 	public Club save(Club club) {
 		Assert.notNull(club);
 		
-		club = clubRepository.save(club);
+		Manager manager;
+		Runner runner;
+		Collection<Runner> runners;
+		boolean pertenece;
+		
+		if(actorService.checkAuthority("MANAGER")) {
+			manager = managerService.findByPrincipal();
+			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
+		} else if(actorService.checkAuthority("RUNNER")) {
+			runner = runnerService.findByPrincipal();
+			runners = runnerService.findAllByClubId(club.getId());
+			pertenece = false;
+			
+			for(Runner r : runners) {
+				if(runner.getId() == r.getId()) {
+					pertenece = true;
+					break;
+				}
+			}
+			Assert.isTrue(pertenece, "Only a runner of this club can save it");
+		}
+		
+		if(club.getId() == 0) {
+			club = clubRepository.save(club);
+			
+			manager = club.getManager();
+			managerService.save(manager);
+		} else {
+			club = clubRepository.save(club);
+		}
+		
+		
 			
 		return club;
 	}
@@ -95,6 +130,13 @@ public class ClubService {
 		Assert.notNull(club);
 		Assert.isTrue(club.getId() != 0);
 		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can delete clubes");
+		
+		if(actorService.checkAuthority("MANAGER")) {
+			Manager manager;
+			
+			manager = managerService.findByPrincipal();
+			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
+		}
 		
 		clubRepository.delete(club);
 		
