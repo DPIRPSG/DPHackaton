@@ -40,6 +40,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MANAGER')">
+			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
 		</security:authorize>
 		

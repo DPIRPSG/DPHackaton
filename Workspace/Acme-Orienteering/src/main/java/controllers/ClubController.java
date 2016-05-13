@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ClubService;
+import services.ManagerService;
 import controllers.AbstractController;
 import domain.Club;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/club")
@@ -30,6 +33,12 @@ public class ClubController extends AbstractController {
 
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private ManagerService managerService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -43,12 +52,20 @@ public class ClubController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Club> clubes;
+		Manager manager;
+		
+		if(actorService.checkAuthority("MANAGER")) {
+			manager = managerService.findByPrincipal();
+		} else {
+			manager = null;
+		}
 
 		clubes = clubService.findAll();
 		
 		result = new ModelAndView("club/list");
 		result.addObject("requestURI", "club/list.do");
 		result.addObject("clubes", clubes);
+		result.addObject("manager", manager);
 
 		return result;
 	}

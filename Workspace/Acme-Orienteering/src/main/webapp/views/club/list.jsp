@@ -17,15 +17,19 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="clubes" requestURI="${requestURI}" id="row_Club">
 	<!-- Action links -->
-	
-	<display:column>
-		<div>
-			<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
-						code="club.edit" />
-			</a></b>
-		</div>
-	</display:column>
-	
+
+	<security:authorize access="hasRole('MANAGER')">
+		<jstl:if test="${manager.id == row_Club.manager.id }">
+			<display:column>
+				<div>
+					<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
+								code="club.edit" />
+					</a></b>
+				</div>
+			</display:column>
+		</jstl:if>
+	</security:authorize>
+
 	<!-- Attributes -->
 
 	<spring:message code="club.name" var="nameHeader"/>
@@ -62,8 +66,12 @@
 
 <!-- Action links -->
 
-<div>
-	<b><a href="club/manager/create.do"> <spring:message
-				code="club.create" />
-	</a></b>
-</div>
+<security:authorize access="hasRole('MANAGER')">
+	<jstl:if test="${clubes == null }">
+		<div>
+			<b><a href="club/manager/create.do"> <spring:message
+						code="club.create" />
+			</a></b>
+		</div>
+	</jstl:if>
+</security:authorize>
