@@ -85,43 +85,9 @@ public class ClubService {
 	
 	public Club save(Club club) {
 		Assert.notNull(club);
-		Assert.isTrue(actorService.checkAuthority("MANAGER"),
-				"Only a manager can save clubes");
 		
-		if(club.getId() == 0){
-			Manager manager;
-			Collection<Bulletin> bulletins;
-			Collection<Classification> classifications;
-			Collection<Entered> entereds;
-			Collection<Punishment> punishments;
-			Collection<FeePayment> feePayments;
-			Collection<Comment> comments;
+		club = clubRepository.save(club);
 			
-			manager = managerService.findByPrincipal();
-			bulletins = new ArrayList<Bulletin>();
-			classifications = new ArrayList<Classification>();
-			entereds = new ArrayList<Entered>();
-			punishments = new ArrayList<Punishment>();
-			feePayments = new ArrayList<FeePayment>();
-			comments = new ArrayList<Comment>();
-			
-			club.setManager(manager);
-			club.setCreationMoment(new Date());
-			club.setDeleted(false);
-			club.setBulletins(bulletins);
-			club.setClassifications(classifications);
-			club.setEntered(entereds);
-			club.setPunishments(punishments);
-			club.setFeePayments(feePayments);
-			club.setComments(comments);
-			
-			club = clubRepository.save(club);
-			
-			manager.setClub(club);
-			
-			managerService.save(manager);
-		}
-		
 		return club;
 	}
 	

@@ -11,23 +11,10 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="club/manager/edit.do" modelAttribute="club">
+<form:form action="club/manager/edit.do" modelAttribute="clubForm">
 	<!-- Hidden Attributes -->
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	
-	<form:hidden path="creationMoment"/>
-	<form:hidden path="deleted"/>
-	
-	<form:hidden path="manager"/>
-	<form:hidden path="bulletins"/>
-	<form:hidden path="classifications"/>
-	<form:hidden path="entered"/>
-	<form:hidden path="punishments"/>
-	<form:hidden path="feePayments"/>
-	
-	<form:hidden path="comments"/>
-	
+	<form:hidden path="clubId"/>
+
 	<!-- Editable Attributes -->
 	
 	<acme:textbox code="club.name" path="name"/>
@@ -39,7 +26,7 @@
 	<!-- Action buttons -->
 	<acme:submit name="save" code="club.save"/>
 	
-	<jstl:if test="${club.id != 0}">
+	<jstl:if test="${clubForm.clubId != 0}">
 		<acme:submit name="delete" code="club.delete"/>
 	</jstl:if>
 	
