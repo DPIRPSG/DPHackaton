@@ -22,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ClubService;
+import services.ManagerService;
+import services.form.ClubFormService;
 import controllers.AbstractController;
 import domain.Club;
+import domain.Manager;
+import domain.form.ClubForm;
 
 @Controller
 @RequestMapping("/club/manager")
@@ -33,6 +37,12 @@ public class ClubManagerController extends AbstractController {
 
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private ClubFormService clubFormService;
+	
+	@Autowired
+	private ManagerService managerService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -46,12 +56,15 @@ public class ClubManagerController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Club club;
+		Manager manager;
 
 		club = clubService.findClubByManagerId();
+		manager = managerService.findByPrincipal();
 		
 		result = new ModelAndView("club/list");
 		result.addObject("requestURI", "club/manager/list.do");
 		result.addObject("clubes", club);
+		result.addObject("manager", manager);
 
 		return result;
 	}
@@ -61,10 +74,10 @@ public class ClubManagerController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Club club;
+		ClubForm clubForm;
 
-		club = clubService.create();
-		result = createEditModelAndView(club);
+		clubForm = clubFormService.create();
+		result = createEditModelAndView(clubForm);
 
 		return result;
 	}
@@ -74,31 +87,31 @@ public class ClubManagerController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int clubId) {
 		ModelAndView result;
-		Club club;
+		ClubForm clubForm;
 
-		club = clubService.findOne(clubId);		
-		Assert.notNull(club);
-		result = createEditModelAndView(club);
+		clubForm = clubFormService.findOne(clubId);		
+		Assert.notNull(clubForm);
+		clubForm.setClubId(clubId);
+		result = createEditModelAndView(clubForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Club club, BindingResult binding) {
+	public ModelAndView save(@Valid ClubForm clubForm, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(club);
-			System.out.println(binding);
+			result = createEditModelAndView(clubForm);
 		} else {
 			try {
+				Club club;
+				
+				club = clubFormService.reconstruct(clubForm);
 				club = clubService.save(club);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				System.out.println(oops);
-				System.out.println(club.getId());
-				System.out.println(club.getManager().getId());
-				result = createEditModelAndView(club, "club.commit.error");				
+				result = createEditModelAndView(clubForm, "club.commit.error");				
 			}
 		}
 
@@ -106,14 +119,14 @@ public class ClubManagerController extends AbstractController {
 	}
 			
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Club club, BindingResult binding) {
+	public ModelAndView delete(ClubForm clubForm, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
-			clubService.delete(club);
+			clubFormService.delete(clubForm);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(club, "club.commit.error");
+			result = createEditModelAndView(clubForm, "club.commit.error");
 		}
 
 		return result;
@@ -121,19 +134,19 @@ public class ClubManagerController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Club club) {
+	protected ModelAndView createEditModelAndView(ClubForm clubForm) {
 		ModelAndView result;
 
-		result = createEditModelAndView(club, null);
+		result = createEditModelAndView(clubForm, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Club club, String message) {
+	protected ModelAndView createEditModelAndView(ClubForm clubForm, String message) {
 		ModelAndView result;
 		
 		result = new ModelAndView("club/edit");
-		result.addObject("club", club);
+		result.addObject("clubForm", clubForm);
 		result.addObject("message", message);
 
 		return result;

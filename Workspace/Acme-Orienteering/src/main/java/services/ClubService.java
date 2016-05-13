@@ -17,6 +17,7 @@ import domain.Entered;
 import domain.FeePayment;
 import domain.Manager;
 import domain.Punishment;
+import domain.Runner;
 
 import repositories.ClubRepository;
 
@@ -36,6 +37,9 @@ public class ClubService {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private RunnerService runnerService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -85,47 +89,40 @@ public class ClubService {
 	
 	public Club save(Club club) {
 		Assert.notNull(club);
-		Assert.isTrue(actorService.checkAuthority("MANAGER"),
-				"Only a manager can save clubes");
-		System.out.println("save1");
 		
-		if(club.getId() == 0){
-			Manager manager;
-			Collection<Bulletin> bulletins;
-			Collection<Classification> classifications;
-			Collection<Entered> entereds;
-			Collection<Punishment> punishments;
-			Collection<FeePayment> feePayments;
-			Collection<Comment> comments;
-			
+		Manager manager;
+		Runner runner;
+		Collection<Runner> runners;
+		boolean pertenece;
+		
+		if(actorService.checkAuthority("MANAGER")) {
 			manager = managerService.findByPrincipal();
-			bulletins = new ArrayList<Bulletin>();
-			classifications = new ArrayList<Classification>();
-			entereds = new ArrayList<Entered>();
-			punishments = new ArrayList<Punishment>();
-			feePayments = new ArrayList<FeePayment>();
-			comments = new ArrayList<Comment>();
+			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
+		} else if(actorService.checkAuthority("RUNNER")) {
+			runner = runnerService.findByPrincipal();
+			runners = runnerService.findAllByClubId(club.getId());
+			pertenece = false;
 			
-			club.setManager(manager);
-			club.setCreationMoment(new Date());
-			club.setDeleted(false);
-			club.setBulletins(bulletins);
-			club.setClassifications(classifications);
-			club.setEntered(entereds);
-			club.setPunishments(punishments);
-			club.setFeePayments(feePayments);
-			club.setComments(comments);
-			
-			System.out.println("save2");
-			club = clubRepository.save(club);
-			
-			manager.setClub(club);
-			
-			System.out.println("save3");
-			managerService.save(manager);
+			for(Runner r : runners) {
+				if(runner.getId() == r.getId()) {
+					pertenece = true;
+					break;
+				}
+			}
+			Assert.isTrue(pertenece, "Only a runner of this club can save it");
 		}
 		
-		System.out.println("save4");
+		if(club.getId() == 0) {
+			club = clubRepository.save(club);
+			
+			manager = club.getManager();
+			managerService.save(manager);
+		} else {
+			club = clubRepository.save(club);
+		}
+		
+		
+			
 		return club;
 	}
 	
@@ -133,6 +130,13 @@ public class ClubService {
 		Assert.notNull(club);
 		Assert.isTrue(club.getId() != 0);
 		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can delete clubes");
+		
+		if(actorService.checkAuthority("MANAGER")) {
+			Manager manager;
+			
+			manager = managerService.findByPrincipal();
+			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
+		}
 		
 		clubRepository.delete(club);
 		

@@ -51,7 +51,10 @@
 		 
 		<security:intercept-url pattern="/customer/customer/*" access="hasRole('CUSTOMER')" />
 		
-		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" />
+		
+		<security:intercept-url pattern="/club/list.do" access="permitAll" />
+		<security:intercept-url pattern="/runner/list.do" access="permitAll" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

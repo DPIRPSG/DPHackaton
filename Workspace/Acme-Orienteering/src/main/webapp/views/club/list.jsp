@@ -17,15 +17,19 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="clubes" requestURI="${requestURI}" id="row_Club">
 	<!-- Action links -->
-	
-	<display:column>
-		<div>
-			<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
-						code="club.edit" />
-			</a></b>
-		</div>
-	</display:column>
-	
+
+	<security:authorize access="hasRole('MANAGER')">
+		<jstl:if test="${manager.id == row_Club.manager.id }">
+			<display:column>
+				<div>
+					<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
+								code="club.edit" />
+					</a></b>
+				</div>
+			</display:column>
+		</jstl:if>
+	</security:authorize>
+
 	<!-- Attributes -->
 
 	<spring:message code="club.name" var="nameHeader"/>
@@ -46,14 +50,28 @@
 	<display:column title="${creationMomentHeader}" sortable="true">
 		<fmt:formatDate value="${row_Club.creationMoment}" pattern="dd-MM-yyyy"/>
 	</display:column>
+	
+	<spring:message code="club.manager" var="managerHeader"/>
+	<acme:displayColumn value="${row_Club.manager.name} ${row_Club.manager.surname }" title="${managerHeader}"/>
+
+	<spring:message code="club.runners" var="runnersHeader" />
+	<display:column title="${runnersHeader}" sortable="false">
+		<a href="runner/list.do?clubId=${row_Club.id}"> <spring:message
+				code="club.runners"/>
+		</a>
+	</display:column>
 
 </display:table>
 
 
 <!-- Action links -->
 
-<div>
-	<b><a href="club/manager/create.do"> <spring:message
-				code="club.create" />
-	</a></b>
-</div>
+<security:authorize access="hasRole('MANAGER')">
+	<jstl:if test="${clubes == null }">
+		<div>
+			<b><a href="club/manager/create.do"> <spring:message
+						code="club.create" />
+			</a></b>
+		</div>
+	</jstl:if>
+</security:authorize>
