@@ -21,7 +21,7 @@ public class RunnerService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private RunnerRepository customerRepository;
+	private RunnerRepository runnerRepository;
 	
 	//Supporting services ----------------------------------------------------
 
@@ -80,7 +80,7 @@ public class RunnerService {
 			customer.setUserAccount(auth);
 			
 		}
-		customerRepository.save(customer);		
+		runnerRepository.save(customer);		
 		
 	}
 	
@@ -93,7 +93,7 @@ public class RunnerService {
 		
 		Collection<Runner> result;
 		
-		result = customerRepository.findAll();
+		result = runnerRepository.findAll();
 		
 		return result;
 	}
@@ -110,8 +110,16 @@ public class RunnerService {
 		
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		result = customerRepository.findByUserAccountId(userAccount.getId());
+		result = runnerRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(result);
+		
+		return result;
+	}
+
+	public Collection<Runner> findAllByClubId(int clubId) {
+		Collection<Runner> result;
+		
+		result = runnerRepository.findAllByClubId(clubId);
 		
 		return result;
 	}

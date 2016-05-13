@@ -35,10 +35,10 @@ public class Entered extends DomainEntity {
 		this.report = report;
 	}
 	
-	public boolean isMember() {
+	public boolean getIsMember() {
 		return isMember;
 	}
-	public void setMember(boolean isMember) {
+	public void setIsMember(boolean isMember) {
 		this.isMember = isMember;
 	}
 	

@@ -46,6 +46,16 @@
 	<display:column title="${creationMomentHeader}" sortable="true">
 		<fmt:formatDate value="${row_Club.creationMoment}" pattern="dd-MM-yyyy"/>
 	</display:column>
+	
+	<spring:message code="club.manager" var="managerHeader"/>
+	<acme:displayColumn value="${row_Club.manager.name} ${row_Club.manager.surname }" title="${managerHeader}"/>
+
+	<spring:message code="club.runners" var="runnersHeader" />
+	<display:column title="${runnersHeader}" sortable="false">
+		<a href="runner/list.do?clubId=${row_Club.id}"> <spring:message
+				code="club.runners"/>
+		</a>
+	</display:column>
 
 </display:table>
 
