@@ -87,7 +87,6 @@ public class ClubService {
 		Assert.notNull(club);
 		Assert.isTrue(actorService.checkAuthority("MANAGER"),
 				"Only a manager can save clubes");
-		System.out.println("save1");
 		
 		if(club.getId() == 0){
 			Manager manager;
@@ -116,16 +115,13 @@ public class ClubService {
 			club.setFeePayments(feePayments);
 			club.setComments(comments);
 			
-			System.out.println("save2");
 			club = clubRepository.save(club);
 			
 			manager.setClub(club);
 			
-			System.out.println("save3");
 			managerService.save(manager);
 		}
 		
-		System.out.println("save4");
 		return club;
 	}
 	

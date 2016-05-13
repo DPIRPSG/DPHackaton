@@ -89,15 +89,11 @@ public class ClubManagerController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(club);
-			System.out.println(binding);
 		} else {
 			try {
 				club = clubService.save(club);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				System.out.println(oops);
-				System.out.println(club.getId());
-				System.out.println(club.getManager().getId());
 				result = createEditModelAndView(club, "club.commit.error");				
 			}
 		}
