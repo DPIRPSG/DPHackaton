@@ -28,7 +28,7 @@ public class Club extends CommentedEntity {
 	private String description;
 	private String name;
 	private Collection<String> pictures;
-	private Date crationMoment;
+	private Date creationMoment;
 	private boolean deleted;
 	
 	@NotNull
@@ -51,7 +51,7 @@ public class Club extends CommentedEntity {
 	
 	@NotNull
 	@ElementCollection
-	@URL
+	//@URL
 	public Collection<String> getPictures() {
 		return pictures;
 	}
@@ -62,11 +62,11 @@ public class Club extends CommentedEntity {
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-	public Date getCrationMoment() {
-		return crationMoment;
+	public Date getCreationMoment() {
+		return creationMoment;
 	}
-	public void setCrationMoment(Date crationMoment) {
-		this.crationMoment = crationMoment;
+	public void setCreationMoment(Date creationMoment) {
+		this.creationMoment = creationMoment;
 	}
 	
 	public boolean isDeleted() {
@@ -86,7 +86,7 @@ public class Club extends CommentedEntity {
 
 	@Valid
 	@NotNull
-	@OneToOne(optional = false, mappedBy = "club")
+	@OneToOne(optional = false)
 	public Manager getManager() {
 		return manager;
 	}

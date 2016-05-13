@@ -31,6 +31,7 @@
 		<value>/views/profile/messages</value>
 		<value>/views/forms/messages</value>
 		
+		<value>/views/club/messages</value>
 		<value>/views/category/messages</value>
 	</util:list>
 
