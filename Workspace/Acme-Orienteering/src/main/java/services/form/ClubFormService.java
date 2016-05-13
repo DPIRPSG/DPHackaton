@@ -80,7 +80,6 @@ public class ClubFormService {
 
 	public void delete(ClubForm clubForm) {
 		Club club;
-		System.out.println(clubForm.getClubId());
 		club = clubService.findOne(clubForm.getClubId());
 		clubService.delete(club);
 	}

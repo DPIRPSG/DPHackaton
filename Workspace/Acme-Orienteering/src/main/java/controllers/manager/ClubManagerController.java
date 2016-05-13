@@ -101,9 +101,7 @@ public class ClubManagerController extends AbstractController {
 	public ModelAndView save(@Valid ClubForm clubForm, BindingResult binding) {
 		ModelAndView result;
 
-		System.out.println(clubForm.getClubId());
 		if (binding.hasErrors()) {
-			System.out.println(binding);
 			result = createEditModelAndView(clubForm);
 		} else {
 			try {
@@ -113,7 +111,6 @@ public class ClubManagerController extends AbstractController {
 				club = clubService.save(club);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				System.out.println(oops);
 				result = createEditModelAndView(clubForm, "club.commit.error");				
 			}
 		}
@@ -129,7 +126,6 @@ public class ClubManagerController extends AbstractController {
 			clubFormService.delete(clubForm);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			System.out.println(oops);
 			result = createEditModelAndView(clubForm, "club.commit.error");
 		}
 
