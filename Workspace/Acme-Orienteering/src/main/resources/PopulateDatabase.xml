@@ -95,6 +95,29 @@
 		</property>
 	</bean>
 	
+	<!-- Curriculum -->
+	
+	<bean id="curriculum1" class="domain.Curriculum">
+		<property name="statement" value="Experiencia guiando a los equipos hacia el éxito."/>
+		<property name="skills" value="Liderazgo, pasión"/>
+		<property name="likes" value="deporte, naturaleza"/>
+		<property name="dislikes" value="ciudad, vehículos a motor"/>
+	</bean>
+	
+	<bean id="curriculum2" class="domain.Curriculum">
+		<property name="statement" value="En el podio durante las úñtimas 25 competiciones."/>
+		<property name="skills" value="velocidad, orientación"/>
+		<property name="likes" value="deporte, montaña"/>
+		<property name="dislikes" value="trampas, juego sucio"/>
+	</bean>
+	
+	<bean id="curriculum3" class="domain.Curriculum">
+		<property name="statement" value="Totalmente imparcial y profesional en lo que hago."/>
+		<property name="skills" value="Visualizo cada detalle, respetuoso con los competidores"/>
+		<property name="likes" value="montañismo, naturaleza"/>
+		<property name="dislikes" value="jugadores agresivos"/>
+	</bean>
+	
 	<!-- Manager -->
 	
 	<bean id="manager1" class="domain.Manager">
@@ -122,6 +145,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="curriculum" ref="curriculum1"/>
 	</bean>
 	
 	<!-- Runner -->
@@ -159,6 +183,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="curriculum" ref="curriculum2"/>
 	</bean>
 	
 	<!-- Referee -->
@@ -188,6 +213,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="curriculum" ref="curriculum3"/>
 	</bean>
 	
 	<!-- Folder -->
@@ -311,5 +337,7 @@
 			</list>
 		</property>
 	</bean>
+	
+	
 	
 </beans>
