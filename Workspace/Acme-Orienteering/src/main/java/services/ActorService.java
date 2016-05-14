@@ -85,9 +85,42 @@ public class ActorService {
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}
+		return result;
+	}
+	
+	/**
+	 * Comprueba si el usuario que está ejecutando tiene alguna de las AuthoritiesSolicitadas
+	 * Deben introducirse separados por ","
+	 * @return boolean -> false si no es customer
+	 * @param authority [ADMIN, CUSTOMER]
+	 */
+	public boolean checkAuthorities(String authoritiesInput){
+		boolean result;
+		result = false;
+
+		for(String a:authoritiesInput.split(",")){
+			if(this.checkAuthority(a.trim())){
+				result = true;
+				break;
+			}
+		}
+
+		return result;
+	}
+	
+	/**
+	 * Comprueba si un usuario está autenticado
+	 */
+	public boolean checkLogin(){
+		boolean result;
 		
+		result = true;
 		
-		
+		try{
+			this.findByPrincipal();
+		} catch (Throwable e) {
+			result = false;
+		}
 		return result;
 	}
 	
