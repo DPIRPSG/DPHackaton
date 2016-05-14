@@ -17,7 +17,7 @@ public interface EnteredRepository extends JpaRepository<Entered, Integer> {
 	@Query("select e from Entered e where e.club.id = ?1")
 	Collection<Entered> findAllByClub(int clubId);
 	
-	@Query("select e from Entered e where e.club.id = ?1 and e.isMember IS FALSE")
-	Collection<Entered> findAllToReviseByClub(int clubId);
+	@Query("select e from Entered e where e.club.id = ?1 and e.isMember IS FALSE and e.registerMoment IS NULL and e.acceptedMoment IS NULL")
+	Collection<Entered> findAllUnresolvedByClub(int clubId);
 	
 }
