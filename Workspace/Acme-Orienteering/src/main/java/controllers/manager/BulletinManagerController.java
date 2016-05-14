@@ -10,43 +10,40 @@
 
 package controllers.manager;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ClubService;
+import services.BulletinService;
 import services.ManagerService;
-import services.form.ClubFormService;
 import controllers.AbstractController;
+import domain.Bulletin;
 import domain.Club;
 import domain.Manager;
-import domain.form.ClubForm;
 
 @Controller
-@RequestMapping("/club/manager")
-public class ClubManagerController extends AbstractController {
+@RequestMapping("/bulletin/manager")
+public class BulletinManagerController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ClubService clubService;
-	
-	@Autowired
-	private ClubFormService clubFormService;
+	private BulletinService bulletinService;
 	
 	@Autowired
 	private ManagerService managerService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public ClubManagerController() {
+	public BulletinManagerController() {
 		super();
 	}
 
@@ -55,17 +52,18 @@ public class ClubManagerController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
+		Collection<Bulletin> bulletins;
 		Club club;
 		Manager manager;
 
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
+		bulletins = club.getBulletins();
 		
-		result = new ModelAndView("club/list");
-		result.addObject("requestURI", "club/manager/list.do");
-		result.addObject("requestURI2", "bulletin/manager/list.do");
-		result.addObject("clubes", club);
-		result.addObject("manager", manager);
+		result = new ModelAndView("bulletin/list");
+		result.addObject("requestURI", "bulletin/manager/list.do");
+		result.addObject("bulletins", bulletins);
+		result.addObject("club", club);
 
 		return result;
 	}
@@ -75,59 +73,49 @@ public class ClubManagerController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		ClubForm clubForm;
+		Bulletin bulletin;
 
-		clubForm = clubFormService.create();
-		result = createEditModelAndView(clubForm);
+		bulletin = bulletinService.create();
+		result = createEditModelAndView(bulletin);
 
 		return result;
 	}
 
 	// Edition ----------------------------------------------------------------
-	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int clubId) {
-		ModelAndView result;
-		ClubForm clubForm;
 
-		clubForm = clubFormService.findOne(clubId);		
-		Assert.notNull(clubForm);
-		clubForm.setClubId(clubId);
-		result = createEditModelAndView(clubForm);
-
-		return result;
-	}
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid ClubForm clubForm, BindingResult binding) {
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Bulletin bulletin, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(clubForm);
+			System.out.println(binding);
+			result = createEditModelAndView(bulletin);
 		} else {
 			try {
-				Club club;
-				
-				club = clubFormService.reconstruct(clubForm);
-				club = clubService.save(club);				
+				bulletin = bulletinService.save(bulletin);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(clubForm, "club.commit.error");				
+				System.out.println(oops);
+				result = createEditModelAndView(bulletin, "bulletin.commit.error");				
 			}
 		}
 
 		return result;
 	}
 			
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(ClubForm clubForm, BindingResult binding) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int bulletinId) {
 		ModelAndView result;
+		Bulletin bulletin;
+		
+		bulletin = bulletinService.findOne(bulletinId);
 
 		try {			
-			clubFormService.delete(clubForm);
+			bulletinService.delete(bulletin);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(clubForm, "club.commit.error");
+			System.out.println(oops);
+			result = new ModelAndView("redirect:list.do");
 		}
 
 		return result;
@@ -135,19 +123,19 @@ public class ClubManagerController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(ClubForm clubForm) {
+	protected ModelAndView createEditModelAndView(Bulletin bulletin) {
 		ModelAndView result;
 
-		result = createEditModelAndView(clubForm, null);
+		result = createEditModelAndView(bulletin, null);
 		
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(ClubForm clubForm, String message) {
+	protected ModelAndView createEditModelAndView(Bulletin bulletin, String message) {
 		ModelAndView result;
 		
-		result = new ModelAndView("club/edit");
-		result.addObject("clubForm", clubForm);
+		result = new ModelAndView("bulletin/create");
+		result.addObject("bulletin", bulletin);
 		result.addObject("message", message);
 
 		return result;
