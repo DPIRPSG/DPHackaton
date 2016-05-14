@@ -78,7 +78,7 @@ public class MessageEntity extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@ManyToMany(mappedBy = "received")
+	@ManyToMany
 	@NotEmpty
 	public Collection<Actor> getRecipients() {
 		return recipients;
@@ -95,6 +95,9 @@ public class MessageEntity extends DomainEntity{
 	}
 	public void setFolders(Collection<Folder> folders) {
 		this.folders = folders;
+	}
+	public void addFolder(Folder f){
+		this.folders.add(f);
 	}
 	
 }

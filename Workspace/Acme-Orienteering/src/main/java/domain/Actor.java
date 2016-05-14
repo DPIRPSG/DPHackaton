@@ -98,7 +98,7 @@ public abstract class Actor extends DomainEntity{
 	
 	@NotNull
 	@Valid
-	@ManyToMany
+	@ManyToMany(mappedBy = "recipients")
 	public Collection<MessageEntity> getReceived() {
 		return received;
 	}

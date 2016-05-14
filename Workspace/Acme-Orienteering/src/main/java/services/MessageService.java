@@ -141,8 +141,11 @@ public class MessageService {
 		MessageEntity result;
 
 		result = this.save(message);
+
 		this.addMessageToFolderFirst(result);
 
+		result = this.findOne(result.getId());
+		
 		return result;
 	}
 
@@ -150,21 +153,31 @@ public class MessageService {
 	 * Añade a las respectivas carpetas la primera vez que un mensaje es creado
 	 */
 	private void addMessageToFolderFirst(MessageEntity message) {
-
+		Collection<Actor> actors;
+		
 		for (Folder f : message.getSender().getFolders()) {
-			if (f.getIsSystem() && f.getName().equals("OutBox"))
+			if (f.getIsSystem() && f.getName().equals("OutBox")){
+				message.addFolder(f);
+				message = this.save(message);
 				folderService.addMessage(f, message);
+				break;
+			}
 		}
 
-		for (Actor recipient : message.getRecipients()) {
+		actors = new ArrayList<Actor>(message.getRecipients());
+		
+		for (Actor recipient : actors) {
 			for (Folder f : recipient.getFolders()) {
 				boolean toInBox;
 
 				toInBox = f.getName().equals("InBox");
 
-				if (toInBox && f.getIsSystem())
+				if (toInBox && f.getIsSystem()){
+					message.addFolder(f);
+					message = this.save(message);
 					folderService.addMessage(f, message);
-			}
+					break;
+			}}
 		}
 	}
 
