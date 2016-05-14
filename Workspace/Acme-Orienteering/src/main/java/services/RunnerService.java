@@ -1,6 +1,7 @@
 package services;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Entered;
+import domain.Participates;
 import domain.Runner;
 import repositories.RunnerRepository;
 import security.Authority;
@@ -59,8 +62,9 @@ public class RunnerService {
 	 * Almacena en la base de datos el cambio
 	 */
 	// req: 10.1
-	private void save(Runner customer){
+	private Runner save(Runner customer){
 		Assert.notNull(customer);
+		Runner saved;
 		
 		boolean result = true;
 		for(Authority a: customer.getUserAccount().getAuthorities()){
@@ -71,28 +75,34 @@ public class RunnerService {
 		}
 		Assert.isTrue(result, "A runner can only be a authority.runner");
 		
-		runnerRepository.save(customer);
+		saved = runnerRepository.save(customer);
+		
+		return saved;
 	}
 	
 	/**
 	 *  Almacena en la base de datos un cambio realizado desde el formulario de edición 
 	 */
-	public void saveFromEdit(Runner runner){
+	public Runner saveFromEdit(Runner runner){
+		Runner result;
 		
 		Assert.isTrue(
 				actorService.checkAuthority("RUNNER")
 						|| (!actorService.checkLogin() && runner.getId() == 0),
 						"RunnerService.saveFromEdit.permissionDenied");
 		if(runner.getId() == 0){ //First save
-			UserAccount auth;
+			Collection<Entered> entered;
+			Collection<Participates> participates;
 			
-			//Encoding password
-			auth = runner.getUserAccount();
-			auth = userAccountService.modifyPassword(auth);
-			runner.setUserAccount(auth);
+			entered = new ArrayList<Entered>();
+			participates = new ArrayList<Participates>();
 			
+			runner.setEntered(entered);
+			runner.setParticipates(participates);
 		}
-		this.save(runner);
+		result = this.save(runner);
+		
+		return result;
 	}
 	
 	/**

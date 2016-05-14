@@ -49,7 +49,7 @@ public class RefereeService {
 		return result;
 	}
 	
-	private void save(Referee input) {
+	private Referee save(Referee input) {
 		Assert.notNull(input);
 		
 		boolean result = true;
@@ -62,21 +62,26 @@ public class RefereeService {
 		Assert.isTrue(result, "A referee can only be a authority.referee");
 				
 		input = refereeRepository.save(input);
+		
+		return input;
 	}
 	
-	public void saveFromEdit(Referee manager){
+	public Referee saveFromEdit(Referee manager){
 		Assert.isTrue(actorService.checkAuthority("REFEREE")
 						|| (actorService.checkAuthority("ADMIN") && manager.getId() == 0),
 						"RefereeService.saveFromEdit.permissionDenied");
-		if(manager.getId() == 0){ //First save
-			UserAccount auth;
-			
-			//Encoding password
-			auth = manager.getUserAccount();
-			auth = userAccountService.modifyPassword(auth);
-			manager.setUserAccount(auth);
-		}
-		this.save(manager);
+		Referee result;
+		
+//		if(manager.getId() == 0){ //First save
+//			UserAccount auth;
+//			
+//			//Encoding password
+//			auth = manager.getUserAccount();
+//			auth = userAccountService.modifyPassword(auth);
+//			manager.setUserAccount(auth);
+//		}
+		result = this.save(manager);
+		return result;
 	}
 	
 	public void saveFromOthers(Referee manager){

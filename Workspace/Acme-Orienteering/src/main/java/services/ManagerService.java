@@ -49,7 +49,7 @@ public class ManagerService {
 		return result;
 	}
 	
-	private void save(Manager manager) {
+	private Manager save(Manager manager) {
 		Assert.notNull(manager);
 		
 		boolean result = true;
@@ -62,23 +62,29 @@ public class ManagerService {
 		Assert.isTrue(result, "A manager can only be a authority.manager");
 		
 		manager = managerRepository.save(manager);
+		
+		return manager;
 	}
 	
-	public void saveFromEdit(Manager manager){
+	public Manager saveFromEdit(Manager manager){
 		Assert.isTrue(
 				actorService.checkAuthority("MANAGER")
 						|| (actorService.checkAuthority("ADMIN") && manager.getId() == 0),
 						"ManagerService.saveFromEdit.permissionDenied");
-		if(manager.getId() == 0){ //First save
-			UserAccount auth;
-			
-			//Encoding password
-			auth = manager.getUserAccount();
-			auth = userAccountService.modifyPassword(auth);
-			manager.setUserAccount(auth);
-		}
+		Manager result;
 		
-		this.save(manager);
+//		if(manager.getId() == 0){ //First save
+//			UserAccount auth;
+//			
+//			//Encoding password
+//			auth = manager.getUserAccount();
+//			auth = userAccountService.modifyPassword(auth);
+//			manager.setUserAccount(auth);
+//		}
+		
+		result = this.save(manager);
+		
+		return result;
 	}
 	
 	public void saveFromOthers(Manager manager){
