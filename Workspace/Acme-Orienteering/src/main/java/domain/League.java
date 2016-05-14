@@ -30,7 +30,7 @@ public class League extends CommentedEntity {
 	private String description;
 	private String name;
 	private Collection<String> pictures;
-	private Date crationMoment;
+	private Date creationMoment;
 	private Date startedMoment;
 	private double amount;
 	
@@ -65,11 +65,11 @@ public class League extends CommentedEntity {
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
-	public Date getCrationMoment() {
-		return crationMoment;
+	public Date getCreationMoment() {
+		return creationMoment;
 	}
-	public void setCrationMoment(Date crationMoment) {
-		this.crationMoment = crationMoment;
+	public void setCreationMoment(Date crationMoment) {
+		this.creationMoment = crationMoment;
 	}
 	
 	@NotNull
