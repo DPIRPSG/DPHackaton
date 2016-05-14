@@ -21,7 +21,7 @@
 	<tr>
 		<th><spring:message code="message.folders" /> :</th>
 		<td><jstl:forEach var="temp" items="${folders}">
-			<acme:link href="message/actor/list.do?folderId=${temp.id}" code="${temp.name}"/> &nbsp;
+			<a href="message/actor/list.do?folderId=${temp.id}"> <jstl:out value="${temp.name}"/> </a>&nbsp;
 		</jstl:forEach>
 		<b> <acme:link href="message/actor/edit.do?messageId=${messa.id}" code="message.addToFolder"/></b>  &nbsp;
 		</td>
