@@ -42,7 +42,31 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="runner1" />
+		<property name="password" value="f2e74bfb6cc78ce03fc6fd7ae33a344a" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="RUNNER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="referee1" />
+		<property name="password" value="092d469d0a71c8002e32f808b861f9a4" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REFEREE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Miguel"/>
@@ -71,6 +95,8 @@
 		</property>
 	</bean>
 	
+	<!-- Manager -->
+	
 	<bean id="manager1" class="domain.Manager">
 		<property name="name" value="Guillermo"/>
 		<property name="surname" value="Alcalá"/>
@@ -97,6 +123,74 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Runner -->
+	
+	<bean id="runner1" class="domain.Runner">
+		<property name="name" value="Manolo"/>
+		<property name="surname" value="López"/>
+		<property name="phone" value="452364415"/>
+		<property name="nif" value="11155472F"/>
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder7"/>
+				<ref bean="folder8"/>
+				<ref bean="folder9"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+			</list>
+		</property>
+		<property name="participates">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Referee -->
+	
+	<bean id="referee1" class="domain.Referee">
+		<property name="name" value="Carlos"/>
+		<property name="surname" value="Mata"/>
+		<property name="phone" value="885223654"/>
+		<property name="nif" value="66855744H"/>
+		<property name="userAccount" ref="userAccount4"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder10"/>
+				<ref bean="folder11"/>
+				<ref bean="folder12"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Folder -->
 	
 	<bean id="folder1" class="domain.Folder">
 		<property name="name" value="InBox"/>
@@ -152,6 +246,66 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder7" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder8" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder9" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder10" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder11" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder12" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee1"/>
 		<property name="messages">
 			<list>
 			</list>
