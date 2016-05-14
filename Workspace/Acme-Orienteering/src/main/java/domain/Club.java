@@ -104,6 +104,14 @@ public class Club extends CommentedEntity {
 		this.bulletins = bulletins;
 	}
 	
+	public void addBulletin(Bulletin bulletin) {
+		this.bulletins.add(bulletin);
+	}
+
+	public void removeBulletin(Bulletin bulletin) {
+		this.bulletins.remove(bulletin);
+	}
+	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "club")

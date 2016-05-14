@@ -165,14 +165,4 @@ public class ClubService {
 		clubRepository.flush();
 	}
 
-	public Club findClubByManagerId() {
-		Club result;
-		Manager manager;
-		
-		manager = managerService.findByPrincipal();
-		
-		result = clubRepository.findByManagerId(manager.getId());
-		
-		return result;
-	}
 }

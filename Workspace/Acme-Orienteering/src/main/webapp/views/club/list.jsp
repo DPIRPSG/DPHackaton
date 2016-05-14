@@ -60,6 +60,13 @@
 				code="club.runners"/>
 		</a>
 	</display:column>
+	
+	<spring:message code="club.bulletins" var="bulletinsHeader" />
+	<display:column title="${bulletinsHeader}" sortable="false">
+		<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
+				code="club.bulletins"/>
+		</a>
+	</display:column>
 
 </display:table>
 
