@@ -61,13 +61,12 @@ public class RunnerService {
 	/**
 	 * Almacena en la base de datos el cambio
 	 */
-	// req: 10.1
-	private Runner save(Runner customer){
-		Assert.notNull(customer);
+	private Runner save(Runner runner){
+		Assert.notNull(runner);
 		Runner saved;
 		
 		boolean result = true;
-		for(Authority a: customer.getUserAccount().getAuthorities()){
+		for(Authority a: runner.getUserAccount().getAuthorities()){
 			if(!a.getAuthority().equals("RUNNER")){
 				result = false;
 				break;
@@ -75,7 +74,7 @@ public class RunnerService {
 		}
 		Assert.isTrue(result, "A runner can only be a authority.runner");
 		
-		saved = runnerRepository.save(customer);
+		saved = runnerRepository.save(runner);
 		
 		return saved;
 	}
@@ -143,6 +142,10 @@ public class RunnerService {
 		result = runnerRepository.findAllByClubId(clubId);
 		
 		return result;
+	}
+	
+	public void flush(){
+		runnerRepository.flush();
 	}
 	
 
