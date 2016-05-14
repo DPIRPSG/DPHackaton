@@ -85,6 +85,26 @@ public class EnteredService {
 		
 		return result;
 	}
+	
+	public Collection<Entered> findAllRejectedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllRejectedByClub(clubId);
+		
+		return result;
+	}
+	
+	public Collection<Entered> findAllAcceptedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllAcceptedByClub(clubId);
+		
+		return result;
+	}
 
 	public void flush(){
 		enteredRepository.flush();
