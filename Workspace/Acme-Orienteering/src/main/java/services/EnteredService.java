@@ -76,14 +76,17 @@ public class EnteredService {
 	 * 	Aceptar o denegar las peticiones.
 	 * @return the collection of entered not accepted yet that a club have received.
 	 */
-	public Collection<Entered> findAllToReviseByClub(int clubId){
+	public Collection<Entered> findAllUnresolvedByClub(int clubId){
 		Assert.isTrue(actorService.checkAuthority("MANAGER"));
 		
 		Collection<Entered> result;
 		
-		result = enteredRepository.findAllToReviseByClub(clubId);
+		result = enteredRepository.findAllUnresolvedByClub(clubId);
 		
 		return result;
 	}
 
+	public void flush(){
+		enteredRepository.flush();
+	}
 }
