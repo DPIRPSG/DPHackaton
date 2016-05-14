@@ -129,7 +129,7 @@ public class FolderService {
 		result = folderRepository.findOne(folderId);
 
 		Assert.notNull(result);
-		this.checkActor(result); // Es necesario ya que no se chekeq en otro lado
+		this.checkActor(result); // Es necesario ya que no se comprueba en otro lado
 
 		return result;
 	}
