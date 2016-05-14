@@ -1,6 +1,5 @@
 package services;
 
-
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-
 
 @Service
 @Transactional
