@@ -50,6 +50,9 @@ public class FolderService {
 		messages = new ArrayList<Message>();
 
 		result.setMessages(messages);
+		result.setIsSystem(false);
+		result.setActor(actorService.findByPrincipal());
+
 
 		return result;
 	}
@@ -74,13 +77,14 @@ public class FolderService {
 
 		Folder result;
 
-		if (folder.getId() == 0) {
-			folder.setIsSystem(false);
-			folder.setActor(actorService.findByPrincipal());
-		}
-
-		this.checkActor(folder);
-		result = this.save(folder);
+		if (folder.getId() == 0)
+			result = this.create();
+		else
+			result = this.findOne(folder.getId());
+		
+		result.setName(folder.getName());
+				
+		result = this.save(result);
 
 		return result;
 	}
@@ -125,7 +129,7 @@ public class FolderService {
 		result = folderRepository.findOne(folderId);
 
 		Assert.notNull(result);
-		this.checkActor(result);
+		this.checkActor(result); // Es necesario ya que no se chekeq en otro lado
 
 		return result;
 	}

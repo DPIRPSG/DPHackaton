@@ -43,7 +43,6 @@ public class MessageService {
 	 * Devuelve Message preparado para ser modificado. Necesita usar save para
 	 * que persista en la base de datos
 	 */
-	// req: 24.2
 	public Message create() {
 		Message result;
 		Collection<Folder> folders;
@@ -64,7 +63,6 @@ public class MessageService {
 	/**
 	 * Guarda un message creado o modificado
 	 */
-	// req: 24.2
 	private Message save(Message message) {
 		Assert.notNull(message);
 		// Assert.isTrue(message.getSender().equals(actorService.findByPrincipal()),
@@ -114,6 +112,25 @@ public class MessageService {
 
 		return result;
 	}
+	
+	public Message saveFromFolderEdit(Message input){
+		int actId;
+		Collection<Folder> folders;
+		
+		actId = actorService.findByPrincipal().getUserAccount().getId();
+		
+		folders = input.getFolders();
+		for(Folder a:folders){
+			if(!a.getMessages().contains(input)){
+				Assert.isTrue(a.getActor().getUserAccount().getId() == actId);
+				input = this.findOne(input.getId());
+				
+				folderService.addMessage(a, input);
+			}
+		}
+		
+		return input;
+	}
 
 	/**
 	 * Guarda la primera vez
@@ -154,7 +171,6 @@ public class MessageService {
 	/**
 	 * Devuelve todos los mensajes contenidos en una determinada carpeta
 	 */
-	// req: 24.1
 	public Collection<Message> findAllByFolder(Folder folder) {
 		Assert.notNull(folder);
 		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
@@ -170,7 +186,6 @@ public class MessageService {
 	/**
 	 * Borra un mensaje de una carpeta
 	 */
-	// req: 24.2
 	public void deleteMessageFromFolder(Message message, Folder folder) {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
