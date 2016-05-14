@@ -45,7 +45,6 @@ public class RunnerService {
 	/** Devuelve customer preparado para ser modificado. Necesita usar save para que persista en la base de datos
 	 * 
 	 */
-	// req: 10.1
 	public Runner create(){
 		Runner result;
 		UserAccount userAccount;
@@ -107,7 +106,6 @@ public class RunnerService {
 	/**
 	 * Lista los customers registrados
 	 */
-	// req: 12.5
 	public Collection<Runner> findAll(){
 		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list customers");
 		
@@ -123,7 +121,6 @@ public class RunnerService {
 	/**
 	 * Devuelve el customers que está realizando la operación
 	 */
-	//req: x
 	public Runner findByPrincipal(){
 		Runner result;
 		UserAccount userAccount;

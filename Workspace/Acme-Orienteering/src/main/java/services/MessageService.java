@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Folder;
-import domain.Message;
+import domain.MessageEntity;
 
 import repositories.MessageRepository;
 
@@ -43,15 +43,14 @@ public class MessageService {
 	 * Devuelve Message preparado para ser modificado. Necesita usar save para
 	 * que persista en la base de datos
 	 */
-	// req: 24.2
-	public Message create() {
-		Message result;
+	public MessageEntity create() {
+		MessageEntity result;
 		Collection<Folder> folders;
 		Collection<Actor> recipients;
 
 		folders = new ArrayList<Folder>();
 		recipients = new ArrayList<Actor>();
-		result = new Message();
+		result = new MessageEntity();
 
 		result.setFolders(folders);
 		result.setRecipients(recipients);
@@ -64,23 +63,22 @@ public class MessageService {
 	/**
 	 * Guarda un message creado o modificado
 	 */
-	// req: 24.2
-	private Message save(Message message) {
+	private MessageEntity save(MessageEntity message) {
 		Assert.notNull(message);
 		// Assert.isTrue(message.getSender().equals(actorService.findByPrincipal()),
 		// "Only the sender can save the message");
 
 		message.setSentMoment(new Date());
 
-		Message result;
+		MessageEntity result;
 
 		result = messageRepository.save(message);
 
 		return result;
 	}
 
-	public Message findOne(int messageId) {
-		Message result;
+	public MessageEntity findOne(int messageId) {
+		MessageEntity result;
 
 		result = messageRepository.findOne(messageId);
 
@@ -96,11 +94,11 @@ public class MessageService {
 	/**
 	 * Guarda la primera vez desde enviar !
 	 */
-	public Message firstSaveNormalSend(Message message) {
+	public MessageEntity firstSaveNormalSend(MessageEntity message) {
 		Assert.notNull(message);
 
 		int sendId, actId;
-		Message result;
+		MessageEntity result;
 
 		sendId = message.getSender().getUserAccount().getId();
 		actId = actorService.findByPrincipal().getUserAccount().getId();
@@ -114,14 +112,33 @@ public class MessageService {
 
 		return result;
 	}
+	
+	public MessageEntity saveFromFolderEdit(MessageEntity input){
+		int actId;
+		Collection<Folder> folders;
+		
+		actId = actorService.findByPrincipal().getUserAccount().getId();
+		
+		folders = input.getFolders();
+		for(Folder a:folders){
+			if(!a.getMessages().contains(input)){
+				Assert.isTrue(a.getActor().getUserAccount().getId() == actId);
+				input = this.findOne(input.getId());
+				
+				folderService.addMessage(a, input);
+			}
+		}
+		
+		return input;
+	}
 
 	/**
 	 * Guarda la primera vez
 	 */
-	private Message firstSave(Message message) {
+	private MessageEntity firstSave(MessageEntity message) {
 		Assert.notNull(message);
 
-		Message result;
+		MessageEntity result;
 
 		result = this.save(message);
 		this.addMessageToFolderFirst(result);
@@ -132,7 +149,7 @@ public class MessageService {
 	/**
 	 * Añade a las respectivas carpetas la primera vez que un mensaje es creado
 	 */
-	private void addMessageToFolderFirst(Message message) {
+	private void addMessageToFolderFirst(MessageEntity message) {
 
 		for (Folder f : message.getSender().getFolders()) {
 			if (f.getIsSystem() && f.getName().equals("OutBox"))
@@ -154,13 +171,12 @@ public class MessageService {
 	/**
 	 * Devuelve todos los mensajes contenidos en una determinada carpeta
 	 */
-	// req: 24.1
-	public Collection<Message> findAllByFolder(Folder folder) {
+	public Collection<MessageEntity> findAllByFolder(Folder folder) {
 		Assert.notNull(folder);
 		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
 				"Only the owner of the folder can display them");
 
-		Collection<Message> result;
+		Collection<MessageEntity> result;
 
 		result = messageRepository.findAllByFolderId(folder.getId());
 
@@ -170,8 +186,7 @@ public class MessageService {
 	/**
 	 * Borra un mensaje de una carpeta
 	 */
-	// req: 24.2
-	public void deleteMessageFromFolder(Message message, Folder folder) {
+	public void deleteMessageFromFolder(MessageEntity message, Folder folder) {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
 		Assert.notNull(folder);
@@ -184,7 +199,7 @@ public class MessageService {
 	}
 
 	public void deleteDefinitely(int messaId) {
-		Message messa;
+		MessageEntity messa;
 
 		messa = this.findOne(messaId);
 
@@ -195,7 +210,7 @@ public class MessageService {
 			messageRepository.delete(messaId);
 	}
 
-	public void checkActor(Message input) {
+	public void checkActor(MessageEntity input) {
 		int actId;
 		int inputId;
 
