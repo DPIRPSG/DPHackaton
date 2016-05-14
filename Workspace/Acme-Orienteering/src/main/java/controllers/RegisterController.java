@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.form.ActorForm;
 
+import security.TypeOfAuthority;
 import services.form.ActorFormService;
 
 @Controller
@@ -41,7 +42,7 @@ public class RegisterController extends AbstractController{
 		ModelAndView result;
 		ActorForm consu;
 		
-		consu = actorFormService.createForm();
+		consu = actorFormService.createForm(TypeOfAuthority.RUNNER);
 		result = createEditModelAndView(consu);
 		
 		return result;

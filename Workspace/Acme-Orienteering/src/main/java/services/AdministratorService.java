@@ -32,8 +32,12 @@ public class AdministratorService {
 	
 	//Simple CRUD methods ----------------------------------------------------
 
-	public void save(Administrator administrator){
+	private void save(Administrator administrator){
 		administratorRepository.save(administrator);
+	}
+	
+	public void saveFromEdit(Administrator administrator){
+		this.save(administrator);
 	}
 	//Other business methods -------------------------------------------------
  

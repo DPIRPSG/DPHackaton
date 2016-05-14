@@ -116,7 +116,7 @@ public class ClubService {
 			club = clubRepository.save(club);
 			
 			manager = club.getManager();
-			managerService.save(manager);
+			managerService.saveFromOthers(manager);
 		} else {
 			club = clubRepository.save(club);
 		}
