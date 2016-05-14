@@ -49,7 +49,7 @@ public class RunnerService {
 
 		result = new Runner();
 		
-		userAccount = userAccountService.create("CUSTOMER");
+		userAccount = userAccountService.create("RUNNER");
 		result.setUserAccount(userAccount);
 		
 		return result;
@@ -59,19 +59,19 @@ public class RunnerService {
 	 * Almacena en la base de datos el cambio
 	 */
 	// req: 10.1
-	public void save(Runner customer){
+	private void save(Runner customer){
 		Assert.notNull(customer);
 		
 		boolean result = true;
 		for(Authority a: customer.getUserAccount().getAuthorities()){
-			if(!a.getAuthority().equals("CUSTOMER")){
+			if(!a.getAuthority().equals("RUNNER")){
 				result = false;
 				break;
 			}
 		}
-		Assert.isTrue(result, "A customer can only be a authority.customer");
+		Assert.isTrue(result, "A runner can only be a authority.runner");
 		
-		if(customer.getId() == 0){
+		if(customer.getId() == 0){ //First save
 			UserAccount auth;
 			
 			//Encoding password
@@ -80,8 +80,19 @@ public class RunnerService {
 			customer.setUserAccount(auth);
 			
 		}
-		runnerRepository.save(customer);		
+		runnerRepository.save(customer);
+	}
+	
+	/**
+	 *  Almacena en la base de datos un cambio realizado desde el formulario de edición 
+	 */
+	public void saveFromEdit(Runner runner){
 		
+		Assert.isTrue(
+				actorService.checkAuthority("RUNNER")
+						|| (!actorService.checkLogin() && runner.getId() == 0),
+						"RunnerService.saveFromEdit.permissionDenied");
+		this.save(runner);
 	}
 	
 	/**

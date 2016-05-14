@@ -108,4 +108,20 @@ public class ActorService {
 		return result;
 	}
 	
+	/**
+	 * Comprueba si un usuario está autenticado
+	 */
+	public boolean checkLogin(){
+		boolean result;
+		
+		result = true;
+		
+		try{
+			this.findByPrincipal();
+		} catch (Throwable e) {
+			result = false;
+		}
+		return result;
+	}
+	
 }
