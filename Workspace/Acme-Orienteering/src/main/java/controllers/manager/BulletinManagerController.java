@@ -88,14 +88,12 @@ public class BulletinManagerController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			System.out.println(binding);
 			result = createEditModelAndView(bulletin);
 		} else {
 			try {
 				bulletin = bulletinService.save(bulletin);				
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
-				System.out.println(oops);
 				result = createEditModelAndView(bulletin, "bulletin.commit.error");				
 			}
 		}
@@ -109,14 +107,9 @@ public class BulletinManagerController extends AbstractController {
 		Bulletin bulletin;
 		
 		bulletin = bulletinService.findOne(bulletinId);
-
-		try {			
-			bulletinService.delete(bulletin);
-			result = new ModelAndView("redirect:list.do");						
-		} catch (Throwable oops) {
-			System.out.println(oops);
-			result = new ModelAndView("redirect:list.do");
-		}
+			
+		bulletinService.delete(bulletin);
+		result = new ModelAndView("redirect:list.do");						
 
 		return result;
 	}
