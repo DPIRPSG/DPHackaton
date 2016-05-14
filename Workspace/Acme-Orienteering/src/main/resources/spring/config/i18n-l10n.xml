@@ -32,6 +32,7 @@
 		<value>/views/forms/messages</value>
 		
 		<value>/views/club/messages</value>
+		<value>/views/bulletin/messages</value>
 		<value>/views/runner/messages</value>
 		<value>/views/category/messages</value>
 	</util:list>
