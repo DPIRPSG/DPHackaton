@@ -20,6 +20,8 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
 import services.AdministratorService;
+import services.ManagerService;
+import services.RefereeService;
 import services.RunnerService;
 
 @Service
@@ -216,29 +218,29 @@ public class ActorFormService {
 		case MANAGER:
 			Assert.isTrue(actorService.checkAuthority("ADMIN"));
 
-			Manager result;
-			result = managerService.create();
+			Manager result1;
+			result1 = managerService.create();
 
-			result.setName(input.getName());
-			result.setSurname(input.getSurname());
-			result.setPhone(input.getUsername());
-			result.setUserAccount(acount);
+			result1.setName(input.getName());
+			result1.setSurname(input.getSurname());
+			result1.setPhone(input.getUsername());
+			result1.setUserAccount(acount);
 
-			managerService.saveFromEdit(result);
+			managerService.saveFromEdit(result1);
 			break;
 
 		case REFEREE:
 			Assert.isTrue(actorService.checkAuthority("ADMIN"));
 
-			Referee result;
-			result = refereeService.create();
+			Referee result11;
+			result11 = refereeService.create();
 
-			result.setName(input.getName());
-			result.setSurname(input.getSurname());
-			result.setPhone(input.getUsername());
-			result.setUserAccount(acount);
+			result11.setName(input.getName());
+			result11.setSurname(input.getSurname());
+			result11.setPhone(input.getUsername());
+			result11.setUserAccount(acount);
 
-			refereeService.saveFromEdit(result);
+			refereeService.saveFromEdit(result11);
 			break;
 		}
 	}

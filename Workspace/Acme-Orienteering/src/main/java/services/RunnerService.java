@@ -71,15 +71,6 @@ public class RunnerService {
 		}
 		Assert.isTrue(result, "A runner can only be a authority.runner");
 		
-		if(customer.getId() == 0){ //First save
-			UserAccount auth;
-			
-			//Encoding password
-			auth = customer.getUserAccount();
-			auth = userAccountService.modifyPassword(auth);
-			customer.setUserAccount(auth);
-			
-		}
 		runnerRepository.save(customer);
 	}
 	
@@ -92,6 +83,15 @@ public class RunnerService {
 				actorService.checkAuthority("RUNNER")
 						|| (!actorService.checkLogin() && runner.getId() == 0),
 						"RunnerService.saveFromEdit.permissionDenied");
+		if(runner.getId() == 0){ //First save
+			UserAccount auth;
+			
+			//Encoding password
+			auth = runner.getUserAccount();
+			auth = userAccountService.modifyPassword(auth);
+			runner.setUserAccount(auth);
+			
+		}
 		this.save(runner);
 	}
 	
