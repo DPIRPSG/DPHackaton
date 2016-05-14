@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="message/actor/edit.do" modelAttribute="messa">
+<form:form action="message/actor/edit.do" modelAttribute="messageEntity">
 	<!-- Hidden Attributes -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />

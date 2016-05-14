@@ -20,7 +20,7 @@ import services.MessageService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Folder;
-import domain.Message;
+import domain.MessageEntity;
 
 @Controller
 @RequestMapping(value = "/message/actor")
@@ -48,7 +48,7 @@ public class MessageActorController extends AbstractController{
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam int folderId){
         ModelAndView result;
-        Collection<Message> messages;
+        Collection<MessageEntity> messages;
         Folder folder;
         
         folder = folderService.findOne(folderId);
@@ -67,7 +67,7 @@ public class MessageActorController extends AbstractController{
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam int messageId){
 		ModelAndView result;
-		Message messa;
+		MessageEntity messa;
 		Collection<Folder> folders;
 		
 		messa = messageService.findOne(messageId);		
@@ -86,7 +86,7 @@ public class MessageActorController extends AbstractController{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(){
 		ModelAndView result;
-		Message message;
+		MessageEntity message;
 		
 		message = messageService.create();
 				
@@ -96,7 +96,7 @@ public class MessageActorController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "send")
-	public ModelAndView save(@Valid Message message, BindingResult binding) {
+	public ModelAndView save(@Valid MessageEntity message, BindingResult binding) {
 		ModelAndView result;
 		int sendId, actId;
 		boolean haySubject, hayBody, hayRecipients;
@@ -140,7 +140,7 @@ public class MessageActorController extends AbstractController{
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView removeFromFolder(@RequestParam int messageId, @RequestParam int folderId){
 		ModelAndView result;
-		Message message;
+		MessageEntity message;
 		Folder folder;
 		
 		message = messageService.findOne(messageId);
@@ -157,7 +157,7 @@ public class MessageActorController extends AbstractController{
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView addFolder(@RequestParam int messageId){
 		ModelAndView result;
-		Message message;
+		MessageEntity message;
 		
 		message = messageService.findOne(messageId);
 		
@@ -167,7 +167,7 @@ public class MessageActorController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView addFolderSave(@Valid Message message, BindingResult binding){
+	public ModelAndView addFolderSave(@Valid MessageEntity message, BindingResult binding){
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
@@ -185,7 +185,7 @@ public class MessageActorController extends AbstractController{
 	
 	// Ancillary Methods ----------------------------------------------------------
 	
-	protected ModelAndView createSendModelAndView(Message input) {
+	protected ModelAndView createSendModelAndView(MessageEntity input) {
 		ModelAndView result;
 		
 		result = createSendModelAndView(input, null, true, true, true);
@@ -193,14 +193,14 @@ public class MessageActorController extends AbstractController{
 		return result;
 	}
 	
-	protected ModelAndView createSendModelAndView(Message input, String message, boolean hayBody, boolean hayRecipients, boolean haySubject){
+	protected ModelAndView createSendModelAndView(MessageEntity input, String message, boolean hayBody, boolean hayRecipients, boolean haySubject){
 		ModelAndView result;
 		Collection<Actor> actors;
 		
 		actors = actorService.findAll();
 		
 		result = new ModelAndView("message/create");
-		result.addObject("messa", input);
+		result.addObject("messageEntity", input);
 		result.addObject("actors", actors);
 		result.addObject("message", message);
 		result.addObject("hayBody", hayBody);
@@ -210,7 +210,7 @@ public class MessageActorController extends AbstractController{
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Message input) {
+	protected ModelAndView createEditModelAndView(MessageEntity input) {
 		ModelAndView result;
 		
 		result = createEditModelAndView(input, null);
@@ -218,14 +218,14 @@ public class MessageActorController extends AbstractController{
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Message input, String message){
+	protected ModelAndView createEditModelAndView(MessageEntity input, String message){
 		ModelAndView result;
 		Collection<Folder> folders;
 		
 		folders = folderService.findAllByActor();
 		
 		result = new ModelAndView("message/edit");
-		result.addObject("messa", input);
+		result.addObject("messageEntity", input);
 		result.addObject("foldersActor", folders);
 		result.addObject("message", message);
 		

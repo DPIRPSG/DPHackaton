@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Folder;
-import domain.Message;
+import domain.MessageEntity;
 
 import repositories.FolderRepository;
 
@@ -44,10 +44,10 @@ public class FolderService {
 	 */
 	public Folder create() {
 		Folder result;
-		Collection<Message> messages;
+		Collection<MessageEntity> messages;
 
 		result = new Folder();
-		messages = new ArrayList<Message>();
+		messages = new ArrayList<MessageEntity>();
 
 		result.setMessages(messages);
 		result.setIsSystem(false);
@@ -139,7 +139,7 @@ public class FolderService {
 	/**
 	 * Añade un mensaje a una carpeta dada. NO USAR EN REPO
 	 */
-	public Folder addMessage(Folder f, Message m) {
+	public Folder addMessage(Folder f, MessageEntity m) {
 		Assert.notNull(f);
 		Assert.notNull(m);
 
@@ -153,7 +153,7 @@ public class FolderService {
 	/**
 	 * Borrar un mensaje de una carpeta dada
 	 */
-	public void removeMessage(Folder f, Message m) {
+	public void removeMessage(Folder f, MessageEntity m) {
 		Assert.notNull(m);
 		Assert.notNull(f);
 		this.checkActor(f);
@@ -263,7 +263,7 @@ public class FolderService {
 	/**
 	 * Mover un mensaje de una carpeta a otra
 	 */
-	public void moveMessage(Folder origin, Folder destination, Message m) {
+	public void moveMessage(Folder origin, Folder destination, MessageEntity m) {
 		Assert.notNull(m);
 		Assert.isTrue(m.getId() != 0);
 		Assert.notNull(origin);
@@ -298,7 +298,7 @@ public class FolderService {
 		Assert.isTrue(actId == inputId, "folder.modify.notOwner");
 	}
 
-	public Collection<Folder> findByMessageAndActualActor(Message messa) {
+	public Collection<Folder> findByMessageAndActualActor(MessageEntity messa) {
 		messageService.checkActor(messa);
 
 		Collection<Folder> result;

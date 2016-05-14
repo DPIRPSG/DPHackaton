@@ -25,10 +25,10 @@
 	<acme:selectMult items="${actors}" itemLabel="userAccount.username" code="message.recipients" path="recipients"/>
 	<br />
 
-	<acme:textarea code="message.subject" path="subject"/>
+	<acme:textbox code="message.subject" path="subject"/>
 	<br />
 	
-	<acme:textbox code="message.body" path="body"/>
+	<acme:textarea code="message.body" path="body"/>
 	<br />
 	
 	<br />

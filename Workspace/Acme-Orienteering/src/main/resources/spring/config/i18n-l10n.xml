@@ -27,7 +27,7 @@
 		<value>/views/legal-terms/messages</value>
 		
 		<value>/views/folder/messages</value>
-		<value>/views/messages/messages</value>
+		<value>/views/message/messages</value>
 		
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
