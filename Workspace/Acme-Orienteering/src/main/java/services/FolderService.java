@@ -67,7 +67,7 @@ public class FolderService {
 		Folder result;
 
 		result = folderRepository.save(folder);
-		this.flush();
+//		this.flush();
 		
 		return result;
 	}

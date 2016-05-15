@@ -95,17 +95,40 @@ public class RunnerService {
 			}
 		}
 		Assert.isTrue(result, "A runner can only be a authority.runner");
+		Folder res = folderService.create();
+		res.setActor(runner);
+		res.setName("pepe");
+		
+		
+		Collection<Folder> toAdd = new ArrayList<Folder>();
+		toAdd.add(res);
+		runner.setFolders(toAdd);
 		
 		saved = runnerRepository.save(runner);
-		this.flush();
-		userAccountService.flush();
-		if(runner.getId() == 0){
-			System.out.println("Id igual a 0");
-			Collection<Folder> folders;
-
-			folders = folderService.initializeSystemFolder(saved);
-			folderService.save(folders);
-		}
+//		this.flush();
+//		userAccountService.flush();
+//		if(runner.getId() == 0){
+//			System.out.println("Id igual a 0");
+//			Collection<Folder> folders;
+//
+//			folders = folderService.initializeSystemFolder(saved);
+//			folderService.save(folders);
+//		}
+		
+		toAdd = new ArrayList<Folder>();
+		//res.setActor(saved);
+		res = folderService.create();
+		res.setActor(saved);
+		res.setName("pepe");
+		
+		toAdd.add(res);
+		
+		folderService.save(toAdd);
+		
+//		saved.setFolders(toAdd);
+//		saved = runnerRepository.save(saved);
+		
+		saved = runnerRepository.findOne(saved.getId());
 			
 		return saved;
 	}
