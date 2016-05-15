@@ -61,6 +61,20 @@
 		</a>
 	</display:column>
 	
+	<spring:message code="club.leagues" var="leaguesHeader" />
+	<display:column title="${leaguesHeader}" sortable="false">
+		<a href="league/list.do?clubId=${row_Club.id}"> <spring:message
+				code="club.leagues"/>
+		</a>
+	</display:column>
+	
+	<spring:message code="club.racing" var="racingHeader" />
+	<display:column title="${racingHeader}" sortable="false">
+		<a href="race/list.do?clubId=${row_Club.id}"> <spring:message
+				code="club.racing"/>
+		</a>
+	</display:column>
+	
 	<spring:message code="club.bulletins" var="bulletinsHeader" />
 	<display:column title="${bulletinsHeader}" sortable="false">
 		<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
