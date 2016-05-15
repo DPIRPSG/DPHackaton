@@ -30,6 +30,7 @@
 		<value>/views/forms/tiles.xml</value>
 		
 		<value>/views/club/tiles.xml</value>
+		<value>/views/sponsor/tiles.xml</value>
 		<value>/views/league/tiles.xml</value>
 		<value>/views/race/tiles.xml</value>
 		<value>/views/bulletin/tiles.xml</value>
