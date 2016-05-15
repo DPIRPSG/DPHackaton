@@ -21,7 +21,7 @@ import security.UserAccount;
 import security.UserAccountService;
 
 @Service
-@Transactional(noRollbackFor = Exception.class)
+@Transactional
 public class RunnerService {
 	//Managed repository -----------------------------------------------------
 	

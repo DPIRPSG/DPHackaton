@@ -203,7 +203,7 @@ public class FolderService {
 
 		actor = actorService.findByPrincipal();
 		result = folderRepository.findAllByActorId(actor.getId());
-		
+
 		return result;
 	}
 
@@ -312,13 +312,13 @@ public class FolderService {
 		actor = actorService.findByPrincipal();
 		result = new ArrayList<Folder>();
 
-//		folders = folderRepository.findAllByActorId(actor.getId());
-//
-//		for (Folder f : folders) {
-//			if (f.getMessages().contains(messa)) {
-//				result.add(f);
-//			}
-//		}
+		folders = folderRepository.findAllByActorId(actor.getId());
+
+		for (Folder f : folders) {
+			if (f.getMessages().contains(messa)) {
+				result.add(f);
+			}
+		}
 
 		return result;
 	}

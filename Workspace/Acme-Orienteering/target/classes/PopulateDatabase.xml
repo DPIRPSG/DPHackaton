@@ -96,7 +96,8 @@
 			<list>
 			</list>
 		</property>
-	</bean>	
+	</bean>
+
 	<bean id="folder1" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
