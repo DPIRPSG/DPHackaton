@@ -37,7 +37,7 @@ public enum TypeOfAuthority {
 				break;
 			}
 		}
-		Assert.isNull(result);
+		Assert.notNull(result);
 		
 		return result;
 	};

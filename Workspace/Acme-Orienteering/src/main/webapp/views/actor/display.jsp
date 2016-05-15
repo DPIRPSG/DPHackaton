@@ -12,21 +12,21 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 	<!-- Listing grid -->
-	<div>
+<div>
 	<table>
 
-	<acme:display code="administrator.name" value="${administrator.name}"/>
-	<acme:display code="administrator.surname" value="${administrator.surname}"/>
-	<acme:display code="administrator.phone" value="${administrator.phone}"/>
-	<acme:display code="administrator.username" value="${administrator.userAccount.username}"/>
-	
-	</table>
-	</div>
+		<acme:display code="actor.name" value="${actor.name}" />
+		<acme:display code="actor.surname" value="${actor.surname}" />
+		<acme:display code="actor.phone" value="${actor.phone}" />
+		<acme:display code="actor.nif" value="${actor.nif}" />
+		<acme:display code="actor.username"
+			value="${actor.userAccount.username}" />
 
-	
-	<!-- Action links -->
+	</table>
+</div>
+
+
+<!-- Action links -->
 	<div>
-		<b><a href="administrator/administrator/edit.do"> 
-			<spring:message code="administrator.edit" />
-		</a></b>
+		<b><acme:link href="actor/actor/edit.do" code="actor.edit"/></b>
 	</div>
