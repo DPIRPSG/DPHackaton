@@ -48,6 +48,8 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register" /></a></li>		
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>

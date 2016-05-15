@@ -45,7 +45,7 @@ public class LeagueController extends AbstractController {
 		ModelAndView result;
 		Collection<League> leagues;
 		
-		if(clubId != 0) {
+		if(clubId != null) {
 			leagues = leagueService.findAllByClubId(clubId);
 		} else {
 			leagues = leagueService.findAll();

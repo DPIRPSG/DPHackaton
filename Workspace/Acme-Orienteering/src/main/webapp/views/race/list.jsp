@@ -17,14 +17,16 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="racing" requestURI="${requestURI}" id="row_Race">
 	<!-- Action links -->
-	
-	<display:column>
-		<div>
-			<b><a href="race/administrator/edit.do?raceId=${row_Race.id}"> <spring:message
-						code="race.edit" />
-			</a></b>
-		</div>
-	</display:column>
+
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<div>
+				<b><a href="race/administrator/edit.do?raceId=${row_Race.id}">
+						<spring:message code="race.edit" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 
@@ -58,9 +60,12 @@
 
 <!-- Action links -->
 
-<div>
-	<b><a href="race/administrator/create.do"> <spring:message
-				code="race.create" />
-	</a></b>
-</div>
+<security:authorize access="hasRole('ADMIN')">
+	<div>
+		<b><a href="race/administrator/create.do"> <spring:message
+					code="race.create" />
+		</a></b>
+	</div>
+</security:authorize>
+
 

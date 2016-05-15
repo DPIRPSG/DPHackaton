@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -49,7 +50,7 @@ public class ClubController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam (required = false) Integer leagueId) {
 		ModelAndView result;
 		Collection<Club> clubes;
 		Manager manager;
@@ -60,7 +61,11 @@ public class ClubController extends AbstractController {
 			manager = null;
 		}
 
-		clubes = clubService.findAll();
+		if(leagueId != null) {
+			clubes = clubService.findAllByLeagueId(leagueId);
+		} else {
+			clubes = clubService.findAll();
+		}
 		
 		result = new ModelAndView("club/list");
 		result.addObject("requestURI", "club/list.do");

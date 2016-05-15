@@ -17,14 +17,17 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="leagues" requestURI="${requestURI}" id="row_League">
 	<!-- Action links -->
-	
-	<display:column>
-		<div>
-			<b><a href="league/administrator/edit.do?leagueId=${row_League.id}"> <spring:message
-						code="league.edit" />
-			</a></b>
-		</div>
-	</display:column>
+
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<div>
+				<b><a
+					href="league/administrator/edit.do?leagueId=${row_League.id}">
+						<spring:message code="league.edit" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 
@@ -58,14 +61,30 @@
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<acme:displayColumn value="${row_League.referee.name} ${row_League.referee.surname }" title="${refereeHeader}"/>
 	
+	<spring:message code="league.racing" var="racingHeader" />
+	<display:column title="${racingHeader}" sortable="false">
+		<a href="race/list.do?leagueId=${row_League.id}"> <spring:message
+				code="league.racing"/>
+		</a>
+	</display:column>
+	
+	<spring:message code="league.clubs" var="clubesHeader" />
+	<display:column title="${clubesHeader}" sortable="false">
+		<a href="club/list.do?leagueId=${row_League.id}"> <spring:message
+				code="league.clubs"/>
+		</a>
+	</display:column>
+	
 </display:table>
 
 
 <!-- Action links -->
 
-<div>
-	<b><a href="league/administrator/create.do"> <spring:message
-				code="league.create" />
-	</a></b>
-</div>
+<security:authorize access="hasRole('ADMIN')">
+	<div>
+		<b><a href="league/administrator/create.do"> <spring:message
+					code="league.create" />
+		</a></b>
+	</div>
+</security:authorize>
 
