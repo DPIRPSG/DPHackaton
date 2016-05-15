@@ -11,24 +11,39 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="category/administrator/edit.do" modelAttribute="category">
+<form:form action="league/administrator/edit.do" modelAttribute="leagueForm">
 	<!-- Hidden Attributes -->
-	<form:hidden path="id" />
-	<form:hidden path="version" />
+	<form:hidden path="leagueId" />
 	
 	<!-- Editable Attributes -->
 	
-	<acme:textbox code="category.name" path="name"/>
+	<acme:textbox code="league.name" path="name"/>
 	
-	<acme:textarea code="category.description" path="description"/>
+	<acme:textarea code="league.description" path="description"/>
+	
+	<acme:textarea code="league.pictures" path="pictures"/>
+	
+	<acme:textbox code="league.startedMoment" path="startedMoment"/>
+	
+	<acme:textbox code="league.amount" path="amount"/>
+	
+	<form:label path="referee">
+			<spring:message code="league.referee" />
+		</form:label>
+	<form:select name="referee" path="referee">
+		    <jstl:forEach var="referee" items="${referees}" >
+		        <form:option value="${referee.id}"><jstl:out value="${referee.name} ${referee.surname}"/></form:option>
+		    </jstl:forEach>
+		</form:select>
+		<form:errors path="referee" cssClass="error" />
 
 	<!-- Action buttons -->
-	<acme:submit name="save" code="category.save"/>
+	<acme:submit name="save" code="league.save"/>
 	
-	<jstl:if test="${category.id != 0}">
-		<acme:submit name="delete" code="category.delete"/>
+	<jstl:if test="${leagueId != 0}">
+		<acme:submit name="delete" code="league.delete"/>
 	</jstl:if>
 	
-	<acme:cancel code="category.cancel" url="category/administrator/list.do"/>
+	<acme:cancel code="league.cancel" url="league/administrator/list.do"/>
 	
 </form:form>
