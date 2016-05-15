@@ -15,7 +15,7 @@ import domain.MessageEntity;
 import repositories.FolderRepository;
 
 @Service
-@Transactional(noRollbackFor = Exception.class)
+@Transactional
 public class FolderService {
 	// Managed repository -----------------------------------------------------
 
@@ -51,11 +51,11 @@ public class FolderService {
 
 		result.setMessages(messages);
 		result.setIsSystem(false);
-//		try {
-//			result.setActor(actorService.findByPrincipal());
-//		} catch (Exception e) {
-//			
-//		}
+		try {
+			result.setActor(actorService.findByPrincipal());
+		} catch (Exception e) {
+			
+		}
 
 
 		return result;
@@ -107,7 +107,6 @@ public class FolderService {
 		for (Folder a : folder) {
 			result.add(this.save(a));
 		}
-		System.out.println("Todas las carpetas guardadas !");
 		return result;
 	}
 
@@ -118,8 +117,8 @@ public class FolderService {
 		Assert.notNull(folder);
 		Assert.isTrue(folder.getId() != 0);
 
-//		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
-//				"Only the owner can delete the folder");
+		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
+				"Only the owner can delete the folder");
 
 		// Si es del sistema no debe poder borrarse
 		Assert.isTrue(!folder.getIsSystem(),
@@ -134,7 +133,7 @@ public class FolderService {
 		result = folderRepository.findOne(folderId);
 
 		Assert.notNull(result);
-//		this.checkActor(result); // Es necesario ya que no se comprueba en otro lado
+		this.checkActor(result); // Es necesario ya que no se comprueba en otro lado
 
 		return result;
 	}
@@ -161,7 +160,7 @@ public class FolderService {
 	public void removeMessage(Folder f, MessageEntity m) {
 		Assert.notNull(m);
 		Assert.notNull(f);
-//		this.checkActor(f);
+		this.checkActor(f);
 		if (f.getName().equals("TrashBox") && f.getIsSystem()) {
 			f.removeMessage(m);
 
@@ -175,14 +174,14 @@ public class FolderService {
 			count = 0;
 			Folder trashBox;
 
-//			for (Folder folder : actor.getFolders()) {
-//				if (folder.getMessages().contains(m)) {
-//					count++;
-//				}
-//				if (count > 1) {
-//					break;
-//				}
-//			}
+			for (Folder folder : actor.getFolders()) {
+				if (folder.getMessages().contains(m)) {
+					count++;
+				}
+				if (count > 1) {
+					break;
+				}
+			}
 			f.removeMessage(m);
 			if (count == 1) {
 				trashBox = this
@@ -203,8 +202,7 @@ public class FolderService {
 		Actor actor;
 
 		actor = actorService.findByPrincipal();
-//		result = folderRepository.findAllByActorId(actor.getId());
-		result = null;
+		result = folderRepository.findAllByActorId(actor.getId());
 		
 		return result;
 	}
@@ -217,8 +215,7 @@ public class FolderService {
 		Actor actor;
 
 		actor = actorService.findOne(actorId);
-//		result = folderRepository.findAllByActorId(actor.getId());
-		result = null;
+		result = folderRepository.findAllByActorId(actor.getId());
 
 		return result;
 	}
@@ -261,9 +258,8 @@ public class FolderService {
 			Actor actor, boolean isSystem) {
 		Collection<Folder> result;
 
-//		result = folderRepository.findByNameActorIDIsSystem(name.trim(),
-//				isSystem, actor.getId());
-		result = null;
+		result = folderRepository.findByNameActorIDIsSystem(name.trim(),
+				isSystem, actor.getId());
 
 		return result;
 	}
@@ -278,10 +274,10 @@ public class FolderService {
 		Assert.isTrue(origin.getId() != 0);
 		Assert.notNull(destination);
 
-//		Assert.isTrue(origin.getActor().equals(destination.getActor()),
-//				"The owner of the source folder is not the same as the destination");
-//		Assert.isTrue(origin.getActor().equals(actorService.findByPrincipal()),
-//				"Only the owner can manage the folder");
+		Assert.isTrue(origin.getActor().equals(destination.getActor()),
+				"The owner of the source folder is not the same as the destination");
+		Assert.isTrue(origin.getActor().equals(actorService.findByPrincipal()),
+				"Only the owner can manage the folder");
 
 		Assert.isTrue(origin.getMessages().contains(m));
 
@@ -296,15 +292,15 @@ public class FolderService {
 		this.removeMessage(origin, m);
 	}
 
-//	public void checkActor(Folder folder) {
-//		int actId;
-//		int inputId;
-//
-//		actId = folder.getActor().getUserAccount().getId();
-//		inputId = actorService.findByPrincipal().getUserAccount().getId();
-//
-//		Assert.isTrue(actId == inputId, "folder.modify.notOwner");
-//	}
+	public void checkActor(Folder folder) {
+		int actId;
+		int inputId;
+
+		actId = folder.getActor().getUserAccount().getId();
+		inputId = actorService.findByPrincipal().getUserAccount().getId();
+
+		Assert.isTrue(actId == inputId, "folder.modify.notOwner");
+	}
 
 	public Collection<Folder> findByMessageAndActualActor(MessageEntity messa) {
 		messageService.checkActor(messa);
