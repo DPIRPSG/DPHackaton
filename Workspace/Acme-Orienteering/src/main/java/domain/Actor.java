@@ -72,8 +72,8 @@ public abstract class Actor extends DomainEntity{
 	private Collection<Folder> folders;
 	private Collection<MessageEntity> received;
 	private Collection<MessageEntity> sent;
-//	private Curriculum curriculum;
-//	private Collection<Comment> comments;	
+	private Curriculum curriculum;
+	private Collection<Comment> comments;	
 
 	@NotNull
 	@Valid
@@ -89,7 +89,6 @@ public abstract class Actor extends DomainEntity{
 	@Valid
 	@OneToMany(mappedBy = "actor")
 	@Size(min = 3)
-//	@Size(min = 1)
 	public Collection<Folder> getFolders() {
 		return folders;
 	}
@@ -117,23 +116,23 @@ public abstract class Actor extends DomainEntity{
 		this.sent = sent;
 	}
 	
-//	@Valid
-//	@OneToOne(optional = true)
-//	public Curriculum getCurriculum() {
-//		return curriculum;
-//	}
-//	public void setCurriculum(Curriculum curriculum) {
-//		this.curriculum = curriculum;
-//	}
+	@Valid
+	@OneToOne(optional = true)
+	public Curriculum getCurriculum() {
+		return curriculum;
+	}
+	public void setCurriculum(Curriculum curriculum) {
+		this.curriculum = curriculum;
+	}
 	
-//	@Valid
-//	@NotNull
-//	@OneToMany(mappedBy = "actor")
-//	public Collection<Comment> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(Collection<Comment> comments) {
-//		this.comments = comments;
-//	}
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "actor")
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
 }

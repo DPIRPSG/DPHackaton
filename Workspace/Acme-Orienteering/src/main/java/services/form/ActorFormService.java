@@ -1,6 +1,5 @@
 package services.form;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Administrator;
-import domain.Comment;
 import domain.Folder;
 import domain.Manager;
 import domain.Referee;
@@ -205,6 +203,7 @@ public class ActorFormService {
 	 */
 	private void saveRegistration(ActorForm input) {
 		UserAccount acount;
+		@SuppressWarnings("unused")
 		Collection<Folder> folders;
 		int actorId;
 		Actor saved;
@@ -243,8 +242,9 @@ public class ActorFormService {
 			result1.setSurname(input.getSurname());
 			result1.setPhone(input.getUsername());
 			result1.setUserAccount(acount);
-//			result1.setFolders(folders);
 			result1.setNif(input.getNif());
+			
+			folders = folderService.initializeSystemFolder(result1);
 
 			actorId = managerService.saveFromEdit(result1).getId();
 			break;
@@ -259,8 +259,9 @@ public class ActorFormService {
 			result11.setSurname(input.getSurname());
 			result11.setPhone(input.getUsername());
 			result11.setUserAccount(acount);
-//			result11.setFolders(folders);
 			result11.setNif(input.getNif());
+			
+			folders = folderService.initializeSystemFolder(result11);
 
 			actorId = refereeService.saveFromEdit(result11).getId();
 			break;
@@ -268,11 +269,8 @@ public class ActorFormService {
 			actorId = 0;
 		}
 		saved = actorService.findOne(actorId);
-//		
-		folderService.save(folderService.initializeSystemFolder(saved));
 
-//		folders = folderService.initializeSystemFolder(saved);
-//		folderService.save(folders);
+		folderService.save(folderService.initializeSystemFolder(saved));
 	}
 
 }

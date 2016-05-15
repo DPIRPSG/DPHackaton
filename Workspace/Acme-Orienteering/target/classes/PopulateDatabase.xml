@@ -65,6 +65,10 @@
 			<list>
 			</list>
 		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="manager1" class="domain.Manager">
@@ -88,8 +92,11 @@
 			<list>
 			</list>
 		</property>
-	</bean>
-	
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>	
 	<bean id="folder1" class="domain.Folder">
 		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>

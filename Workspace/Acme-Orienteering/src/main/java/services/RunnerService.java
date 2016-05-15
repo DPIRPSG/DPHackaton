@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 
 import domain.Comment;
 import domain.Entered;
-import domain.Folder;
 import domain.MessageEntity;
 import domain.Participates;
 import domain.Runner;
@@ -36,9 +35,6 @@ public class RunnerService {
 	
 	@Autowired
 	private UserAccountService userAccountService;
-	
-	@Autowired
-	private FolderService folderService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -66,7 +62,7 @@ public class RunnerService {
 		participates = new ArrayList<Participates>();
 
 		result = new Runner();
-//		result.setComments(comments);
+		result.setComments(comments);
 		result.setReceived(messages2);
 		result.setSent(messages);
 		result.setEntered(entered);
@@ -95,50 +91,8 @@ public class RunnerService {
 			}
 		}
 		Assert.isTrue(result, "A runner can only be a authority.runner");
-		Folder res = folderService.create();
-		res.setActor(runner);
-		res.setName("pepe");
-		
-		
-//		Collection<Folder> toAdd = folderService.initializeSystemFolder(runner);
-//				new ArrayList<Folder>();
-//		toAdd.add(res);
-//		runner.setFolders(toAdd);
 		
 		saved = runnerRepository.save(runner);
-//		this.flush();
-//		userAccountService.flush();
-//		if(runner.getId() == 0){
-//			System.out.println("Id igual a 0");
-//			Collection<Folder> folders;
-//
-//			folders = folderService.initializeSystemFolder(saved);
-//			folderService.save(folders);
-//		}
-		
-//		toAdd = new ArrayList<Folder>();
-//		res.setActor(saved);
-////		res = folderService.create();
-////		res.setActor(saved);
-////		res.setName("pepe");
-//		
-//		toAdd.add(res);
-//		
-//		folderService.save(toAdd);
-//		Collection<Folder> jes = new ArrayList<Folder>();
-//		
-//		for(Folder f:toAdd){
-//			f.setActor(saved);
-//			jes.add(f);
-//		}
-//		
-//		folderService.save(jes);
-//		folderService.save(folderService.initializeSystemFolder(saved));
-		
-//		saved.setFolders(toAdd);
-//		saved = runnerRepository.save(saved);
-		
-		saved = runnerRepository.findOne(saved.getId());
 			
 		return saved;
 	}
@@ -153,13 +107,7 @@ public class RunnerService {
 				actorService.checkAuthority("RUNNER")
 						|| (!actorService.checkLogin() && runner.getId() == 0),
 						"RunnerService.saveFromEdit.permissionDenied");
-//		if(runner.getId() == 0){ //First save
-//
-//			
-//
-//			
-//
-//		}
+
 		result = this.save(runner);
 		
 		return result;

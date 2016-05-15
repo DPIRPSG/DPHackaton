@@ -52,7 +52,7 @@ public class RefereeService {
 		messages = new ArrayList<MessageEntity>();
 		
 		result = new Referee();
-//		result.setComments(comments);
+		result.setComments(comments);
 		result.setReceived(messages);
 		result.setSent(messages);
 		

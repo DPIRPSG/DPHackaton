@@ -52,7 +52,7 @@ public class ManagerService {
 		messages = new ArrayList<MessageEntity>();
 
 		result = new Manager();
-//		result.setComments(comments);
+		result.setComments(comments);
 		result.setReceived(messages);
 		result.setSent(messages);
 		
@@ -87,15 +87,6 @@ public class ManagerService {
 						|| (actorService.checkAuthority("ADMIN") && manager.getId() == 0),
 						"ManagerService.saveFromEdit.permissionDenied");
 		Manager result;
-		
-//		if(manager.getId() == 0){ //First save
-//			UserAccount auth;
-//			
-//			//Encoding password
-//			auth = manager.getUserAccount();
-//			auth = userAccountService.modifyPassword(auth);
-//			manager.setUserAccount(auth);
-//		}
 		
 		result = this.save(manager);
 		
