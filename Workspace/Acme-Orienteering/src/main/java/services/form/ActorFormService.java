@@ -231,8 +231,8 @@ public class ActorFormService {
 			result.setUserAccount(acount);
 			result.setNif(input.getNif());
 			
-			folders = folderService.initializeSystemFolder(result);
-			result.setFolders(folders);
+//			folders = folderService.initializeSystemFolder(result);
+//			result.setFolders(folders);
 
 			actor = runnerService.saveFromEdit(result);
 			actorId = actor.getId();

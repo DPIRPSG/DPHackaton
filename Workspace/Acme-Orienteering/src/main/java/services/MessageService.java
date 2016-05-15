@@ -122,7 +122,7 @@ public class MessageService {
 		folders = input.getFolders();
 		for(Folder a:folders){
 			if(!a.getMessages().contains(input)){
-				Assert.isTrue(a.getActor().getUserAccount().getId() == actId);
+//				Assert.isTrue(a.getActor().getUserAccount().getId() == actId);
 				input = this.findOne(input.getId());
 				
 				folderService.addMessage(a, input);
@@ -142,7 +142,7 @@ public class MessageService {
 
 		result = this.save(message);
 
-		this.addMessageToFolderFirst(result);
+//		this.addMessageToFolderFirst(result);
 
 		result = this.findOne(result.getId());
 		
@@ -152,49 +152,49 @@ public class MessageService {
 	/**
 	 * Añade a las respectivas carpetas la primera vez que un mensaje es creado
 	 */
-	private void addMessageToFolderFirst(MessageEntity message) {
-		Collection<Actor> actors;
-		
-		for (Folder f : message.getSender().getFolders()) {
-			if (f.getIsSystem() && f.getName().equals("OutBox")){
-				message.addFolder(f);
-				message = this.save(message);
-				folderService.addMessage(f, message);
-				break;
-			}
-		}
+//	private void addMessageToFolderFirst(MessageEntity message) {
+//		Collection<Actor> actors;
+//		
+//		for (Folder f : message.getSender().getFolders()) {
+//			if (f.getIsSystem() && f.getName().equals("OutBox")){
+//				message.addFolder(f);
+//				message = this.save(message);
+//				folderService.addMessage(f, message);
+//				break;
+//			}
+//		}
+//
+//		actors = new ArrayList<Actor>(message.getRecipients());
+//		
+//		for (Actor recipient : actors) {
+//			for (Folder f : recipient.getFolders()) {
+//				boolean toInBox;
+//
+//				toInBox = f.getName().equals("InBox");
+//
+//				if (toInBox && f.getIsSystem()){
+//					message.addFolder(f);
+//					message = this.save(message);
+//					folderService.addMessage(f, message);
+//					break;
+//			}}
+//		}
+//	}
 
-		actors = new ArrayList<Actor>(message.getRecipients());
-		
-		for (Actor recipient : actors) {
-			for (Folder f : recipient.getFolders()) {
-				boolean toInBox;
-
-				toInBox = f.getName().equals("InBox");
-
-				if (toInBox && f.getIsSystem()){
-					message.addFolder(f);
-					message = this.save(message);
-					folderService.addMessage(f, message);
-					break;
-			}}
-		}
-	}
-
-	/**
-	 * Devuelve todos los mensajes contenidos en una determinada carpeta
-	 */
-	public Collection<MessageEntity> findAllByFolder(Folder folder) {
-		Assert.notNull(folder);
-		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
-				"Only the owner of the folder can display them");
-
-		Collection<MessageEntity> result;
-
-		result = messageRepository.findAllByFolderId(folder.getId());
-
-		return result;
-	}
+//	/**
+//	 * Devuelve todos los mensajes contenidos en una determinada carpeta
+//	 */
+//	public Collection<MessageEntity> findAllByFolder(Folder folder) {
+//		Assert.notNull(folder);
+//		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
+//				"Only the owner of the folder can display them");
+//
+//		Collection<MessageEntity> result;
+//
+//		result = messageRepository.findAllByFolderId(folder.getId());
+//
+//		return result;
+//	}
 
 	/**
 	 * Borra un mensaje de una carpeta
@@ -205,8 +205,8 @@ public class MessageService {
 		Assert.notNull(folder);
 		Assert.isTrue(folder.getId() != 0);
 
-		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
-				"Only the owner of the folder can delete a message");
+//		Assert.isTrue(folder.getActor().equals(actorService.findByPrincipal()),
+//				"Only the owner of the folder can delete a message");
 
 		folderService.removeMessage(folder, message);
 	}

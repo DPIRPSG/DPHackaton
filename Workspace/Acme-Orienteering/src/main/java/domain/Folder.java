@@ -43,19 +43,19 @@ public class Folder extends DomainEntity {
 	}
 
 	// Relationships ----------------------------------------------------------
-	private Actor actor;
+//	private Actor actor;
 	private Collection<MessageEntity> messages;
 
-	@NotNull
-	@Valid
-	@ManyToOne(optional = false)
-	public Actor getActor() {
-		return actor;
-	}
-
-	public void setActor(Actor actor) {
-		this.actor = actor;
-	}
+//	@NotNull
+//	@Valid
+//	@ManyToOne(optional = false)
+//	public Actor getActor() {
+//		return actor;
+//	}
+//
+//	public void setActor(Actor actor) {
+//		this.actor = actor;
+//	}
 
 	@Valid
 	@ManyToMany
