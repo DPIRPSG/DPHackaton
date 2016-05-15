@@ -380,7 +380,7 @@
 		<property name="name" value="Los Imperdibles"/>
 		<property name="pictures">
 			<list>
-				<value bean="http://www.abc.es/Media/201310/31/222792351--644x362.jpg"/>
+				<value>http://www.abc.es/Media/201310/31/222792351--644x362.jpg</value>
 			</list>
 		</property>
 		<property name="creationMoment" value="2014/06/16 13:05"/>
@@ -388,30 +388,168 @@
 		<property name="manager" ref="manager1"/>
 		<property name="bulletins">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="bulletin1"/>
 			</list>
 		</property>
 		<property name="classifications">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="classification1"/>
 			</list>
 		</property>
 		<property name="entered">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="entered1"/>
 			</list>
 		</property>
 		<property name="punishments">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="punishments1"/>
 			</list>
 		</property>
 		<property name="feePayments">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="feePayments1"/>
 			</list>
 		</property>
 	</bean>
 	
+	<!-- Bulletin -->
+	
+	<bean id="bulletin1" class="domain.Bulletin">
+		<property name="title" value="Thank you!"/>
+		<property name="description" value="Our club have obtain the best classifications of 2015!"/>
+		<property name="creationMoment" value="2016/01/01 00:16"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<!-- Classification -->
+	
+	<bean id="classification1" class="domain.Classification">
+		<property name="position" value="1"/>
+		<property name="points" value="30"/>
+		<property name="race" ref="race1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<!-- Punishment -->
+	
+	<bean id="punishment1" class="domain.Punishment">
+		<property name="reason" value="The second place runner was catched going throw a ilegal zone."/>
+		<property name="points" value="10"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<!-- FeePayment -->
+	
+	<bean id="feePayment1" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="350"/>
+		<property name="paymentMoment" value="2016/02/03 12:12"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<!-- Race -->
+	
+	<bean id="race1" class="domain.Race">
+		<property name="description" value="1"/>
+		<property name="name" value="30"/>
+		<property name="moment" value="2016/02/03 12:12"/>
+		<property name="classifications">
+			<list>
+				<ref bean="classification1"/>
+			</list>
+		</property>
+		<property name="category" ref="category1"/>
+		<property name="league" ref="league1"/>
+		<property name="participates">
+			<list>
+				<ref bean="participates1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- League -->
+	
+	<bean id="league1" class="domain.League">
+		<property name="description" value="The most important european league!"/>
+		<property name="name" value="First Orienteering League (FOL)"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/11/06 13:00"/>
+		<property name="startedMoment" value="2016/02/02 10:30"/>
+		<property name="amount" value="350"/>
+		<property name="punishments">
+			<list>
+				<ref bean="punishment1"/>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+				<ref bean="feePayment1"/>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+				<ref bean="race1"/>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+				<ref bean="finances1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- CreditCard -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Manolo López"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
+	
+	<!-- Category -->
+	
+	<bean id="category1" class="domain.Category">
+		<property name="description" value="Only for older than 18 years old runners and with a minimum of 5 years of experience."/>
+		<property name="name" value="Professional"/>
+	</bean>
+	
+	<!-- Participates -->
+	
+	<bean id="participates1" class="domain.Participates">
+		<property name="result" value="65"/>
+		<property name="race" ref="race1"/>
+		<property name="runner" ref="runner1"/>
+	</bean>
+	
+	<!-- Finances -->
+	
+	<bean id="finances1" class="domain.Finances">
+		<property name="amount" value="1500"/>
+		<property name="sponsor" ref="sponsor1"/>
+		<property name="league" ref="league1"/>
+	</bean>
+	
+	<!-- Sponsor -->
+	
+	<bean id="sponsor1" class="domain.Sponsor">
+		<property name="name" value="CocaCola"/>
+		<property name="description" value="CocaCola Company."/>
+		<property name="logo" value="https://www.cocacola.es/content/dam/GO/CokeZone/Common/global/logo/logodesktop/coca-cola-logo-260x260.png"/>
+		<property name="finances">
+			<list>
+				<ref bean="finances1"/>
+			</list>
+		</property>
+	</bean>
 	
 </beans>
