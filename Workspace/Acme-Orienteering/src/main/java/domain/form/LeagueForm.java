@@ -14,8 +14,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import domain.Referee;
-
 public class LeagueForm {
 
 	private String description;
@@ -24,7 +22,7 @@ public class LeagueForm {
 	private Date startedMoment;
 	private double amount;
 	private int leagueId;
-	private Referee referee;
+	private int refereeId;
 	
 	@NotNull
 	@NotBlank
@@ -83,11 +81,11 @@ public class LeagueForm {
 	
 	@Valid
 	@NotNull
-	public Referee getReferee() {
-		return referee;
+	public int getRefereeId() {
+		return refereeId;
 	}
-	public void setReferee(Referee referee) {
-		this.referee = referee;
+	public void setRefereeId(int refereeId) {
+		this.refereeId = refereeId;
 	}
 	
 }

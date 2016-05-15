@@ -23,16 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ClubService;
-import services.ManagerService;
+import services.LeagueService;
 import services.RefereeService;
-import services.form.ClubFormService;
+import services.form.LeagueFormService;
 import controllers.AbstractController;
-import domain.Club;
 import domain.League;
-import domain.Manager;
 import domain.Referee;
-import domain.form.ClubForm;
 import domain.form.LeagueForm;
 
 @Controller
@@ -153,6 +149,7 @@ public class LeagueAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("league/edit");
 		result.addObject("leagueForm", leagueForm);
+		result.addObject("referees", referees);
 		result.addObject("message", message);
 
 		return result;

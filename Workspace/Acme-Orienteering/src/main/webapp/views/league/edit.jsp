@@ -27,20 +27,22 @@
 	
 	<acme:textbox code="league.amount" path="amount"/>
 	
-	<form:label path="referee">
+	<form:label path="refereeId">
 			<spring:message code="league.referee" />
 		</form:label>
-	<form:select name="referee" path="referee">
+	<form:select name="referee" path="refereeId">
 		    <jstl:forEach var="referee" items="${referees}" >
 		        <form:option value="${referee.id}"><jstl:out value="${referee.name} ${referee.surname}"/></form:option>
 		    </jstl:forEach>
 		</form:select>
-		<form:errors path="referee" cssClass="error" />
+		<form:errors path="refereeId" cssClass="error" />
+		
+	<br/>
 
 	<!-- Action buttons -->
 	<acme:submit name="save" code="league.save"/>
 	
-	<jstl:if test="${leagueId != 0}">
+	<jstl:if test="${leagueForm.leagueId != 0}">
 		<acme:submit name="delete" code="league.delete"/>
 	</jstl:if>
 	
