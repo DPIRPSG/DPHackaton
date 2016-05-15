@@ -38,7 +38,7 @@ public class ActorFormService {
 	private ActorService actorService;
 
 	@Autowired
-	private RunnerService customerService;
+	private RunnerService runnerService;
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -100,6 +100,7 @@ public class ActorFormService {
 		result.setSurname(actor.getSurname());
 		result.setPhone(actor.getPhone());
 		result.setUsername(actor.getUserAccount().getUsername());
+		result.setNif(actor.getNif());
 
 		return result;
 	}
@@ -142,14 +143,15 @@ public class ActorFormService {
 		case RUNNER:
 			Runner result;
 
-			result = customerService.findByPrincipal();
+			result = runnerService.findByPrincipal();
 
 			result.setName(input.getName());
 			result.setSurname(input.getSurname());
 			result.setPhone(input.getPhone());
 			result.setUserAccount(acount);
+			result.setNif(input.getNif());
 
-			customerService.saveFromEdit(result);
+			runnerService.saveFromEdit(result);
 			break;
 
 		case ADMIN:
@@ -161,6 +163,7 @@ public class ActorFormService {
 			result1.setSurname(input.getSurname());
 			result1.setPhone(input.getPhone());
 			result1.setUserAccount(acount);
+			result1.setNif(input.getNif());
 
 			administratorService.saveFromEdit(result1);
 			break;
@@ -174,6 +177,7 @@ public class ActorFormService {
 			result11.setSurname(input.getSurname());
 			result11.setPhone(input.getPhone());
 			result11.setUserAccount(acount);
+			result11.setNif(input.getNif());
 
 			managerService.saveFromEdit(result11);
 			break;
@@ -187,6 +191,7 @@ public class ActorFormService {
 			result111.setSurname(input.getSurname());
 			result111.setPhone(input.getPhone());
 			result111.setUserAccount(acount);
+			result111.setNif(input.getNif());
 
 			refereeService.saveFromEdit(result111);
 			break;
@@ -203,32 +208,37 @@ public class ActorFormService {
 		Collection<Folder> folders;
 		int actorId;
 		Actor saved;
-		Collection<Comment> comments;
-		
+
 		acount = userAccountService.createComplete(input.getUsername(),
-				input.getPassword(), "CUSTOMER");
-		folders = folderService.initializeSystemFolder(customerService.create());
-		comments = new ArrayList<Comment>();
+					input.getPassword(), input.getAuthority().toString());
+
+//		folders = folderService.initializeSystemFolder(runnerService.create());
 
 		//Encoding password
 		acount = userAccountService.modifyPassword(acount);
 
 		switch (input.getAuthority()) {
 		case RUNNER:
+			Runner actor;
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 			Assert.isTrue(!actorService.checkLogin());
-
 			Runner result;
-			result = customerService.create();
+			result = runnerService.create();
 
 			result.setName(input.getName());
 			result.setSurname(input.getSurname());
 			result.setPhone(input.getUsername());
 			result.setUserAccount(acount);
+			result.setNif(input.getNif());
+			
+			folders = folderService.initializeSystemFolder(result);
 			result.setFolders(folders);
-			result.setComments(comments);
 
-			actorId = customerService.saveFromEdit(result).getId();
+			actor = runnerService.saveFromEdit(result);
+			actorId = actor.getId();
+			
+//			folders = folderService.initializeSystemFolder(actor);
+//			folderService.save(folders);
 			break;
 
 		case MANAGER:
@@ -241,8 +251,8 @@ public class ActorFormService {
 			result1.setSurname(input.getSurname());
 			result1.setPhone(input.getUsername());
 			result1.setUserAccount(acount);
-			result1.setFolders(folders);
-			result1.setComments(comments);
+//			result1.setFolders(folders);
+			result1.setNif(input.getNif());
 
 			actorId = managerService.saveFromEdit(result1).getId();
 			break;
@@ -257,19 +267,18 @@ public class ActorFormService {
 			result11.setSurname(input.getSurname());
 			result11.setPhone(input.getUsername());
 			result11.setUserAccount(acount);
-			result11.setFolders(folders);
-			result11.setComments(comments);
-
+//			result11.setFolders(folders);
+			result11.setNif(input.getNif());
 
 			actorId = refereeService.saveFromEdit(result11).getId();
 			break;
 		default:
 			actorId = 0;
 		}
-		saved = actorService.findOne(actorId);
-		
-		folders = folderService.initializeSystemFolder(saved);
-		folderService.save(folders);
+//		saved = actorService.findOne(actorId);
+//		
+//		folders = folderService.initializeSystemFolder(saved);
+//		folderService.save(folders);
 	}
 
 }

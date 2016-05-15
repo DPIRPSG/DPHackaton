@@ -65,10 +65,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="comments">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="manager1" class="domain.Manager">
@@ -89,10 +85,6 @@
 			</list>
 		</property>
 		<property name="received">
-			<list>
-			</list>
-		</property>
-		<property name="comments">
 			<list>
 			</list>
 		</property>

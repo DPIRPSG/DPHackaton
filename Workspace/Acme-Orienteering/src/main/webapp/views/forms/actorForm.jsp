@@ -13,11 +13,13 @@
 	<!-- Form -->
 	<form:form action="${urlAction}" modelAttribute="actorForm">
 		<!-- Hidden Attributes -->
+		<form:hidden path="authority"/>
 		
 		<!-- Editable Attributes -->
 		<acme:textbox code="actorForm.name" path="name"/>
 		<acme:textbox code="actorForm.surname" path="surname"/>
 		<acme:textbox code="actorForm.phone" path="phone"/>
+		<acme:textbox code="actorForm.nif" path="nif"/>
 		<acme:textbox code="actorForm.username" path="username"/>
 		
 		<form:label path="password">
@@ -34,13 +36,11 @@
 		<form:errors class="error" path="repeatedPassword" />
 		<br />		
 		
-		<security:authorize access="!hasAnyRole('CUSTOMER', 'ADMIN')">
-
-		<acme:checkbox code="actorForm.acceptTerm" path="acceptTerm"/>
-		<a href="legal-terms/index.do"><spring:message
-				code="actorForm.legalTerms" /></a>
-		<br/>
-			
+		<security:authorize access="!isAuthenticated()">
+			<acme:checkbox code="actorForm.acceptTerm" path="acceptTerm"/>
+		
+			<acme:link href="legal-terms/index.do" code="actorForm.legalTerms"/>
+			<br/>
 		</security:authorize>		
 		<br />
 		

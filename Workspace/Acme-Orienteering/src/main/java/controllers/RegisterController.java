@@ -16,7 +16,7 @@ import security.TypeOfAuthority;
 import services.form.ActorFormService;
 
 @Controller
-@RequestMapping(value = "/customer")
+@RequestMapping(value = "/runner")
 public class RegisterController extends AbstractController{
 
 	//Services ----------------------------------------------------------
@@ -59,14 +59,14 @@ public class RegisterController extends AbstractController{
 		if(binding.hasErrors()){
 			result = createEditModelAndView(consu);
 		} else {
-			try {
+//			try {
 				actorFormService.saveForm(consu);
-				result = new ModelAndView("redirect:../security/login.do");
-				result.addObject("messageStatus", "customer.commit.ok");
+//				result = new ModelAndView("redirect:../security/login.do");
+//				result.addObject("messageStatus", "runner.commit.ok");
 												
-			} catch (Throwable oops){
-				result = createEditModelAndView(consu, "customer.commit.error");
-			}
+//			} catch (Throwable oops){
+				result = createEditModelAndView(consu, "runner.commit.error");
+//			}
 		}
 		
 		return result;
@@ -87,7 +87,7 @@ public class RegisterController extends AbstractController{
 		result = new ModelAndView("actorForm/create");
 		result.addObject("actorForm", customer);
 		result.addObject("message", message);
-		result.addObject("urlAction", "customer/create.do");
+		result.addObject("urlAction", "runner/create.do");
 		
 		return result;
 	}

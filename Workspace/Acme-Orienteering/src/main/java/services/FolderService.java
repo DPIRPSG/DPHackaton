@@ -15,7 +15,7 @@ import domain.MessageEntity;
 import repositories.FolderRepository;
 
 @Service
-@Transactional
+@Transactional(noRollbackFor = Exception.class)
 public class FolderService {
 	// Managed repository -----------------------------------------------------
 
@@ -51,7 +51,11 @@ public class FolderService {
 
 		result.setMessages(messages);
 		result.setIsSystem(false);
-		result.setActor(actorService.findByPrincipal());
+		try {
+			result.setActor(actorService.findByPrincipal());
+		} catch (Exception e) {
+			
+		}
 
 
 		return result;
@@ -63,7 +67,8 @@ public class FolderService {
 		Folder result;
 
 		result = folderRepository.save(folder);
-
+		this.flush();
+		
 		return result;
 	}
 
@@ -102,7 +107,7 @@ public class FolderService {
 		for (Folder a : folder) {
 			result.add(this.save(a));
 		}
-
+		System.out.println("Todas las carpetas guardadas !");
 		return result;
 	}
 

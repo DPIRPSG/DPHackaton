@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Comment;
 import domain.Entered;
+import domain.Folder;
+import domain.MessageEntity;
 import domain.Participates;
 import domain.Runner;
 import repositories.RunnerRepository;
@@ -19,7 +22,7 @@ import security.UserAccount;
 import security.UserAccountService;
 
 @Service
-@Transactional
+@Transactional(noRollbackFor = Exception.class)
 public class RunnerService {
 	//Managed repository -----------------------------------------------------
 	
@@ -33,6 +36,9 @@ public class RunnerService {
 	
 	@Autowired
 	private UserAccountService userAccountService;
+	
+	@Autowired
+	private FolderService folderService;
 	
 	//Constructors -----------------------------------------------------------
 
@@ -48,8 +54,23 @@ public class RunnerService {
 	public Runner create(){
 		Runner result;
 		UserAccount userAccount;
+		Collection<Comment> comments;
+		Collection<MessageEntity> messages, messages2;
+		Collection<Entered> entered;
+		Collection<Participates> participates;
+
+		comments = new ArrayList<Comment>();
+		messages = new ArrayList<MessageEntity>();
+		messages2 = new ArrayList<MessageEntity>();
+		entered = new ArrayList<Entered>();
+		participates = new ArrayList<Participates>();
 
 		result = new Runner();
+//		result.setComments(comments);
+		result.setReceived(messages2);
+		result.setSent(messages);
+		result.setEntered(entered);
+		result.setParticipates(participates);
 		
 		userAccount = userAccountService.create("RUNNER");
 		result.setUserAccount(userAccount);
@@ -64,9 +85,11 @@ public class RunnerService {
 		Assert.notNull(runner);
 		Runner saved;
 		
-		boolean result = true;
+		boolean result = false;
 		for(Authority a: runner.getUserAccount().getAuthorities()){
-			if(!a.getAuthority().equals("RUNNER")){
+			if(a.getAuthority().equals("RUNNER")){
+				result = true;
+			}else{
 				result = false;
 				break;
 			}
@@ -74,7 +97,16 @@ public class RunnerService {
 		Assert.isTrue(result, "A runner can only be a authority.runner");
 		
 		saved = runnerRepository.save(runner);
-		
+		this.flush();
+		userAccountService.flush();
+		if(runner.getId() == 0){
+			System.out.println("Id igual a 0");
+			Collection<Folder> folders;
+
+			folders = folderService.initializeSystemFolder(saved);
+			folderService.save(folders);
+		}
+			
 		return saved;
 	}
 	
@@ -88,16 +120,13 @@ public class RunnerService {
 				actorService.checkAuthority("RUNNER")
 						|| (!actorService.checkLogin() && runner.getId() == 0),
 						"RunnerService.saveFromEdit.permissionDenied");
-		if(runner.getId() == 0){ //First save
-			Collection<Entered> entered;
-			Collection<Participates> participates;
-			
-			entered = new ArrayList<Entered>();
-			participates = new ArrayList<Participates>();
-			
-			runner.setEntered(entered);
-			runner.setParticipates(participates);
-		}
+//		if(runner.getId() == 0){ //First save
+//
+//			
+//
+//			
+//
+//		}
 		result = this.save(runner);
 		
 		return result;
