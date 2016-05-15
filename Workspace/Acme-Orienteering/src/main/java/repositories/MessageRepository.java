@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import domain.Message;
+import domain.MessageEntity;
 
 @Repository
-public interface MessageRepository extends JpaRepository<Message, Integer> {
+public interface MessageRepository extends JpaRepository<MessageEntity, Integer> {
 
-	@Query("select m from Message m join m.folders f where f.id = ?1")
-	Collection<Message> findAllByFolderId(int folderId);
+	@Query("select m from MessageEntity m join m.folders f where f.id = ?1")
+	Collection<MessageEntity> findAllByFolderId(int folderId);
 }

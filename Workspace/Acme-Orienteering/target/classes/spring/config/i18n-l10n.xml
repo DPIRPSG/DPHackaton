@@ -26,12 +26,16 @@
 		<value>/views/about-us/messages</value>
 		<value>/views/legal-terms/messages</value>
 		
+		<value>/views/folder/messages</value>
+		<value>/views/message/messages</value>
+		
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/forms/messages</value>
 		
 		<value>/views/club/messages</value>
+		<value>/views/league/messages</value>
 		<value>/views/bulletin/messages</value>
 		<value>/views/runner/messages</value>
 		<value>/views/category/messages</value>
