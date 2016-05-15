@@ -1,6 +1,7 @@
 package services;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Comment;
+import domain.MessageEntity;
 import domain.Referee;
 import repositories.RefereeRepository;
 import security.Authority;
@@ -42,8 +45,16 @@ public class RefereeService {
 	public Referee create(){
 		Referee result;
 		UserAccount userAccount;
+		Collection<Comment> comments;
+		Collection<MessageEntity> messages;
 
+		comments = new ArrayList<Comment>();
+		messages = new ArrayList<MessageEntity>();
+		
 		result = new Referee();
+		result.setComments(comments);
+		result.setReceived(messages);
+		result.setSent(messages);
 		
 		userAccount = userAccountService.create("REFEREE");
 		result.setUserAccount(userAccount);
@@ -54,9 +65,11 @@ public class RefereeService {
 	private Referee save(Referee input) {
 		Assert.notNull(input);
 		
-		boolean result = true;
+		boolean result = false;
 		for(Authority a: input.getUserAccount().getAuthorities()){
-			if(!a.getAuthority().equals("REFEREE")){
+			if(a.getAuthority().equals("REFEREE")){
+				result = true;
+			}else{
 				result = false;
 				break;
 			}

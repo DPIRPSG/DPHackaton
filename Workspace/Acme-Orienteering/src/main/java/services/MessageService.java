@@ -65,8 +65,8 @@ public class MessageService {
 	 */
 	private MessageEntity save(MessageEntity message) {
 		Assert.notNull(message);
-		// Assert.isTrue(message.getSender().equals(actorService.findByPrincipal()),
-		// "Only the sender can save the message");
+		Assert.isTrue(message.getSender().equals(actorService.findByPrincipal()),
+		 "Only the sender can save the message");
 
 		message.setSentMoment(new Date());
 
@@ -217,8 +217,8 @@ public class MessageService {
 		messa = this.findOne(messaId);
 
 		this.checkActor(messa);
-		// Assert.isTrue(messa.getFolders().size()==0,
-		// "message.delete.useByOtherFolder");
+		Assert.isTrue(messa.getFolders().size()==0,
+		 "message.delete.useByOtherFolder");
 		if (messa.getFolders().size() == 0)
 			messageRepository.delete(messaId);
 	}

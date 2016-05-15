@@ -44,7 +44,7 @@
 		<security:intercept-url pattern="/about-us/index.do" access="permitAll" />
 		<security:intercept-url pattern="/legal-terms/index.do" access="permitAll" />
 
-		<security:intercept-url pattern="/customer/create.do" access="!isAuthenticated()" /> 
+		<security:intercept-url pattern="/runner/create.do" access="!isAuthenticated()" /> 
 
 		<security:intercept-url pattern="/league/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/race/administrator/**" access="hasRole('ADMIN')" /> 

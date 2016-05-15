@@ -13,6 +13,7 @@ public class ActorForm {
 	private String surname;
 	private String phone;
 	private String username;
+	private String nif;
 	private String password;
 	private String repeatedPassword;
 	private Boolean acceptTerm;
@@ -33,6 +34,14 @@ public class ActorForm {
 	}
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+	@NotNull
+	@NotBlank	
+	public String getNif() {
+		return nif;
+	}
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
 	@NotNull
 	@NotBlank

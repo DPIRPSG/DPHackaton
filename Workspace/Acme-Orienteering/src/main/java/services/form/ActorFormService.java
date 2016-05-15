@@ -1,6 +1,5 @@
 package services.form;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Administrator;
-import domain.Comment;
 import domain.Folder;
 import domain.Manager;
 import domain.Referee;
@@ -38,7 +36,7 @@ public class ActorFormService {
 	private ActorService actorService;
 
 	@Autowired
-	private RunnerService customerService;
+	private RunnerService runnerService;
 
 	@Autowired
 	private AdministratorService administratorService;
@@ -100,6 +98,7 @@ public class ActorFormService {
 		result.setSurname(actor.getSurname());
 		result.setPhone(actor.getPhone());
 		result.setUsername(actor.getUserAccount().getUsername());
+		result.setNif(actor.getNif());
 
 		return result;
 	}
@@ -142,14 +141,15 @@ public class ActorFormService {
 		case RUNNER:
 			Runner result;
 
-			result = customerService.findByPrincipal();
+			result = runnerService.findByPrincipal();
 
 			result.setName(input.getName());
 			result.setSurname(input.getSurname());
 			result.setPhone(input.getPhone());
 			result.setUserAccount(acount);
+			result.setNif(input.getNif());
 
-			customerService.saveFromEdit(result);
+			runnerService.saveFromEdit(result);
 			break;
 
 		case ADMIN:
@@ -161,6 +161,7 @@ public class ActorFormService {
 			result1.setSurname(input.getSurname());
 			result1.setPhone(input.getPhone());
 			result1.setUserAccount(acount);
+			result1.setNif(input.getNif());
 
 			administratorService.saveFromEdit(result1);
 			break;
@@ -174,6 +175,7 @@ public class ActorFormService {
 			result11.setSurname(input.getSurname());
 			result11.setPhone(input.getPhone());
 			result11.setUserAccount(acount);
+			result11.setNif(input.getNif());
 
 			managerService.saveFromEdit(result11);
 			break;
@@ -187,6 +189,7 @@ public class ActorFormService {
 			result111.setSurname(input.getSurname());
 			result111.setPhone(input.getPhone());
 			result111.setUserAccount(acount);
+			result111.setNif(input.getNif());
 
 			refereeService.saveFromEdit(result111);
 			break;
@@ -200,15 +203,13 @@ public class ActorFormService {
 	 */
 	private void saveRegistration(ActorForm input) {
 		UserAccount acount;
+		@SuppressWarnings("unused")
 		Collection<Folder> folders;
 		int actorId;
 		Actor saved;
-		Collection<Comment> comments;
-		
+
 		acount = userAccountService.createComplete(input.getUsername(),
-				input.getPassword(), "CUSTOMER");
-		folders = folderService.initializeSystemFolder(customerService.create());
-		comments = new ArrayList<Comment>();
+					input.getPassword(), input.getAuthority().toString());
 
 		//Encoding password
 		acount = userAccountService.modifyPassword(acount);
@@ -217,18 +218,18 @@ public class ActorFormService {
 		case RUNNER:
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 			Assert.isTrue(!actorService.checkLogin());
-
 			Runner result;
-			result = customerService.create();
+			result = runnerService.create();
 
 			result.setName(input.getName());
 			result.setSurname(input.getSurname());
 			result.setPhone(input.getUsername());
 			result.setUserAccount(acount);
-			result.setFolders(folders);
-			result.setComments(comments);
+			result.setNif(input.getNif());
+			
+			folders = folderService.initializeSystemFolder(result);
 
-			actorId = customerService.saveFromEdit(result).getId();
+			actorId = runnerService.saveFromEdit(result).getId();
 			break;
 
 		case MANAGER:
@@ -241,8 +242,9 @@ public class ActorFormService {
 			result1.setSurname(input.getSurname());
 			result1.setPhone(input.getUsername());
 			result1.setUserAccount(acount);
-			result1.setFolders(folders);
-			result1.setComments(comments);
+			result1.setNif(input.getNif());
+			
+			folders = folderService.initializeSystemFolder(result1);
 
 			actorId = managerService.saveFromEdit(result1).getId();
 			break;
@@ -257,9 +259,9 @@ public class ActorFormService {
 			result11.setSurname(input.getSurname());
 			result11.setPhone(input.getUsername());
 			result11.setUserAccount(acount);
-			result11.setFolders(folders);
-			result11.setComments(comments);
-
+			result11.setNif(input.getNif());
+			
+			folders = folderService.initializeSystemFolder(result11);
 
 			actorId = refereeService.saveFromEdit(result11).getId();
 			break;
@@ -267,9 +269,8 @@ public class ActorFormService {
 			actorId = 0;
 		}
 		saved = actorService.findOne(actorId);
-		
-		folders = folderService.initializeSystemFolder(saved);
-		folderService.save(folders);
+
+		folderService.save(folderService.initializeSystemFolder(saved));
 	}
 
 }
