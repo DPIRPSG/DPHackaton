@@ -75,6 +75,13 @@
 		</a>
 	</display:column>
 	
+	<spring:message code="club.punishments" var="punishmentsHeader" />
+	<display:column title="${punishmentsHeader}" sortable="false">
+		<a href="punishment/list.do?clubId=${row_Club.id}"> <spring:message
+				code="club.punishments"/>
+		</a>
+	</display:column>
+	
 	<spring:message code="club.bulletins" var="bulletinsHeader" />
 	<display:column title="${bulletinsHeader}" sortable="false">
 		<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
