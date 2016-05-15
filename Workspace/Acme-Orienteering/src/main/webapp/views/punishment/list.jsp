@@ -15,33 +15,25 @@
 
 <!-- Listing grid -->
 <display:table pagesize="5" class="displaytag" keepStatus="false"
-	name="categories" requestURI="${requestURI}" id="row_Category">
+	name="punishments" requestURI="${requestURI}" id="row_Punishment">
 	<!-- Action links -->
-	
-	<display:column>
-		<div>
-			<b><a href="category/administrator/edit.do?categoryId=${row_Category.id}"> <spring:message
-						code="category.edit" />
-			</a></b>
-		</div>
-	</display:column>
 
 	<!-- Attributes -->
 
-	<spring:message code="category.name" var="nameHeader"/>
-	<acme:displayColumn value="${row_Category.name }" title="${nameHeader}"/>
+	<spring:message code="punishment.reason" var="reasonHeader"/>
+	<acme:displayColumn value="${row_Punishment.reason }" title="${reasonHeader}"/>
 	
-	<spring:message code="category.description" var="descriptionHeader"/>
-	<acme:displayColumn value="${row_Category.description }" title="${descriptionHeader}"/>
+	<spring:message code="punishment.points" var="pointsHeader"/>
+	<acme:displayColumn value="${row_Punishment.points }" title="${pointsHeader}"/>
+	
+	<spring:message code="punishment.club" var="clubHeader"/>
+	<acme:displayColumn value="${row_Punishment.club.name }" title="${clubHeader}"/>
+	
+	<spring:message code="punishment.league" var="leagueHeader"/>
+	<acme:displayColumn value="${row_Punishment.league.name }" title="${leagueHeader}"/>
 
 </display:table>
 
 
 <!-- Action links -->
-
-<div>
-	<b><a href="category/administrator/create.do"> <spring:message
-				code="category.create" />
-	</a></b>
-</div>
 
