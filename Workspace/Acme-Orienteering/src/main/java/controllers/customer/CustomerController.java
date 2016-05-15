@@ -60,7 +60,7 @@ public class CustomerController extends AbstractController {
 		ModelAndView result;
 		ActorForm actorForm;
 		
-		actorForm = actorFormService.createForm();
+		actorForm = actorFormService.createForm(null);
 		
 		result = createEditModelAndView(actorForm);
 		

@@ -1,9 +1,12 @@
 package domain.form;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import security.TypeOfAuthority;
 
 public class ActorForm {
 	private String name;
@@ -13,6 +16,7 @@ public class ActorForm {
 	private String password;
 	private String repeatedPassword;
 	private Boolean acceptTerm;
+	private TypeOfAuthority authority;
 	
 	@NotNull
 	@NotBlank
@@ -67,6 +71,17 @@ public class ActorForm {
 	public void setAcceptTerm(Boolean aceptTerm) {
 		this.acceptTerm = aceptTerm;
 	}
+	
+	@NotNull
+	@Valid
+	public TypeOfAuthority getAuthority() {
+		return authority;
+	}
+	public void setAuthority(TypeOfAuthority authority) {
+		this.authority = authority;
+	}
+	
+	
 	
 	// Validator ----------
 

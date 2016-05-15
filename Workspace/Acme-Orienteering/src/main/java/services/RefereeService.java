@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Manager;
-import repositories.ManagerRepository;
+import domain.Referee;
+import repositories.RefereeRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -15,11 +15,11 @@ import security.UserAccountService;
 
 @Service
 @Transactional
-public class ManagerService {
+public class RefereeService {
 	//Managed repository -----------------------------------------------------
 	
 	@Autowired
-	private ManagerRepository managerRepository;
+	private RefereeRepository refereeRepository;
 
 	//Supporting services ----------------------------------------------------
 	
@@ -31,44 +31,43 @@ public class ManagerService {
 	
 	//Constructors -----------------------------------------------------------
 
-	public ManagerService(){
+	public RefereeService(){
 		super();
 	}
 	
 	//Simple CRUD methods ----------------------------------------------------
 
-	public Manager create(){
-		Manager result;
+	public Referee create(){
+		Referee result;
 		UserAccount userAccount;
 
-		result = new Manager();
+		result = new Referee();
 		
-		userAccount = userAccountService.create("MANAGER");
+		userAccount = userAccountService.create("REFEREE");
 		result.setUserAccount(userAccount);
 		
 		return result;
 	}
 	
-	private void save(Manager manager) {
-		Assert.notNull(manager);
+	private void save(Referee input) {
+		Assert.notNull(input);
 		
 		boolean result = true;
-		for(Authority a: manager.getUserAccount().getAuthorities()){
-			if(!a.getAuthority().equals("MANAGER")){
+		for(Authority a: input.getUserAccount().getAuthorities()){
+			if(!a.getAuthority().equals("REFEREE")){
 				result = false;
 				break;
 			}
 		}
-		Assert.isTrue(result, "A manager can only be a authority.manager");
-		
-		manager = managerRepository.save(manager);
+		Assert.isTrue(result, "A referee can only be a authority.referee");
+				
+		input = refereeRepository.save(input);
 	}
 	
-	public void saveFromEdit(Manager manager){
-		Assert.isTrue(
-				actorService.checkAuthority("MANAGER")
+	public void saveFromEdit(Referee manager){
+		Assert.isTrue(actorService.checkAuthority("REFEREE")
 						|| (actorService.checkAuthority("ADMIN") && manager.getId() == 0),
-						"ManagerService.saveFromEdit.permissionDenied");
+						"RefereeService.saveFromEdit.permissionDenied");
 		if(manager.getId() == 0){ //First save
 			UserAccount auth;
 			
@@ -77,12 +76,11 @@ public class ManagerService {
 			auth = userAccountService.modifyPassword(auth);
 			manager.setUserAccount(auth);
 		}
-		
 		this.save(manager);
 	}
 	
-	public void saveFromOthers(Manager manager){
-		Assert.isTrue(actorService.checkLogin(),"ManagerService.saveFromOthers.permissionDenied");
+	public void saveFromOthers(Referee manager){
+		Assert.isTrue(actorService.checkLogin(),"RefereeService.saveFromOthers.permissionDenied");
 		this.save(manager);
 	}
 	
@@ -92,13 +90,13 @@ public class ManagerService {
 	 * Devuelve el manager que está realizando la operación
 	 */
 	//req: x
-	public Manager findByPrincipal(){
-		Manager result;
+	public Referee findByPrincipal(){
+		Referee result;
 		UserAccount userAccount;
 		
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		result = managerRepository.findByUserAccountId(userAccount.getId());
+		result = refereeRepository.findByUserAccountId(userAccount.getId());
 		Assert.notNull(result);
 		
 		return result;

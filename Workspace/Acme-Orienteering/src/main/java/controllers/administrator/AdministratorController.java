@@ -60,7 +60,7 @@ public class AdministratorController extends AbstractController {
 		ModelAndView result;
 		ActorForm administrator;
 		
-		administrator = actorFormService.createForm();
+		administrator = actorFormService.createForm(null);
 		
 		result = createEditModelAndView(administrator);
 		
