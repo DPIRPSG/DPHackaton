@@ -1,9 +1,10 @@
 A continuación se detallan lo que hemos considerado aspectos importantes a tener en cuenta en nuestra implementación del proyecto y que no están reflejados en otras zonas del mismo:
 
 Respecto a las peticiones de ingreso:
-- Si isMember IS TRUE && registerMoment IS NOT NULL && acceptedMoment IS NOT NULL —> Aceptado
-- Si isMember IS FALSE && registerMoment IS NOT NULL && acceptedMoment IS NULL —> Rechazado
-- Si isMember IS FALSE && registerMoment IS NULL && acceptedMoment IS NULL —> Pendiente
+- Si isMember IS TRUE && acceptedMoment IS NOT NULL —> Aceptado
+- Si isMember IS FALSE && acceptedMoment IS NULL —> Pendiente
+- Si isMember IS FALSE && acceptedMoment IS NOT NULL —> Expusado del club
+- Si se borra el Entered antes de pasar de Pendiente a Aceptado —> Rechazado
 
 Respecto al despliegue:
 - Al desplegar el proyecto puede aparecer el error "java.lang.OutOfMemoryError: PermGen space" lo que provoca:

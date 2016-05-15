@@ -1,13 +1,16 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Club;
 import domain.Entered;
+import domain.Runner;
 
 import repositories.EnteredRepository;
 
@@ -23,6 +26,12 @@ public class EnteredService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private RunnerService runnerService;
+	
+	@Autowired
+	private ClubService clubService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -31,6 +40,46 @@ public class EnteredService {
 	}
 	
 	// Simple CRUD methods ----------------------------------------------------
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @see 21.a
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Hacer peticiones de ingreso a los distintos clubes del sistema.
+	 * @return create an entered to a club from the runner logged
+	 */
+	public Entered create(int clubId){
+		
+		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can create an entered");
+		
+		Entered result;
+		Runner runner;
+		Club club;
+		
+		runner = runnerService.findByPrincipal();
+		club = clubService.findOne(clubId);
+		
+		result = new Entered();
+		
+		result.setRunner(runner);
+		result.setClub(club);
+		
+		result.setIsMember(false);
+		result.setRegisterMoment(new Date());
+		
+		return result;
+	}
+	
+	public Entered save(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthorities("RUNNER,MANAGER"), "Only a runner or a manager can save a entered");
+		
+		enteredRepository.save(entered);
+		
+		return entered;
+	}
 	
 	/**
 	 * 
@@ -89,23 +138,6 @@ public class EnteredService {
 	/**
 	 * 
 	 * @param clubId
-	 * @see
-	 * 
-	 * @return the collection of rejected entered that a club have.
-	 */
-	public Collection<Entered> findAllRejectedByClub(int clubId){
-		Assert.isTrue(actorService.checkAuthority("MANAGER"));
-		
-		Collection<Entered> result;
-		
-		result = enteredRepository.findAllRejectedByClub(clubId);
-		
-		return result;
-	}
-	
-	/**
-	 * 
-	 * @param clubId
 	 * @return the collection of accepted entered that a club have.
 	 */
 	public Collection<Entered> findAllAcceptedByClub(int clubId){
@@ -117,7 +149,22 @@ public class EnteredService {
 		
 		return result;
 	}
-
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @return the collection of expelled entered that a club have.
+	 */
+	public Collection<Entered> findAllExpelledByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllExpelledByClub(clubId);
+		
+		return result;
+	}
+	
 	public void flush(){
 		enteredRepository.flush();
 	}
