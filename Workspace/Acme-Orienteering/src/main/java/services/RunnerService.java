@@ -100,9 +100,10 @@ public class RunnerService {
 		res.setName("pepe");
 		
 		
-		Collection<Folder> toAdd = new ArrayList<Folder>();
-		toAdd.add(res);
-		runner.setFolders(toAdd);
+//		Collection<Folder> toAdd = folderService.initializeSystemFolder(runner);
+//				new ArrayList<Folder>();
+//		toAdd.add(res);
+//		runner.setFolders(toAdd);
 		
 		saved = runnerRepository.save(runner);
 //		this.flush();
@@ -115,15 +116,24 @@ public class RunnerService {
 //			folderService.save(folders);
 //		}
 		
-		toAdd = new ArrayList<Folder>();
-		//res.setActor(saved);
-		res = folderService.create();
-		res.setActor(saved);
-		res.setName("pepe");
-		
-		toAdd.add(res);
-		
-		folderService.save(toAdd);
+//		toAdd = new ArrayList<Folder>();
+//		res.setActor(saved);
+////		res = folderService.create();
+////		res.setActor(saved);
+////		res.setName("pepe");
+//		
+//		toAdd.add(res);
+//		
+//		folderService.save(toAdd);
+//		Collection<Folder> jes = new ArrayList<Folder>();
+//		
+//		for(Folder f:toAdd){
+//			f.setActor(saved);
+//			jes.add(f);
+//		}
+//		
+//		folderService.save(jes);
+//		folderService.save(folderService.initializeSystemFolder(saved));
 		
 //		saved.setFolders(toAdd);
 //		saved = runnerRepository.save(saved);

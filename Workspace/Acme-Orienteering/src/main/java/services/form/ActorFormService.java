@@ -212,14 +212,11 @@ public class ActorFormService {
 		acount = userAccountService.createComplete(input.getUsername(),
 					input.getPassword(), input.getAuthority().toString());
 
-//		folders = folderService.initializeSystemFolder(runnerService.create());
-
 		//Encoding password
 		acount = userAccountService.modifyPassword(acount);
 
 		switch (input.getAuthority()) {
 		case RUNNER:
-			Runner actor;
 			Assert.isTrue(input.getAcceptTerm(), "actorForm.error.termsDenied");
 			Assert.isTrue(!actorService.checkLogin());
 			Runner result;
@@ -231,14 +228,9 @@ public class ActorFormService {
 			result.setUserAccount(acount);
 			result.setNif(input.getNif());
 			
-//			folders = folderService.initializeSystemFolder(result);
-//			result.setFolders(folders);
+			folders = folderService.initializeSystemFolder(result);
 
-			actor = runnerService.saveFromEdit(result);
-			actorId = actor.getId();
-			
-//			folders = folderService.initializeSystemFolder(actor);
-//			folderService.save(folders);
+			actorId = runnerService.saveFromEdit(result).getId();
 			break;
 
 		case MANAGER:
@@ -275,8 +267,10 @@ public class ActorFormService {
 		default:
 			actorId = 0;
 		}
-//		saved = actorService.findOne(actorId);
+		saved = actorService.findOne(actorId);
 //		
+		folderService.save(folderService.initializeSystemFolder(saved));
+
 //		folders = folderService.initializeSystemFolder(saved);
 //		folderService.save(folders);
 	}

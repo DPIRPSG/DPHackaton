@@ -244,12 +244,12 @@ public class FolderService {
 
 			temp.setIsSystem(true);
 			temp.setName(string);
-//			temp.setActor(actor);
+			temp.setActor(actor);
 
 			result.add(temp);
 		}
 
-//		actor.setFolders(result);
+		actor.setFolders(result);
 
 		return result;
 	}

@@ -88,8 +88,8 @@ public abstract class Actor extends DomainEntity{
 	@NotNull
 	@Valid
 	@OneToMany(mappedBy = "actor")
-//	@Size(min = 3)
-	@Size(min = 1)
+	@Size(min = 3)
+//	@Size(min = 1)
 	public Collection<Folder> getFolders() {
 		return folders;
 	}
