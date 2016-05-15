@@ -140,4 +140,12 @@ public class RaceService {
 	public void flush() {
 		raceRepository.flush();
 	}
+
+	public Collection<Race> findAllByClubId(Integer clubId) {
+		Collection<Race> result;
+		
+		result = raceRepository.findAllByClubId(clubId);
+		
+		return result;
+	}
 }
