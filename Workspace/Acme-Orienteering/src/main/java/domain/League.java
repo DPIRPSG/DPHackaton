@@ -54,7 +54,7 @@ public class League extends CommentedEntity {
 	
 	@NotNull
 	@ElementCollection
-	@URL
+	//@URL
 	public Collection<String> getPictures() {
 		return pictures;
 	}
