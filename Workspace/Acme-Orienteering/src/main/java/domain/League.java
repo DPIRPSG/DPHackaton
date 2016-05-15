@@ -17,7 +17,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -127,6 +126,14 @@ public class League extends CommentedEntity {
 	}
 	public void setRacing(Collection<Race> racing) {
 		this.racing = racing;
+	}
+	
+	public void addRace(Race race) {
+		this.racing.add(race);
+	}
+
+	public void removeRace(Race race) {
+		this.racing.remove(race);
 	}
 	
 	@Valid
