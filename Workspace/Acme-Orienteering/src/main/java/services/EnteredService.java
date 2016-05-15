@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class EnteredService {
 	 */
 	public Entered create(int clubId){
 		
-		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can create an entered");
+		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can create an entered.");
 		
 		Entered result;
 		Runner runner;
@@ -71,16 +72,74 @@ public class EnteredService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param entered
+	 * @see 21.a
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Hacer peticiones de ingreso a los distintos clubes del sistema.
+	 * @return the entered saved in the database
+	 */
 	public Entered save(Entered entered){
 		
 		Assert.notNull(entered);
-		Assert.isTrue(actorService.checkAuthorities("RUNNER,MANAGER"), "Only a runner or a manager can save a entered");
+		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can save a entered.");
 		
 		enteredRepository.save(entered);
 		
 		return entered;
 	}
 	
+	/**
+	 * 
+	 * @param entered
+	 * @see 22.d
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Aceptar o denegar las peticiones.
+	 */
+	public void accept(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can accept a entered");
+		
+		Runner runner;
+		Collection<Entered> runnerEntereds;
+		Collection<Club> runnerClub = new HashSet<>();
+		
+		runner = entered.getRunner();
+		runnerEntereds = enteredRepository.findAllByRunner(runner.getId());
+		
+		for(Entered e:runnerEntereds){
+			if(e.getIsMember() == true){
+				runnerClub.add(e.getClub());
+				break;
+			}
+		}
+		Assert.isTrue(runnerClub.isEmpty(), "You cannot accept a runner who is in another club.");
+		
+		entered.setIsMember(true);
+		entered.setAcceptedMoment(new Date());
+		enteredRepository.save(entered);
+		
+	}
+	
+	/**
+	 * 
+	 * @param entered
+	 * @see 22.d
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Aceptar o denegar las peticiones.
+	 */
+	public void deny(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can accept a entered");
+		Assert.isTrue(entered.getIsMember() == false, "You can only deny an unaccepted entered");
+		Assert.isNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
+		
+		enteredRepository.delete(entered);
+	}
+		
 	/**
 	 * 
 	 * @param runnerId
@@ -161,6 +220,14 @@ public class EnteredService {
 		Collection<Entered> result;
 		
 		result = enteredRepository.findAllExpelledByClub(clubId);
+		
+		return result;
+	}
+	
+	public Entered findOne(int enteredId){
+		Entered result;
+		
+		result = enteredRepository.findOne(enteredId);
 		
 		return result;
 	}
