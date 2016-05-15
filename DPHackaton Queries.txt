@@ -1,0 +1,35 @@
+Queries DPHackaton:
+
+1) Club que ha ganado más ligas.
+
+
+2) Club que ha ganado más carreras.
+
+
+3) Club con más peticiones rechazadas.
+
+
+4) Club con más sanciones impuestas.
+
+
+5) Media de clubes por liga.
+
+
+6) Liga con más carreras.
+
+
+7) Media de carreras por Liga.
+
+
+8) Liga con más clubes participantes.
+
+
+9) Categoría más frecuente en carreras.
+
+
+10) Club con mayor puntuación contando todas las ligas.
+
+
+11) Club con menor puntuación contando todas las ligas.
+
+
