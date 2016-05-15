@@ -108,7 +108,7 @@ public class ActorFormService {
 			Assert.isTrue(
 					input.getPassword().equals(input.getRepeatedPassword()),
 					"actorForm.error.passwordMismatch");
-
+		
 		if (actorService.checkLogin() && input.getAuthority() == null) {
 			this.saveActor(input);
 		} else {
@@ -131,13 +131,7 @@ public class ActorFormService {
 			}
 		}
 
-		// Check postHacking authority
-		Assert.isTrue(
-				TypeOfAuthority.transformAuthority(acount.getAuthorities())
-						.equals(input.getAuthority()),
-				"actorForm.error.saveActor.authorityModified");
-
-		switch (input.getAuthority()) {
+		switch (TypeOfAuthority.transformAuthority(acount.getAuthorities())) {
 		case RUNNER:
 			Runner result;
 

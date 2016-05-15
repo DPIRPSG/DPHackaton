@@ -1,4 +1,4 @@
-package controllers.customer;
+package controllers.actor;
 
 import javax.validation.Valid;
 
@@ -10,31 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.RunnerService;
+import services.ActorService;
 import services.form.ActorFormService;
 
 import controllers.AbstractController;
-import domain.Runner;
+import domain.Actor;
 import domain.form.ActorForm;
 
 @Controller
-@RequestMapping(value = "/customer/customer")
-public class CustomerController extends AbstractController {
+@RequestMapping(value = "/actor/actor")
+public class ActorActorController extends AbstractController {
 
 	// Services ----------------------------------------------------------
-
-	@Autowired
-	private RunnerService customerService;
-	
 	@Autowired
 	private ActorFormService actorFormService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	@Autowired
 	private Validator actorFormValidator;
 
 	// Constructors ----------------------------------------------------------
 
-	public CustomerController() {
+	public ActorActorController() {
 		super();
 	}
 
@@ -43,12 +42,12 @@ public class CustomerController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(){
 		ModelAndView result;
-		Runner customer;
+		Actor actor;
 		
-		customer = customerService.findByPrincipal();
+		actor = actorService.findByPrincipal();
 		
-		result = new ModelAndView("customer/display");
-		result.addObject("customer", customer);
+		result = new ModelAndView("actor/display");
+		result.addObject("actor", actor);
 		
 		return result;
 	}
@@ -80,10 +79,11 @@ public class CustomerController extends AbstractController {
 			result = createEditModelAndView(customer);
 		} else {
 			try {
+				customer.setAuthority(null);
 				actorFormService.saveForm(customer);
 				result = new ModelAndView("redirect:display.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(customer, "customer.commit.error");				
+				result = createEditModelAndView(customer, "actorForm.commit.error");				
 			}
 		}
 
@@ -107,7 +107,7 @@ public class CustomerController extends AbstractController {
 		result = new ModelAndView("actorForm/edit");
 		result.addObject("actorForm", customer);
 		result.addObject("message", message);
-		result.addObject("urlAction", "customer/customer/edit.do");
+		result.addObject("urlAction", "actor/actor/edit.do");
 
 		return result;
 	}

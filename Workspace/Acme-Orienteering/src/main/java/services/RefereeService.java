@@ -87,14 +87,6 @@ public class RefereeService {
 						"RefereeService.saveFromEdit.permissionDenied");
 		Referee result;
 		
-//		if(manager.getId() == 0){ //First save
-//			UserAccount auth;
-//			
-//			//Encoding password
-//			auth = manager.getUserAccount();
-//			auth = userAccountService.modifyPassword(auth);
-//			manager.setUserAccount(auth);
-//		}
 		result = this.save(manager);
 		return result;
 	}
@@ -109,7 +101,6 @@ public class RefereeService {
 	/**
 	 * Devuelve el manager que está realizando la operación
 	 */
-	//req: x
 	public Referee findByPrincipal(){
 		Referee result;
 		UserAccount userAccount;
