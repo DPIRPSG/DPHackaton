@@ -83,6 +83,7 @@
 		</property>
 		<property name="sent">
 			<list>
+<!-- 				<ref bean="message1"/> -->
 			</list>
 		</property>
 		<property name="received">
@@ -169,6 +170,7 @@
 		</property>
 		<property name="received">
 			<list>
+<!-- 				<ref bean="message1"/> -->
 			</list>
 		</property>
 		<property name="comments">
@@ -216,6 +218,26 @@
 		<property name="curriculum" ref="curriculum3"/>
 	</bean>
 	
+	<!-- Message -->
+	
+<!-- 	<bean id="message1" class="domain.Message"> -->
+<!-- 		<property name="subject" value="Welcome!"/> -->
+<!-- 		<property name="body" value="You were registered successfully! Welcome to Acme Orienteering!"/> -->
+<!-- 		<property name="sentMoment" value="2016/05/02 12:15"/> -->
+<!-- 		<property name="sender" ref="administrator1"/> -->
+<!-- 		<property name="recipients"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="runner1"/> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 		<property name="folders"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="folder2"/> -->
+<!-- 				<ref bean="folder7"/> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	
 	<!-- Folder -->
 	
 	<bean id="folder1" class="domain.Folder">
@@ -234,6 +256,7 @@
 		<property name="actor" ref="administrator1"/>
 		<property name="messages">
 			<list>
+<!-- 				<ref bean="message1"/> -->
 			</list>
 		</property>
 	</bean>
@@ -284,6 +307,7 @@
 		<property name="actor" ref="runner1"/>
 		<property name="messages">
 			<list>
+<!-- 				<ref bean="message1"/> -->
 			</list>
 		</property>
 	</bean>
@@ -338,6 +362,56 @@
 		</property>
 	</bean>
 	
+	<!-- Entered -->
+	
+	<bean id="entered1" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="true"/>
+		<property name="registerMoment" value="2015/12/05 12:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
+		<property name="runner" ref="runner1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<!-- Club -->
+	
+	<bean id="club1" class="domain.Club">
+		<property name="description" value="El club con las mejores clasificaciones de los últimos años."/>
+		<property name="name" value="Los Imperdibles"/>
+		<property name="pictures">
+			<list>
+				<value bean="http://www.abc.es/Media/201310/31/222792351--644x362.jpg"/>
+			</list>
+		</property>
+		<property name="creationMoment" value="2014/06/16 13:05"/>
+		<property name="deleted" value="false"/>
+		<property name="manager" ref="manager1"/>
+		<property name="bulletins">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+		<property name="classifications">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+		<property name="punishments">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+	</bean>
 	
 	
 </beans>
