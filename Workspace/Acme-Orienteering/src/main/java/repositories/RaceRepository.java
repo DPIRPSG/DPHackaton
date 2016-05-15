@@ -11,7 +11,7 @@ import domain.Race;
 @Repository
 public interface RaceRepository extends JpaRepository<Race, Integer> {
 
-	@Query("select r from Race r join r.league.club c where c.id = ?1")
+	@Query("select r from Race r join r.classifications c where c.club.id = ?1")
 	Collection<Race> findAllByClubId(Integer clubId);
 
 }
