@@ -18,6 +18,7 @@
 	
 	<form:hidden path="classifications"/>
 	<form:hidden path="participates"/>
+	<form:hidden path="comments"/>
 	
 	<!-- Editable Attributes -->
 	
@@ -25,7 +26,7 @@
 	
 	<acme:textarea code="race.description" path="description"/>
 		
-	<acme:textbox code="race.Moment" path="oment"/>
+	<acme:textbox code="race.moment" path="moment"/>
 		
 	<acme:select items="${categories}" itemLabel="name" code="race.category" path="category"/>
 	

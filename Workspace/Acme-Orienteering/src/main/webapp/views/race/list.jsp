@@ -20,7 +20,7 @@
 	
 	<display:column>
 		<div>
-			<b><a href="race/administrator/edit.do?raceId=${row_race.id}"> <spring:message
+			<b><a href="race/administrator/edit.do?raceId=${row_Race.id}"> <spring:message
 						code="race.edit" />
 			</a></b>
 		</div>
@@ -41,14 +41,16 @@
 	
 	<spring:message code="race.category" var="categoryHeader" />
 	<display:column title="${categoryHeader}" sortable="true">
-		<jstl:out value="row_Race.category.name"></jstl:out>
-		<jstl:out value="row_Race.category.description"></jstl:out>
+		<jstl:out value="${row_Race.category.name}"></jstl:out>
+		<br/>
+		<jstl:out value="${row_Race.category.description}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="race.league" var="leagueHeader" />
 	<display:column title="${leagueHeader}" sortable="true">
-		<jstl:out value="row_Race.league.name"></jstl:out>
-		<jstl:out value="row_Race.league.description"></jstl:out>
+		<jstl:out value="${row_Race.league.name}"></jstl:out>
+		<br/>
+		<jstl:out value="${row_Race.league.description}"></jstl:out>
 	</display:column>
 	
 </display:table>

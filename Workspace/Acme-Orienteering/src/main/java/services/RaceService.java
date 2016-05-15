@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Classification;
+import domain.Comment;
 import domain.League;
 import domain.Participates;
 import domain.Race;
@@ -48,13 +49,16 @@ public class RaceService {
 		Race result;
 		Collection<Classification> classifications;
 		Collection<Participates> participates;
+		Collection<Comment> comments;
 		
 		result = new Race();
 		classifications = new ArrayList<Classification>();
 		participates = new ArrayList<Participates>();
+		comments = new ArrayList<Comment>();
 		
 		result.setClassifications(classifications);
 		result.setParticipates(participates);
+		result.setComments(comments);
 		
 		return result;
 	}
