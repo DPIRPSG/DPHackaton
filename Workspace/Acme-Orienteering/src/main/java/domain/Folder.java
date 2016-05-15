@@ -44,7 +44,7 @@ public class Folder extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 	private Actor actor;
-	private Collection<Message> messages;
+	private Collection<MessageEntity> messages;
 
 	@NotNull
 	@Valid
@@ -60,16 +60,16 @@ public class Folder extends DomainEntity {
 	@Valid
 	@ManyToMany(mappedBy = "folders")
 	@NotNull
-	public Collection<Message> getMessages() {
+	public Collection<MessageEntity> getMessages() {
 		return messages;
 	}
-	public void setMessages(Collection<Message> messages) {
+	public void setMessages(Collection<MessageEntity> messages) {
 		this.messages = messages;
 	}
-	public void addMessage(Message message) {
+	public void addMessage(MessageEntity message) {
 		this.messages.add(message);
 	}
-	public void removeMessage(Message message) {
+	public void removeMessage(MessageEntity message) {
 		this.messages.remove(message);
 	}
 
