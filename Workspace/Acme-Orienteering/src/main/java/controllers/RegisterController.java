@@ -59,14 +59,14 @@ public class RegisterController extends AbstractController{
 		if(binding.hasErrors()){
 			result = createEditModelAndView(consu);
 		} else {
-//		try {
+		try {
 				actorFormService.saveForm(consu);
-//				result = new ModelAndView("redirect:../security/login.do");
-//				result.addObject("messageStatus", "runner.commit.ok");
-//												
-//			} catch (Throwable oops){
+				result = new ModelAndView("redirect:../security/login.do");
+				result.addObject("messageStatus", "runner.commit.ok");
+												
+			} catch (Throwable oops){
 				result = createEditModelAndView(consu, "runner.commit.error");
-//			}
+			}
 		}
 		
 		return result;

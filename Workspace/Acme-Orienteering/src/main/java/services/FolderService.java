@@ -51,11 +51,11 @@ public class FolderService {
 
 		result.setMessages(messages);
 		result.setIsSystem(false);
-		try {
-			result.setActor(actorService.findByPrincipal());
-		} catch (Exception e) {
-			
-		}
+//		try { // No usar, hace que vaya mal ! ! ! !
+//			result.setActor(actorService.findByPrincipal());
+//		} catch (Exception e) {
+//
+//		}
 
 
 		return result;
