@@ -86,6 +86,13 @@ public class EnteredService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param clubId
+	 * @see
+	 * 
+	 * @return the collection of rejected entered that a club have.
+	 */
 	public Collection<Entered> findAllRejectedByClub(int clubId){
 		Assert.isTrue(actorService.checkAuthority("MANAGER"));
 		
@@ -96,6 +103,11 @@ public class EnteredService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param clubId
+	 * @return the collection of accepted entered that a club have.
+	 */
 	public Collection<Entered> findAllAcceptedByClub(int clubId){
 		Assert.isTrue(actorService.checkAuthority("MANAGER"));
 		
