@@ -58,6 +58,12 @@
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<acme:displayColumn value="${row_League.referee.name} ${row_League.referee.surname }" title="${refereeHeader}"/>
 	
+	<display:column>
+		<a href="comment/list.do?commentedEntityId=${row_League.id}"> <spring:message
+				code="league.comments" />
+		</a>
+	</display:column>
+	
 </display:table>
 
 

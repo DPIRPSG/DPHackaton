@@ -26,6 +26,7 @@
 					<li class="arrow"></li>
 					<li><a href="league/administrator/list.do"><spring:message code="master.page.administrator.league" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
+					<li><a href="comment/administrator/list.do"><spring:message code="master.page.comment" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

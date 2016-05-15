@@ -67,6 +67,12 @@
 				code="club.bulletins"/>
 		</a>
 	</display:column>
+	
+	<display:column>
+		<a href="comment/list.do?commentedEntityId=${row_Club.id}"> <spring:message
+				code="club.comments" />
+		</a>
+	</display:column>
 
 </display:table>
 
