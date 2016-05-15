@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="race/list" extends="master.page">	
+		<put-attribute name="title" value="List of Racing" />
+		<put-attribute name="body" value="/views/race/list.jsp" />
+	</definition>
+	
+	<definition name="race/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit a Race" />
+		<put-attribute name="body" value="/views/race/edit.jsp" />
+	</definition>
+	
+</tiles-definitions>
