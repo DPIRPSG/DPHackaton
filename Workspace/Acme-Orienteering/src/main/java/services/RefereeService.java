@@ -121,6 +121,22 @@ public class RefereeService {
 		
 		return result;
 	}
+
+	public Collection<Referee> findAll() {
+		Collection<Referee> result;
+		
+		result = refereeRepository.findAll();
+		
+		return result;
+	}
+
+	public Referee findOne(int refereeId) {
+		Referee result;
+		
+		result = refereeRepository.findOne(refereeId);
+		
+		return result;
+	}
 	
 
 }

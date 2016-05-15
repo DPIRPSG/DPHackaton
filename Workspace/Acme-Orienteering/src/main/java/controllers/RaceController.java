@@ -19,62 +19,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.ClubService;
-import services.ManagerService;
+import services.LeagueService;
+import services.RaceService;
 import controllers.AbstractController;
-import domain.Club;
-import domain.Manager;
+import domain.Race;
 
 @Controller
-@RequestMapping("/club")
-public class ClubController extends AbstractController {
+@RequestMapping("/race")
+public class RaceController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ClubService clubService;
+	private RaceService raceService;
 	
 	@Autowired
-	private ActorService actorService;
-	
-	@Autowired
-	private ManagerService managerService;
+	private LeagueService leagueService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public ClubController() {
+	public RaceController() {
 		super();
 	}
 
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam (required = false) Integer leagueId) {
+	public ModelAndView list(@RequestParam(required = false) Integer clubId,
+			@RequestParam(required = false) Integer leagueId) {
 		ModelAndView result;
-		Collection<Club> clubes;
-		Manager manager;
-		
-		if(actorService.checkAuthority("MANAGER")) {
-			manager = managerService.findByPrincipal();
-		} else {
-			manager = null;
-		}
+		Collection<Race> racing;
 
-		if(leagueId != null) {
-			clubes = clubService.findAllByLeagueId(leagueId);
+		if(clubId != null) {
+			racing = raceService.findAllByClubId(clubId);
+		} else if(leagueId != null) {
+			racing = leagueService.findOne(leagueId).getRacing();
 		} else {
-			clubes = clubService.findAll();
+			racing = raceService.findAll();
 		}
 		
-		result = new ModelAndView("club/list");
-		result.addObject("requestURI", "club/list.do");
-		result.addObject("clubes", clubes);
-		result.addObject("manager", manager);
+		result = new ModelAndView("race/list");
+		result.addObject("requestURI", "race/list.do");
+		result.addObject("racing", racing);
 
 		return result;
 	}
-
-	// Creation ---------------------------------------------------------------
 
 }

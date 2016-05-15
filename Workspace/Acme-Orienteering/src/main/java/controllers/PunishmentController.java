@@ -19,58 +19,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.ClubService;
-import services.ManagerService;
+import services.PunishmentService;
 import controllers.AbstractController;
-import domain.Club;
-import domain.Manager;
+import domain.Punishment;
 
 @Controller
-@RequestMapping("/club")
-public class ClubController extends AbstractController {
+@RequestMapping("/punishment")
+public class PunishmentController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ClubService clubService;
-	
-	@Autowired
-	private ActorService actorService;
-	
-	@Autowired
-	private ManagerService managerService;
+	private PunishmentService punishmentService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public ClubController() {
+	public PunishmentController() {
 		super();
 	}
 
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam (required = false) Integer leagueId) {
+	public ModelAndView list(@RequestParam (required = false) Integer clubId) {
 		ModelAndView result;
-		Collection<Club> clubes;
-		Manager manager;
-		
-		if(actorService.checkAuthority("MANAGER")) {
-			manager = managerService.findByPrincipal();
-		} else {
-			manager = null;
-		}
+		Collection<Punishment> punishments;
 
-		if(leagueId != null) {
-			clubes = clubService.findAllByLeagueId(leagueId);
+		if(clubId != null) {
+			punishments = punishmentService.findAllByClubId(clubId);
 		} else {
-			clubes = clubService.findAll();
+			punishments = punishmentService.findAll();
 		}
 		
-		result = new ModelAndView("club/list");
-		result.addObject("requestURI", "club/list.do");
-		result.addObject("clubes", clubes);
-		result.addObject("manager", manager);
+		result = new ModelAndView("punishment/list");
+		result.addObject("requestURI", "punishment/list.do");
+		result.addObject("punishments", punishments);
 
 		return result;
 	}

@@ -19,62 +19,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.ClubService;
-import services.ManagerService;
+import services.LeagueService;
 import controllers.AbstractController;
-import domain.Club;
-import domain.Manager;
+import domain.League;
 
 @Controller
-@RequestMapping("/club")
-public class ClubController extends AbstractController {
+@RequestMapping("/league")
+public class LeagueController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ClubService clubService;
-	
-	@Autowired
-	private ActorService actorService;
-	
-	@Autowired
-	private ManagerService managerService;
+	private LeagueService leagueService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public ClubController() {
+	public LeagueController() {
 		super();
 	}
 
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam (required = false) Integer leagueId) {
+	public ModelAndView list(@RequestParam (required=false) Integer clubId) {
 		ModelAndView result;
-		Collection<Club> clubes;
-		Manager manager;
+		Collection<League> leagues;
 		
-		if(actorService.checkAuthority("MANAGER")) {
-			manager = managerService.findByPrincipal();
+		if(clubId != null) {
+			leagues = leagueService.findAllByClubId(clubId);
 		} else {
-			manager = null;
-		}
-
-		if(leagueId != null) {
-			clubes = clubService.findAllByLeagueId(leagueId);
-		} else {
-			clubes = clubService.findAll();
+			leagues = leagueService.findAll();
 		}
 		
-		result = new ModelAndView("club/list");
-		result.addObject("requestURI", "club/list.do");
-		result.addObject("clubes", clubes);
-		result.addObject("manager", manager);
+		result = new ModelAndView("league/list");
+		result.addObject("requestURI", "league/list.do");
+		result.addObject("leagues", leagues);
 
 		return result;
 	}
-
-	// Creation ---------------------------------------------------------------
 
 }

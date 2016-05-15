@@ -11,7 +11,6 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,8 +25,7 @@ public class Entered extends DomainEntity {
 	private Date registerMoment;
 	private Date acceptedMoment;
 	
-	@NotNull
-	@NotBlank
+//	@NotBlank // Hay que controlarlo por los servicios
 	public String getReport() {
 		return report;
 	}
