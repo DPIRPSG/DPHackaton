@@ -12,23 +12,16 @@ package controllers;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.CategoryService;
 import services.LeagueService;
 import services.RaceService;
 import controllers.AbstractController;
-import domain.Category;
-import domain.League;
 import domain.Race;
 
 @Controller
@@ -43,9 +36,6 @@ public class RaceController extends AbstractController {
 	@Autowired
 	private LeagueService leagueService;
 	
-	@Autowired
-	private CategoryService categoryService;
-	
 	// Constructors -----------------------------------------------------------
 	
 	public RaceController() {
@@ -55,12 +45,15 @@ public class RaceController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam (required=false) Integer clubId) {
+	public ModelAndView list(@RequestParam(required = false) Integer clubId,
+			@RequestParam(required = false) Integer leagueId) {
 		ModelAndView result;
 		Collection<Race> racing;
 
-		if(clubId != 0) {
+		if(clubId != null) {
 			racing = raceService.findAllByClubId(clubId);
+		} else if(leagueId != null) {
+			racing = leagueService.findOne(leagueId).getRacing();
 		} else {
 			racing = raceService.findAll();
 		}
