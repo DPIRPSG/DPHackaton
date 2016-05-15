@@ -1,5 +1,6 @@
 package services.form;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import domain.Actor;
 import domain.Administrator;
+import domain.Comment;
 import domain.Folder;
 import domain.Manager;
 import domain.Referee;
@@ -20,6 +22,7 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
 import services.AdministratorService;
+import services.FolderService;
 import services.ManagerService;
 import services.RefereeService;
 import services.RunnerService;
@@ -45,6 +48,9 @@ public class ActorFormService {
 
 	@Autowired
 	private RefereeService refereeService;
+	
+	@Autowired
+	private FolderService folderService;
 
 	@Autowired
 	private UserAccountService userAccountService;
@@ -195,9 +201,17 @@ public class ActorFormService {
 	private void saveRegistration(ActorForm input) {
 		UserAccount acount;
 		Collection<Folder> folders;
-
+		int actorId;
+		Actor saved;
+		Collection<Comment> comments;
+		
 		acount = userAccountService.createComplete(input.getUsername(),
 				input.getPassword(), "CUSTOMER");
+		folders = folderService.initializeSystemFolder(customerService.create());
+		comments = new ArrayList<Comment>();
+
+		//Encoding password
+		acount = userAccountService.modifyPassword(acount);
 
 		switch (input.getAuthority()) {
 		case RUNNER:
@@ -211,8 +225,10 @@ public class ActorFormService {
 			result.setSurname(input.getSurname());
 			result.setPhone(input.getUsername());
 			result.setUserAccount(acount);
+			result.setFolders(folders);
+			result.setComments(comments);
 
-			customerService.saveFromEdit(result);
+			actorId = customerService.saveFromEdit(result).getId();
 			break;
 
 		case MANAGER:
@@ -225,8 +241,10 @@ public class ActorFormService {
 			result1.setSurname(input.getSurname());
 			result1.setPhone(input.getUsername());
 			result1.setUserAccount(acount);
+			result1.setFolders(folders);
+			result1.setComments(comments);
 
-			managerService.saveFromEdit(result1);
+			actorId = managerService.saveFromEdit(result1).getId();
 			break;
 
 		case REFEREE:
@@ -239,10 +257,19 @@ public class ActorFormService {
 			result11.setSurname(input.getSurname());
 			result11.setPhone(input.getUsername());
 			result11.setUserAccount(acount);
+			result11.setFolders(folders);
+			result11.setComments(comments);
 
-			refereeService.saveFromEdit(result11);
+
+			actorId = refereeService.saveFromEdit(result11).getId();
 			break;
+		default:
+			actorId = 0;
 		}
+		saved = actorService.findOne(actorId);
+		
+		folders = folderService.initializeSystemFolder(saved);
+		folderService.save(folders);
 	}
 
 }

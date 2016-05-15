@@ -24,6 +24,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.manage" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="league/administrator/list.do"><spring:message code="master.page.administrator.league" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 				</ul>
 			</li>
@@ -51,6 +52,8 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="folder/actor/list.do"><spring:message code="master.page.messages" /></a></li>
+
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 

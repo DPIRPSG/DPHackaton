@@ -7,18 +7,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import repositories.MessageRepository;
-import domain.Message;
+import domain.MessageEntity;
 
 @Component
 @Transactional
-public class StringToMessageConverter implements Converter<String, Message> {
+public class StringToMessageConverter implements Converter<String, MessageEntity> {
 
 	@Autowired
 	MessageRepository messageRepository;
 
 	@Override
-	public Message convert(String text) {
-		Message result;
+	public MessageEntity convert(String text) {
+		MessageEntity result;
 		int id;
 
 		try {
