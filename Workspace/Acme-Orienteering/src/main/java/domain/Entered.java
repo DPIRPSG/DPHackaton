@@ -26,7 +26,6 @@ public class Entered extends DomainEntity {
 	private Date registerMoment;
 	private Date acceptedMoment;
 	
-	@NotNull
 	@NotBlank
 	public String getReport() {
 		return report;
