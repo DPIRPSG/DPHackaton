@@ -63,6 +63,8 @@
 		
 		<security:intercept-url pattern="/club/list.do" access="permitAll" />
 		<security:intercept-url pattern="/runner/list.do" access="permitAll" />
+		<security:intercept-url pattern="/league/list.do" access="permitAll" />
+		<security:intercept-url pattern="/race/list.do" access="permitAll" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

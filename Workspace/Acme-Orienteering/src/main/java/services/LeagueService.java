@@ -118,4 +118,12 @@ public class LeagueService {
 		leagueRepository.flush();
 	}
 
+	public Collection<League> findAllByClubId(Integer clubId) {
+		Collection<League> result;
+		
+		result = leagueRepository.findAllByClubId(clubId);
+				
+		return result;
+	}
+
 }
