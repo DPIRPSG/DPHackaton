@@ -70,7 +70,7 @@ public class CommentService {
 	
 	public void save(Comment comment){
 		Assert.isTrue(actorService.checkLogin(), "Only an authenticated user can save comments");
-		Assert.isTrue(comment.isDeleted() == false);
+		Assert.isTrue(comment.getDeleted() == false);
 		Assert.notNull(comment);
 		
 		Assert.isTrue(comment.getActor().getId() == actorService.findByPrincipal().getId(), "The actor must be the one logged");
@@ -88,7 +88,7 @@ public class CommentService {
 	public void delete(Comment comment){
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
-		Assert.isTrue(comment.isDeleted() == false, "This comment is already deleted");
+		Assert.isTrue(comment.getDeleted() == false, "This comment is already deleted");
 		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can delete comments");
 
 		comment.setDeleted(true);

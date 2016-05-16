@@ -53,17 +53,33 @@ public class CommentActorController extends AbstractController {
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST, params="save")
-	public ModelAndView save(@Valid Comment comment,@RequestParam int commentedEntityId, BindingResult binding) {
+	public ModelAndView save(@Valid Comment comment, BindingResult binding) {
 		ModelAndView result;
 		CommentedEntity commentedEntity;
-		//int commentedEntityId;
+		int commentedEntityId;
 		
-		//commentedEntity = comment.getCommentedEntity();
-		commentedEntity = commentedEntityService.findOne(commentedEntityId);
+//		//commentedEntity = comment.getCommentedEntity();
+//		commentedEntity = commentedEntityService.findOne(commentedEntityId);
+//		
+//		comment.setCommentedEntity(commentedEntity);
+//		
+//		//commentedEntityId = commentedEntity.getId();
+//		
+//		if (binding.hasErrors()) {
+//			result = createEditModelAndView(comment, commentedEntity);
+//		} else {
+//			try {
+//				commentService.save(comment);
+//				result = new ModelAndView("redirect:../list.do?commentedEntityId=" + commentedEntityId);
+//			} catch (Throwable oops) {
+//				result = createEditModelAndView(comment, commentedEntity, "comment.commit.error");
+//			}
+//		}
+//		
+//		return result;
 		
-		comment.setCommentedEntity(commentedEntity);
-		
-		//commentedEntityId = commentedEntity.getId();
+		commentedEntity = comment.getCommentedEntity();
+		commentedEntityId = commentedEntity.getId();
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(comment, commentedEntity);
