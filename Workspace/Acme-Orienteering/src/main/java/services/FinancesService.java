@@ -99,7 +99,7 @@ public class FinancesService {
 	public void delete(Finances input) {
 		Assert.notNull(input);
 		Assert.isTrue(input.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only a admin can delete finances");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can delete finances");
 		
 		financesRepository.delete(input);
 	}
