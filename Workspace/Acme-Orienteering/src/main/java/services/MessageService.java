@@ -217,8 +217,10 @@ public class MessageService {
 		messa = this.findOne(messaId);
 
 		this.checkActor(messa);
-		Assert.isTrue(messa.getFolders().size()==0,
-		 "message.delete.useByOtherFolder");
+		
+//		Assert.isTrue(messa.getFolders().size()==0, //No es necesario, se comprueba con el if
+//		 "message.delete.useByOtherFolder");
+		
 		if (messa.getFolders().size() == 0)
 			messageRepository.delete(messaId);
 	}
