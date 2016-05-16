@@ -26,6 +26,7 @@
 					<li class="arrow"></li>
 					<li><a href="league/administrator/list.do"><spring:message code="master.page.administrator.league" /></a></li>
 					<li><a href="race/administrator/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+					<li><a href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 				</ul>
 			</li>
@@ -39,11 +40,18 @@
 					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
 				</ul>
 			</li>
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
+			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MANAGER')">
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
@@ -52,6 +60,7 @@
 			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
 			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
