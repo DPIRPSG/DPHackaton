@@ -1,12 +1,17 @@
 package services;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Comment;
 import domain.Manager;
+import domain.MessageEntity;
 import repositories.ManagerRepository;
 import security.Authority;
 import security.LoginService;
@@ -40,8 +45,16 @@ public class ManagerService {
 	public Manager create(){
 		Manager result;
 		UserAccount userAccount;
+		Collection<Comment> comments;
+		Collection<MessageEntity> messages;
+
+		comments = new ArrayList<Comment>();
+		messages = new ArrayList<MessageEntity>();
 
 		result = new Manager();
+		result.setComments(comments);
+		result.setReceived(messages);
+		result.setSent(messages);
 		
 		userAccount = userAccountService.create("MANAGER");
 		result.setUserAccount(userAccount);
@@ -52,9 +65,11 @@ public class ManagerService {
 	private Manager save(Manager manager) {
 		Assert.notNull(manager);
 		
-		boolean result = true;
+		boolean result = false;
 		for(Authority a: manager.getUserAccount().getAuthorities()){
-			if(!a.getAuthority().equals("MANAGER")){
+			if(a.getAuthority().equals("MANAGER")){
+				result = true;
+			}else{
 				result = false;
 				break;
 			}
@@ -72,15 +87,6 @@ public class ManagerService {
 						|| (actorService.checkAuthority("ADMIN") && manager.getId() == 0),
 						"ManagerService.saveFromEdit.permissionDenied");
 		Manager result;
-		
-//		if(manager.getId() == 0){ //First save
-//			UserAccount auth;
-//			
-//			//Encoding password
-//			auth = manager.getUserAccount();
-//			auth = userAccountService.modifyPassword(auth);
-//			manager.setUserAccount(auth);
-//		}
 		
 		result = this.save(manager);
 		

@@ -131,6 +131,7 @@ public abstract class Actor extends DomainEntity{
 	public Collection<Comment> getComments() {
 		return comments;
 	}
+
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}

@@ -165,4 +165,12 @@ public class ClubService {
 		clubRepository.flush();
 	}
 
+	public Collection<Club> findAllByLeagueId(Integer leagueId) {
+		Collection<Club> result;
+		
+		result = clubRepository.findAllByLeagueId(leagueId);
+		
+		return result;
+	}
+
 }

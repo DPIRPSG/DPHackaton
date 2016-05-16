@@ -42,8 +42,8 @@
 	<display:column title="${pictureHeader}"
 		sortable="false" >
 		<jstl:forEach items="${row_Club.pictures}" var="picture">
+			<img src="${picture}" style="width:204px;"/>
 		</jstl:forEach>
-		<img src="${picture}" style="width:204px;"/>
 	</display:column>
 	
 	<spring:message code="club.creationMoment" var="creationMomentHeader" />
@@ -72,6 +72,13 @@
 	<display:column title="${racingHeader}" sortable="false">
 		<a href="race/list.do?clubId=${row_Club.id}"> <spring:message
 				code="club.racing"/>
+		</a>
+	</display:column>
+	
+	<spring:message code="club.punishments" var="punishmentsHeader" />
+	<display:column title="${punishmentsHeader}" sortable="false">
+		<a href="punishment/list.do?clubId=${row_Club.id}"> <spring:message
+				code="club.punishments"/>
 		</a>
 	</display:column>
 	
