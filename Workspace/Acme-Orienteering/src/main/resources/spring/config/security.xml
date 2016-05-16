@@ -48,6 +48,7 @@
 
 		<security:intercept-url pattern="/league/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/sponsor/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/finances/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/race/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/administrator/*" access="hasRole('ADMIN')" />
@@ -65,6 +66,7 @@
 		
 		<security:intercept-url pattern="/club/list.do" access="permitAll" />
 		<security:intercept-url pattern="/sponsor/list.do" access="permitAll" />
+		<security:intercept-url pattern="/finances/list.do" access="permitAll" />
 		<security:intercept-url pattern="/runner/list.do" access="permitAll" />
 		<security:intercept-url pattern="/league/list.do" access="permitAll" />
 		<security:intercept-url pattern="/race/list.do" access="permitAll" />

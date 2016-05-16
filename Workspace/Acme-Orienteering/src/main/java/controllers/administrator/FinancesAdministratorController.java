@@ -10,6 +10,8 @@
 
 package controllers.administrator;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +23,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.FinancesService;
+import services.LeagueService;
 import services.SponsorService;
 import controllers.AbstractController;
+import domain.Finances;
+import domain.League;
 import domain.Sponsor;
 
 @Controller
-@RequestMapping("/sponsor/administrator")
-public class SponsorAdministratorController extends AbstractController {
+@RequestMapping("/finances/administrator")
+public class FinancesAdministratorController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
 	@Autowired
+	private FinancesService financesService;
+	
+	@Autowired
 	private SponsorService sponsorService;
+	
+	@Autowired
+	private LeagueService leagueService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public SponsorAdministratorController() {
+	public FinancesAdministratorController() {
 		super();
 	}
 
@@ -45,11 +57,12 @@ public class SponsorAdministratorController extends AbstractController {
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam(required = false, defaultValue = "-1") int sponsorId,
+			@RequestParam(required = false, defaultValue = "-1") int leagueId) {
 		ModelAndView result;
-		Sponsor sponsor;
+		Finances sponsor;
 
-		sponsor = sponsorService.create();
+		sponsor = financesService.create(sponsorId, leagueId);
 		result = createEditModelAndView(sponsor);
 
 		return result;
@@ -58,29 +71,29 @@ public class SponsorAdministratorController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int sponsorId) {
+	public ModelAndView edit(@RequestParam int financesId) {
 		ModelAndView result;
-		Sponsor sponsor;
+		Finances finances;
 
-		sponsor = sponsorService.findOne(sponsorId);		
-		Assert.notNull(sponsor);
-		result = createEditModelAndView(sponsor);
+		finances = financesService.findOne(financesId);		
+		Assert.notNull(finances);
+		result = createEditModelAndView(finances);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Sponsor input, BindingResult binding) {
+	public ModelAndView save(@Valid Finances input, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(input);
 		} else {
 			try {
-				sponsorService.saveFromEdit(input);				
-				result = new ModelAndView("redirect:../../sponsor/list.do");
+				financesService.saveFromEdit(input);				
+				result = new ModelAndView("redirect:../../finances/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(input, "sponsor.commit.error");				
+				result = createEditModelAndView(input, "finances.commit.error");				
 			}
 		}
 
@@ -88,14 +101,14 @@ public class SponsorAdministratorController extends AbstractController {
 	}
 			
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Sponsor sponsor, BindingResult binding) {
+	public ModelAndView delete(Finances finances, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
-			sponsorService.delete(sponsor);
-			result = new ModelAndView("redirect:../../sponsor/list.do");						
+			financesService.delete(finances);
+			result = new ModelAndView("redirect:../../finances/list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(sponsor, "sponsor.commit.error");
+			result = createEditModelAndView(finances, "finances.commit.error");
 		}
 
 		return result;
@@ -103,7 +116,7 @@ public class SponsorAdministratorController extends AbstractController {
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Sponsor input) {
+	protected ModelAndView createEditModelAndView(Finances input) {
 		ModelAndView result;
 
 		result = createEditModelAndView(input, null);
@@ -111,11 +124,18 @@ public class SponsorAdministratorController extends AbstractController {
 		return result;
 	}	
 	
-	protected ModelAndView createEditModelAndView(Sponsor input, String message) {
+	protected ModelAndView createEditModelAndView(Finances input, String message) {
 		ModelAndView result;
+		Collection<Sponsor> sponsors;
+		Collection<League> leagues;
 		
-		result = new ModelAndView("sponsor/edit");
-		result.addObject("sponsor", input);
+		sponsors = sponsorService.findAll();
+		leagues = leagueService.findAll();
+		
+		result = new ModelAndView("finances/edit");
+		result.addObject("finances", input);
+		result.addObject("sponsors", sponsors);
+		result.addObject("leagues", leagues);
 		result.addObject("message", message);
 
 		return result;
