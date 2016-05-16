@@ -25,6 +25,8 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="league/administrator/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+					<li><a href="race/administrator/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+					<li><a href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 				</ul>
 			</li>
@@ -38,16 +40,33 @@
 					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
 				</ul>
 			</li>
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
+			
+		</security:authorize>
+		
+		<security:authorize access="hasRole('RUNNER')">
+			<li><a class="fNiv" href="entered/runner/list.do"><spring:message code="master.page.runner.entered" /></a></li>
+		
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MANAGER')">
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="entered/manager/list.do"><spring:message code="master.page.manager.entered" /></a></li>			
 			<li><a class="fNiv" href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
-			<li><a class="fNiv" href="customer/create.do"><spring:message code="master.page.register" /></a></li>		
+			<li><a class="fNiv" href="runner/create.do"><spring:message code="master.page.register" /></a></li>		
+			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
@@ -55,21 +74,12 @@
 			<li><a class="fNiv" href="folder/actor/list.do"><spring:message code="master.page.messages" /></a></li>
 
 			<li>
-				<a class="fNiv"> 
+				<a class="fNiv" href="actor/actor/display.do"> 
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)
 				</a>
 				<ul>
-					<li class="arrow"></li>
-						<security:authorize access="hasRole('CUSTOMER')">
-							<li><a href="customer/customer/display.do"><spring:message code="master.page.profile.display" /></a></li>						
-						</security:authorize>
-						<security:authorize access="hasRole('ADMIN')">
-							<li><a href="administrator/administrator/display.do"><spring:message code="master.page.profile.display" /></a></li>						
-						</security:authorize>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<li class="arrow"></li>			
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

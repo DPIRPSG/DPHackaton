@@ -128,6 +128,14 @@ public class League extends CommentedEntity {
 		this.racing = racing;
 	}
 	
+	public void addRace(Race race) {
+		this.racing.add(race);
+	}
+
+	public void removeRace(Race race) {
+		this.racing.remove(race);
+	}
+	
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)

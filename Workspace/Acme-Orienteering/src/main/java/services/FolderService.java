@@ -51,7 +51,11 @@ public class FolderService {
 
 		result.setMessages(messages);
 		result.setIsSystem(false);
-		result.setActor(actorService.findByPrincipal());
+//		try { // No usar, hace que vaya mal ! ! ! !
+//			result.setActor(actorService.findByPrincipal());
+//		} catch (Exception e) {
+//
+//		}
 
 
 		return result;
@@ -63,7 +67,8 @@ public class FolderService {
 		Folder result;
 
 		result = folderRepository.save(folder);
-
+//		this.flush();
+		
 		return result;
 	}
 
@@ -102,7 +107,6 @@ public class FolderService {
 		for (Folder a : folder) {
 			result.add(this.save(a));
 		}
-
 		return result;
 	}
 

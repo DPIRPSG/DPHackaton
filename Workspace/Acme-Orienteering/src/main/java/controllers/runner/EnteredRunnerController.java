@@ -2,10 +2,14 @@ package controllers.runner;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.EnteredService;
@@ -55,6 +59,59 @@ public class EnteredRunnerController extends AbstractController{
 		result.addObject("requestURI", "entered/runner/list.do");
 		result.addObject("entereds", entereds);		
 		
+		return result;
+	}
+	
+	// Creation ---------------------------------------------------------------
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int clubId){
+		
+		ModelAndView result;
+		Entered entered;
+		
+		entered = enteredService.create(clubId);
+		result = createEditModelAndView(entered);
+		return result;
+	}
+	
+	// Edition ----------------------------------------------------------------
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Entered entered, BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(entered);
+		} else {
+			try {
+				entered = enteredService.save(entered);				
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(entered, "entered.commit.error");				
+			}
+		}
+
+		return result;
+	}
+	
+	// Ancillary methods ------------------------------------------------------
+	
+	protected ModelAndView createEditModelAndView(Entered entered) {
+		ModelAndView result;
+
+		result = createEditModelAndView(entered, null);
+		
+		return result;
+	}	
+	
+	protected ModelAndView createEditModelAndView(Entered entered, String message) {
+		ModelAndView result;
+		
+		result = new ModelAndView("entered/create");
+		result.addObject("entered", entered);
+		result.addObject("message", message);
+
 		return result;
 	}
 

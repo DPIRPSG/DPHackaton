@@ -18,12 +18,58 @@
 	name="racing" requestURI="${requestURI}" id="row_Race">
 	<!-- Action links -->
 
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<div>
+				<b><a href="race/administrator/edit.do?raceId=${row_Race.id}">
+						<spring:message code="race.edit" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
+
+	<!-- Attributes -->
+
+	<spring:message code="race.name" var="nameHeader"/>
+	<acme:displayColumn value="${row_Race.name }" title="${nameHeader}"/>
 	
+	<spring:message code="race.description" var="descriptionHeader"/>
+	<acme:displayColumn value="${row_Race.description }" title="${descriptionHeader}"/>
 	
+	<spring:message code="race.moment" var="momentHeader" />
+	<display:column title="${momentHeader}" sortable="true">
+		<fmt:formatDate value="${row_Race.moment}" pattern="dd-MM-yyyy hh:mm"/>
+	</display:column>
+	
+	<spring:message code="race.category" var="categoryHeader" />
+	<display:column title="${categoryHeader}" sortable="true">
+		<jstl:out value="${row_Race.category.name}"></jstl:out>
+		<br/>
+		<jstl:out value="${row_Race.category.description}"></jstl:out>
+	</display:column>
+	
+	<spring:message code="race.league" var="leagueHeader" />
+	<display:column title="${leagueHeader}" sortable="true">
+		<jstl:out value="${row_Race.league.name}"></jstl:out>
+		<br/>
+		<jstl:out value="${row_Race.league.description}"></jstl:out>
+	</display:column>
+
 	<display:column>
 		<a href="comment/list.do?commentedEntityId=${row_Race.id}"> <spring:message
 				code="race.comments" />
 		</a>
 	</display:column>
-
+	
 </display:table>
+
+
+<!-- Action links -->
+
+<security:authorize access="hasRole('ADMIN')">
+	<div>
+		<b><a href="race/administrator/create.do"> <spring:message
+					code="race.create" />
+		</a></b>
+	</div>
+</security:authorize>

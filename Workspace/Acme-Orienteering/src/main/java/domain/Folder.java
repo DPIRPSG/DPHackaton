@@ -58,7 +58,7 @@ public class Folder extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToMany(mappedBy = "folders")
+	@ManyToMany
 	@NotNull
 	public Collection<MessageEntity> getMessages() {
 		return messages;

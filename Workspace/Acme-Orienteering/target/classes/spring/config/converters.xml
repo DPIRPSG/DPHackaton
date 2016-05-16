@@ -85,6 +85,12 @@
 		<bean class="converters.ClassificationToStringConverter" />
 		<bean class="converters.StringToClassificationConverter" />
 		
+		<bean class="converters.FinancesToStringConverter" />
+		<bean class="converters.StringToFinancesConverter" />
+		
+		<bean class="converters.SponsorToStringConverter" />
+		<bean class="converters.StringToSponsorConverter" />
+		
 	</util:list>
 	
 </beans>

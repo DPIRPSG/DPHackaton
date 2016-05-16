@@ -17,14 +17,17 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="leagues" requestURI="${requestURI}" id="row_League">
 	<!-- Action links -->
-	
-	<display:column>
-		<div>
-			<b><a href="league/administrator/edit.do?leagueId=${row_League.id}"> <spring:message
-						code="league.edit" />
-			</a></b>
-		</div>
-	</display:column>
+
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<div>
+				<b><a
+					href="league/administrator/edit.do?leagueId=${row_League.id}">
+						<spring:message code="league.edit" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 
@@ -38,8 +41,8 @@
 	<display:column title="${pictureHeader}"
 		sortable="false" >
 		<jstl:forEach items="${row_League.pictures}" var="picture">
+			<img src="${picture}" style="width:204px;"/>
 		</jstl:forEach>
-		<img src="${picture}" style="width:204px;"/>
 	</display:column>
 	
 	<spring:message code="league.creationMoment" var="creationMomentHeader" />
@@ -53,11 +56,26 @@
 	</display:column>
 	
 	<spring:message code="league.amount" var="amountHeader"/>
-	<acme:displayColumn value="${row_League.amount}" title="${amountHeader}"/>
+	<acme:displayColumn value="${row_League.amount}" title="${amountHeader}" sorteable="true"/>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<acme:displayColumn value="${row_League.referee.name} ${row_League.referee.surname }" title="${refereeHeader}"/>
+
+	<spring:message code="league.racing" var="racingHeader" />
+	<display:column title="${racingHeader}" sortable="false">
+		<acme:link href="race/list.do?leagueId=${row_League.id}" code="league.racing.view"/>
+	</display:column>
 	
+	<spring:message code="league.clubs" var="clubesHeader" />
+	<display:column title="${clubesHeader}" sortable="false">
+		<acme:link href="club/list.do?leagueId=${row_League.id}" code="league.club.view"/>
+	</display:column>
+	
+	<spring:message code="league.financess" var="financesHeader" />
+	<display:column title="${financesHeader}" sortable="false">
+		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
+	</display:column>
+
 	<display:column>
 		<a href="comment/list.do?commentedEntityId=${row_League.id}"> <spring:message
 				code="league.comments" />
@@ -69,9 +87,11 @@
 
 <!-- Action links -->
 
-<div>
-	<b><a href="league/administrator/create.do"> <spring:message
-				code="league.create" />
-	</a></b>
-</div>
+<security:authorize access="hasRole('ADMIN')">
+	<div>
+		<b><a href="league/administrator/create.do"> <spring:message
+					code="league.create" />
+		</a></b>
+	</div>
+</security:authorize>
 
