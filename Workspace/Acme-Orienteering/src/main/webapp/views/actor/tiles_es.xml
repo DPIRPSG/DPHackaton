@@ -16,14 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="actorForm/create" extends="master.page">	
-		<put-attribute name="title" value="Corredor: Registro" />
-		<put-attribute name="body" value="/views/forms/actorForm.jsp" />
-	</definition>
-	
-	<definition name="actorForm/edit" extends="master.page">	
-		<put-attribute name="title" value="Perfil: Edición" />
-		<put-attribute name="body" value="/views/forms/actorForm.jsp" />
+	<definition name="actor/display" extends="master.page">	
+		<put-attribute name="title" value="Mi información personal" />
+		<put-attribute name="body" value="/views/actor/display.jsp" />
 	</definition>
 	
 </tiles-definitions>

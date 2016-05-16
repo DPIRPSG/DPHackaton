@@ -28,13 +28,14 @@
 		
 		<value>/views/folder/messages</value>
 		<value>/views/message/messages</value>
+		<value>/views/actor/messages</value>
 		
 		<value>/views/administrator/messages</value>
-		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
 		<value>/views/forms/messages</value>
 		
 		<value>/views/club/messages</value>
+		<value>/views/sponsor/messages</value>
 		<value>/views/league/messages</value>
 		<value>/views/race/messages</value>
 		<value>/views/bulletin/messages</value>

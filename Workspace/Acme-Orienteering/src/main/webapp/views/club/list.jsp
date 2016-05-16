@@ -42,8 +42,8 @@
 	<display:column title="${pictureHeader}"
 		sortable="false" >
 		<jstl:forEach items="${row_Club.pictures}" var="picture">
+			<img src="${picture}" style="width:204px;"/>
 		</jstl:forEach>
-		<img src="${picture}" style="width:204px;"/>
 	</display:column>
 	
 	<spring:message code="club.creationMoment" var="creationMomentHeader" />
