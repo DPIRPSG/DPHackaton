@@ -44,9 +44,15 @@
 			
 		</security:authorize>
 		
+		<security:authorize access="hasRole('RUNNER')">
+			<li><a class="fNiv" href="entered/runner/list.do"><spring:message code="master.page.runner.entered" /></a></li>
+		
+		</security:authorize>
+		
 		<security:authorize access="hasRole('MANAGER')">
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="entered/manager/list.do"><spring:message code="master.page.manager.entered" /></a></li>			
 			<li><a class="fNiv" href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
 		</security:authorize>
 		
