@@ -8,7 +8,7 @@
  * 
  */
 
-package controllers.manager;
+package controllers.runner;
 
 import java.util.Collection;
 
@@ -19,19 +19,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BulletinService;
-import services.ManagerService;
+import services.ClubService;
+import services.RunnerService;
 import controllers.AbstractController;
 import domain.Bulletin;
 import domain.Club;
-import domain.Manager;
+import domain.Runner;
 
 @Controller
-@RequestMapping("/bulletin/manager")
-public class BulletinManagerController extends AbstractController {
+@RequestMapping("/bulletin/runner")
+public class BulletinRunnerController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
@@ -39,11 +39,14 @@ public class BulletinManagerController extends AbstractController {
 	private BulletinService bulletinService;
 	
 	@Autowired
-	private ManagerService managerService;
+	private RunnerService runnerService;
+	
+	@Autowired
+	private ClubService clubService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public BulletinManagerController() {
+	public BulletinRunnerController() {
 		super();
 	}
 
@@ -54,15 +57,15 @@ public class BulletinManagerController extends AbstractController {
 		ModelAndView result;
 		Collection<Bulletin> bulletins;
 		Club club;
-		Manager manager;
+		Runner runner;
 
-		manager = managerService.findByPrincipal();
-		club = manager.getClub();
+		runner = runnerService.findByPrincipal();
+		club = clubService.findOneByRunnerId(runner.getId());
 		bulletins = club.getBulletins();
 		
 		result = new ModelAndView("bulletin/list");
-		result.addObject("requestURI", "bulletin/manager/list.do");
-		result.addObject("requestURI2", "bulletin/manager/create.do");
+		result.addObject("requestURI", "bulletin/runner/list.do");
+		result.addObject("requestURI2", "bulletin/runner/create.do");
 		result.addObject("bulletins", bulletins);
 		result.addObject("club", club);
 
@@ -101,19 +104,6 @@ public class BulletinManagerController extends AbstractController {
 
 		return result;
 	}
-			
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam int bulletinId) {
-		ModelAndView result;
-		Bulletin bulletin;
-		
-		bulletin = bulletinService.findOne(bulletinId);
-			
-		bulletinService.delete(bulletin);
-		result = new ModelAndView("redirect:list.do");						
-
-		return result;
-	}
 	
 	// Ancillary methods ------------------------------------------------------
 	
@@ -129,8 +119,8 @@ public class BulletinManagerController extends AbstractController {
 		ModelAndView result;
 		
 		result = new ModelAndView("bulletin/create");
-		result.addObject("requestURI1", "bulletin/manager/create.do");
-		result.addObject("requestURI2", "bulletin/manager/list.do");
+		result.addObject("requestURI1", "bulletin/runner/create.do");
+		result.addObject("requestURI2", "bulletin/runner/list.do");
 		result.addObject("bulletin", bulletin);
 		result.addObject("message", message);
 

@@ -57,6 +57,7 @@
 		<security:intercept-url pattern="/message/actor/*" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/actor/actor/*" access="isAuthenticated()" /> 
 		
+		<security:intercept-url pattern="/club/runner/*" access="hasRole('RUNNER')" />
 		<security:intercept-url pattern="/bulletin/runner/*" access="hasRole('RUNNER')" />
 		 
 		<security:intercept-url pattern="/customer/customer/*" access="hasRole('CUSTOMER')" />

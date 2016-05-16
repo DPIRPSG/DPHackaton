@@ -52,7 +52,7 @@
 <!-- Action links -->
 <security:authorize access="hasRole('MANAGER')">
 	<div>
-		<a href="bulletin/manager/create.do?clubId=${club.id}"> <spring:message
+		<a href="${requestURI2}?clubId=${club.id}"> <spring:message
 				code="bulletin.create" />
 		</a>
 	</div>
