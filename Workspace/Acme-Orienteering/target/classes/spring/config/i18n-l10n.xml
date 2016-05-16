@@ -36,6 +36,7 @@
 		
 		<value>/views/club/messages</value>
 		<value>/views/sponsor/messages</value>
+		<value>/views/finances/messages</value>
 		<value>/views/league/messages</value>
 		<value>/views/race/messages</value>
 		<value>/views/bulletin/messages</value>

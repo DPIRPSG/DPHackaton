@@ -41,8 +41,8 @@
 	<display:column title="${pictureHeader}"
 		sortable="false" >
 		<jstl:forEach items="${row_League.pictures}" var="picture">
+			<img src="${picture}" style="width:204px;"/>
 		</jstl:forEach>
-		<img src="${picture}" style="width:204px;"/>
 	</display:column>
 	
 	<spring:message code="league.creationMoment" var="creationMomentHeader" />
@@ -56,23 +56,24 @@
 	</display:column>
 	
 	<spring:message code="league.amount" var="amountHeader"/>
-	<acme:displayColumn value="${row_League.amount}" title="${amountHeader}"/>
+	<acme:displayColumn value="${row_League.amount}" title="${amountHeader}" sorteable="true"/>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<acme:displayColumn value="${row_League.referee.name} ${row_League.referee.surname }" title="${refereeHeader}"/>
 	
 	<spring:message code="league.racing" var="racingHeader" />
 	<display:column title="${racingHeader}" sortable="false">
-		<a href="race/list.do?leagueId=${row_League.id}"> <spring:message
-				code="league.racing"/>
-		</a>
+		<acme:link href="race/list.do?leagueId=${row_League.id}" code="league.racing.view"/>
 	</display:column>
 	
 	<spring:message code="league.clubs" var="clubesHeader" />
 	<display:column title="${clubesHeader}" sortable="false">
-		<a href="club/list.do?leagueId=${row_League.id}"> <spring:message
-				code="league.clubs"/>
-		</a>
+		<acme:link href="club/list.do?leagueId=${row_League.id}" code="league.club.view"/>
+	</display:column>
+	
+	<spring:message code="league.financess" var="financesHeader" />
+	<display:column title="${financesHeader}" sortable="false">
+		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
 	</display:column>
 	
 </display:table>

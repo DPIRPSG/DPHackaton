@@ -31,7 +31,7 @@
 	<spring:message code="sponsor.logo" var="pictureHeader"/>
 	<display:column title="${pictureHeader}"
 		sortable="false" >
-		<img src="${row_Sponsor.logo}" style="width:100px;"/>
+		<img src="${row_Sponsor.logo}" style="height:100px;"/>
 	</display:column>
 
 	<spring:message code="sponsor.name" var="nameHeader"/>

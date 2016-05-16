@@ -78,7 +78,7 @@ public class SponsorService {
 	public void delete(Sponsor sponsor) {
 		Assert.notNull(sponsor);
 		Assert.isTrue(sponsor.getId() != 0);
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only a admin can delete sponsors");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can delete sponsors");
 		
 		sponsorRepository.delete(sponsor);
 	}
