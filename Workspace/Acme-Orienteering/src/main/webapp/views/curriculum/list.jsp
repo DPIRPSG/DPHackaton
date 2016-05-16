@@ -11,7 +11,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('RUNNER', 'REFEREE', 'MANAGER')">
+<security:authorize access="hasAnyRole('RUNNER', 'REFEREE', 'MANAGER')">
 
 	<jstl:if test="${curriculum != null}">
 	

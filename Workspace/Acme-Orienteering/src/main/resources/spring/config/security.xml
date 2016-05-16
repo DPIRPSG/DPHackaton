@@ -76,6 +76,8 @@
 		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/bulletin/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/entered/manager/**" access="hasRole('MANAGER')" />
+		
+		<security:intercept-url pattern="/curriculum/actor/*" access="hasAnyRole('RUNNER','MANAGER','REFEREE')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
