@@ -24,7 +24,7 @@ import domain.Runner;
 
 @Controller
 @RequestMapping("/club/runner")
-public class ClubRunnerrController extends AbstractController {
+public class ClubRunnerController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 
@@ -36,7 +36,7 @@ public class ClubRunnerrController extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 	
-	public ClubRunnerrController() {
+	public ClubRunnerController() {
 		super();
 	}
 
