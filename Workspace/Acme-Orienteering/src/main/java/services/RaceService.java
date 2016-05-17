@@ -118,6 +118,10 @@ public class RaceService {
 		
 	}
 	
+	public void join(Race race){
+		
+	}
+	
 	public Race findOne(int raceId) {
 		Race result;
 		
@@ -133,7 +137,7 @@ public class RaceService {
 
 		return result;
 	}
-	
+		
 
 	// Other business methods -------------------------------------------------
 	
@@ -148,4 +152,13 @@ public class RaceService {
 		
 		return result;
 	}
+	
+	public Collection<Race> findAllByRunnerId(int runnerId){
+		Collection<Race> result;
+		
+		result = raceRepository.findAllByRunnerId(runnerId);
+		
+		return result;
+	}
+
 }

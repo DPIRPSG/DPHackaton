@@ -30,9 +30,6 @@ public class EnteredService {
 	
 	@Autowired
 	private RunnerService runnerService;
-	
-	@Autowired
-	private ClubService clubService;
 
 	// Constructors -----------------------------------------------------------
 	
