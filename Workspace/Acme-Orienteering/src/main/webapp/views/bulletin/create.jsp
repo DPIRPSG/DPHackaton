@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="bulletin/manager/create.do" modelAttribute="bulletin">
+<form:form action="${requestURI1}" modelAttribute="bulletin">
 	<!-- Hidden Attributes -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -31,6 +31,6 @@
 	
 	<acme:submit name="save" code="bulletin.save"/>
 	
-	<acme:cancel code="bulletin.cancel" url="bulletin/manager/list.do?clubId=${bulletin.club.id}"/>
+	<acme:cancel code="bulletin.cancel" url="${requestURI2}?clubId=${bulletin.club.id}"/>
 
 </form:form>

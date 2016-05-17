@@ -173,4 +173,12 @@ public class ClubService {
 		return result;
 	}
 
+	public Club findOneByRunnerId(int id) {
+		Club result;
+		
+		result = clubRepository.findOneByRunnerId(id);
+		
+		return result;
+	}
+
 }
