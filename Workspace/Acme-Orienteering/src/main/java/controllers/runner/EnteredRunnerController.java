@@ -1,6 +1,7 @@
 package controllers.runner;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.validation.Valid;
 
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ClubService;
 import services.EnteredService;
 import services.RunnerService;
 
 import controllers.AbstractController;
+import domain.Club;
 import domain.Entered;
 import domain.Runner;
 
@@ -30,6 +33,9 @@ public class EnteredRunnerController extends AbstractController{
 	
 	@Autowired
 	private RunnerService runnerService;
+	
+	@Autowired
+	private ClubService clubService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -57,7 +63,7 @@ public class EnteredRunnerController extends AbstractController{
 		
 		result = new ModelAndView("entered/list");
 		result.addObject("requestURI", "entered/runner/list.do");
-		result.addObject("entereds", entereds);		
+		result.addObject("entereds", entereds);	
 		
 		return result;
 	}
@@ -65,12 +71,12 @@ public class EnteredRunnerController extends AbstractController{
 	// Creation ---------------------------------------------------------------
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int clubId){
+	public ModelAndView create(){
 		
 		ModelAndView result;
 		Entered entered;
-		
-		entered = enteredService.create(clubId);
+				
+		entered = enteredService.create();
 		result = createEditModelAndView(entered);
 		return result;
 	}
@@ -107,10 +113,19 @@ public class EnteredRunnerController extends AbstractController{
 	
 	protected ModelAndView createEditModelAndView(Entered entered, String message) {
 		ModelAndView result;
+		Runner runner;
+		Collection<Club> allClubs = new HashSet<>();
+		Collection<Club> runnerClub = new HashSet<>();
+		
+		allClubs = clubService.findAll();
+		runner = runnerService.findByPrincipal();
+		runnerClub = clubService.findAllByRunner(runner.getId());
+		allClubs.removeAll(runnerClub);
 		
 		result = new ModelAndView("entered/create");
 		result.addObject("entered", entered);
 		result.addObject("message", message);
+		result.addObject("allClubs", allClubs);
 
 		return result;
 	}

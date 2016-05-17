@@ -50,21 +50,18 @@ public class EnteredService {
 	 * 	Hacer peticiones de ingreso a los distintos clubes del sistema.
 	 * @return create an entered to a club from the runner logged
 	 */
-	public Entered create(int clubId){
+	public Entered create(){
 		
 		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can create an entered.");
 		
 		Entered result;
 		Runner runner;
-		Club club;
 		
 		runner = runnerService.findByPrincipal();
-		club = clubService.findOne(clubId);
 		
 		result = new Entered();
 		
 		result.setRunner(runner);
-		result.setClub(club);
 		
 		result.setIsMember(false);
 		result.setRegisterMoment(new Date());

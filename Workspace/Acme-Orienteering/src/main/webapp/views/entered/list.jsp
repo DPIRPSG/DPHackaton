@@ -17,7 +17,31 @@
 <display:table pagesize="5" class="displaytag" keepStatus="false"
 	name="entereds" requestURI="${requestURI}" id="row_Entered">
 	<!-- Action links -->
-
+	<security:authorize access="hasRole('MANAGER')">
+	<spring:message code="entered.accept" var="acceptHeader"/>
+		<display:column title="${acceptHeader}">
+			<div>
+				<jstl:if test="${row_Entered.isMember == false && row_Entered.acceptedMoment == null}">	
+					<b><a href="entered/manager/accept.do?enteredId=${row_Entered.id}"> <spring:message
+								code="entered.accept" />
+					</a></b>
+				</jstl:if>
+			</div>
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('MANAGER')">
+	<spring:message code="entered.deny" var="denyHeader"/>
+		<display:column title="${denyHeader}">
+			<div>
+				<jstl:if test="${row_Entered.isMember == false && row_Entered.acceptedMoment == null}">	
+					<b><a href="entered/manager/deny.do?enteredId=${row_Entered.id}"> <spring:message
+								code="entered.deny" />
+					</a></b>
+				</jstl:if>				
+			</div>
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 
@@ -44,6 +68,12 @@
 	<acme:displayColumn value="${row_Entered.acceptedMoment}" title="${acceptedMomentHeader}"/>
 
 </display:table>
+
+	<security:authorize access="hasRole('RUNNER')">
+		<b><a href="entered/runner/create.do"> <spring:message
+						code="entered.create" />
+		</a></b>
+	</security:authorize>
 
 
 <!-- Action links -->
