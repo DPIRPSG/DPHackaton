@@ -47,15 +47,18 @@ public class ClubRunnerController extends AbstractController {
 		ModelAndView result;
 		Club club;
 		Runner runner;
+		Boolean pertenece;
 
 		runner = runnerService.findByPrincipal();
 		club = clubService.findOneByRunnerId(runner.getId());
+		pertenece = true;
 		
 		result = new ModelAndView("club/list");
 		result.addObject("requestURI", "club/runner/list.do");
 		result.addObject("requestURI2", "bulletin/runner/list.do");
 		result.addObject("clubes", club);
-		//result.addObject("manager", manager);
+		result.addObject("runner", runner);
+		result.addObject("pertenece", pertenece);
 
 		return result;
 	}

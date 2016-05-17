@@ -55,16 +55,19 @@ public class BulletinManagerController extends AbstractController {
 		Collection<Bulletin> bulletins;
 		Club club;
 		Manager manager;
+		Boolean pertenece;
 
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
 		bulletins = club.getBulletins();
+		pertenece = true;
 		
 		result = new ModelAndView("bulletin/list");
 		result.addObject("requestURI", "bulletin/manager/list.do");
 		result.addObject("requestURI2", "bulletin/manager/create.do");
 		result.addObject("bulletins", bulletins);
 		result.addObject("club", club);
+		result.addObject("pertenece", pertenece);
 
 		return result;
 	}

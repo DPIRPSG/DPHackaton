@@ -58,16 +58,19 @@ public class BulletinRunnerController extends AbstractController {
 		Collection<Bulletin> bulletins;
 		Club club;
 		Runner runner;
+		Boolean pertenece;
 
 		runner = runnerService.findByPrincipal();
 		club = clubService.findOneByRunnerId(runner.getId());
 		bulletins = club.getBulletins();
+		pertenece = true;
 		
 		result = new ModelAndView("bulletin/list");
 		result.addObject("requestURI", "bulletin/runner/list.do");
 		result.addObject("requestURI2", "bulletin/runner/create.do");
 		result.addObject("bulletins", bulletins);
 		result.addObject("club", club);
+		result.addObject("pertenece", pertenece);
 
 		return result;
 	}
