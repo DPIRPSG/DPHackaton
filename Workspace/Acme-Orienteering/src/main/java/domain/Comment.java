@@ -47,7 +47,7 @@ public class Comment extends DomainEntity{
 	}
 	
 	//No debe ser null
-	@Range(min = 0, max = 3)
+	@Range(min = 0, max = 5)
 	@Valid
 	public int getStarRating() {
 		return starRating;
