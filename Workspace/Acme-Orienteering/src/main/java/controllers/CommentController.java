@@ -42,8 +42,8 @@ public class CommentController {
 		Collection<Comment> comments;
 		CommentedEntity commentedEntity;
 		
-		comments = commentService.findAllByCommentedEntityId(commentedEntityId);
 		commentedEntity = commentedEntityService.findOne(commentedEntityId);
+		comments = commentedEntity.getComments();
 		
 		result = new ModelAndView("comment/list");
 		result.addObject("comments", comments);
