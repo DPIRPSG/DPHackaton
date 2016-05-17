@@ -49,7 +49,15 @@ public class ActorService {
 		return result;
 	}
 	
-	// Other business methods -------------------------------------------------
+	// Other business methods -------------------------------------------------7
+	
+	public Actor save(Actor actor){
+		Actor result;
+		
+		result = actorRepository.save(actor);
+		
+		return result;
+	}
 
 	/**
 	 *  Devuelve el actor que está realizando la operación
@@ -127,6 +135,14 @@ public class ActorService {
 		} catch (Throwable e) {
 			result = false;
 		}
+		return result;
+	}
+	
+	public Actor findByCurriculumId(int actorId){
+		Actor result;
+		
+		result = actorRepository.findByCurriculumId(actorId);
+		
 		return result;
 	}
 	
