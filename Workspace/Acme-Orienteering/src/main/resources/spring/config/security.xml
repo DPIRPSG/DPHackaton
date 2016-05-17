@@ -60,11 +60,14 @@
 		<security:intercept-url pattern="/actor/actor/*" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/bulletin/runner/*" access="hasRole('RUNNER')" />
+		<security:intercept-url pattern="/participates/runner/*" access="hasRole('RUNNER')" />
+		
 		
 		<security:intercept-url pattern="/participates/referee/*" access="hasRole('REFEREE')" />
 		 		
 		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/bulletin/manager/*" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/participates/manager/*" access="hasRole('MANAGER')" />
 		
 		<security:intercept-url pattern="/club/list.do" access="permitAll" />
 		<security:intercept-url pattern="/sponsor/list.do" access="permitAll" />

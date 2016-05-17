@@ -1,5 +1,7 @@
 package controllers.referee;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,20 @@ public class ParticipatesRefereeController extends AbstractController{
 	}
 
 	//Listing ----------------------------------------------------------
-
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(defaultValue = "-1") int runnerId,
+			@RequestParam(defaultValue = "-1") int raceId) {
+		ModelAndView result;
+		Collection<Participates> parts;
+		
+		parts = participatesService.findAllRefereeByRunnerIdAndRaceId(runnerId, raceId);
+		
+		result = new ModelAndView("participates/list");
+		result.addObject("participatess", parts);
+		result.addObject("requestURI", "participates/referee/list.do");
+		return result;
+	}
+	
 	//Creation ----------------------------------------------------------
 	
 	//Edition ----------------------------------------------------------
@@ -43,7 +58,7 @@ public class ParticipatesRefereeController extends AbstractController{
 		
 		part = participatesService.findOne(participatesId);
 		
-		result = createEditModelAndView(part, "actorForm.commit.error");
+		result = createEditModelAndView(part);
 		
 		return result;
 	}

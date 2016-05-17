@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Club;
 import domain.Comment;
 import domain.Entered;
 import domain.MessageEntity;
@@ -149,6 +150,20 @@ public class RunnerService {
 		result = runnerRepository.findAllByClubId(clubId);
 		
 		return result;
+	}
+	
+	public Club getClub(){
+		Club res;
+		Runner runner;
+		
+		runner = this.findByPrincipal();
+		res = null;
+		for(Entered e:runner.getEntered()){
+			if(e.getIsMember() && e.getAcceptedMoment() != null)
+				res = e.getClub();
+		}
+				
+		return res;
 	}
 	
 	public void flush(){

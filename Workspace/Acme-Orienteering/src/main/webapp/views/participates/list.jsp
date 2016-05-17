@@ -15,34 +15,35 @@
 
 <!-- Listing grid -->
 <display:table pagesize="5" class="displaytag" keepStatus="false"
-	name="sponsors" requestURI="${requestURI}" id="row_Sponsor">
+	name="participatess" requestURI="${requestURI}" id="row_Participates">
 	<!-- Action links -->
 
-	<security:authorize access="hasRole('ADMIN')">
+	<security:authorize access="hasRole('REFEREE')">
 		<display:column>
 			<div>
-				<b><acme:link href="sponsor/administrator/edit.do?sponsorId=${row_Sponsor.id}" code="sponsor.edit"/></b>
+				<b><acme:link href="participates/referee/edit.do?participatesId=${row_Participates.id}"
+				 code="participates.edit"/></b>
 			</div>
 		</display:column>
 	</security:authorize>
 
 	<!-- Attributes -->
-
-	<spring:message code="sponsor.logo" var="pictureHeader"/>
-	<display:column title="${pictureHeader}"
-		sortable="false" >
-		<img src="${row_Sponsor.logo}" style="height:100px;"/>
+	
+	<spring:message code="participates.result" var="resultHeader"/>
+	<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" />
+	
+	<spring:message code="participates.runner" var="runnerHeader" />
+	<display:column title="${runnerHeader}" sortable="false">
+<%-- 		<a href="${requestURI}?runnerId=${row_Participates.runner.id}"> --%>
+			<jstl:out value="${row_Participates.runner.name}"/>
+<!-- 		</a> -->
 	</display:column>
-
-	<spring:message code="sponsor.name" var="nameHeader"/>
-	<acme:displayColumn value="${row_Sponsor.name}" title="${nameHeader}"/>
 	
-	<spring:message code="sponsor.description" var="descriptionHeader"/>
-	<acme:displayColumn value="${row_Sponsor.description }" title="${descriptionHeader}"/>
-	
-	<spring:message code="sponsor.finances" var="financesHeader" />
-	<display:column title="${financesHeader}" sortable="false">
-		<acme:link href="finances/list.do?sponsorId=${row_Sponsor.id}" code="sponsor.finances.view"/>
+	<spring:message code="participates.race" var="raceHeader" />
+	<display:column title="${raceHeader}" sortable="false">
+<%-- 		<a href="${requestURI}?raceId=${row_Participates.race.id}"> --%>
+			<jstl:out value="${row_Participates.race.name}"/>
+<!-- 		</a> -->
 	</display:column>
 	
 </display:table>
