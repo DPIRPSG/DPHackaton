@@ -70,7 +70,7 @@
 </display:table>
 
 	<security:authorize access="hasRole('RUNNER')">
-		<b><a href="entered/runner/create.do?clubId=${row_Entered.club.id}"> <spring:message
+		<b><a href="entered/runner/create.do"> <spring:message
 						code="entered.create" />
 		</a></b>
 	</security:authorize>
