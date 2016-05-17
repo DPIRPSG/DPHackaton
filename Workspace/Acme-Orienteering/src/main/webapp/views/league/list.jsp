@@ -61,6 +61,11 @@
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<acme:displayColumn value="${row_League.referee.name} ${row_League.referee.surname }" title="${refereeHeader}"/>
 
+	<spring:message code="league.classification" var="classificationHeader" />
+	<display:column title="${classificationHeader}" sortable="false">
+		<acme:link href="club/list.do?leagueId=${row_League.id}&classification=true" code="league.club.view"/>
+	</display:column>
+
 	<spring:message code="league.racing" var="racingHeader" />
 	<display:column title="${racingHeader}" sortable="false">
 		<acme:link href="race/list.do?leagueId=${row_League.id}" code="league.racing.view"/>
