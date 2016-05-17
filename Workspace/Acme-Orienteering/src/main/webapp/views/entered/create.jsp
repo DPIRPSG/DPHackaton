@@ -13,8 +13,17 @@
 <!-- Form -->
 <form:form action="entered/runner/create.do" modelAttribute="entered">
 	<!-- Hidden Attributes -->
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+
+	<form:hidden path="runner" />
+	<form:hidden path="registerMoment" />
+
 
 	<!-- Editable Attributes -->
+	<acme:select items="${allClubs}" itemLabel="name" code="entered.club" path="club"/>
 	
+	<acme:submit name="save" code="entered.save"/>
+	<acme:cancel code="entered.cancel" url="entered/runner/list.do"/>
 	
 </form:form>
