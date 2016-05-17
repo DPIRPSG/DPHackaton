@@ -51,10 +51,28 @@ public class ActorService {
 	
 	// Other business methods -------------------------------------------------7
 	
-	public Actor save(Actor actor){
+	private Actor save(Actor actor){
+		Assert.isTrue(this.checkLogin(), "Only an Actor can change his/her data.");
+		Assert.notNull(actor);
+		
 		Actor result;
+		Actor principalActor;
+		
+		principalActor = this.findByPrincipal();
+		
+		Assert.isTrue(principalActor == actor, "You can't modify other user's data.");
 		
 		result = actorRepository.save(actor);
+		
+		return result;
+	}
+	
+	public Actor saveCurriculum(Actor actor){
+		Assert.isTrue(this.checkAuthorities("RUNNER,MANAGER,REFEREE"), "Only a Runner, Manager or Referee can manage his/her Curriculum.");
+		
+		Actor result;
+		
+		result = this.save(actor);
 		
 		return result;
 	}

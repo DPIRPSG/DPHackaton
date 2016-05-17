@@ -58,7 +58,7 @@ public class CurriculumService {
 		curriculum = curriculumRepository.save(curriculum);
 		if(curriculumId == 0){
 			actor.setCurriculum(curriculum);
-			actorService.save(actor);
+			actorService.saveCurriculum(actor);
 		}
 		
 		return curriculum;

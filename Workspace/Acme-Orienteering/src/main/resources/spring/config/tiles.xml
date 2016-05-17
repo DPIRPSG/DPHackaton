@@ -41,6 +41,7 @@
 		<value>/views/punishment/tiles.xml</value>
 		<value>/views/entered/tiles.xml</value>
 		<value>/views/curriculum/tiles.xml</value>
+		<value>/views/feePayment/tiles.xml</value>
 
 	</util:list>
 
