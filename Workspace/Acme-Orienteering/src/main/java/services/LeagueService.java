@@ -72,6 +72,7 @@ public class LeagueService {
 	
 	public League save(League league) {
 		Assert.notNull(league);
+		Assert.isTrue(league.getStartedMoment().compareTo(new Date()) >= 0);
 
 		if(league.getId() == 0) {
 			Assert.isTrue(actorService.checkAuthority("ADMIN"),

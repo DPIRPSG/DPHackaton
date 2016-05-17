@@ -55,6 +55,7 @@ public class Bulletin extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 	private Club club;
+	private Actor actor;
 
 	@Valid
 	@NotNull
@@ -64,5 +65,15 @@ public class Bulletin extends DomainEntity {
 	}
 	public void setClub(Club club) {
 		this.club = club;
+	}
+	
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Actor getActor() {
+		return actor;
+	}
+	public void setActor(Actor actor) {
+		this.actor = actor;
 	}
 }

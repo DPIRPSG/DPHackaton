@@ -522,6 +522,7 @@
 		<property name="description" value="Our club have obtain the best classifications of 2015!"/>
 		<property name="creationMoment" value="2016/01/01 00:16"/>
 		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
 	</bean>
 	
 	<!-- Category -->
