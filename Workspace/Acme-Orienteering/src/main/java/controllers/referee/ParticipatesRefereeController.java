@@ -73,7 +73,7 @@ public class ParticipatesRefereeController extends AbstractController{
 		} else {
 			try {
 				participatesService.saveFromClassificationEdit(input);
-				result = new ModelAndView("redirect:../..");
+				result = new ModelAndView("redirect:list.do");
 				result.addObject("messageStatus", "actorForm.commit.ok");						
 			} catch (Throwable oops){
 				result = createEditModelAndView(input, "actorForm.commit.error");
