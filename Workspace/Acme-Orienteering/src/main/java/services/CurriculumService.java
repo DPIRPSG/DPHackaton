@@ -96,7 +96,7 @@ public class CurriculumService {
 		actorPrincipal = actorService.findByPrincipal();
 		actorOwner = actorService.findByCurriculumId(curriculumId);
 		
-		Assert.isTrue(actorPrincipal == actorOwner, "You can't manage a Curriculum of other Trainer.");
+		Assert.isTrue(actorPrincipal == actorOwner, "You can only manage you own Curriculum.");
 	}
 	
 	public void flush() {
