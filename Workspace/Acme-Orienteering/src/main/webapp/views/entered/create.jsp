@@ -13,8 +13,12 @@
 <!-- Form -->
 <form:form action="entered/runner/create.do" modelAttribute="entered">
 	<!-- Hidden Attributes -->
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 
 	<!-- Editable Attributes -->
 	
+	<acme:submit name="save" code="entered.save"/>
+	<acme:cancel code="entered.cancel" url="entered/runner/list.do"/>
 	
 </form:form>
