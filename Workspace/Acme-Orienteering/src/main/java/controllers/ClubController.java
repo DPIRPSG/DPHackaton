@@ -51,7 +51,8 @@ public class ClubController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam (required = false) Integer leagueId) {
+	public ModelAndView list(@RequestParam (required = false) Integer leagueId, 
+			@RequestParam (required = false) String classification) {
 		ModelAndView result;
 		Collection<Club> clubes;
 		Manager manager;
@@ -65,8 +66,13 @@ public class ClubController extends AbstractController {
 		}
 
 		if(leagueId != null) {
-			clubes = clubService.findAllByLeagueId(leagueId);
-			ranking = clubService.calculateRankingByLeague(leagueId);
+			if(classification.equals("true")) {
+				clubes = clubService.findAllByLeagueId(leagueId);
+				ranking = clubService.calculateRankingByLeague(leagueId);
+			} else {
+				clubes = clubService.findAllByLeagueId(leagueId);
+				ranking = null;
+			}
 		} else {
 			clubes = clubService.findAll();
 			ranking = null;
