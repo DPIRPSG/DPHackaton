@@ -31,6 +31,13 @@
 	</security:authorize>
 
 	<!-- Attributes -->
+	<display:column>
+		<jstl:forEach var="possition" items="${ranking }">
+			<jstl:if test="${possition[0] == row_Club.id}">
+				<jstl:out value="${possition[1]}" />
+			</jstl:if>
+		</jstl:forEach>
+	</display:column>
 
 	<spring:message code="club.name" var="nameHeader"/>
 	<acme:displayColumn value="${row_Club.name }" title="${nameHeader}"/>
