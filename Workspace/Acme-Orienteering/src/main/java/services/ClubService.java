@@ -173,4 +173,51 @@ public class ClubService {
 		return result;
 	}
 
+	public Club findOneByRunnerId(int id) {
+		Club result;
+		
+		result = clubRepository.findOneByRunnerId(id);
+		
+		return result;
+	}
+	
+	public Collection<ArrayList<Integer>> calculateRankingByLeague(int leagueId) {
+		Collection<ArrayList<Integer>> result;
+		Integer points;
+		ArrayList<Integer> result2;
+		Collection<Club> clubes;
+		
+		result = new ArrayList<ArrayList<Integer>>();
+		
+		clubes = this.findAllByLeagueId(leagueId);
+		for(Club c : clubes) {
+			points = 0;
+			result2 = new ArrayList<Integer>();
+			for(Classification classification : c.getClassifications()) {
+				if(classification.getRace().getLeague().getId() == leagueId) {
+					points = points + classification.getPoints();
+				}
+			}
+			for(Punishment p : c.getPunishments()) {
+				if(p.getLeague().getId() == leagueId) {
+					points = points -p.getPoints();
+				}
+			}
+			result2.add(c.getId());
+			result2.add(points);
+			result.add(result2);
+		}
+		
+		return result;
+		
+	}
+	
+	public Collection<Club> findAllByRunner(int runnerId){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllByRunner(runnerId);
+		
+		return result;
+	}
+
 }

@@ -17,28 +17,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Comment extends DomainEntity {
+public class Comment extends DomainEntity{
 
 	// Constructors -----------------------------------------------------------
 
 	// Attributes -------------------------------------------------------------
-	private Date moment;
 	private String text;
+	private Date moment;
 	private int starRating;
 	private boolean deleted;
 	
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")	
-	public Date getMoment() {
-		return moment;
-	}
-	public void setMoment(Date moment) {
-		this.moment = moment;
-	}
-	
-	@NotNull
 	@NotBlank
+	@NotNull
 	public String getText() {
 		return text;
 	}
@@ -46,7 +36,19 @@ public class Comment extends DomainEntity {
 		this.text = text;
 	}
 	
-	@Range(max = 5, min = 0)
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy/dd/MM HH:mm")
+	@NotNull
+	public Date getMoment() {
+		return moment;
+	}
+	public void setMoment(Date moment) {
+		this.moment = moment;
+	}
+	
+	//No debe ser null
+	@Range(min = 0, max = 5)
+	@Valid
 	public int getStarRating() {
 		return starRating;
 	}
@@ -54,19 +56,20 @@ public class Comment extends DomainEntity {
 		this.starRating = starRating;
 	}
 	
-	public boolean isDeleted() {
+	public boolean getDeleted() {
 		return deleted;
 	}
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	
 	// Relationships ----------------------------------------------------------
 	private Actor actor;
 	private CommentedEntity commentedEntity;
-
+	
 	@Valid
 	@NotNull
-	@ManyToOne(optional = false)
+	@ManyToOne(optional=false)
 	public Actor getActor() {
 		return actor;
 	}
@@ -74,13 +77,15 @@ public class Comment extends DomainEntity {
 		this.actor = actor;
 	}
 	
-	@Valid
 	@NotNull
-	@ManyToOne(optional = false)	
+	@Valid
+	@ManyToOne(optional = false)
 	public CommentedEntity getCommentedEntity() {
 		return commentedEntity;
 	}
 	public void setCommentedEntity(CommentedEntity commentedEntity) {
 		this.commentedEntity = commentedEntity;
 	}
+	
+	
 }

@@ -50,13 +50,14 @@
 <br/>
 
 <!-- Action links -->
-<security:authorize access="hasRole('MANAGER')">
+
+<jstl:if test="${pertenece}">
 	<div>
-		<a href="bulletin/manager/create.do?clubId=${club.id}"> <spring:message
+		<a href="${requestURI2}?clubId=${club.id}"> <spring:message
 				code="bulletin.create" />
 		</a>
 	</div>
-</security:authorize>
+</jstl:if>
 
 <!-- Alert -->
 	

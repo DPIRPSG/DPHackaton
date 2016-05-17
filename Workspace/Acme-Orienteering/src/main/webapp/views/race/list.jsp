@@ -54,6 +54,12 @@
 		<br/>
 		<jstl:out value="${row_Race.league.description}"></jstl:out>
 	</display:column>
+
+	<display:column>
+		<a href="comment/list.do?commentedEntityId=${row_Race.id}"> <spring:message
+				code="race.comments" />
+		</a>
+	</display:column>
 	
 	<security:authorize access="hasAnyRole('MANAGER, RUNNER, REFEREE')">
 	<spring:message code="race.participates" var="leagueHeader" />
@@ -82,5 +88,3 @@
 		</a></b>
 	</div>
 </security:authorize>
-
-
