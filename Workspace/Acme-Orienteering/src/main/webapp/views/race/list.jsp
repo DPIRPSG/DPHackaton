@@ -54,6 +54,12 @@
 		<br/>
 		<jstl:out value="${row_Race.league.description}"></jstl:out>
 	</display:column>
+
+	<display:column>
+		<a href="comment/list.do?commentedEntityId=${row_Race.id}"> <spring:message
+				code="race.comments" />
+		</a>
+	</display:column>
 	
 </display:table>
 
@@ -67,5 +73,3 @@
 		</a></b>
 	</div>
 </security:authorize>
-
-

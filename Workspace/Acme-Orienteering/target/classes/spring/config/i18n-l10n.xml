@@ -42,7 +42,11 @@
 		<value>/views/bulletin/messages</value>
 		<value>/views/runner/messages</value>
 		<value>/views/category/messages</value>
+		<value>/views/comment/messages</value>
 		<value>/views/punishment/messages</value>
+		<value>/views/entered/messages</value>
+		<value>/views/curriculum/messages</value>
+
 	</util:list>
 
 </beans>

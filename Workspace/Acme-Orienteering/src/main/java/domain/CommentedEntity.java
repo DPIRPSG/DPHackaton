@@ -9,7 +9,6 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-
 @Entity
 @Access(AccessType.PROPERTY)
 public abstract class CommentedEntity extends DomainEntity{
@@ -17,13 +16,13 @@ public abstract class CommentedEntity extends DomainEntity{
 	// Constructors -----------------------------------------------------------
 
 	// Attributes -------------------------------------------------------------
-
+	
 	// Relationships ----------------------------------------------------------
-	private Collection<Comment> comments;	
-
+	private Collection<Comment> comments;
+	
 	@Valid
+	@OneToMany(mappedBy = "commentedEntity")
 	@NotNull
-	@OneToMany(mappedBy = "actor")
 	public Collection<Comment> getComments() {
 		return comments;
 	}
@@ -31,6 +30,4 @@ public abstract class CommentedEntity extends DomainEntity{
 		this.comments = comments;
 	}
 	
-	
-
 }

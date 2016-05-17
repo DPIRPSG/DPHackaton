@@ -7,5 +7,7 @@ import domain.CommentedEntity;
 
 @Repository
 public interface CommentedEntityRepository extends JpaRepository<CommentedEntity, Integer> {
+	
+	
 
 }
