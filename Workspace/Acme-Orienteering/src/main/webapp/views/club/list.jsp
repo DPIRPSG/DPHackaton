@@ -81,14 +81,16 @@
 				code="club.punishments"/>
 		</a>
 	</display:column>
-	
-	<spring:message code="club.bulletins" var="bulletinsHeader" />
-	<display:column title="${bulletinsHeader}" sortable="false">
-		<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
-				code="club.bulletins"/>
-		</a>
-	</display:column>
-	
+
+	<jstl:if test="${manager.id == row_Club.manager.id || pertenece}">
+		<spring:message code="club.bulletins" var="bulletinsHeader" />
+		<display:column title="${bulletinsHeader}" sortable="false">
+			<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
+					code="club.bulletins" />
+			</a>
+		</display:column>
+	</jstl:if>
+
 	<display:column>
 		<a href="comment/list.do?commentedEntityId=${row_Club.id}"> <spring:message
 				code="club.comments" />

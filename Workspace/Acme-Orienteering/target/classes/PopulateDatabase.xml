@@ -218,6 +218,26 @@
 		<property name="curriculum" ref="curriculum3"/>
 	</bean>
 	
+	<!-- MessageEntity -->
+	
+	<bean id="message1" class="domain.MessageEntity">
+		<property name="subject" value="Welcome!"/>
+		<property name="body" value="You were registered successfully! Welcome to Acme Orienteering!"/>
+		<property name="sentMoment" value="2016/05/02 12:15"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Folder -->
 	
 	<bean id="folder1" class="domain.Folder">
@@ -338,26 +358,6 @@
 		<property name="actor" ref="referee1"/>
 		<property name="messages">
 			<list>
-			</list>
-		</property>
-	</bean>
-	
-	<!-- MessageEntity -->
-	
-	<bean id="message1" class="domain.MessageEntity">
-		<property name="subject" value="Welcome!"/>
-		<property name="body" value="You were registered successfully! Welcome to Acme Orienteering!"/>
-		<property name="sentMoment" value="2016/05/02 12:15"/>
-		<property name="sender" ref="administrator1"/>
-		<property name="recipients">
-			<list>
-				<ref bean="runner1"/>
-			</list>
-		</property>
-		<property name="folders">
-			<list>
-				<ref bean="folder2"/>
-				<ref bean="folder7"/>
 			</list>
 		</property>
 	</bean>
