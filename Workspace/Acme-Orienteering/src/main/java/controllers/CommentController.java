@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.CommentService;
 import services.CommentedEntityService;
 import domain.Comment;
 import domain.CommentedEntity;
@@ -19,9 +18,6 @@ import domain.CommentedEntity;
 public class CommentController {
 
 	// Services ----------------------------------------------------------
-	
-	@Autowired
-	private CommentService commentService;
 	
 	@Autowired
 	private CommentedEntityService commentedEntityService;
