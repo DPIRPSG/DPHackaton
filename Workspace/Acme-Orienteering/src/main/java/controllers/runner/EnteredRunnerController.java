@@ -113,7 +113,14 @@ public class EnteredRunnerController extends AbstractController{
 	
 	protected ModelAndView createEditModelAndView(Entered entered, String message) {
 		ModelAndView result;
+		Runner runner;
 		Collection<Club> allClubs = new HashSet<>();
+		Collection<Club> runnerClub = new HashSet<>();
+		
+		allClubs = clubService.findAll();
+		runner = runnerService.findByPrincipal();
+		runnerClub = clubService.findAllByRunner(runner.getId());
+		allClubs.removeAll(runnerClub);
 		
 		result = new ModelAndView("entered/create");
 		result.addObject("entered", entered);

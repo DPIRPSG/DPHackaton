@@ -180,5 +180,13 @@ public class ClubService {
 		
 		return result;
 	}
+	
+	public Collection<Club> findAllByRunner(int runnerId){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllByRunner(runnerId);
+		
+		return result;
+	}
 
 }
