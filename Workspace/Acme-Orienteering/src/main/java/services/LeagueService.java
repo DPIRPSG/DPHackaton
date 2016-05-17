@@ -72,9 +72,9 @@ public class LeagueService {
 	
 	public League save(League league) {
 		Assert.notNull(league);
-		Assert.isTrue(league.getStartedMoment().compareTo(new Date()) >= 0);
 
 		if(league.getId() == 0) {
+			Assert.isTrue(league.getStartedMoment().compareTo(new Date()) >= 0, "La fecha de una carrera debe ser en el futuro");
 			Assert.isTrue(actorService.checkAuthority("ADMIN"),
 					"Only an administrator can save a league");
 			
@@ -82,6 +82,7 @@ public class LeagueService {
 			league = leagueRepository.save(league);
 			
 		} else {
+			Assert.isTrue(league.getStartedMoment().compareTo(league.getCreationMoment()) >= 0, "La fecha de una carrera debe ser en el futuro");
 			league = leagueRepository.save(league);
 		}
 		return league;
