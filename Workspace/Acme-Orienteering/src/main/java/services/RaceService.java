@@ -118,10 +118,6 @@ public class RaceService {
 		
 	}
 	
-	public void join(Race race){
-		
-	}
-	
 	public Race findOne(int raceId) {
 		Race result;
 		

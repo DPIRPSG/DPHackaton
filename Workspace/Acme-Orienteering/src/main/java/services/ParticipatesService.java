@@ -9,6 +9,8 @@ import org.springframework.util.Assert;
 
 import domain.Club;
 import domain.Participates;
+import domain.Race;
+import domain.Runner;
 import repositories.ParticipatesRepository;
 
 @Service
@@ -32,6 +34,9 @@ public class ParticipatesService {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private RaceService raceService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -71,6 +76,30 @@ public class ParticipatesService {
 		result = this.save(result);
 		
 		return result;
+	}
+	
+	public void joinRace(int raceId){
+		
+		/*
+		 * Faltan asserts como:
+		 * - Que el runner esté en el club.
+		 * - Que el runner no esté apuntado ya.
+		 */
+		
+		Assert.isTrue(actorService.checkAuthority("RUNNER"));
+		
+		Participates result;
+		Runner runner;
+		Race race;
+		
+		runner = runnerService.findByPrincipal();
+		race = raceService.findOne(raceId);
+		result = create();
+		result.setRace(race);
+		result.setResult(0);
+		result.setRunner(runner);
+		save(result);
+		
 	}
 	
 	/**
