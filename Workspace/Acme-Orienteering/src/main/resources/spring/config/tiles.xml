@@ -33,6 +33,7 @@
 		<value>/views/sponsor/tiles.xml</value>
 		<value>/views/finances/tiles.xml</value>
 		<value>/views/participates/tiles.xml</value>
+		<value>/views/classification/tiles.xml</value>
 		<value>/views/league/tiles.xml</value>
 		<value>/views/race/tiles.xml</value>
 		<value>/views/bulletin/tiles.xml</value>
