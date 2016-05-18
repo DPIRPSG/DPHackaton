@@ -141,10 +141,11 @@ public class ClubService {
 		return club;
 	}
 	
-	public void delete(Club club) {
+	public void delete(Club club, int managerId) {
 		Assert.notNull(club);
 		Assert.isTrue(club.getId() != 0);
 		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can delete clubes");
+		Manager preSave, postSave;
 		
 		if(actorService.checkAuthority("MANAGER")) {
 			Manager manager;
@@ -153,7 +154,19 @@ public class ClubService {
 			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
 		}
 		
-		clubRepository.delete(club);
+		preSave = managerService.findByPrincipal();
+		postSave = managerService.findOne(managerId);
+		
+		Assert.isTrue(postSave.getClub() == null, "El nuevo Manager no debe ser dueño de un club");
+		
+		preSave.setClub(null);
+		managerService.saveFromOthers(preSave);
+		
+		club.setManager(postSave);
+		club = clubRepository.save(club);
+		
+		postSave.setClub(club);
+		managerService.saveFromOthers(postSave);
 		
 	}
 	

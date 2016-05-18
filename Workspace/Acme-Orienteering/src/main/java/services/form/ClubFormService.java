@@ -77,10 +77,5 @@ public class ClubFormService {
 		
 		return result;
 	}
-
-	public void delete(ClubForm clubForm) {
-		Club club;
-		club = clubService.findOne(clubForm.getClubId());
-		clubService.delete(club);
-	}
+	
 }
