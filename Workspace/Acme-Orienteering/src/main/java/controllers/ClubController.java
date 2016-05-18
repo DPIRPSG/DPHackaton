@@ -82,7 +82,6 @@ public class ClubController extends AbstractController {
 		result.addObject("requestURI", "club/list.do");
 		result.addObject("clubes", clubes);
 		result.addObject("manager", manager);
-		result.addObject("manager", manager);
 		result.addObject("ranking", ranking);
 
 		return result;

@@ -17,6 +17,7 @@ import domain.Entered;
 import domain.FeePayment;
 import domain.Manager;
 import domain.Punishment;
+import domain.Referee;
 import domain.Runner;
 
 import repositories.ClubRepository;
@@ -40,6 +41,9 @@ public class ClubService {
 	
 	@Autowired
 	private RunnerService runnerService;
+	
+	@Autowired
+	private RefereeService refereeService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -92,6 +96,7 @@ public class ClubService {
 		
 		Manager manager;
 		Runner runner;
+		Referee referee;
 		Collection<Runner> runners;
 		boolean pertenece;
 		
@@ -110,6 +115,16 @@ public class ClubService {
 				}
 			}
 			Assert.isTrue(pertenece, "Only a runner of this club can save it");
+		} else if(actorService.checkAuthority("REFEREE")) {
+			referee = refereeService.findByPrincipal();
+			pertenece = false;
+			for(FeePayment f : club.getFeePayments()) {
+				if(f.getLeague().getReferee().getId() == referee.getId()) {
+					pertenece = true;
+					break;
+				}
+			}
+			Assert.isTrue(pertenece, "Only a referee of this club can save it");
 		}
 		
 		if(club.getId() == 0) {

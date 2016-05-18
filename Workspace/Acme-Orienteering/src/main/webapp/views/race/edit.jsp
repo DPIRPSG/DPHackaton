@@ -36,7 +36,7 @@
 	<acme:submit name="save" code="race.save"/>
 	
 	<jstl:if test="${race.id != 0}">
-		<acme:submit name="delete" code="race.delete"/>
+		<acme:submit_confirm name="delete" code="race.delete" codeConfirm="race.confirm.delete"/>
 	</jstl:if>
 	
 	<acme:cancel code="race.cancel" url="race/administrator/list.do"/>

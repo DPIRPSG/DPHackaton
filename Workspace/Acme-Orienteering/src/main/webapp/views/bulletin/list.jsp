@@ -27,6 +27,10 @@
 	</security:authorize>
 
 	<!-- Attributes -->
+	
+	<spring:message code="bulletin.actor" var="actorHeader" />
+	<acme:displayColumn title="${actorHeader}" sorteable="true" value="${row_Bulletin.actor.name} ${row_Bulletin.actor.surname} (${row_Bulletin.actor.userAccount.username})"/>
+	
 	<spring:message code="bulletin.title" var="titleHeader" />
 	<display:column title="${titleHeader}"
 		sortable="true">
