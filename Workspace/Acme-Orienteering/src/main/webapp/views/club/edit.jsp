@@ -26,10 +26,6 @@
 	<!-- Action buttons -->
 	<acme:submit name="save" code="club.save"/>
 	
-	<jstl:if test="${clubForm.clubId != 0}">
-		<acme:submit name="delete" code="club.delete"/>
-	</jstl:if>
-	
 	<acme:cancel code="club.cancel" url="club/manager/list.do"/>
 	
 </form:form>

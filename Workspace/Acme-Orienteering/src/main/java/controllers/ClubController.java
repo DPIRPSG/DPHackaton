@@ -10,6 +10,7 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,13 @@ public class ClubController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam (required = false) Integer leagueId) {
+	public ModelAndView list(@RequestParam (required = false) Integer leagueId, 
+			@RequestParam (required = false) String classification) {
 		ModelAndView result;
 		Collection<Club> clubes;
 		Manager manager;
+		Collection<ArrayList<Integer>> ranking;
+		
 		
 		if(actorService.checkAuthority("MANAGER")) {
 			manager = managerService.findByPrincipal();
@@ -62,15 +66,23 @@ public class ClubController extends AbstractController {
 		}
 
 		if(leagueId != null) {
-			clubes = clubService.findAllByLeagueId(leagueId);
+			if(classification.equals("true")) {
+				clubes = clubService.findAllByLeagueId(leagueId);
+				ranking = clubService.calculateRankingByLeague(leagueId);
+			} else {
+				clubes = clubService.findAllByLeagueId(leagueId);
+				ranking = null;
+			}
 		} else {
 			clubes = clubService.findAll();
+			ranking = null;
 		}
 		
 		result = new ModelAndView("club/list");
 		result.addObject("requestURI", "club/list.do");
 		result.addObject("clubes", clubes);
 		result.addObject("manager", manager);
+		result.addObject("ranking", ranking);
 
 		return result;
 	}

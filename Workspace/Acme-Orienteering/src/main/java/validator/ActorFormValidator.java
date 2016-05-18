@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import security.TypeOfAuthority;
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
@@ -38,7 +39,7 @@ public class ActorFormValidator implements Validator{
 			
 		}
 		
-		if(actActor == null){ // Creation moment
+		if(actActor == null || adminRegisterOtherUser(actActor, actor)){ // Creation moment
 			actUAccount = null;
 			if(actor.getPassword() == null){
 				errors.rejectValue("password", "javax.validation.constraints.NotNull.message");
@@ -46,8 +47,9 @@ public class ActorFormValidator implements Validator{
 			if(actor.getRepeatedPassword() == null){
 				errors.rejectValue("repeatedPassword", "javax.validation.constraints.NotNull.message");
 			}
-			if(actor.getAcceptTerm() != true){
-				errors.rejectValue("acceptTerm", "acme.validation.notSelected");				
+			if(!adminRegisterOtherUser(actActor, actor) ){
+				if(actor.getAcceptTerm() != true)
+					errors.rejectValue("acceptTerm", "acme.validation.notSelected");
 			}	
 		}else{
 			actUAccount = actActor.getUserAccount();
@@ -55,7 +57,9 @@ public class ActorFormValidator implements Validator{
 		
 		// Match passwords
 		if(actor.getPassword() != null && actor.getRepeatedPassword() != null){
-			if(actor.getPassword().equals("") && actActor != null && actor.getPassword().equals(actor.getRepeatedPassword())){
+			if(actor.getPassword().equals("") &&
+					! (actActor == null || adminRegisterOtherUser(actActor, actor))
+					&& actor.getPassword().equals(actor.getRepeatedPassword())){
 				// No error
 			}else if (actor.getPassword().length() < 5 || actor.getPassword().length() > 32) {
 				errors.rejectValue("password", "acme.validation.sizeNotMatch.standard");
@@ -69,9 +73,8 @@ public class ActorFormValidator implements Validator{
 		
 		// Username availability
 		if(uAccountUsername != null){
-			if(!uAccountUsername.equals(actUAccount)){
+			if(!uAccountUsername.equals(actUAccount))
 				errors.rejectValue("username", "acme.validation.usernameInUse");
-			}
 		}
 
 	}
@@ -80,6 +83,21 @@ public class ActorFormValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
 		return ActorForm.class.isAssignableFrom(clazz);
+	}
+	
+	private boolean adminRegisterOtherUser(Actor actActor, ActorForm actor) {
+		boolean result;
+
+		try {
+			result = TypeOfAuthority.transformAuthority(
+					actActor.getUserAccount().getAuthorities()).equals(
+					TypeOfAuthority.ADMIN);
+			result = result
+					&& !actor.getAuthority().equals(TypeOfAuthority.ADMIN);
+		} catch (Exception e) {
+			result = false;
+		}
+		return result;
 	}
 
 

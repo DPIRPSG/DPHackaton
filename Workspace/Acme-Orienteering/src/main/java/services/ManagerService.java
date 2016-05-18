@@ -115,6 +115,29 @@ public class ManagerService {
 		
 		return result;
 	}
+
+	public Manager findOne(int managerId) {
+		Manager result;
+		
+		result = managerRepository.findOne(managerId);
+		
+		return result;
+	}
+
+	public Collection<Manager> findAllWithoutClub() {
+		Collection<Manager> result, managers;
+		
+		managers = managerRepository.findAll();
+		result = new ArrayList<Manager>();
+		
+		for(Manager m : managers) {
+			if(m.getClub() == null) {
+				result.add(m);
+			}
+		}
+		
+		return result;
+	}
 	
 
 }

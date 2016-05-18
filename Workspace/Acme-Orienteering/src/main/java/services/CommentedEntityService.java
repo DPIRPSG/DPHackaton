@@ -29,7 +29,7 @@ public class CommentedEntityService {
 	public CommentedEntity findOne(int commentedEntityId){
 		CommentedEntity result;
 		
-		result = commentedEntityRepository.findOne(commentedEntityId);
+		result = commentedEntityRepository.findOneById(commentedEntityId);
 		
 		return result;
 	}

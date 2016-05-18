@@ -49,8 +49,8 @@ public class CurriculumActorController extends AbstractController {
 		boolean isMine;
 		
 		skills = new ArrayList<String>();
-		likes = new ArrayList<String>();;
-		dislikes = new ArrayList<String>();;
+		likes = new ArrayList<String>();
+		dislikes = new ArrayList<String>();
 				
 		if(actorId == null){
 			actor = actorService.findByPrincipal();

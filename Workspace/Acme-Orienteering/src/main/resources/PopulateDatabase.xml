@@ -78,6 +78,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -166,6 +178,33 @@
 			</list>
 		</property>
 		<property name="curriculum" ref="curriculum1"/>
+	</bean>
+	
+	<bean id="manager2" class="domain.Manager">
+		<property name="name" value="Ruben"/>
+		<property name="surname" value="Martinez"/>
+		<property name="phone" value="652147963"/>
+		<property name="nif" value="74654321B"/>
+		<property name="userAccount" ref="userAccount6"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder16"/>
+				<ref bean="folder17"/>
+				<ref bean="folder18"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Runner -->
@@ -450,6 +489,36 @@
 		</property>
 	</bean>
 	
+	<bean id="folder16" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder17" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder18" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Club -->
 	
 	<bean id="club1" class="domain.Club">
@@ -522,6 +591,7 @@
 		<property name="description" value="Our club have obtain the best classifications of 2015!"/>
 		<property name="creationMoment" value="2016/01/01 00:16"/>
 		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
 	</bean>
 	
 	<!-- Category -->
@@ -573,8 +643,8 @@
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
-		<property name="description" value="1"/>
-		<property name="name" value="30"/>
+		<property name="description" value="Carrera de orientación perteneciente a la liga"/>
+		<property name="name" value="Primera carrera de la liga"/>
 		<property name="moment" value="2016/02/03 12:12"/>
 		<property name="classifications">
 			<list>
