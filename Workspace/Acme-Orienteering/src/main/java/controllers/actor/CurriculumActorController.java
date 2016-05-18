@@ -46,8 +46,8 @@ public class CurriculumActorController extends AbstractController {
 		Collection<String> skills, likes, dislikes;
 		
 		skills = new ArrayList<String>();
-		likes = new ArrayList<String>();;
-		dislikes = new ArrayList<String>();;
+		likes = new ArrayList<String>();
+		dislikes = new ArrayList<String>();
 				
 		actor = actorService.findByPrincipal();
 		curriculum = actor.getCurriculum();
