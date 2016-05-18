@@ -163,7 +163,7 @@ public class ClubService {
 		managerService.saveFromOthers(preSave);
 		
 		club.setManager(postSave);
-		club = this.save(club);
+		club = clubRepository.save(club);
 		
 		postSave.setClub(club);
 		managerService.saveFromOthers(postSave);

@@ -142,11 +142,15 @@ public class ClubManagerController extends AbstractController {
 	public ModelAndView delete(DeleteClubForm clubForm, BindingResult binding) {
 		ModelAndView result;
 
-		try {			
-			deleteClubFormService.delete(clubForm);
-			result = new ModelAndView("redirect:list.do");						
-		} catch (Throwable oops) {
-			result = createDeleteModelAndView(clubForm, "club.commit.error");
+		if (binding.hasErrors()) {
+			result = createDeleteModelAndView(clubForm);
+		} else {
+			try {
+				deleteClubFormService.delete(clubForm);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createDeleteModelAndView(clubForm, "club.commit.error");
+			}
 		}
 
 		return result;
