@@ -87,13 +87,33 @@ public class ParticipatesService {
 		 */
 		
 		Assert.isTrue(actorService.checkAuthority("RUNNER"));
-		
+				
 		Participates result;
 		Runner runner;
 		Race race;
 		
+		Collection<Participates> allParticipatesByRunner;
+		Boolean flag;
+		
 		runner = runnerService.findByPrincipal();
 		race = raceService.findOne(raceId);
+		
+		// La query no funciona o no sé cómo usarla
+		allParticipatesByRunner = findAllByRunnerIdAndRaceId(runner.getId(), raceId, 0, 0);
+		flag = false;
+		
+		for(Participates p:allParticipatesByRunner){
+			System.out.println("Participates");
+			System.out.println(p.getRace());
+			System.out.println(p.getRunner());
+			if(p.getRace().getId()==raceId){
+				flag = true;
+				break;
+			}
+		}
+		
+		Assert.isTrue(!flag);
+		
 		result = create();
 		result.setRace(race);
 		result.setResult(0);
