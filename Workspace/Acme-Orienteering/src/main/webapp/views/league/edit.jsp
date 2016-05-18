@@ -43,7 +43,7 @@
 	<acme:submit name="save" code="league.save"/>
 	
 	<jstl:if test="${leagueForm.leagueId != 0}">
-		<acme:submit name="delete" code="league.delete"/>
+		<acme:submit_confirm name="delete" code="league.delete" codeConfirm="league.confirm.delete"/>
 	</jstl:if>
 	
 	<acme:cancel code="league.cancel" url="league/administrator/list.do"/>

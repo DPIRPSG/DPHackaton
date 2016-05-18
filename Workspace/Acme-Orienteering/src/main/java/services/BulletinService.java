@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Actor;
 import domain.Bulletin;
 import domain.Club;
 import domain.Entered;
@@ -52,6 +53,9 @@ public class BulletinService {
 				"Only a manager or a runner can create a Bulletin");
 		Bulletin result;
 		Club club;
+		Actor actor;
+		
+		actor = actorService.findByPrincipal();
 		
 		club = null;
 		
@@ -77,6 +81,7 @@ public class BulletinService {
 		result = new Bulletin();
 		result.setClub(club);
 		result.setCreationMoment(new Date());
+		result.setActor(actor);
 		
 		return result;
 	}
@@ -86,6 +91,9 @@ public class BulletinService {
 		Assert.isTrue(actorService.checkAuthority("MANAGER") || actorService.checkAuthority("RUNNER"),
 				"Only a manager or a runner can save a Bulletin");
 		Club club;
+		Actor actor;
+		
+		actor = actorService.findByPrincipal();
 		
 		club = null;
 		
@@ -110,6 +118,7 @@ public class BulletinService {
 		
 		bulletin.setClub(club);
 		bulletin.setCreationMoment(new Date());
+		bulletin.setActor(actor);
 		
 		bulletin = bulletinRepository.save(bulletin);
 		
