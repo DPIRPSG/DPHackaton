@@ -85,7 +85,8 @@
 		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
 	</display:column>
 
-	<display:column>
+	<spring:message code="league.comments" var="commentsHeader" />
+	<display:column title="${commentsHeader }">
 		<a href="comment/list.do?commentedEntityId=${row_League.id}"> <spring:message
 				code="league.comments" />
 		</a>

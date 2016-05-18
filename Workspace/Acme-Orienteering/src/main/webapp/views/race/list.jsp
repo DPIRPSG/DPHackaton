@@ -55,7 +55,8 @@
 		<jstl:out value="${row_Race.league.description}"></jstl:out>
 	</display:column>
 
-	<display:column>
+	<spring:message code="race.comments" var="commentsHeader" />
+	<display:column title="${commentsHeader }">
 		<a href="comment/list.do?commentedEntityId=${row_Race.id}"> <spring:message
 				code="race.comments" />
 		</a>
