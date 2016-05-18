@@ -10,6 +10,8 @@
 
 package controllers.manager;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ClubService;
 import services.ManagerService;
 import services.form.ClubFormService;
+import services.form.DeleteClubFormService;
 import controllers.AbstractController;
 import domain.Club;
 import domain.Manager;
 import domain.form.ClubForm;
+import domain.form.DeleteClubForm;
 
 @Controller
 @RequestMapping("/club/manager")
@@ -40,6 +44,9 @@ public class ClubManagerController extends AbstractController {
 	
 	@Autowired
 	private ClubFormService clubFormService;
+	
+	@Autowired
+	private DeleteClubFormService deleteClubFormService;
 	
 	@Autowired
 	private ManagerService managerService;
@@ -118,16 +125,28 @@ public class ClubManagerController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int clubId) {
+		ModelAndView result;
+		DeleteClubForm clubForm;
+
+		clubForm = deleteClubFormService.findOne(clubId);		
+		Assert.notNull(clubForm);
+		result = createDeleteModelAndView(clubForm);
+
+		return result;
+	}
 			
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(ClubForm clubForm, BindingResult binding) {
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(DeleteClubForm clubForm, BindingResult binding) {
 		ModelAndView result;
 
 		try {			
-			clubFormService.delete(clubForm);
+			deleteClubFormService.delete(clubForm);
 			result = new ModelAndView("redirect:list.do");						
 		} catch (Throwable oops) {
-			result = createEditModelAndView(clubForm, "club.commit.error");
+			result = createDeleteModelAndView(clubForm, "club.commit.error");
 		}
 
 		return result;
@@ -149,6 +168,28 @@ public class ClubManagerController extends AbstractController {
 		result = new ModelAndView("club/edit");
 		result.addObject("clubForm", clubForm);
 		result.addObject("message", message);
+
+		return result;
+	}
+	
+	protected ModelAndView createDeleteModelAndView(DeleteClubForm deleteClubForm) {
+		ModelAndView result;
+
+		result = createDeleteModelAndView(deleteClubForm, null);
+		
+		return result;
+	}	
+	
+	protected ModelAndView createDeleteModelAndView(DeleteClubForm deleteClubForm, String message) {
+		ModelAndView result;
+		Collection<Manager> managers;
+		
+		managers = managerService.findAllWithoutClub();
+		
+		result = new ModelAndView("club/delete");
+		result.addObject("deleteClubForm", deleteClubForm);
+		result.addObject("message", message);
+		result.addObject("managers", managers);
 
 		return result;
 	}

@@ -126,4 +126,11 @@
 			</a></b>
 		</div>
 	</jstl:if>
+	<jstl:if test="${clubes != null }">
+		<div>
+			<b><a href="club/manager/delete.do?clubId=${clubes.id }"> <spring:message
+						code="club.delete" />
+			</a></b>
+		</div>
+	</jstl:if>
 </security:authorize>
