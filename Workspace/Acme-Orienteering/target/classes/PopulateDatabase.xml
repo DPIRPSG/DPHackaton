@@ -574,8 +574,8 @@
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
-		<property name="description" value="1"/>
-		<property name="name" value="30"/>
+		<property name="description" value="Carrera de orientación perteneciente a la liga"/>
+		<property name="name" value="Primera carrera de la liga"/>
 		<property name="moment" value="2016/02/03 12:12"/>
 		<property name="classifications">
 			<list>
