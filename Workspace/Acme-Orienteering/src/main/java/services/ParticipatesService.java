@@ -9,6 +9,8 @@ import org.springframework.util.Assert;
 
 import domain.Club;
 import domain.Participates;
+import domain.Race;
+import domain.Runner;
 import repositories.ParticipatesRepository;
 
 @Service
@@ -32,6 +34,9 @@ public class ParticipatesService {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private RaceService raceService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -71,6 +76,50 @@ public class ParticipatesService {
 		result = this.save(result);
 		
 		return result;
+	}
+	
+	public void joinRace(int raceId){
+		
+		/*
+		 * Faltan asserts como:
+		 * - Que el runner esté en el club.
+		 * - Que el runner no esté apuntado ya.
+		 */
+		
+		Assert.isTrue(actorService.checkAuthority("RUNNER"));
+				
+		Participates result;
+		Runner runner;
+		Race race;
+		
+		Collection<Participates> allParticipatesByRunner;
+		Boolean flag;
+		
+		runner = runnerService.findByPrincipal();
+		race = raceService.findOne(raceId);
+		
+		// La query no funciona o no sé cómo usarla
+		allParticipatesByRunner = findAllByRunnerIdAndRaceId(runner.getId(), raceId, 0, 0);
+		flag = false;
+		
+		for(Participates p:allParticipatesByRunner){
+			System.out.println("Participates");
+			System.out.println(p.getRace());
+			System.out.println(p.getRunner());
+			if(p.getRace().getId()==raceId){
+				flag = true;
+				break;
+			}
+		}
+		
+		Assert.isTrue(!flag);
+		
+		result = create();
+		result.setRace(race);
+		result.setResult(0);
+		result.setRunner(runner);
+		save(result);
+		
 	}
 	
 	/**
