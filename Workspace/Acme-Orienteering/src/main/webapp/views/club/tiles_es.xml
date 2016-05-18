@@ -16,4 +16,9 @@
 		<put-attribute name="body" value="/views/club/edit.jsp" />
 	</definition>
 	
+	<definition name="club/delete" extends="master.page">	
+		<put-attribute name="title" value="Borrar un Club" />
+		<put-attribute name="body" value="/views/club/delete.jsp" />
+	</definition>
+	
 </tiles-definitions>

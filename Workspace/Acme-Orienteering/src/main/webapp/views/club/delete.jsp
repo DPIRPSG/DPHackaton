@@ -11,20 +11,28 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="club/manager/edit.do" modelAttribute="clubForm">
+<form:form action="club/manager/delete.do" modelAttribute="deleteClubForm">
 	<!-- Hidden Attributes -->
 	<form:hidden path="clubId"/>
 
 	<!-- Editable Attributes -->
 	
-	<acme:textbox code="club.name" path="name"/>
-	
-	<acme:textarea code="club.description" path="description"/>
-	
-	<acme:textarea code="club.pictures" path="pictures"/>
-
+	<form:label path="managerId">
+			<spring:message code="club.manager" />
+		</form:label>
+	<form:select name="manager" path="managerId">
+		    <jstl:forEach var="manager" items="${managers}" >
+		        <form:option value="${manager.id}"><jstl:out value="${manager.name} ${manager.surname}"/></form:option>
+		    </jstl:forEach>
+		</form:select>
+		<form:errors path="managerId" cssClass="error" />
+		
+	<br/>
 	<!-- Action buttons -->
-	<acme:submit name="save" code="club.save"/>
+	
+	<jstl:if test="${deleteClubForm.clubId != 0}">
+		<acme:submit name="delete" code="club.delete"/>
+	</jstl:if>
 	
 	<acme:cancel code="club.cancel" url="club/manager/list.do"/>
 	
