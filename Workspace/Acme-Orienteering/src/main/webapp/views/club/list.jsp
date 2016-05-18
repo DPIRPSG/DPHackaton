@@ -54,9 +54,11 @@
 		</display:column>
 
 		<spring:message code="club.manager" var="managerHeader" />
-		<acme:displayColumn
-			value="${row_Club.manager.name} ${row_Club.manager.surname }"
-			title="${managerHeader}" />
+		<display:column title="${managerHeader }" sortable="true">
+			<a href="actor/list.do?actorId=${row_Club.manager.id}"> <jstl:out
+					value="${row_Club.manager.name} ${row_Club.manager.surname} (${row_Club.manager.userAccount.username})" />
+			</a>
+		</display:column>
 
 		<spring:message code="club.runners" var="runnersHeader" />
 		<display:column title="${runnersHeader}" sortable="false">

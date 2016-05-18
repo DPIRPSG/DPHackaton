@@ -51,6 +51,7 @@
 		<security:intercept-url pattern="/race/list.do" access="permitAll" />
 		<security:intercept-url pattern="/punishment/list.do" access="permitAll" />
 		<security:intercept-url pattern="/comment/list.do" access="permitAll" />
+		<security:intercept-url pattern="/actor/list.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/folder/actor/*" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/message/actor/*" access="isAuthenticated()" />
