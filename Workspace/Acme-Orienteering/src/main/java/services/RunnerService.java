@@ -152,6 +152,14 @@ public class RunnerService {
 		return result;
 	}
 	
+	public Collection<Runner> findAllWhoCanJoinARace(int raceId){
+		Collection<Runner> result;
+		
+		result = runnerRepository.findAllWhoCanJoinARace(raceId);
+		
+		return result;
+	}
+	
 	public Club getClub(){
 		Club res;
 		Runner runner;
