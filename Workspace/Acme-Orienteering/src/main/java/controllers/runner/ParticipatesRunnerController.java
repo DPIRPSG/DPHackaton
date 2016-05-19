@@ -45,6 +45,21 @@ public class ParticipatesRunnerController extends AbstractController{
 	}
 	
 	//Creation ----------------------------------------------------------
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public ModelAndView join(@RequestParam int raceId){
+		ModelAndView result;
+		
+		try{
+			participatesService.joinRace(raceId);
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "participates.join.ok");
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "participates.join.error");
+		}
+		
+		return result;
+	}
 	
 	//Edition ----------------------------------------------------------
 	

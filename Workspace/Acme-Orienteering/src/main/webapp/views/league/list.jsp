@@ -84,6 +84,14 @@
 	<display:column title="${financesHeader}" sortable="false">
 		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
 	</display:column>
+	
+	<security:authorize access="hasRole('MANAGER')">
+		<display:column>
+			<a href="feePayment/manager/create.do?leagueId=${row_League.id}"> <spring:message
+					code="league.feePayment" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 	<spring:message code="league.comments" var="commentsHeader" />
 	<display:column title="${commentsHeader }">

@@ -77,6 +77,13 @@
 	</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('RUNNER')">
+		<spring:message code="race.join" var="joinHeader" />
+		<display:column title="${joinHeader}" sortable="true">
+			<acme:link href="participates/runner/join.do?raceId=${row_Race.id}" code="race.join"/>
+		</display:column>
+	</security:authorize>
+	
 </display:table>
 
 

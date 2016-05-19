@@ -127,5 +127,13 @@ public class LeagueService {
 				
 		return result;
 	}
+	
+	public Collection<League> findAllByRefereeAndClubId(Integer refereeId, Integer clubId) {
+		Collection<League> result;
+		
+		result = leagueRepository.findAllByRefereeAndClubId(refereeId, clubId);
+				
+		return result;
+	}
 
 }
