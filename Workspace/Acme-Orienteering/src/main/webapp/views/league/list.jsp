@@ -93,7 +93,8 @@
 		</display:column>
 	</security:authorize>
 
-	<display:column>
+	<spring:message code="league.comments" var="commentsHeader" />
+	<display:column title="${commentsHeader }">
 		<a href="comment/list.do?commentedEntityId=${row_League.id}"> <spring:message
 				code="league.comments" />
 		</a>
