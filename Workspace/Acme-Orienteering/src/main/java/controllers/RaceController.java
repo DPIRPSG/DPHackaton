@@ -19,10 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.ClubService;
 import services.LeagueService;
 import services.RaceService;
+import services.RunnerService;
 import controllers.AbstractController;
+import domain.Club;
 import domain.Race;
+import domain.Runner;
 
 @Controller
 @RequestMapping("/race")
@@ -35,6 +40,15 @@ public class RaceController extends AbstractController {
 	
 	@Autowired
 	private LeagueService leagueService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private RunnerService runnerService;
+	
+	@Autowired
+	private ClubService clubService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -49,6 +63,16 @@ public class RaceController extends AbstractController {
 			@RequestParam(required = false) Integer leagueId) {
 		ModelAndView result;
 		Collection<Race> racing;
+		Runner runner;
+		Club club;
+		
+		runner = null;
+		club = null;
+		
+		if(actorService.checkAuthority("RUNNER")) {
+			runner = runnerService.findByPrincipal();
+			club = clubService.findOneByRunnerId(runner.getId());
+		}
 
 		if(clubId != null) {
 			racing = raceService.findAllByClubId(clubId);
@@ -61,7 +85,9 @@ public class RaceController extends AbstractController {
 		result = new ModelAndView("race/list");
 		result.addObject("requestURI", "race/list.do");
 		result.addObject("racing", racing);
-
+		result.addObject("runner", runner);
+		result.addObject("club", club);
+		
 		return result;
 	}
 
