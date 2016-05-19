@@ -30,6 +30,8 @@
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('RUNNER')">
@@ -60,6 +62,10 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="curriculum/actor/list.do"><spring:message code="master.page.actor.curriculum" /></a></li>
 		</security:authorize>
@@ -75,7 +81,6 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
-			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="folder/actor/list.do"><spring:message code="master.page.messages" /></a></li>
 
 			<li>
