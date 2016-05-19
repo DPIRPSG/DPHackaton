@@ -102,6 +102,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -203,6 +215,33 @@
 				<ref bean="folder16"/>
 				<ref bean="folder17"/>
 				<ref bean="folder18"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager3" class="domain.Manager">
+		<property name="name" value="Javier"/>
+		<property name="surname" value="García"/>
+		<property name="phone" value="689741157"/>
+		<property name="nif" value="85274185L"/>
+		<property name="userAccount" ref="userAccount8"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder22"/>
+				<ref bean="folder23"/>
+				<ref bean="folder24"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -598,6 +637,36 @@
 		</property>
 	</bean>
 	
+	<bean id="folder22" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder23" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder24" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Club -->
 	
 	<bean id="club1" class="domain.Club">
@@ -761,6 +830,39 @@
 		<property name="finances">
 			<list>
 				<ref bean="finances1"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league2" class="domain.League">
+		<property name="description" value="The most important junior european league!"/>
+		<property name="name" value="First Junior Orienteering League (FJOL)"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/11/06 13:00"/>
+		<property name="startedMoment" value="2016/02/02 10:30"/>
+		<property name="amount" value="150"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
 			</list>
 		</property>
 		<property name="comments">

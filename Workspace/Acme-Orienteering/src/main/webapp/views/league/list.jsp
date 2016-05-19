@@ -84,22 +84,23 @@
 	<display:column title="${financesHeader}" sortable="false">
 		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
 	</display:column>
-	
+
 	<security:authorize access="hasRole('MANAGER')">
-		<display:column>
-			<jstl:set var="contains" value="false" />
-			<jstl:forEach var="item" items="${clubLeagues}">
-			  <jstl:if test="${item.id eq row_League.id}">
-			    <jstl:set var="contains" value="true" />
-			  </jstl:if>
+		<jstl:if test="${manager.club.id != null}">
+			<display:column>
+			<jstl:set value="false" var="pagado" />
+			<jstl:forEach items="${row_League.feePayments}" var="fee">
+				<jstl:if test="${fee.club.id == manager.club.id }">
+					<jstl:set value="true" var="pagado" />
+				</jstl:if>
 			</jstl:forEach>
-<%-- 			<jstl:if test="${!fn:contains(clubLeagues, row_League) && clubLeagues != null}"> --%>
-			<jstl:if test="${!contains}">
-				<a href="feePayment/manager/create.do?leagueId=${row_League.id}"> <spring:message
-						code="league.feePayment" />
+			<jstl:if test="${pagado != true}">
+				<a href="feePayment/manager/create.do?leagueId=${row_League.id}">
+					<spring:message code="league.feePayment" />
 				</a>
 			</jstl:if>
 		</display:column>
+		</jstl:if>
 	</security:authorize>
 
 	<spring:message code="league.comments" var="commentsHeader" />
