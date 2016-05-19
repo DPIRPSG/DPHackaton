@@ -87,14 +87,23 @@
 	
 	<security:authorize access="hasRole('MANAGER')">
 		<display:column>
-			<a href="feePayment/manager/create.do?leagueId=${row_League.id}"> <spring:message
-					code="league.feePayment" />
-			</a>
+			<jstl:set var="contains" value="false" />
+			<jstl:forEach var="item" items="${clubLeagues}">
+			  <jstl:if test="${item.id eq row_League.id}">
+			    <jstl:set var="contains" value="true" />
+			  </jstl:if>
+			</jstl:forEach>
+<%-- 			<jstl:if test="${!fn:contains(clubLeagues, row_League) && clubLeagues != null}"> --%>
+			<jstl:if test="${!contains}">
+				<a href="feePayment/manager/create.do?leagueId=${row_League.id}"> <spring:message
+						code="league.feePayment" />
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 
 	<spring:message code="league.comments" var="commentsHeader" />
-	<display:column title="${commentsHeader }">
+	<display:column title="${commentsHeader}">
 		<a href="comment/list.do?commentedEntityId=${row_League.id}"> <spring:message
 				code="league.comments" />
 		</a>

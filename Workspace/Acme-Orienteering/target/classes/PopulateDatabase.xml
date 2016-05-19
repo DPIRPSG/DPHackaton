@@ -90,6 +90,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="runner3" />
+		<property name="password" value="edc6d81da126fb64a40a903f0f3dce10" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="RUNNER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -283,6 +295,43 @@
 			</list>
 		</property>
 		<property name="curriculum" ref="curriculum4"/>
+	</bean>
+	
+	<bean id="runner3" class="domain.Runner">
+		<property name="name" value="Antonio"/>
+		<property name="surname" value="Pozo"/>
+		<property name="phone" value="452814416"/>
+		<property name="nif" value="74955482A"/>
+		<property name="userAccount" ref="userAccount7"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder19"/>
+				<ref bean="folder20"/>
+				<ref bean="folder21"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+				<ref bean="entered3"/>
+			</list>
+		</property>
+		<property name="participates">
+			<list>
+				<ref bean="participates2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Referee -->
@@ -519,6 +568,36 @@
 		</property>
 	</bean>
 	
+	<bean id="folder19" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder20" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder21" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Club -->
 	
 	<bean id="club1" class="domain.Club">
@@ -564,6 +643,46 @@
 		</property>
 	</bean>
 	
+	<bean id="club2" class="domain.Club">
+		<property name="description" value="El mejor club de orientación de Triana y del mundo."/>
+		<property name="name" value="Triana OC"/>
+		<property name="pictures">
+			<list>
+				<value>http://deportes-aventura.es/wp-content/uploads/2013/07/Orientaci%C3%B3n-deporte-de-b%C3%BAsqueda-2.jpg</value>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/01/16 13:05"/>
+		<property name="deleted" value="false"/>
+		<property name="manager" ref="manager2"/>
+		<property name="bulletins">
+			<list>
+			</list>
+		</property>
+		<property name="classifications">
+			<list>
+				<ref bean="classification2"/>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+				<ref bean="entered3"/>
+			</list>
+		</property>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+				<ref bean="feePayment2"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Entered -->
 	
 	<bean id="entered1" class="domain.Entered">
@@ -582,6 +701,15 @@
 <!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner2"/>
 		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="entered3" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="true"/>
+		<property name="registerMoment" value="2015/12/05 12:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
+		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club2"/>
 	</bean>
 	
 	<!-- Bulletin -->
@@ -621,6 +749,7 @@
 		<property name="feePayments">
 			<list>
 				<ref bean="feePayment1"/>
+				<ref bean="feePayment2"/>
 			</list>
 		</property>
 		<property name="racing">
@@ -649,6 +778,7 @@
 		<property name="classifications">
 			<list>
 				<ref bean="classification1"/>
+				<ref bean="classification2"/>
 			</list>
 		</property>
 		<property name="category" ref="category1"/>
@@ -656,6 +786,7 @@
 		<property name="participates">
 			<list>
 				<ref bean="participates1"/>
+				<ref bean="participates2"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -668,9 +799,16 @@
 	
 	<bean id="classification1" class="domain.Classification">
 		<property name="position" value="1"/>
-		<property name="points" value="30"/>
+		<property name="points" value="35"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="classification2" class="domain.Classification">
+		<property name="position" value="2"/>
+		<property name="points" value="18"/>
+		<property name="race" ref="race1"/>
+		<property name="club" ref="club2"/>
 	</bean>
 	
 	<!-- Punishment -->
@@ -692,6 +830,14 @@
 		<property name="club" ref="club1"/>
 	</bean>
 	
+	<bean id="feePayment2" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="amount" value="350"/>
+		<property name="paymentMoment" value="2016/02/05 12:12"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club2"/>
+	</bean>
+	
 	<!-- CreditCard -->
 	
 	<bean id="creditCard1" class="domain.CreditCard">
@@ -709,6 +855,12 @@
 		<property name="result" value="65"/>
 		<property name="race" ref="race1"/>
 		<property name="runner" ref="runner1"/>
+	</bean>
+	
+	<bean id="participates2" class="domain.Participates">
+		<property name="result" value="70"/>
+		<property name="race" ref="race1"/>
+		<property name="runner" ref="runner3"/>
 	</bean>
 	
 	<!-- Sponsor -->

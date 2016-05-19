@@ -51,8 +51,3 @@
 
 <!-- Action links -->
 
-<security:authorize access="hasRole('ADMIN')">
-	<div>
-		<b><acme:link href="sponsor/administrator/create.do" code="sponsor.create"/></b>
-	</div>
-</security:authorize>
