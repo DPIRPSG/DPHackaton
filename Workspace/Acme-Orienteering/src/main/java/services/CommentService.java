@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -129,9 +130,22 @@ public class CommentService {
 	 */
 	
 	public Collection<Comment> findAllByCommentedEntityId(int commentedEntityId){
+		Collection<Comment> preResult;
 		Collection<Comment> result;
+		CommentedEntity commentedEntity;
 		
-		result = commentRepository.findAllByCommentedEntityId(commentedEntityId);
+//		result = commentRepository.findAllByCommentedEntityId(commentedEntityId);
+		commentedEntity = commentedEntityService.findOne(commentedEntityId);
+		
+		preResult = commentedEntity.getComments();
+		
+		result = new ArrayList<>();
+		
+		for(Comment c: preResult){
+			if(!c.getDeleted()){
+				result.add(c);
+			}
+		}
 		
 		return result;
 	}
