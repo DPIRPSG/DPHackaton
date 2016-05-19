@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+<!-- 	<definition name="participates/editResult" extends="master.page">	 -->
+<!-- 		<put-attribute name="title" value="Edit runner result" /> -->
+<!-- 		<put-attribute name="body" value="/views/participates/editResult.jsp" /> -->
+<!-- 	</definition> -->
+	
+	<definition name="classification/list" extends="master.page">	
+		<put-attribute name="title" value="List: Club Result" />
+		<put-attribute name="body" value="/views/classification/list.jsp" />
+	</definition>
+	
+</tiles-definitions>
