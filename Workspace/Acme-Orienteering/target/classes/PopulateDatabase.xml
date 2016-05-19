@@ -838,6 +838,39 @@
 		</property>
 	</bean>
 	
+	<bean id="league2" class="domain.League">
+		<property name="description" value="The most important junior european league!"/>
+		<property name="name" value="First Junior Orienteering League (FJOL)"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/11/06 13:00"/>
+		<property name="startedMoment" value="2016/02/02 10:30"/>
+		<property name="amount" value="150"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
