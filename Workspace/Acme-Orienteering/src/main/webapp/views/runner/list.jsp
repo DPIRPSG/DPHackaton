@@ -38,11 +38,18 @@
 		<jstl:out value="${row_Runner.phone}"/>
 	</display:column>
 	
-	<spring:message code="runner.nif" var="nifHeader" />
+	<security:authorize access="hasRole('ADMIN') || hasRole('MANAGER') || hasRole('RUNNER')">
+		<spring:message code="runner.nif" var="nifHeader" />
 	<display:column title="${nifHeader}"
 		sortable="true">
-		<jstl:out value="${row_Runner.nif}"/>
+		<jstl:if test="${esAdmin || manager.club.id == clubId || runner.id == row_Runner.id}">
+			<jstl:out value="${row_Runner.nif}"/>
+		</jstl:if>
+		<jstl:if test="${!(esAdmin || manager.club.id == clubId || runner.id == row_Runner.id)}">
+			<spring:message code="runner.nif.notAccess"/>
+		</jstl:if>
 	</display:column>
+	</security:authorize>
 	
 	<spring:message code="runner.curriculum.statement" var="statementHeader" />
 	<display:column title="${statementHeader}"

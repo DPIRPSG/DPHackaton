@@ -21,9 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.LeagueService;
+import services.ManagerService;
 import controllers.AbstractController;
-import domain.Actor;
 import domain.League;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/league")
@@ -37,6 +38,9 @@ public class LeagueController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private ManagerService managerService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public LeagueController() {
@@ -49,6 +53,7 @@ public class LeagueController extends AbstractController {
 	public ModelAndView list(@RequestParam (required=false) Integer clubId) {
 		ModelAndView result;
 		Collection<League> leagues;
+		Manager manager;
 		
 		if(clubId != null) {
 			leagues = leagueService.findAllByClubId(clubId);
@@ -61,6 +66,8 @@ public class LeagueController extends AbstractController {
 		result.addObject("leagues", leagues);
 		if(actorService.checkAuthority("MANAGER")){
 			Collection<League> clubLeagues;
+			
+			manager = managerService.findByPrincipal();
 //			Actor referee;
 			
 //			referee = actorService.findByPrincipal();
@@ -68,6 +75,7 @@ public class LeagueController extends AbstractController {
 			clubLeagues = leagueService.findAllByClubId(clubId);
 			
 			result.addObject("clubLeagues", clubLeagues);
+			result.addObject("manager", manager);
 		}
 
 		return result;

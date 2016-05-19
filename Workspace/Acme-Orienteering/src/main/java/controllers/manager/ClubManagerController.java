@@ -139,7 +139,7 @@ public class ClubManagerController extends AbstractController {
 	}
 			
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(DeleteClubForm clubForm, BindingResult binding) {
+	public ModelAndView delete(@Valid DeleteClubForm clubForm, BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()) {

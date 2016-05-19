@@ -210,14 +210,19 @@ public class ClubService {
 	}
 	
 	public Collection<ArrayList<Integer>> calculateRankingByLeague(int leagueId) {
-		Collection<ArrayList<Integer>> result;
+		Collection<ArrayList<Integer>> result, result1;
 		Integer points;
-		ArrayList<Integer> result2;
+		ArrayList<Integer> result2, result3;
 		Collection<Club> clubes;
+		int index;
 		
-		result = new ArrayList<ArrayList<Integer>>();
-		
+		result = new ArrayList<ArrayList<Integer>>();	
+		result1 = new ArrayList<ArrayList<Integer>>();	
 		clubes = this.findAllByLeagueId(leagueId);
+		index = 0;
+		
+		int[] arrayPoints = new int[clubes.size()];
+		
 		for(Club c : clubes) {
 			points = 0;
 			result2 = new ArrayList<Integer>();
@@ -231,9 +236,25 @@ public class ClubService {
 					points = points -p.getPoints();
 				}
 			}
+			arrayPoints[index] = points;
+			index++;
 			result2.add(c.getId());
 			result2.add(points);
-			result.add(result2);
+			result1.add(result2);
+		}
+		
+		ordSelDesc(arrayPoints);
+		
+		for(int i = 0; i < arrayPoints.length; i++) {
+			result3 = new ArrayList<Integer>();
+			for(ArrayList<Integer> list : result1) {
+				if(list.get(1) == arrayPoints[i]) {
+					result3.add(i);
+					result3.add(list.get(0));
+					result3.add(list.get(1));
+					result.add(result3);
+				}
+			}
 		}
 		
 		return result;
@@ -246,6 +267,24 @@ public class ClubService {
 		result = clubRepository.findAllByRunner(runnerId);
 		
 		return result;
+	}
+	
+	private void ordSelDesc(int[] arreglo) {
+		for (int i = 0; i < arreglo.length - 1; i++) {
+			int max = i;
+
+			for (int j = i + 1; j < arreglo.length; j++) {
+				if (arreglo[j] > arreglo[max]) {
+					max = j;
+				}
+			}
+
+			if (i != max) {
+				int aux = arreglo[i];
+				arreglo[i] = arreglo[max];
+				arreglo[max] = aux;
+			}
+		}
 	}
 
 }
