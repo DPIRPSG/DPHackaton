@@ -64,7 +64,7 @@
 	
 	<security:authorize access="hasAnyRole('MANAGER, RUNNER, REFEREE')">
 	<spring:message code="race.participates" var="leagueHeader" />
-	<display:column title="${leagueHeader}" sortable="true">
+	<display:column title="${leagueHeader}">
 		<security:authorize access="hasRole('MANAGER')">
 			<acme:link href="participates/manager/list.do" code="race.participates.view"/>
 		</security:authorize>
@@ -74,6 +74,13 @@
 		<security:authorize access="hasRole('REFEREE')">
 			<acme:link href="participates/referee/list.do" code="race.participates.view"/>
 		</security:authorize>
+	</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('REFEREE')">
+	<spring:message code="race.calculateClassification" var="calculateClassificationHeader" />
+	<display:column title="${calculateClassificationHeader}">
+		<acme:link href="classification/referee/calculateClassification.do?raceId=${row_Race.id}" code="race.calculateClassification.view"/>
 	</display:column>
 	</security:authorize>
 	
