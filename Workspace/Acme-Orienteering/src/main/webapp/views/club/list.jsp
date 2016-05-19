@@ -29,6 +29,16 @@
 			</jstl:if>
 			</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('REFEREE')">
+		<display:column>
+			<div>
+				<b><a href="punishment/referee/create.do?clubId=${row_Club.id}"> <spring:message
+							code="club.punishment" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 

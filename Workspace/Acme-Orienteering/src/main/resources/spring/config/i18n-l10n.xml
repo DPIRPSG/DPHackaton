@@ -47,6 +47,7 @@
 		<value>/views/punishment/messages</value>
 		<value>/views/entered/messages</value>
 		<value>/views/curriculum/messages</value>
+		<value>/views/feePayment/messages</value>
 
 	</util:list>
 

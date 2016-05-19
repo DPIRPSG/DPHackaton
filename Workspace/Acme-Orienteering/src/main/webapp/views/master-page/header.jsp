@@ -71,6 +71,7 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="folder/actor/list.do"><spring:message code="master.page.messages" /></a></li>
 
 			<li>

@@ -15,6 +15,8 @@
 
 	<jstl:if test="${curriculum != null}">
 	
+		<h2><jstl:out value="${actorFullName}"/></h2>
+	
 		<strong><spring:message code="curriculum.statement" />:</strong> <jstl:out value="${curriculum.statement}"/><br>
 		
 		<strong><spring:message code="curriculum.skills" />:</strong><br>
@@ -33,14 +35,19 @@
 	    </jstl:forEach>
 	    <br>
 	    
-	    <acme:link code="curriculum.edit" href="curriculum/actor/edit.do"/>
+	    <jstl:if test="${isMine}">
+	    	<acme:link code="curriculum.edit" href="curriculum/actor/edit.do"/>
+	    </jstl:if>
 	    
 	</jstl:if>
 	<jstl:if test="${curriculum == null}">
 	
 		<spring:message code="curriculum.null" />
 		<br>
-		<acme:link code="curriculum.create" href="curriculum/actor/create.do"/>
+		<jstl:if test="${isMine}">
+	    	<acme:link code="curriculum.create" href="curriculum/actor/create.do"/>
+	    </jstl:if>
+		
 		
 	</jstl:if>
 	

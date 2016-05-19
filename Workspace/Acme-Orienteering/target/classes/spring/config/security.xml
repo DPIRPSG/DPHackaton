@@ -80,11 +80,13 @@
 		
 		
 		<security:intercept-url pattern="/participates/referee/*" access="hasRole('REFEREE')" />
+		<security:intercept-url pattern="/punishment/referee/*" access="hasRole('REFEREE')" />
 		 		
 		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/bulletin/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/participates/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/entered/manager/**" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/feePayment/manager/**" access="hasRole('MANAGER')" />
 		
 		<security:intercept-url pattern="/curriculum/actor/*" access="hasAnyRole('RUNNER','MANAGER','REFEREE')" />
 	
