@@ -26,7 +26,7 @@
 	<acme:submit name="save" code="category.save"/>
 	
 	<jstl:if test="${category.id != 0}">
-		<acme:submit name="delete" code="category.delete"/>
+		<acme:submit_confirm name="delete" code="category.delete" codeConfirm="category.confirm.delete"/>
 	</jstl:if>
 	
 	<acme:cancel code="category.cancel" url="category/administrator/list.do"/>

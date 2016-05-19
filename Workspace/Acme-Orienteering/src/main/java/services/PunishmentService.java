@@ -5,9 +5,13 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import domain.Punishment;
+import org.springframework.util.Assert;
 
 import repositories.PunishmentRepository;
+import domain.Actor;
+import domain.Club;
+import domain.League;
+import domain.Punishment;
 
 @Service
 @Transactional
@@ -20,6 +24,15 @@ public class PunishmentService {
 
 	// Supporting services ----------------------------------------------------
 	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private ClubService clubService;
+	
+	@Autowired
+	private LeagueService leagueService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public PunishmentService() {
@@ -27,6 +40,40 @@ public class PunishmentService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+	
+	public Punishment create(Integer clubId){
+		Assert.isTrue(actorService.checkAuthority("REFEREE"), "Only a referee can manage punishments.");
+		
+		Punishment result;
+		Club club;
+		
+		club = clubService.findOne(clubId);
+		
+		result = new Punishment();
+		
+		result.setClub(club);
+		
+		return result;
+	}
+	
+	public Punishment save(Punishment punishment){
+		Assert.isTrue(actorService.checkAuthority("REFEREE"), "Only a referee can manage punishments.");
+		Assert.notNull(punishment);
+		
+		Punishment result;
+		Collection<League> leagues;
+		Actor referee;
+		
+		referee = actorService.findByPrincipal();
+		
+		leagues = leagueService.findAllByRefereeAndClubId(referee.getId(), punishment.getClub().getId());
+		
+		Assert.isTrue(leagues.contains(punishment.getLeague()), "You can't sanction a League that is not asigned to you or a League where the club didn't/doesn't participate.");
+		
+		result = punishmentRepository.save(punishment);
+		
+		return result;
+	}
 
 	
 	public Collection<Punishment> findAll() {

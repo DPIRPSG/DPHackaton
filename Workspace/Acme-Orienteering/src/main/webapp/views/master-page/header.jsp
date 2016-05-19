@@ -30,43 +30,53 @@
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('RUNNER')">
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="club/runner/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
+			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="entered/runner/list.do"><spring:message code="master.page.runner.entered" /></a></li>
 			<li><a class="fNiv" href="curriculum/actor/list.do"><spring:message code="master.page.actor.curriculum" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MANAGER')">
-			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.manager.myClub" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+					<li><a href="entered/manager/list.do"><spring:message code="master.page.manager.entered" /></a></li>
+				</ul>
+			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
-			<li><a class="fNiv" href="entered/manager/list.do"><spring:message code="master.page.manager.entered" /></a></li>			
-			<li><a class="fNiv" href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
+			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>			
 			<li><a class="fNiv" href="curriculum/actor/list.do"><spring:message code="master.page.actor.curriculum" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
+			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
+			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="curriculum/actor/list.do"><spring:message code="master.page.actor.curriculum" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
-			<li><a class="fNiv" href="runner/create.do"><spring:message code="master.page.register" /></a></li>		
 			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
 			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
+			<li><a class="fNiv" href="runner/create.do"><spring:message code="master.page.register" /></a></li>		
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		

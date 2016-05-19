@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,8 @@ import org.springframework.util.Assert;
 
 import domain.Club;
 import domain.Participates;
+import domain.Race;
+import domain.Runner;
 import repositories.ParticipatesRepository;
 
 @Service
@@ -32,7 +35,10 @@ public class ParticipatesService {
 	
 	@Autowired
 	private ManagerService managerService;
-
+	
+	@Autowired
+	private RaceService raceService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public ParticipatesService(){
@@ -71,6 +77,48 @@ public class ParticipatesService {
 		result = this.save(result);
 		
 		return result;
+	}
+	
+	public void joinRace(int raceId){
+		
+		Assert.isTrue(actorService.checkAuthority("RUNNER"));
+				
+		Participates result;
+		Runner runner;
+		Race race;
+		
+		Collection<Participates> allParticipatesByRunner;
+		Collection<Runner> allRunnerWhoCanJoinARace;
+		Boolean flag;
+		
+		runner = runnerService.findByPrincipal();
+		race = raceService.findOne(raceId);
+		
+		Assert.isTrue(race.getMoment().after(new Date()));
+		
+		allParticipatesByRunner = findAllByRunnerIdAndRaceId(runner.getId(), raceId, -1, -1);
+		allRunnerWhoCanJoinARace = runnerService.findAllWhoCanJoinARace(raceId);		
+		flag = false;
+		
+		for(Participates p:allParticipatesByRunner){
+			if(p.getRace().getId()==raceId){
+				flag = true;
+				break;
+			}
+		}
+		
+		if(!allRunnerWhoCanJoinARace.contains(runner)){
+			flag = true;
+		}
+		
+		Assert.isTrue(!flag);
+		
+		result = create();
+		result.setRace(race);
+		result.setResult(0);
+		result.setRunner(runner);
+		save(result);
+		
 	}
 	
 	/**

@@ -19,15 +19,25 @@
 	<!-- Action links -->
 
 	<security:authorize access="hasRole('MANAGER')">
-		<jstl:if test="${manager.id == row_Club.manager.id }">
 			<display:column>
+			<jstl:if test="${manager.id == row_Club.manager.id }">
 				<div>
 					<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
 								code="club.edit" />
 					</a></b>
 				</div>
+			</jstl:if>
 			</display:column>
-		</jstl:if>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('REFEREE')">
+		<display:column>
+			<div>
+				<b><a href="punishment/referee/create.do?clubId=${row_Club.id}"> <spring:message
+							code="club.punishment" />
+				</a></b>
+			</div>
+		</display:column>
 	</security:authorize>
 
 	<!-- Attributes -->
@@ -54,9 +64,11 @@
 		</display:column>
 
 		<spring:message code="club.manager" var="managerHeader" />
-		<acme:displayColumn
-			value="${row_Club.manager.name} ${row_Club.manager.surname }"
-			title="${managerHeader}" />
+		<display:column title="${managerHeader }" sortable="true">
+			<a href="actor/list.do?actorId=${row_Club.manager.id}"> <jstl:out
+					value="${row_Club.manager.name} ${row_Club.manager.surname} (${row_Club.manager.userAccount.username})" />
+			</a>
+		</display:column>
 
 		<spring:message code="club.runners" var="runnersHeader" />
 		<display:column title="${runnersHeader}" sortable="false">
@@ -86,16 +98,8 @@
 			</a>
 		</display:column>
 
-		<jstl:if test="${manager.id == row_Club.manager.id || pertenece}">
-			<spring:message code="club.bulletins" var="bulletinsHeader" />
-			<display:column title="${bulletinsHeader}" sortable="false">
-				<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
-						code="club.bulletins" />
-				</a>
-			</display:column>
-		</jstl:if>
-
-		<display:column>
+		<spring:message code="club.comments" var="commentsHeader" />
+		<display:column title="${commentsHeader }">
 			<a href="comment/list.do?commentedEntityId=${row_Club.id}"> <spring:message
 					code="club.comments" />
 			</a>
@@ -112,6 +116,15 @@
 			</jstl:forEach>
 		</display:column>
 	</jstl:if>
+	
+	<jstl:if test="${(manager.id == row_Club.manager.id || pertenece) && requestURI2 != null}">
+			<spring:message code="club.bulletins" var="bulletinsHeader" />
+			<display:column title="${bulletinsHeader}" sortable="false">
+				<a href="${requestURI2}?clubId=${row_Club.id}"> <spring:message
+						code="club.bulletins" />
+				</a>
+			</display:column>
+		</jstl:if>
 
 </display:table>
 
@@ -125,5 +138,14 @@
 						code="club.create" />
 			</a></b>
 		</div>
+	</jstl:if>
+	<jstl:if test="${requestURI2 != null}">
+		<jstl:if test="${clubes != null  }">
+		<div>
+			<b><a href="club/manager/delete.do?clubId=${clubes.id }"> <spring:message
+						code="club.delete" />
+			</a></b>
+		</div>
+	</jstl:if>
 	</jstl:if>
 </security:authorize>

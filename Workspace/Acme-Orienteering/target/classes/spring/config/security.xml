@@ -52,6 +52,7 @@
 		<security:intercept-url pattern="/classification/list.do" access="permitAll" />
 		<security:intercept-url pattern="/punishment/list.do" access="permitAll" />
 		<security:intercept-url pattern="/comment/list.do" access="permitAll" />
+		<security:intercept-url pattern="/actor/list.do" access="permitAll" />
 		
 		<security:intercept-url pattern="/folder/actor/*" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/message/actor/*" access="isAuthenticated()" />
@@ -80,11 +81,13 @@
 		
 		<security:intercept-url pattern="/participates/referee/*" access="hasRole('REFEREE')" />
 		<security:intercept-url pattern="/classification/referee/*" access="hasRole('REFEREE')" />
+		<security:intercept-url pattern="/punishment/referee/*" access="hasRole('REFEREE')" />
 		 		
 		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/bulletin/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/participates/manager/*" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/entered/manager/**" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/feePayment/manager/**" access="hasRole('MANAGER')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

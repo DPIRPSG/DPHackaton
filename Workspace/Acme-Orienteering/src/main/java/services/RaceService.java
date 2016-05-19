@@ -133,7 +133,7 @@ public class RaceService {
 
 		return result;
 	}
-	
+		
 
 	// Other business methods -------------------------------------------------
 	
@@ -148,4 +148,13 @@ public class RaceService {
 		
 		return result;
 	}
+	
+	public Collection<Race> findAllByRunnerId(int runnerId){
+		Collection<Race> result;
+		
+		result = raceRepository.findAllByRunnerId(runnerId);
+		
+		return result;
+	}
+
 }

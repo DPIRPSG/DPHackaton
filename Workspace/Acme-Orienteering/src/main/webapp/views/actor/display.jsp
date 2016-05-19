@@ -21,6 +21,10 @@
 		<acme:display code="actor.nif" value="${actor.nif}" />
 		<acme:display code="actor.username"
 			value="${actor.userAccount.username}" />
+		
+		<security:authorize access="hasAnyRole('RUNNER','MANAGER','REFEREE')">
+			<acme:link href="curriculum/actor/list.do" code="actor.curriculum"/>
+		</security:authorize>
 
 	</table>
 </div>

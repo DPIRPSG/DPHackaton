@@ -55,7 +55,8 @@
 		<jstl:out value="${row_Race.league.description}"></jstl:out>
 	</display:column>
 
-	<display:column>
+	<spring:message code="race.comments" var="commentsHeader" />
+	<display:column title="${commentsHeader }">
 		<a href="comment/list.do?commentedEntityId=${row_Race.id}"> <spring:message
 				code="race.comments" />
 		</a>
@@ -81,6 +82,13 @@
 	<display:column title="${calculateClassificationHeader}">
 		<acme:link href="classification/referee/calculateClassification.do?raceId=${row_Race.id}" code="race.calculateClassification.view"/>
 	</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('RUNNER')">
+		<spring:message code="race.join" var="joinHeader" />
+		<display:column title="${joinHeader}" sortable="true">
+			<acme:link href="participates/runner/join.do?raceId=${row_Race.id}" code="race.join"/>
+		</display:column>
 	</security:authorize>
 	
 </display:table>

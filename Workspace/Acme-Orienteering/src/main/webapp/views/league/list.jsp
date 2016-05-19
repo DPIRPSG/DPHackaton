@@ -59,7 +59,11 @@
 	<acme:displayColumn value="${row_League.amount}" title="${amountHeader}" sorteable="true"/>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
-	<acme:displayColumn value="${row_League.referee.name} ${row_League.referee.surname }" title="${refereeHeader}"/>
+	<display:column title="${refereeHeader }" sortable="true">
+			<a href="actor/list.do?actorId=${row_League.referee.id}"> <jstl:out
+					value="${row_League.referee.name} ${row_League.referee.surname} (${row_League.referee.userAccount.username})" />
+			</a>
+		</display:column>
 
 	<spring:message code="league.classification" var="classificationHeader" />
 	<display:column title="${classificationHeader}" sortable="false">
@@ -80,8 +84,26 @@
 	<display:column title="${financesHeader}" sortable="false">
 		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
 	</display:column>
+	
+	<security:authorize access="hasRole('MANAGER')">
+		<display:column>
+			<jstl:set var="contains" value="false" />
+			<jstl:forEach var="item" items="${clubLeagues}">
+			  <jstl:if test="${item.id eq row_League.id}">
+			    <jstl:set var="contains" value="true" />
+			  </jstl:if>
+			</jstl:forEach>
+<%-- 			<jstl:if test="${!fn:contains(clubLeagues, row_League) && clubLeagues != null}"> --%>
+			<jstl:if test="${!contains}">
+				<a href="feePayment/manager/create.do?leagueId=${row_League.id}"> <spring:message
+						code="league.feePayment" />
+				</a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
-	<display:column>
+	<spring:message code="league.comments" var="commentsHeader" />
+	<display:column title="${commentsHeader}">
 		<a href="comment/list.do?commentedEntityId=${row_League.id}"> <spring:message
 				code="league.comments" />
 		</a>

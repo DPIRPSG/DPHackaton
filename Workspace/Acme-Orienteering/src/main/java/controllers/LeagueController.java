@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.LeagueService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.League;
 
 @Controller
@@ -31,6 +33,9 @@ public class LeagueController extends AbstractController {
 
 	@Autowired
 	private LeagueService leagueService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -54,6 +59,16 @@ public class LeagueController extends AbstractController {
 		result = new ModelAndView("league/list");
 		result.addObject("requestURI", "league/list.do");
 		result.addObject("leagues", leagues);
+		if(actorService.checkAuthority("MANAGER")){
+			Collection<League> clubLeagues;
+//			Actor referee;
+			
+//			referee = actorService.findByPrincipal();
+			
+			clubLeagues = leagueService.findAllByClubId(clubId);
+			
+			result.addObject("clubLeagues", clubLeagues);
+		}
 
 		return result;
 	}

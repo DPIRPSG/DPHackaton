@@ -13,5 +13,8 @@ public interface RaceRepository extends JpaRepository<Race, Integer> {
 
 	@Query("select r from Race r join r.classifications c where c.club.id = ?1")
 	Collection<Race> findAllByClubId(Integer clubId);
+	
+	@Query("select r from Race r left join r.participates p where p.runner.id = ?1")
+	Collection<Race> findAllByRunnerId(int runnerId);
 
 }

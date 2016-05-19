@@ -17,6 +17,7 @@ import domain.Entered;
 import domain.FeePayment;
 import domain.Manager;
 import domain.Punishment;
+import domain.Referee;
 import domain.Runner;
 
 import repositories.ClubRepository;
@@ -40,6 +41,9 @@ public class ClubService {
 	
 	@Autowired
 	private RunnerService runnerService;
+	
+	@Autowired
+	private RefereeService refereeService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -92,6 +96,7 @@ public class ClubService {
 		
 		Manager manager;
 		Runner runner;
+		Referee referee;
 		Collection<Runner> runners;
 		boolean pertenece;
 		
@@ -110,6 +115,16 @@ public class ClubService {
 				}
 			}
 			Assert.isTrue(pertenece, "Only a runner of this club can save it");
+		} else if(actorService.checkAuthority("REFEREE")) {
+			referee = refereeService.findByPrincipal();
+			pertenece = false;
+			for(FeePayment f : club.getFeePayments()) {
+				if(f.getLeague().getReferee().getId() == referee.getId()) {
+					pertenece = true;
+					break;
+				}
+			}
+			Assert.isTrue(pertenece, "Only a referee of this club can save it");
 		}
 		
 		if(club.getId() == 0) {
@@ -126,10 +141,11 @@ public class ClubService {
 		return club;
 	}
 	
-	public void delete(Club club) {
+	public void delete(Club club, int managerId) {
 		Assert.notNull(club);
 		Assert.isTrue(club.getId() != 0);
 		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can delete clubes");
+		Manager preSave, postSave;
 		
 		if(actorService.checkAuthority("MANAGER")) {
 			Manager manager;
@@ -138,7 +154,19 @@ public class ClubService {
 			Assert.isTrue(club.getManager().getId() == manager.getId(), "Only the manager of this club can save it");
 		}
 		
-		clubRepository.delete(club);
+		preSave = managerService.findByPrincipal();
+		postSave = managerService.findOne(managerId);
+		
+		Assert.isTrue(postSave.getClub() == null, "El nuevo Manager no debe ser dueño de un club");
+		
+		preSave.setClub(null);
+		managerService.saveFromOthers(preSave);
+		
+		club.setManager(postSave);
+		club = clubRepository.save(club);
+		
+		postSave.setClub(club);
+		managerService.saveFromOthers(postSave);
 		
 	}
 	

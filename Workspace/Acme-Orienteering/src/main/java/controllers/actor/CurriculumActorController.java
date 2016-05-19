@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
@@ -39,17 +40,26 @@ public class CurriculumActorController extends AbstractController {
 	// Listing --------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required = false) Integer actorId) {
 		ModelAndView result;
 		Actor actor;
 		Curriculum curriculum;
 		Collection<String> skills, likes, dislikes;
+		String actorFullName;
+		boolean isMine;
 		
 		skills = new ArrayList<String>();
-		likes = new ArrayList<String>();;
-		dislikes = new ArrayList<String>();;
+		likes = new ArrayList<String>();
+		dislikes = new ArrayList<String>();
 				
-		actor = actorService.findByPrincipal();
+		if(actorId == null){
+			actor = actorService.findByPrincipal();
+			isMine = true;
+		}else{
+			actor = actorService.findOne(actorId);
+			isMine = false;
+		}
+		
 		curriculum = actor.getCurriculum();
 		
 		if (curriculum != null) {
@@ -69,6 +79,7 @@ public class CurriculumActorController extends AbstractController {
 			}
 		}
 		
+		actorFullName = actor.getName() + " " + actor.getSurname();
 		
 		result = new ModelAndView("curriculum/list");
 		result.addObject("requestURI", "curriculum/trainer/list.do");
@@ -76,6 +87,8 @@ public class CurriculumActorController extends AbstractController {
 		result.addObject("skills", skills);
 		result.addObject("likes", likes);
 		result.addObject("dislikes", dislikes);
+		result.addObject("actorFullName", actorFullName);
+		result.addObject("isMine", isMine);
 
 		return result;
 	}
