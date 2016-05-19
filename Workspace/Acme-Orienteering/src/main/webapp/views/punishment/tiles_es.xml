@@ -21,4 +21,9 @@
 		<put-attribute name="body" value="/views/punishment/list.jsp" />
 	</definition>
 	
+	<definition name="punishment/create" extends="master.page">	
+		<put-attribute name="title" value="Crear una Sanción" />
+		<put-attribute name="body" value="/views/punishment/create.jsp" />
+	</definition>
+	
 </tiles-definitions>
