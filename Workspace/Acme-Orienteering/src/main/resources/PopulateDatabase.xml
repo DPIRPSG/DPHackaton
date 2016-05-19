@@ -798,15 +798,15 @@
 	<!-- Classification -->
 	
 	<bean id="classification1" class="domain.Classification">
-		<property name="position" value="2"/>
-		<property name="points" value="18"/>
+		<property name="position" value="1"/>
+		<property name="points" value="35"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="classification2" class="domain.Classification">
-		<property name="position" value="1"/>
-		<property name="points" value="25"/>
+		<property name="position" value="2"/>
+		<property name="points" value="18"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club2"/>
 	</bean>
