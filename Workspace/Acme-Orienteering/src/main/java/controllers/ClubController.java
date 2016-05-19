@@ -52,7 +52,7 @@ public class ClubController extends AbstractController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam (required = false) Integer leagueId, 
-			@RequestParam (required = false) String classification) {
+			@RequestParam (required = false, defaultValue = "false") String classification) {
 		ModelAndView result;
 		Collection<Club> clubes;
 		Manager manager;
