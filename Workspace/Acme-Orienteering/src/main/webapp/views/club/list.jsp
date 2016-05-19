@@ -19,17 +19,27 @@
 	<!-- Action links -->
 
 	<security:authorize access="hasRole('MANAGER')">
+		<jstl:if test="${requestURI2 != null }" var="estaEnMiClub" />
+		<jstl:if test="${requestURI2 == null }">
+			<jstl:forEach items="${clubes }" var="club">
+				<jstl:if test="${club.id == manager.club.id}">
+					<jstl:if test="${null == null}" var="tieneUno" />
+				</jstl:if>
+			</jstl:forEach>
+		</jstl:if>
+		<jstl:if test="${estaEnMiClub || tieneUno}">
 			<display:column>
-			<jstl:if test="${manager.id == row_Club.manager.id }">
-				<div>
-					<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
-								code="club.edit" />
-					</a></b>
-				</div>
-			</jstl:if>
+				<jstl:if test="${manager.id == row_Club.manager.id }">
+					<div>
+						<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
+									code="club.edit" />
+						</a></b>
+					</div>
+				</jstl:if>
 			</display:column>
+		</jstl:if>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('REFEREE')">
 		<display:column>
 			<div>

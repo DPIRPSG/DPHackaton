@@ -21,6 +21,7 @@
 			<spring:message code="club.manager" />
 		</form:label>
 	<form:select name="manager" path="managerId">
+		<form:option value="0" label="----" />
 		    <jstl:forEach var="manager" items="${managers}" >
 		        <form:option value="${manager.id}"><jstl:out value="${manager.name} ${manager.surname}"/></form:option>
 		    </jstl:forEach>
