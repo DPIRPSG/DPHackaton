@@ -58,7 +58,7 @@ public class CurriculumService {
 		curriculum = curriculumRepository.save(curriculum);
 		if(curriculumId == 0){
 			actor.setCurriculum(curriculum);
-			actorService.save(actor);
+			actorService.saveCurriculum(actor);
 		}
 		
 		return curriculum;
@@ -96,7 +96,7 @@ public class CurriculumService {
 		actorPrincipal = actorService.findByPrincipal();
 		actorOwner = actorService.findByCurriculumId(curriculumId);
 		
-		Assert.isTrue(actorPrincipal == actorOwner, "You can't manage a Curriculum of other Trainer.");
+		Assert.isTrue(actorPrincipal == actorOwner, "You can only manage you own Curriculum.");
 	}
 	
 	public void flush() {
