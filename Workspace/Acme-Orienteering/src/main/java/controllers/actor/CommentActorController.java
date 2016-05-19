@@ -12,9 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.CommentService;
 import services.CommentedEntityService;
+import services.form.CommentFormService;
 import controllers.AbstractController;
 import domain.Comment;
 import domain.CommentedEntity;
+import domain.form.CommentForm;
 
 @Controller
 @RequestMapping("/comment/actor")
@@ -28,6 +30,8 @@ public class CommentActorController extends AbstractController {
 	@Autowired
 	private CommentedEntityService commentedEntityService;
 	
+	@Autowired
+	private CommentFormService commentFormService;
 	
 	// Constructors --------------------------------------------------------
 	
@@ -41,19 +45,19 @@ public class CommentActorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam Integer commentedEntityId) {
 		ModelAndView result;
-		Comment comment;
+		CommentForm commentForm;
 		CommentedEntity commentedEntity;
 		
-		comment = commentService.create(commentedEntityId);
+		commentForm = commentFormService.create(commentedEntityId);
 		commentedEntity = commentedEntityService.findOne(commentedEntityId);
 		
-		result = createEditModelAndView(comment, commentedEntity);
+		result = createEditModelAndView(commentForm, commentedEntity);
 		
 		return result;
 	}
 	
 	@RequestMapping(value="/create", method=RequestMethod.POST, params="save")
-	public ModelAndView save(@Valid Comment comment, BindingResult binding) {
+	public ModelAndView save(@Valid CommentForm commentForm, BindingResult binding) {
 		ModelAndView result;
 		CommentedEntity commentedEntity;
 		int commentedEntityId;
@@ -78,17 +82,19 @@ public class CommentActorController extends AbstractController {
 //		
 //		return result;
 		
-		commentedEntity = comment.getCommentedEntity();
+		Comment comment;
+		commentedEntity = commentedEntityService.findOne(commentForm.getCommentedEntityId());
 		commentedEntityId = commentedEntity.getId();
 		
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(comment, commentedEntity);
+			result = createEditModelAndView(commentForm, commentedEntity);
 		} else {
 			try {
+				comment = commentFormService.reconstruct(commentForm);
 				commentService.save(comment);
 				result = new ModelAndView("redirect:../list.do?commentedEntityId=" + commentedEntityId);
 			} catch (Throwable oops) {
-				result = createEditModelAndView(comment, commentedEntity, "comment.commit.error");
+				result = createEditModelAndView(commentForm, commentedEntity, "comment.commit.error");
 			}
 		}
 		
@@ -98,19 +104,19 @@ public class CommentActorController extends AbstractController {
 	
 	// Ancillary methods ---------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(Comment comment, CommentedEntity commentedEntity) {
+	protected ModelAndView createEditModelAndView(CommentForm commentForm, CommentedEntity commentedEntity) {
 		ModelAndView result;
 		
-		result = createEditModelAndView(comment, commentedEntity, null);
+		result = createEditModelAndView(commentForm, commentedEntity, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Comment comment, CommentedEntity commentedEntity, String message) {
+	protected ModelAndView createEditModelAndView(CommentForm commentForm, CommentedEntity commentedEntity, String message) {
 		ModelAndView result;
 		
 		result = new ModelAndView("comment/create");
-		result.addObject("comment", comment);
+		result.addObject("commentForm", commentForm);
 		result.addObject("commentedEntity", commentedEntity);
 		result.addObject("message", message);
 		

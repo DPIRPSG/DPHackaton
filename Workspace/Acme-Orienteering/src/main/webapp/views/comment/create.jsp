@@ -14,15 +14,10 @@
 	<h3><spring:message code="comment.entity"/>: <jstl:out value="${commentedEntity.name}" /></h3>
 	
 	<!-- Form -->
-	<form:form action="comment/actor/create.do" modelAttribute="comment">
+	<form:form action="comment/actor/create.do" modelAttribute="commentForm">
 		<!-- Hidden Attributes -->
-		<form:hidden path="id"/>
-		<form:hidden path="version"/>
-		<form:hidden path="moment"/>
-		<form:hidden path="commentedEntity"/>
-		<form:hidden path="actor"/>
-		<form:hidden path="deleted"/>
-		<input type="hidden" name="commentedEntityId" value="${commentedEntity.id}">
+		<form:hidden path="commentedEntityId"/>
+		<form:hidden path="commentId"/>
 		
 		<!-- Editable Attributes -->
 		
