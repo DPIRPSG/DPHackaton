@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ParticipatesService {
 	
 	@Autowired
 	private RaceService raceService;
-
+	
 	// Constructors -----------------------------------------------------------
 	
 	public ParticipatesService(){
@@ -80,11 +81,6 @@ public class ParticipatesService {
 	
 	public void joinRace(int raceId){
 		
-		/*
-		 * Faltan asserts como:
-		 * - Que el runner esté en el club.
-		 */
-		
 		Assert.isTrue(actorService.checkAuthority("RUNNER"));
 				
 		Participates result;
@@ -92,12 +88,16 @@ public class ParticipatesService {
 		Race race;
 		
 		Collection<Participates> allParticipatesByRunner;
+		Collection<Runner> allRunnerWhoCanJoinARace;
 		Boolean flag;
 		
 		runner = runnerService.findByPrincipal();
 		race = raceService.findOne(raceId);
 		
+		Assert.isTrue(race.getMoment().after(new Date()));
+		
 		allParticipatesByRunner = findAllByRunnerIdAndRaceId(runner.getId(), raceId, -1, -1);
+		allRunnerWhoCanJoinARace = runnerService.findAllWhoCanJoinARace(raceId);		
 		flag = false;
 		
 		for(Participates p:allParticipatesByRunner){
@@ -105,6 +105,10 @@ public class ParticipatesService {
 				flag = true;
 				break;
 			}
+		}
+		
+		if(!allRunnerWhoCanJoinARace.contains(runner)){
+			flag = true;
 		}
 		
 		Assert.isTrue(!flag);
