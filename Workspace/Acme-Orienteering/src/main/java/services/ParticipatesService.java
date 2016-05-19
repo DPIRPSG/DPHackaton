@@ -83,7 +83,6 @@ public class ParticipatesService {
 		/*
 		 * Faltan asserts como:
 		 * - Que el runner esté en el club.
-		 * - Que el runner no esté apuntado ya.
 		 */
 		
 		Assert.isTrue(actorService.checkAuthority("RUNNER"));
@@ -98,14 +97,10 @@ public class ParticipatesService {
 		runner = runnerService.findByPrincipal();
 		race = raceService.findOne(raceId);
 		
-		// La query no funciona o no sé cómo usarla
-		allParticipatesByRunner = findAllByRunnerIdAndRaceId(runner.getId(), raceId, 0, 0);
+		allParticipatesByRunner = findAllByRunnerIdAndRaceId(runner.getId(), raceId, -1, -1);
 		flag = false;
 		
 		for(Participates p:allParticipatesByRunner){
-			System.out.println("Participates");
-			System.out.println(p.getRace());
-			System.out.println(p.getRunner());
 			if(p.getRace().getId()==raceId){
 				flag = true;
 				break;
