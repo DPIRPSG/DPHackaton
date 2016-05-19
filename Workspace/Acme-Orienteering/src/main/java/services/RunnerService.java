@@ -157,8 +157,16 @@ public class RunnerService {
 		Runner runner;
 		
 		runner = this.findByPrincipal();
+		res = this.getClub(runner);
+				
+		return res;
+	}
+
+	public Club getClub(Runner input){
+		Club res;
+		
 		res = null;
-		for(Entered e:runner.getEntered()){
+		for(Entered e:input.getEntered()){
 			if(e.getIsMember() && e.getAcceptedMoment() != null)
 				res = e.getClub();
 		}

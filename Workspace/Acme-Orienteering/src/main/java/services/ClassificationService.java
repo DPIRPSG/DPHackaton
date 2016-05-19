@@ -1,6 +1,13 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +17,7 @@ import org.springframework.util.Assert;
 import domain.Classification;
 import domain.Club;
 import domain.Participates;
+import domain.Race;
 import repositories.ClassificationRepository;
 import repositories.ParticipatesRepository;
 
@@ -34,6 +42,9 @@ public class ClassificationService {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private RaceService raceService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -104,30 +115,77 @@ public class ClassificationService {
 		
 		return result;
 	}
-//	
-//	public Collection<Participates> findAllClubByRunnerIdAndRaceId(int runnerId, int raceId){
-//		boolean res;
-//		
-//		res = actorService.checkAuthorities("MANAGER, RUNNER");
-//		Assert.isTrue(res, "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
-//		
-//		Collection<Participates> result;
-//		int clubId;
-//		Club club;
-//		
-//		if (actorService.checkAuthority("MANAGER"))
-//			club = managerService.findByPrincipal().getClub();
-//		else
-//			club = runnerService.getClub();
-//				
-//		clubId = -1;
-//		if (club != null )
-//			clubId = club.getId();
-//		
-//		result = this.findAllByRunnerIdAndRaceId(runnerId, raceId, -1, clubId);
-//		
-//		return result;
-//	}
+	
+	public void calculateClassification(int raceId) {
+		Assert.isTrue(actorService.checkAuthority("REFEREE"), "calculateClassification.NotReferee");
+		
+		Race race;
+		Map<Club, Map<String, Integer>> raceClassification;
+		List<Integer> clubTotal;
+		
+		race = raceService.findOne(raceId);
+		
+		Assert.isTrue(actorService.findByPrincipal().getId() == race.getLeague().getReferee().getId(), "calculateClassification.PermissionDenied");
+		
+		raceClassification = new HashMap<Club, Map<String, Integer>>();
+		clubTotal = new ArrayList<Integer>();
+		
+		for(Participates p:race.getParticipates()){
+			System.out.println("Resultado de participante '" + p.getRunner().getUserAccount().getUsername() + "' : "+ p.getResult());
+			Map<String, Integer> clubClassi;
+			Club actClub;
+			
+			actClub = runnerService.getClub(p.getRunner());
+			
+			if(raceClassification.containsKey(actClub))
+				clubClassi = raceClassification.get(actClub);
+			else{
+				clubClassi = new HashMap<String, Integer>();
+				clubClassi.put("position", 0);
+				clubClassi.put("runners", 0);
+				clubClassi.put("totalClub", 0);
+			}
+			
+			clubClassi.put("runners", clubClassi.get("runners") + 1);
+			clubClassi.put("totalClub", clubClassi.get("totalClub") + p.getResult());
+			
+			raceClassification.put(actClub, clubClassi);
+		}
+		
+		
+		for(Club i:raceClassification.keySet()){
+			Map<String, Integer> clubClassi;
+			clubClassi = raceClassification.get(i);
+			clubTotal.add(clubClassi.get("totalClub") / clubClassi.get("runners"));
+		}
+		Comparator<Integer> comparador = Collections.reverseOrder();
+		Collections.sort(clubTotal, comparador);
+
+		for(Club i:raceClassification.keySet()){
+			Iterator<Classification> ja2 = this.findAllByClubIdAndRaceId(i.getId(), raceId).iterator();
+			Classification actClassi;
+			Integer average;
+			Map<String, Integer> clubClassi;
+
+			clubClassi = raceClassification.get(i);
+
+			
+			if(ja2.hasNext()){
+				actClassi = ja2.next();
+			} else {
+				actClassi = this.create();
+				
+				actClassi.setClub(i);
+				actClassi.setRace(race);
+			}
+			average = clubClassi.get("totalClub") / clubClassi.get("runners");
+
+			actClassi.setPosition(clubTotal.indexOf(average) + 1);
+			actClassi.setPoints(average);
+			System.out.println("Club: '" + actClassi.getClub().getName() + "', Position: '" + actClassi.getPosition() + "', Points: '" + actClassi.getPoints() + "'");
+			this.save(actClassi);
+		}
+	}
 	
 	
 	public Classification findOne(int enteredId){
