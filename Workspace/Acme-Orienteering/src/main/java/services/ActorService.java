@@ -60,7 +60,7 @@ public class ActorService {
 		
 		principalActor = this.findByPrincipal();
 		
-		Assert.isTrue(principalActor == actor, "You can't modify other user's data.");
+		Assert.isTrue(principalActor.getId() == actor.getId(), "You can't modify other user's data.");
 		
 		result = actorRepository.save(actor);
 		
