@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CommentService;
 import services.CommentedEntityService;
 import domain.Comment;
 import domain.CommentedEntity;
@@ -21,6 +22,9 @@ public class CommentController {
 	
 	@Autowired
 	private CommentedEntityService commentedEntityService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	
 	// Constructors --------------------------------------------------------
@@ -39,7 +43,8 @@ public class CommentController {
 		CommentedEntity commentedEntity;
 		
 		commentedEntity = commentedEntityService.findOne(commentedEntityId);
-		comments = commentedEntity.getComments();
+//		comments = commentedEntity.getComments();
+		comments = commentService.findAllByCommentedEntityId(commentedEntityId);
 		
 		result = new ModelAndView("comment/list");
 		result.addObject("comments", comments);
