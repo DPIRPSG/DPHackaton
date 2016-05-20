@@ -31,16 +31,16 @@
 	<spring:message code="finances.sponsor" var="sponsorHeader"/>
 	<display:column title="${sponsorHeader}">
 		<img src="${row_Finances.sponsor.logo}" style="height:40px;"/> &nbsp;
-		<a href="finances/list.do?sponsorId=${row_Finances.sponsor.id}">
+<%-- 		<a href="finances/list.do?sponsorId=${row_Finances.sponsor.id}"> --%>
 			<jstl:out value="${row_Finances.sponsor.name}"/>
-		</a>
+<!-- 		</a> -->
 	</display:column>
 	
 	<spring:message code="finances.league" var="leagueHeader"/>
 	<display:column title="${leagueHeader}">
-		<a href="finances/list.do?leagueId=${row_Finances.league.id}">
+<%-- 		<a href="finances/list.do?leagueId=${row_Finances.league.id}"> --%>
 			<jstl:out value="${row_Finances.league.name}"/>
-		</a>
+<!-- 		</a> -->
 	</display:column>
 
 	<spring:message code="finances.amount" var="amountHeader"/>
