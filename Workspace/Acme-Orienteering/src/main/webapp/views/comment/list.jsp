@@ -1,5 +1,7 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%-- <%@page language="java" contentType="text/html; charset=utf-8" --%>
+<%--   	pageEncoding="utf-8"%> --%>
 	
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -36,7 +38,18 @@
 	<acme:displayColumn title="${textHeader}" sorteable="false" value="${row_Comment.text}"/>
 
 	<spring:message code="comment.starRating" var="starRatingHeader" />
-	<acme:displayColumn title="${starRatingHeader}" sorteable="true" value="${row_Comment.starRating}"/>
+	<display:column title="${starRatingHeader}" sortable="true">
+<%-- 	<acme:displayColumn title="${starRatingHeader}" sorteable="true" value="${row_Comment.starRating}"/> --%>
+		<jstl:forEach items="${row_League.feePayments}" var="fee"></jstl:forEach>
+		<jstl:forEach begin="0" end="4" varStatus="loop">
+		    <jstl:if test="${loop.index <= row_Comment.starRating - 1}">
+		        <img src="images/star.png" width="20px" height="20px"/>
+		    </jstl:if>
+		    <jstl:if test="${loop.index > row_Comment.starRating - 1}">
+		        <img src="images/void-star.png" width="20px" height="20px"/>
+		    </jstl:if>
+		</jstl:forEach>
+	</display:column>
 		
 </display:table>
 

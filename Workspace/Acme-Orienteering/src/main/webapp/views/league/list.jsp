@@ -60,10 +60,10 @@
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<display:column title="${refereeHeader }" sortable="true">
-			<a href="actor/list.do?actorId=${row_League.referee.id}"> <jstl:out
-					value="${row_League.referee.name} ${row_League.referee.surname} (${row_League.referee.userAccount.username})" />
-			</a>
-		</display:column>
+		<a href="actor/list.do?actorId=${row_League.referee.id}"> <jstl:out
+				value="${row_League.referee.name} ${row_League.referee.surname} (${row_League.referee.userAccount.username})" />
+		</a>
+	</display:column>
 
 	<spring:message code="league.classification" var="classificationHeader" />
 	<display:column title="${classificationHeader}" sortable="false">
