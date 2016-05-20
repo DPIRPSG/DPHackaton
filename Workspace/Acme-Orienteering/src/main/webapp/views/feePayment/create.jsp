@@ -22,9 +22,7 @@
 		
 		<!-- Editable Attributes -->
 		<h3><spring:message code="feePayment.club" /> "<jstl:out value="${feePaymentForm.club.name}"/>" <spring:message code="feePayment.league" /> "<jstl:out value="${feePaymentForm.league.name}"/>"</h3>
-		
-		<acme:textbox code="feePayment.amount" path="amount" />
-		
+				
 		<fieldset>
 			<legend align="left">
 				<spring:message code = "feePayment.creditCard"/>
