@@ -87,19 +87,20 @@
 
 	<security:authorize access="hasRole('MANAGER')">
 		<jstl:if test="${manager.club.id != null}">
-			<display:column>
-			<jstl:set value="false" var="pagado" />
-			<jstl:forEach items="${row_League.feePayments}" var="fee">
-				<jstl:if test="${fee.club.id == manager.club.id }">
-					<jstl:set value="true" var="pagado" />
+			<spring:message code="league.feePayment" var="financesHeader" />
+			<display:column title="${financesHeader}" sortable="false">
+				<jstl:set value="false" var="pagado" />
+				<jstl:forEach items="${row_League.feePayments}" var="fee">
+					<jstl:if test="${fee.club.id == manager.club.id }">
+						<jstl:set value="true" var="pagado" />
+					</jstl:if>
+				</jstl:forEach>
+				<jstl:if test="${pagado != true}">
+					<a href="feePayment/manager/create.do?leagueId=${row_League.id}">
+						<spring:message code="league.feePayment" />
+					</a>
 				</jstl:if>
-			</jstl:forEach>
-			<jstl:if test="${pagado != true}">
-				<a href="feePayment/manager/create.do?leagueId=${row_League.id}">
-					<spring:message code="league.feePayment" />
-				</a>
-			</jstl:if>
-		</display:column>
+			</display:column>
 		</jstl:if>
 	</security:authorize>
 

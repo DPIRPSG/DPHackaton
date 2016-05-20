@@ -42,6 +42,7 @@ public class FeePaymentService {
 	
 	public FeePayment save(FeePayment feePayment){
 		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can pay for a league.");
+		Assert.isTrue(feePayment.getId() == 0, "You cant edit the pay for a league.");
 		Assert.notNull(feePayment);
 		
 		FeePayment result;
