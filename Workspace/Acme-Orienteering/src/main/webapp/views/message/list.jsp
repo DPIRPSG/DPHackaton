@@ -30,9 +30,11 @@
 		</display:column>
 		
 		<!-- Attributes -->
-		<acme:displayColumn value="${row_messa.sentMoment}" title="message.sentMoment" sorteable="true" format="{0,date,yyyy/MM/dd }" />
+		<spring:message code="message.sentMoment" var="sentMomentHeader" />
+		<acme:displayColumn value="${row_messa.sentMoment}" title="${sentMomentHeader}" sorteable="true" format="{0,date,yyyy/MM/dd }" />
 		
-		<acme:displayColumn value="${row_messa.subject}" title="message.subject" sorteable="true"/>
+		<spring:message code="message.subject" var="subjectHeader" />
+		<acme:displayColumn value="${row_messa.subject}" title="${subjectHeader}" sorteable="true"/>
 			
 	</display:table>
 	

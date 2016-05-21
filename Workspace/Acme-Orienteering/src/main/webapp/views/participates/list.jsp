@@ -12,6 +12,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jsp:useBean id="today" class="java.util.Date" />
 
 <!-- Listing grid -->
 <display:table pagesize="5" class="displaytag" keepStatus="false"
@@ -19,18 +20,24 @@
 	<!-- Action links -->
 
 	<security:authorize access="hasRole('REFEREE')">
+		<jstl:if test="${today.time gt row_Participates.race.moment.time}">
 		<display:column>
 			<div>
 				<b><acme:link href="participates/referee/edit.do?participatesId=${row_Participates.id}"
 				 code="participates.edit"/></b>
 			</div>
 		</display:column>
+		</jstl:if>
+		
 	</security:authorize>
 
 	<!-- Attributes -->
+	<jstl:if test="${today.time gt row_Participates.race.moment.time}">
+
+		<spring:message code="participates.result" var="resultHeader"/>
+		<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" />
+	</jstl:if>
 	
-	<spring:message code="participates.result" var="resultHeader"/>
-	<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" />
 	
 	<spring:message code="participates.runner" var="runnerHeader" />
 	<display:column title="${runnerHeader}" sortable="false">
