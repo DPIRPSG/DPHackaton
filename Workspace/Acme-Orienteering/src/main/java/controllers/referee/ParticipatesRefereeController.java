@@ -34,16 +34,16 @@ public class ParticipatesRefereeController extends AbstractController{
 
 	//Listing ----------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue = "-1") int runnerId,
-			@RequestParam(defaultValue = "-1") int raceId) {
+	public ModelAndView list(@RequestParam(defaultValue = "-1") Integer runnerId,
+			@RequestParam(defaultValue = "-1") Integer raceId) {
 		ModelAndView result;
 		Collection<Participates> parts;
 		
-		parts = participatesService.findAllRefereeByRunnerIdAndRaceId(runnerId, raceId);
+		parts = participatesService.findAllRefereeByRunnerIdAndRaceId(runnerId.intValue(), raceId.intValue());
 		
 		result = new ModelAndView("participates/list");
 		result.addObject("participatess", parts);
-		result.addObject("requestURI", "participates/referee/list.do");
+		result.addObject("requestURI", "participates/referee/list.do?raceId=" + raceId.toString());
 		return result;
 	}
 	
@@ -52,13 +52,13 @@ public class ParticipatesRefereeController extends AbstractController{
 	//Edition ----------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int participatesId){
+	public ModelAndView create(@RequestParam int participatesId, @RequestParam(defaultValue="participates/referee/list.do") String redirectUrl){
 		ModelAndView result;
 		Participates part;
 		
 		part = participatesService.findOne(participatesId);
 		
-		result = createEditModelAndView(part);
+		result = createEditModelAndView(part, redirectUrl);
 		
 		return result;
 	}
@@ -69,14 +69,13 @@ public class ParticipatesRefereeController extends AbstractController{
 		ModelAndView result;
 		
 		if(binding.hasErrors()){
-			result = createEditModelAndView(input);
+			result = createEditModelAndView(input, "participates/referee/list.do?raceId=" + input.getRace().getId());
 		} else {
 			try {
 				participatesService.saveFromClassificationEdit(input);
-				result = new ModelAndView("redirect:list.do");
-				result.addObject("messageStatus", "actorForm.commit.ok");						
+				result = new ModelAndView("redirect:list.do?raceId=" + input.getRace().getId());
 			} catch (Throwable oops){
-				result = createEditModelAndView(input, "actorForm.commit.error");
+				result = createEditModelAndView(input, "participates/referee/list.do?raceId=" + input.getRace().getId(), "participates.commit.error");
 			}
 		}
 		
@@ -84,20 +83,21 @@ public class ParticipatesRefereeController extends AbstractController{
 	}
 	//Ancillary Methods ----------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(Participates input){
+	protected ModelAndView createEditModelAndView(Participates input, String redirectUrl){
 		ModelAndView result;
 		
-		result = createEditModelAndView(input, null);
+		result = createEditModelAndView(input, redirectUrl, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(Participates input, String message){
+	protected ModelAndView createEditModelAndView(Participates input, String redirectUrl, String message){
 		ModelAndView result;
 		
 		result = new ModelAndView("participates/editResult");
 		result.addObject("participates", input);
 		result.addObject("message", message);
+		result.addObject("redirectUrl", redirectUrl);
 		
 		return result;
 	}
