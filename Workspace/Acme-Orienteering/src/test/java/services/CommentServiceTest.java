@@ -1,6 +1,8 @@
 package services;
 
 
+import java.util.Collection;
+
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
@@ -596,6 +598,381 @@ public class CommentServiceTest extends AbstractTest {
 		Assert.isTrue((numCommentsPre + 1) == numCommentsPost);
 		Assert.isTrue(race.getComments().contains(comment));
 		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre un club en condiciones normales
+	 */
+	@Test
+	public void testDeleteCommentOk1() {
+		Collection<Club> clubes;
+		Club club;
+		Comment comment;
+		
+		clubes = clubService.findAll();
+		club = null;
+		comment = null;
+		
+		for(Club c : clubes) {
+			if(!c.getComments().isEmpty()) {
+				club = c;
+				break;
+			}
+		}
+				
+		authenticate("admin");		
+		
+		for(Comment c : club.getComments()) {
+			if(!c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre una liga en condiciones normales
+	 */
+	@Test
+	public void testDeleteCommentOk2() {
+		Collection<League> leagues;
+		League league;
+		Comment comment;
+		
+		leagues = leagueService.findAll();
+		league = null;
+		comment = null;
+		
+		for(League l : leagues) {
+			if(!l.getComments().isEmpty()) {
+				league = l;
+				break;
+			}
+		}
+				
+		authenticate("admin");		
+		
+		for(Comment c : league.getComments()) {
+			if(!c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre una carrera en condiciones normales
+	 */
+	@Test
+	public void testDeleteCommentOk3() {
+		Collection<Race> races;
+		Race race;
+		Comment comment;
+		
+		races = raceService.findAll();
+		race = null;
+		comment = null;
+		
+		for(Race r : races) {
+			if(!r.getComments().isEmpty()) {
+				race = r;
+				break;
+			}
+		}
+				
+		authenticate("admin");		
+		
+		for(Comment c : race.getComments()) {
+			if(!c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede borrar un comentario
+	 * sobre un club sin ser administrador
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCommentError1() {
+		Collection<Club> clubes;
+		Club club;
+		Comment comment;
+		
+		clubes = clubService.findAll();
+		club = null;
+		comment = null;
+		
+		for(Club c : clubes) {
+			if(!c.getComments().isEmpty()) {
+				club = c;
+				break;
+			}
+		}
+				
+		//authenticate("admin");		
+		
+		for(Comment c : club.getComments()) {
+			if(!c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		//authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre una liga sin ser administrador
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCommentError2() {
+		Collection<League> leagues;
+		League league;
+		Comment comment;
+		
+		leagues = leagueService.findAll();
+		league = null;
+		comment = null;
+		
+		for(League l : leagues) {
+			if(!l.getComments().isEmpty()) {
+				league = l;
+				break;
+			}
+		}
+				
+		//authenticate("admin");		
+		
+		for(Comment c : league.getComments()) {
+			if(!c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		//authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre una carrera sin ser administrador
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCommentError3() {
+		Collection<Race> races;
+		Race race;
+		Comment comment;
+		
+		races = raceService.findAll();
+		race = null;
+		comment = null;
+		
+		for(Race r : races) {
+			if(!r.getComments().isEmpty()) {
+				race = r;
+				break;
+			}
+		}
+				
+		//authenticate("admin");		
+		
+		for(Comment c : race.getComments()) {
+			if(!c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		//authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede borrar un comentario
+	 * sobre un club si el comentario que se intenta borrar ya esta borrado
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCommentError4() {
+		Collection<Club> clubes;
+		Club club;
+		Comment comment;
+		
+		clubes = clubService.findAll();
+		club = null;
+		comment = null;
+		
+		for(Club c : clubes) {
+			if(!c.getComments().isEmpty()) {
+				club = c;
+				break;
+			}
+		}
+				
+		authenticate("admin");		
+		
+		for(Comment c : club.getComments()) {
+			if(c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre una liga si el comentario que se intenta borrar ya esta borrado
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCommentError5() {
+		Collection<League> leagues;
+		League league;
+		Comment comment;
+		
+		leagues = leagueService.findAll();
+		league = null;
+		comment = null;
+		
+		for(League l : leagues) {
+			if(!l.getComments().isEmpty()) {
+				league = l;
+				break;
+			}
+		}
+				
+		authenticate("admin");		
+		
+		for(Comment c : league.getComments()) {
+			if(c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar un comentario
+	 * sobre una carrera si el comentario que se intenta borrar ya esta borrado
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCommentError6() {
+		Collection<Race> races;
+		Race race;
+		Comment comment;
+		
+		races = raceService.findAll();
+		race = null;
+		comment = null;
+		
+		for(Race r : races) {
+			if(!r.getComments().isEmpty()) {
+				race = r;
+				break;
+			}
+		}
+				
+		authenticate("admin");		
+		
+		for(Comment c : race.getComments()) {
+			if(c.getDeleted()) {
+				comment = c;
+				break;
+			}
+		}
+		
+		commentService.delete(comment);
+		
+		comment = commentService.findOne(comment.getId());		
+		Assert.isTrue(comment.getDeleted() == true);
 		authenticate(null);
 	}
 }
