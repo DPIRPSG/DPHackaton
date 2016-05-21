@@ -22,6 +22,7 @@ public class Entered extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private String report;
 	private boolean isMember;
+	private boolean isDenied;
 	private Date registerMoment;
 	private Date acceptedMoment;
 	
@@ -40,6 +41,12 @@ public class Entered extends DomainEntity {
 		this.isMember = isMember;
 	}
 	
+	public boolean getIsDenied() {
+		return isDenied;
+	}
+	public void setIsDenied(boolean isDenied) {
+		this.isDenied = isDenied;
+	}	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")

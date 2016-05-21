@@ -757,6 +757,7 @@
 	<bean id="entered1" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="true"/>
+		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
 		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner1"/>
@@ -766,6 +767,7 @@
 	<bean id="entered2" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2016/05/05 12:10"/>
 <!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner2"/>
@@ -775,6 +777,7 @@
 	<bean id="entered3" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="true"/>
+		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
 		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner3"/>
