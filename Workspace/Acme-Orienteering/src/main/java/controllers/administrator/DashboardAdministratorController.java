@@ -42,7 +42,6 @@ public class DashboardAdministratorController extends AbstractController {
 		super();
 	}
 	
-	
 	// Listing ------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
