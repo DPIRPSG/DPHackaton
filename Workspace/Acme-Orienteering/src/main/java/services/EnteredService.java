@@ -61,6 +61,7 @@ public class EnteredService {
 		result.setRunner(runner);
 		
 		result.setIsMember(false);
+		result.setIsDenied(false);
 		result.setRegisterMoment(new Date());
 		
 		return result;
