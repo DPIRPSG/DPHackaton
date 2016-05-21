@@ -206,6 +206,21 @@ public class EnteredService {
 	/**
 	 * 
 	 * @param clubId
+	 * @return the collection of denied entered that a club have.
+	 */
+	public Collection<Entered> findAllDeniedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllDeniedByClub(clubId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
 	 * @return the collection of expelled entered that a club have.
 	 */
 	public Collection<Entered> findAllExpelledByClub(int clubId){
