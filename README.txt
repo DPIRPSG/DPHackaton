@@ -2,13 +2,13 @@ A continuación se detallan lo que hemos considerado aspectos importantes a tener
 
 Respecto a las peticiones de ingreso:
 
-- Si está pendiente -> isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NULL && registerMoment IS NOT NULL
+- Si está pendiente -> isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NULL
 
-- Si está aceptado -> isMember IS TRUE && isDenied IS FALSE && acceptedMoment IS NOT NULL && registerMoment IS NOT NULL
+- Si está aceptado -> isMember IS TRUE && isDenied IS FALSE && acceptedMoment IS NOT NULL
 
-- Si está rechazado -> isMember IS FALSE && is Denied IS TRUE && acceptedMoment IS NULL && registerMoment IS NOT NULL
+- Si está rechazado -> isMember IS FALSE && is Denied IS TRUE && acceptedMoment IS NULL
 
-- Si está expulsado -> isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NOT NULL && registerMoment IS NOT NULL
+- Si está expulsado -> isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NOT NULL
 
 =====
 
