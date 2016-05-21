@@ -20,23 +20,23 @@
 	<!-- Action links -->
 
 	<security:authorize access="hasRole('REFEREE')">
-		<jstl:if test="${today.time gt row_Participates.race.moment.time}">
 		<display:column>
+			<jstl:if test="${today.time gt row_Participates.race.moment.time}">
 			<div>
 				<b><acme:link href="participates/referee/edit.do?participatesId=${row_Participates.id}"
 				 code="participates.edit"/></b>
 			</div>
+			</jstl:if>
 		</display:column>
-		</jstl:if>
 		
 	</security:authorize>
 
 	<!-- Attributes -->
-	<jstl:if test="${today.time gt row_Participates.race.moment.time}">
+<%-- 	<jstl:if test="${today.time gt row_Participates.race.moment.time}"> --%>
 
 		<spring:message code="participates.result" var="resultHeader"/>
 		<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" />
-	</jstl:if>
+<%-- 	</jstl:if> --%>
 	
 	
 	<spring:message code="participates.runner" var="runnerHeader" />
