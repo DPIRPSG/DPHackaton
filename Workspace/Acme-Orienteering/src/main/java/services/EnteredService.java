@@ -78,7 +78,7 @@ public class EnteredService {
 	public Entered save(Entered entered){
 		
 		Assert.notNull(entered);
-		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can save a entered.");
+		Assert.isTrue(actorService.checkAuthorities("RUNNER,MANAGER"));
 		
 		enteredRepository.save(entered);
 		

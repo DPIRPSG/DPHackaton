@@ -2,9 +2,12 @@ package controllers.manager;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +63,42 @@ public class EnteredManagerController extends AbstractController{
 		result.addObject("requestURI", "entered/manager/list.do");
 		result.addObject("entereds", entereds);		
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int enteredId) {
+		ModelAndView result;
+		Entered entered;
+
+		entered = enteredService.findOne(enteredId);
+		Assert.notNull(entered);
+		result = createEditModelAndView(entered);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Entered entered, BindingResult binding) {
+		ModelAndView result;
+		String report;
+		Entered enteredPreSave;
+		
+		report = entered.getReport();
+		enteredPreSave = enteredService.findOne(entered.getId());
+		enteredPreSave.setReport(report);
+		
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(entered);
+		} else {
+			try {
+				enteredService.save(enteredPreSave);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(entered, "race.commit.error");				
+			}
+		}
+
 		return result;
 	}
 	
@@ -147,6 +186,26 @@ public class EnteredManagerController extends AbstractController{
 			result.addObject("messageStatus", "entered.commit.error");
 		}
 		
+		return result;
+	}
+	
+	// Ancillary methods ------------------------------------------------------
+	
+	protected ModelAndView createEditModelAndView(Entered entered) {
+		ModelAndView result;
+
+		result = createEditModelAndView(entered, null);
+		
+		return result;
+	}	
+	
+	protected ModelAndView createEditModelAndView(Entered entered, String message) {
+		ModelAndView result;
+		
+		result = new ModelAndView("entered/edit");
+		result.addObject("entered", entered);
+		result.addObject("message", message);
+
 		return result;
 	}
 

@@ -18,6 +18,17 @@
 	name="entereds" requestURI="${requestURI}" id="row_Entered">
 	<!-- Action links -->
 	<security:authorize access="hasRole('MANAGER')">
+	<spring:message code="entered.edit" var="editHeader"/>
+		<display:column title="${editHeader}">
+			<div>
+				<b><a href="entered/manager/edit.do?enteredId=${row_Entered.id}"> <spring:message
+							code="entered.edit" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('MANAGER')">
 	<spring:message code="entered.accept" var="acceptHeader"/>
 		<display:column title="${acceptHeader}">
 			<div>
