@@ -286,5 +286,60 @@ public class ClubService {
 			}
 		}
 	}
+	
+	// DASHBOARD
+	
+	public Collection<Club> findAllWhoHaveWonMoreLeagues(){
+		Collection<Club> result = null;
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveWonMoreRaces(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveWonMoreRaces();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveMoreDeniedEntered(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveMoreDeniedEntered();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveMorePunishments(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveMorePunishments();
+		
+		return result;
+	}
+	
+	public Double ratioOfClubsByLeague(){
+		Double result;
+		
+		result = clubRepository.ratioOfClubsByLeague();
+		
+		return result;
+	}
 
+	public Collection<Club> findAllWithMorePoints(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWithMorePoints();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWithLessPoint(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWithLessPoint();
+		
+		return result;
+	}
 }
