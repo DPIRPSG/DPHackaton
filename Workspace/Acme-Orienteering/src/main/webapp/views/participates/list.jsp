@@ -23,7 +23,7 @@
 		<display:column>
 			<jstl:if test="${today.time gt row_Participates.race.moment.time}">
 			<div>
-				<b><acme:link href="participates/referee/edit.do?participatesId=${row_Participates.id}"
+				<b><acme:link href="participates/referee/edit.do?participatesId=${row_Participates.id}&redirectUrl=${requestURI}"
 				 code="participates.edit"/></b>
 			</div>
 			</jstl:if>
@@ -43,6 +43,7 @@
 	<display:column title="${runnerHeader}" sortable="false">
 <%-- 		<a href="${requestURI}?runnerId=${row_Participates.runner.id}"> --%>
 			<jstl:out value="${row_Participates.runner.name}"/>
+			(<jstl:out value="${row_Participates.runner.userAccount.username}"/>)
 <!-- 		</a> -->
 	</display:column>
 	
