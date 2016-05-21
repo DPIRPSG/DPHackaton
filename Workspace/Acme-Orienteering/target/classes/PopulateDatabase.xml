@@ -271,6 +271,9 @@
 				<ref bean="folder7"/>
 				<ref bean="folder8"/>
 				<ref bean="folder9"/>
+				<ref bean="folder100"/>
+				<ref bean="folder101"/>
+				<ref bean="folder102"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -661,6 +664,36 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder100" class="domain.Folder">
+		<property name="name" value="Mi carpeta 1"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder101" class="domain.Folder">
+		<property name="name" value="Mi carpeta 2"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder102" class="domain.Folder">
+		<property name="name" value="Mi carpeta 3"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
 		<property name="messages">
 			<list>
 			</list>

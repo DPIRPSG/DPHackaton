@@ -82,9 +82,10 @@ public class FolderService {
 
 		Folder result;
 
-		if (folder.getId() == 0)
+		if (folder.getId() == 0){
 			result = this.create();
-		else
+			result.setActor(actorService.findByPrincipal());
+		}else
 			result = this.findOne(folder.getId());
 		
 		result.setName(folder.getName());
