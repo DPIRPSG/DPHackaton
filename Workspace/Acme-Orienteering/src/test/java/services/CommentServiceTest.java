@@ -36,7 +36,7 @@ public class CommentServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * 
+	 * Acme-Orienteering - 
 	 */
 	
 	/**
