@@ -98,6 +98,8 @@ public class ClassificationService {
 			Map<String, Integer> clubClassi;
 			Club actClub;
 			
+			Assert.isTrue(p.getResult() > 0, "classification.calculateClassification.runnerWithNoResult");
+			
 			actClub = runnerService.getClub(p.getRunner());
 			
 			if(raceClassification.containsKey(actClub))

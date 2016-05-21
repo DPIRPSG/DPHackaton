@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,17 +41,21 @@ public class ClassificationRefereeController extends AbstractController{
 	//Edition ----------------------------------------------------------
 	
 	@RequestMapping(value = "/calculateClassification", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int raceId, @RequestParam(defaultValue = "classification/list.do") String requestUri){
+	public ModelAndView create(
+			@RequestParam int raceId,
+			@RequestParam(defaultValue = "classification/list.do") String fromUrl) {
 		ModelAndView result;
 
 		try {
 			classificationService.calculateClassification(raceId);
-		} catch (Throwable oops) {
-			result = new ModelAndView("redirect:../../" + requestUri);
-			result.addObject("messageStatus", "classification.commit.error");
-		} finally {
-			result = new ModelAndView("redirect:../../" + requestUri);
+			result = new ModelAndView("redirect:../list.do?raceId=" + raceId);
 			result.addObject("messageStatus", "classification.commit.ok");
+		}catch (Throwable oops) {
+			result = new ModelAndView("redirect:../../" + fromUrl);
+			if (oops.getMessage().equals("classification.calculateClassification.runnerWithNoResult"))
+				result.addObject("messageStatus", "classification.commit.error.result0");			
+			else
+				result.addObject("messageStatus", "classification.commit.error");
 		}
 		
 		return result;
