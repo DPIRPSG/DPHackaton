@@ -23,6 +23,7 @@ import services.ActorService;
 import services.ClubService;
 import services.LeagueService;
 import services.RaceService;
+import services.RefereeService;
 import services.RunnerService;
 import controllers.AbstractController;
 import domain.Club;
@@ -49,6 +50,9 @@ public class RaceController extends AbstractController {
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private RefereeService refereeService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -87,6 +91,9 @@ public class RaceController extends AbstractController {
 		result.addObject("racing", racing);
 		result.addObject("runner", runner);
 		result.addObject("club", club);
+		
+		if(actorService.checkAuthority("REFEREE"))
+			result.addObject("referee", refereeService.findByPrincipal());
 		
 		return result;
 	}
