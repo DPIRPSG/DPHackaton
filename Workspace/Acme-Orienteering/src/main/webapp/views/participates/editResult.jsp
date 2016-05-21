@@ -23,12 +23,9 @@
 	<acme:textbox code="participates.result" path="result"/>
 
 	<!-- Action buttons -->
+	<br />
 	<acme:submit name="save" code="participates.save"/>
 	
-	<jstl:if test="${sponsor.id != 0}">
-		<acme:submit name="delete" code="participates.delete"/>
-	</jstl:if>
-	
-	<acme:cancel code="participates.cancel" url="participates/referee/list.do"/>
+	<acme:cancel code="participates.cancel" url="${redirectUrl}"/>
 	
 </form:form>

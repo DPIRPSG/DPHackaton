@@ -57,7 +57,9 @@ public class ParticipatesService {
 	
 	private Participates save(Participates participates){
 		Assert.notNull(participates);
-		
+		if(participates.getResult() != 0)
+			Assert.isTrue(participates.getRace().getMoment().before(new Date()), "participates.save.resultNot0");
+			
 		participatesRepository.save(participates);
 		
 		return participates;
