@@ -120,12 +120,12 @@ public class DatabaseUtil {
 		String[] statements;		
 		
 		databaseScript = new ArrayList<String>();
-		databaseScript.add(String.format("drop database `%s`", databaseName));
-		databaseScript.add(String.format("create database `%s`", databaseName));
+		databaseScript.add(String.format("drop database \"%s\"", databaseName));
+		databaseScript.add(String.format("create database \"%s\"", databaseName));
 		executeScript(databaseScript);
 		
 		schemaScript = new ArrayList<String>();
-		schemaScript.add(String.format("use `%s`", databaseName));
+		schemaScript.add(String.format("use '%s'", databaseName));
 		statements = configuration.generateSchemaCreationScript(databaseDialect);
 		schemaScript.addAll(Arrays.asList(statements));
 		executeScript(schemaScript);
@@ -138,6 +138,8 @@ public class DatabaseUtil {
 			@Override
 			public void execute(Connection connection) throws SQLException {
 				Statement statement;
+				
+				connection.setAutoCommit(true);
 				
 				statement = connection.createStatement();
 				for (String line : script) {
