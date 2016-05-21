@@ -1,9 +1,14 @@
 package services;
 
 
+import java.util.Collection;
+
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -37,6 +42,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	@Autowired
 	private ClubService clubService;
 	
+	@Autowired
+	private RefereeService refereeService;
+	
 	// Tests ---------------------------------------
 	
 	/**
@@ -44,7 +52,8 @@ public class PunishmentServiceTest extends AbstractTest {
 	 */
 	
 	/**
-	 * 
+	 * Test que comprueba que se puede crear
+	 * una sancion en condiciones normales
 	 */
 	@Test
 	public void testCreatePunishmentOk() {
@@ -79,6 +88,247 @@ public class PunishmentServiceTest extends AbstractTest {
 		System.out.println("numPostSaveClub: "+numPostSaveClub);
 		System.out.println("numPreSaveLeague: "+numPreSaveLeague);
 		System.out.println("numPostSaveLeague: "+numPostSaveLeague);
+		
+		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
+		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);
+		Assert.isTrue(club.getPunishments().contains(punishment));
+		Assert.isTrue(league.getPunishments().contains(punishment));
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que si intentar crear
+	 * una sancion sin ser arbitro, falla
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testCreatePunishmentError1() {
+		Punishment punishment;
+		League league;
+		Club club;
+		Referee referee;
+		int numPreSaveClub, numPostSaveClub;
+		int numPreSaveLeague, numPostSaveLeague;
+				
+		league = leagueService.findAll().iterator().next();
+		club = league.getFeePayments().iterator().next().getClub();
+		referee = league.getReferee();
+		
+		numPreSaveClub = club.getPunishments().size();
+		numPreSaveLeague = league.getPunishments().size();
+		
+		authenticate("manager2");
+		punishment = punishmentService.create(club.getId());
+		punishment.setReason("Prueba");
+		punishment.setPoints(10);
+		punishment.setLeague(league);
+		punishment = punishmentService.save(punishment);
+		
+		league = leagueService.findOne(league.getId());
+		club = clubService.findOne(club.getId());
+		
+		numPostSaveClub = club.getPunishments().size();
+		numPostSaveLeague = league.getPunishments().size();
+		
+		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
+		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);
+		Assert.isTrue(club.getPunishments().contains(punishment));
+		Assert.isTrue(league.getPunishments().contains(punishment));
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que si se intenta crear
+	 * una sancion sin ser el arbitro de dicha liga, falla
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testCreatePunishmentError2() {
+		Punishment punishment;
+		League league;
+		Club club;
+		Collection<Referee> referees;
+		Referee referee;
+		int numPreSaveClub, numPostSaveClub;
+		int numPreSaveLeague, numPostSaveLeague;
+				
+		league = leagueService.findAll().iterator().next();
+		club = league.getFeePayments().iterator().next().getClub();
+		referee = league.getReferee();
+		
+		referees = refereeService.findAll();
+		for(Referee r : referees) {
+			if(r.getId() != referee.getId()) {
+				referee = r;
+				break;
+			}
+		}
+		
+		numPreSaveClub = club.getPunishments().size();
+		numPreSaveLeague = league.getPunishments().size();
+		
+		authenticate(referee.getUserAccount().getUsername());
+		punishment = punishmentService.create(club.getId());
+		punishment.setReason("Prueba");
+		punishment.setPoints(10);
+		punishment.setLeague(league);
+		punishment = punishmentService.save(punishment);
+		
+		league = leagueService.findOne(league.getId());
+		club = clubService.findOne(club.getId());
+		
+		numPostSaveClub = club.getPunishments().size();
+		numPostSaveLeague = league.getPunishments().size();
+		
+		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
+		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);
+		Assert.isTrue(club.getPunishments().contains(punishment));
+		Assert.isTrue(league.getPunishments().contains(punishment));
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede crear
+	 * una sancion sin indicar la liga
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testCreatePunishmentError3() {
+		Punishment punishment;
+		League league;
+		Club club;
+		Referee referee;
+		int numPreSaveClub, numPostSaveClub;
+		int numPreSaveLeague, numPostSaveLeague;
+				
+		league = leagueService.findAll().iterator().next();
+		club = league.getFeePayments().iterator().next().getClub();
+		referee = league.getReferee();
+		
+		numPreSaveClub = club.getPunishments().size();
+		numPreSaveLeague = league.getPunishments().size();
+		
+		authenticate(referee.getUserAccount().getUsername());
+		punishment = punishmentService.create(club.getId());
+		punishment.setReason("Prueba");
+		punishment.setPoints(10);
+		//punishment.setLeague(league);
+		punishment = punishmentService.save(punishment);
+		
+		league = leagueService.findOne(league.getId());
+		club = clubService.findOne(club.getId());
+		
+		numPostSaveClub = club.getPunishments().size();
+		numPostSaveLeague = league.getPunishments().size();
+		
+		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
+		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);
+		Assert.isTrue(club.getPunishments().contains(punishment));
+		Assert.isTrue(league.getPunishments().contains(punishment));
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede crear
+	 * una sancion sin indicar el motivo
+	 */
+	@Test(expected=ConstraintViolationException.class)
+	@Rollback(value=true)
+	public void testCreatePunishmentError4() {
+		Punishment punishment;
+		League league;
+		Club club;
+		Referee referee;
+		int numPreSaveClub, numPostSaveClub;
+		int numPreSaveLeague, numPostSaveLeague;
+				
+		league = leagueService.findAll().iterator().next();
+		club = league.getFeePayments().iterator().next().getClub();
+		referee = league.getReferee();
+		
+		numPreSaveClub = club.getPunishments().size();
+		numPreSaveLeague = league.getPunishments().size();
+		
+		authenticate(referee.getUserAccount().getUsername());
+		punishment = punishmentService.create(club.getId());
+		//punishment.setReason("Prueba");
+		punishment.setPoints(10);
+		punishment.setLeague(league);
+		punishment = punishmentService.save(punishment);
+		punishmentService.flush();
+		
+		league = leagueService.findOne(league.getId());
+		club = clubService.findOne(club.getId());
+		
+		numPostSaveClub = club.getPunishments().size();
+		numPostSaveLeague = league.getPunishments().size();
+		
+		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
+		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);
+		Assert.isTrue(club.getPunishments().contains(punishment));
+		Assert.isTrue(league.getPunishments().contains(punishment));
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede crear
+	 * una sancion sin indicar los puntos
+	 */
+	@Test(expected=ConstraintViolationException.class)
+	@Rollback(value=true)
+	public void testCreatePunishmentError5() {
+		Punishment punishment;
+		League league;
+		Club club;
+		Referee referee;
+		int numPreSaveClub, numPostSaveClub;
+		int numPreSaveLeague, numPostSaveLeague;
+				
+		league = leagueService.findAll().iterator().next();
+		club = league.getFeePayments().iterator().next().getClub();
+		referee = league.getReferee();
+		
+		numPreSaveClub = club.getPunishments().size();
+		numPreSaveLeague = league.getPunishments().size();
+		
+		authenticate(referee.getUserAccount().getUsername());
+		punishment = punishmentService.create(club.getId());
+		punishment.setReason("Prueba");
+		//punishment.setPoints(10);
+		punishment.setLeague(league);
+		punishment = punishmentService.save(punishment);
+		punishmentService.flush();
+		
+		league = leagueService.findOne(league.getId());
+		club = clubService.findOne(club.getId());
+		
+		numPostSaveClub = club.getPunishments().size();
+		numPostSaveLeague = league.getPunishments().size();
 		
 		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
 		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);
