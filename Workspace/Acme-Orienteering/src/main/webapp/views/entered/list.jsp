@@ -42,6 +42,19 @@
 			</div>
 		</display:column>
 	</security:authorize>
+	
+	<security:authorize access="hasRole('MANAGER')">
+	<spring:message code="entered.expel" var="expelHeader"/>
+		<display:column title="${expelHeader}">
+			<div>
+				<jstl:if test="${row_Entered.isMember == true && row_Entered.isDenied == false && row_Entered.acceptedMoment != null}">	
+					<b><a href="entered/manager/expel.do?enteredId=${row_Entered.id}"> <spring:message
+								code="entered.expel" />
+					</a></b>
+				</jstl:if>				
+			</div>
+		</display:column>
+	</security:authorize>
 
 	<!-- Attributes -->
 

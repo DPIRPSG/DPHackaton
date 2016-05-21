@@ -83,10 +83,10 @@ public class EnteredManagerController extends AbstractController{
 		try{
 			enteredService.accept(entered);
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.accept.ok");
+			result.addObject("messageStatus", "entered.commit.ok");
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.accept.error");
+			result.addObject("messageStatus", "entered.commit.error");
 		}
 		
 		return result;
@@ -112,10 +112,39 @@ public class EnteredManagerController extends AbstractController{
 		try{
 			enteredService.deny(entered);
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.deny.ok");
+			result.addObject("messageStatus", "entered.commit.ok");
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.deny.error");
+			result.addObject("messageStatus", "entered.commit.error");
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param enteredId
+	 * @see 22.
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Expulsar a un corredor de su club.
+	 * @return the view with the entered accepted
+	 */
+	@RequestMapping(value = "/expel", method = RequestMethod.GET)
+	public ModelAndView expel(@RequestParam int enteredId){
+		
+		ModelAndView result;
+		Entered entered;
+		
+		entered = enteredService.findOne(enteredId);
+		Assert.notNull(entered);
+		
+		try{
+			enteredService.expel(entered);
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "entered.commit.ok");
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "entered.commit.error");
 		}
 		
 		return result;
