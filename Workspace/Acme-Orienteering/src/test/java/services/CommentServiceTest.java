@@ -635,6 +635,8 @@ public class CommentServiceTest extends AbstractTest {
 			}
 		}
 		
+		Assert.isTrue(comment.getDeleted() == false);
+		
 		commentService.delete(comment);
 		
 		comment = commentService.findOne(comment.getId());		
@@ -676,6 +678,8 @@ public class CommentServiceTest extends AbstractTest {
 			}
 		}
 		
+		Assert.isTrue(comment.getDeleted() == false);
+		
 		commentService.delete(comment);
 		
 		comment = commentService.findOne(comment.getId());		
@@ -716,6 +720,8 @@ public class CommentServiceTest extends AbstractTest {
 				break;
 			}
 		}
+		
+		Assert.isTrue(comment.getDeleted() == false);
 		
 		commentService.delete(comment);
 		
@@ -759,6 +765,8 @@ public class CommentServiceTest extends AbstractTest {
 			}
 		}
 		
+		Assert.isTrue(comment.getDeleted() == false);
+		
 		commentService.delete(comment);
 		
 		comment = commentService.findOne(comment.getId());		
@@ -800,6 +808,8 @@ public class CommentServiceTest extends AbstractTest {
 				break;
 			}
 		}
+		
+		Assert.isTrue(comment.getDeleted() == false);
 		
 		commentService.delete(comment);
 		
@@ -843,6 +853,8 @@ public class CommentServiceTest extends AbstractTest {
 			}
 		}
 		
+		Assert.isTrue(comment.getDeleted() == false);
+		
 		commentService.delete(comment);
 		
 		comment = commentService.findOne(comment.getId());		
@@ -885,6 +897,8 @@ public class CommentServiceTest extends AbstractTest {
 			}
 		}
 		
+		Assert.isTrue(comment.getDeleted() == true);
+		
 		commentService.delete(comment);
 		
 		comment = commentService.findOne(comment.getId());		
@@ -926,6 +940,7 @@ public class CommentServiceTest extends AbstractTest {
 				break;
 			}
 		}
+		Assert.isTrue(comment.getDeleted() == true);
 		
 		commentService.delete(comment);
 		
@@ -969,10 +984,78 @@ public class CommentServiceTest extends AbstractTest {
 			}
 		}
 		
+		Assert.isTrue(comment.getDeleted() == true);
+		
 		commentService.delete(comment);
 		
 		comment = commentService.findOne(comment.getId());		
 		Assert.isTrue(comment.getDeleted() == true);
 		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que el listado de los comentarios
+	 * de un club funciona correctamente
+	 */
+	@Test
+	public void testFindAllByCommentedEntityId1() {
+		Collection<Comment> comments;
+		Club club;
+		int commentedEntityId;
+		
+		club = clubService.findAll().iterator().next();
+		commentedEntityId = club.getId();
+		
+		comments = commentService.findAllByCommentedEntityId(commentedEntityId);
+		
+		Assert.isTrue(comments.size() == 1);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que el listado de los comentarios
+	 * de una liga funciona correctamente
+	 */
+	@Test
+	public void testFindAllByCommentedEntityId2() {
+		Collection<Comment> comments;
+		League league;
+		int commentedEntityId;
+		
+		league = leagueService.findAll().iterator().next();
+		commentedEntityId = league.getId();
+		
+		comments = commentService.findAllByCommentedEntityId(commentedEntityId);
+		
+		Assert.isTrue(comments.size() == 1);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que el listado de los comentarios
+	 * de una carrera funciona correctamente
+	 */
+	@Test
+	public void testFindAllByCommentedEntityId3() {
+		Collection<Comment> comments;
+		Race race;
+		int commentedEntityId;
+		
+		race = raceService.findAll().iterator().next();
+		commentedEntityId = race.getId();
+		
+		comments = commentService.findAllByCommentedEntityId(commentedEntityId);
+		
+		Assert.isTrue(comments.size() == 1);
 	}
 }
