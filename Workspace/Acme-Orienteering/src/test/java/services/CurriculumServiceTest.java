@@ -605,4 +605,126 @@ public class CurriculumServiceTest extends AbstractTest {
 		
 		//authenticate(null);
 	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que se puede borrar
+	 * un curriculum en condiciones normales
+	 */
+	@Test
+	public void testDeleteCurriculumOk() {
+		Curriculum curriculum;
+		Collection<Actor> actors;
+		Actor actor;
+		
+		actors = actorService.findAll();
+		actor = null;
+		
+		for(Actor a : actors) {
+			if(a.getCurriculum() != null) {
+				actor = a;
+				break;
+			}
+		}
+		
+		Assert.isTrue(actor.getCurriculum() != null);
+		
+		authenticate(actor.getUserAccount().getUsername());
+		
+		curriculum = actor.getCurriculum();
+		curriculumService.delete(curriculum);
+		
+		actor = actorService.findByPrincipal();
+		Assert.isTrue(actor.getCurriculum() == null);
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede borrar
+	 * un curriculum sin estar logueado
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCurriculumError1() {
+		Curriculum curriculum;
+		Collection<Actor> actors;
+		Actor actor;
+		
+		actors = actorService.findAll();
+		actor = null;
+		
+		for(Actor a : actors) {
+			if(a.getCurriculum() != null) {
+				actor = a;
+				break;
+			}
+		}
+		
+		Assert.isTrue(actor.getCurriculum() != null);
+		
+		//authenticate(actor.getUserAccount().getUsername());
+		
+		curriculum = actor.getCurriculum();
+		curriculumService.delete(curriculum);
+		
+		actor = actorService.findByPrincipal();
+		Assert.isTrue(actor.getCurriculum() == null);
+		
+		//authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que no se puede borrar
+	 * el curriculum de otro usuario
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDeleteCurriculumError2() {
+		Curriculum curriculum;
+		Collection<Actor> actors;
+		Actor actor;
+		Actor actor2;
+		
+		actors = actorService.findAll();
+		actor = null;
+		actor2 = null;
+		
+		for(Actor a : actors) {
+			if(a.getCurriculum() != null) {
+				actor = a;
+				break;
+			}
+		}
+		
+		for(Actor a : actors) {
+			if(a.getCurriculum() != null && a.getId() != actor.getId()) {
+				actor2 = a;
+				break;
+			}
+		}
+		
+		Assert.isTrue(actor2.getCurriculum() != null);
+		
+		authenticate(actor.getUserAccount().getUsername());
+		
+		curriculum = actor2.getCurriculum();
+		curriculumService.delete(curriculum);
+		
+		actor2 = actorService.findOne(actor2.getId());
+		Assert.isTrue(actor2.getCurriculum() == null);
+		
+		authenticate(null);
+	}
 }
