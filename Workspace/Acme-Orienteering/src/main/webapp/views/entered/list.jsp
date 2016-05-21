@@ -18,10 +18,21 @@
 	name="entereds" requestURI="${requestURI}" id="row_Entered">
 	<!-- Action links -->
 	<security:authorize access="hasRole('MANAGER')">
+	<spring:message code="entered.edit" var="editHeader"/>
+		<display:column title="${editHeader}">
+			<div>
+				<b><a href="entered/manager/edit.do?enteredId=${row_Entered.id}"> <spring:message
+							code="entered.edit" />
+				</a></b>
+			</div>
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('MANAGER')">
 	<spring:message code="entered.accept" var="acceptHeader"/>
 		<display:column title="${acceptHeader}">
 			<div>
-				<jstl:if test="${row_Entered.isMember == false && row_Entered.acceptedMoment == null}">	
+				<jstl:if test="${row_Entered.isMember == false && row_Entered.isDenied == false && row_Entered.acceptedMoment == null}">	
 					<b><a href="entered/manager/accept.do?enteredId=${row_Entered.id}"> <spring:message
 								code="entered.accept" />
 					</a></b>
@@ -34,9 +45,22 @@
 	<spring:message code="entered.deny" var="denyHeader"/>
 		<display:column title="${denyHeader}">
 			<div>
-				<jstl:if test="${row_Entered.isMember == false && row_Entered.acceptedMoment == null}">	
+				<jstl:if test="${row_Entered.isMember == false && row_Entered.isDenied == false && row_Entered.acceptedMoment == null}">	
 					<b><a href="entered/manager/deny.do?enteredId=${row_Entered.id}"> <spring:message
 								code="entered.deny" />
+					</a></b>
+				</jstl:if>				
+			</div>
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('MANAGER')">
+	<spring:message code="entered.expel" var="expelHeader"/>
+		<display:column title="${expelHeader}">
+			<div>
+				<jstl:if test="${row_Entered.isMember == true && row_Entered.isDenied == false && row_Entered.acceptedMoment != null}">	
+					<b><a href="entered/manager/expel.do?enteredId=${row_Entered.id}"> <spring:message
+								code="entered.expel" />
 					</a></b>
 				</jstl:if>				
 			</div>
@@ -60,6 +84,9 @@
 	
 	<spring:message code="entered.isMember" var="isMemberHeader"/>
 	<acme:displayColumn value="${row_Entered.isMember}" title="${isMemberHeader}"/>
+	
+	<spring:message code="entered.isDenied" var="isDeniedHeader"/>
+	<acme:displayColumn value="${row_Entered.isDenied}" title="${isDeniedHeader}"/>
 	
 	<spring:message code="entered.registerMoment" var="registerMomentHeader"/>
 	<acme:displayColumn value="${row_Entered.registerMoment}" title="${registerMomentHeader}"/>

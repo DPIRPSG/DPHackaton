@@ -61,6 +61,7 @@ public class EnteredService {
 		result.setRunner(runner);
 		
 		result.setIsMember(false);
+		result.setIsDenied(false);
 		result.setRegisterMoment(new Date());
 		
 		return result;
@@ -77,7 +78,7 @@ public class EnteredService {
 	public Entered save(Entered entered){
 		
 		Assert.notNull(entered);
-		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can save a entered.");
+		Assert.isTrue(actorService.checkAuthorities("RUNNER,MANAGER"));
 		
 		enteredRepository.save(entered);
 		
@@ -110,8 +111,13 @@ public class EnteredService {
 			}
 		}
 		Assert.isTrue(runnerClub.isEmpty(), "You cannot accept a runner who is in another club.");
+		Assert.isTrue(entered.getIsMember() == false, "You can only accept an unaccepted entered");
+		Assert.isTrue(entered.getIsDenied() == false, "You can only accept an undenied entered");
+		Assert.isNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
+		
 		
 		entered.setIsMember(true);
+		entered.setIsDenied(false);
 		entered.setAcceptedMoment(new Date());
 		enteredRepository.save(entered);
 		
@@ -127,11 +133,33 @@ public class EnteredService {
 	public void deny(Entered entered){
 		
 		Assert.notNull(entered);
-		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can accept a entered");
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can deny a entered");
 		Assert.isTrue(entered.getIsMember() == false, "You can only deny an unaccepted entered");
+		Assert.isTrue(entered.getIsDenied() == false, "You can only deny an undenied entered");
 		Assert.isNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
 		
-		enteredRepository.delete(entered);
+		entered.setIsMember(false);
+		entered.setIsDenied(true);
+		enteredRepository.save(entered);
+	}
+	
+	/**
+	 * 
+	 * @param entered
+	 * @see 22.h
+	 * 	
+	 */
+	public void expel(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can expel a entered");
+		Assert.isTrue(entered.getIsMember() == true, "You can only expel an accepted entered");
+		Assert.isTrue(entered.getIsDenied() == false, "You can only expel an undenied entered");
+		Assert.notNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
+		
+		entered.setIsMember(false);
+		entered.setIsDenied(false);
+		enteredRepository.save(entered);
 	}
 		
 	/**
@@ -199,6 +227,21 @@ public class EnteredService {
 		Collection<Entered> result;
 		
 		result = enteredRepository.findAllAcceptedByClub(clubId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @return the collection of denied entered that a club have.
+	 */
+	public Collection<Entered> findAllDeniedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllDeniedByClub(clubId);
 		
 		return result;
 	}
