@@ -60,10 +60,10 @@
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<display:column title="${refereeHeader }" sortable="true">
-			<a href="actor/list.do?actorId=${row_League.referee.id}"> <jstl:out
-					value="${row_League.referee.name} ${row_League.referee.surname} (${row_League.referee.userAccount.username})" />
-			</a>
-		</display:column>
+		<a href="actor/list.do?actorId=${row_League.referee.id}"> <jstl:out
+				value="${row_League.referee.name} ${row_League.referee.surname} (${row_League.referee.userAccount.username})" />
+		</a>
+	</display:column>
 
 	<spring:message code="league.classification" var="classificationHeader" />
 	<display:column title="${classificationHeader}" sortable="false">
@@ -87,19 +87,20 @@
 
 	<security:authorize access="hasRole('MANAGER')">
 		<jstl:if test="${manager.club.id != null}">
-			<display:column>
-			<jstl:set value="false" var="pagado" />
-			<jstl:forEach items="${row_League.feePayments}" var="fee">
-				<jstl:if test="${fee.club.id == manager.club.id }">
-					<jstl:set value="true" var="pagado" />
+			<spring:message code="league.feePayment" var="financesHeader" />
+			<display:column title="${financesHeader}" sortable="false">
+				<jstl:set value="false" var="pagado" />
+				<jstl:forEach items="${row_League.feePayments}" var="fee">
+					<jstl:if test="${fee.club.id == manager.club.id }">
+						<jstl:set value="true" var="pagado" />
+					</jstl:if>
+				</jstl:forEach>
+				<jstl:if test="${pagado != true}">
+					<a href="feePayment/manager/create.do?leagueId=${row_League.id}">
+						<spring:message code="league.feePayment" />
+					</a>
 				</jstl:if>
-			</jstl:forEach>
-			<jstl:if test="${pagado != true}">
-				<a href="feePayment/manager/create.do?leagueId=${row_League.id}">
-					<spring:message code="league.feePayment" />
-				</a>
-			</jstl:if>
-		</display:column>
+			</display:column>
 		</jstl:if>
 	</security:authorize>
 

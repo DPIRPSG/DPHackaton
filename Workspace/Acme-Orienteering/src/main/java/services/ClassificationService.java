@@ -19,7 +19,6 @@ import domain.Club;
 import domain.Participates;
 import domain.Race;
 import repositories.ClassificationRepository;
-import repositories.ParticipatesRepository;
 
 @Service
 @Transactional
@@ -35,13 +34,7 @@ public class ClassificationService {
 	private ActorService actorService;
 	
 	@Autowired
-	private RefereeService refereeService;
-	
-	@Autowired
 	private RunnerService runnerService;
-	
-	@Autowired
-	private ManagerService managerService;
 	
 	@Autowired
 	private RaceService raceService;
@@ -70,36 +63,6 @@ public class ClassificationService {
 		return participates;
 	}
 	
-//	public Classification saveFromClassificationEdit(Classification participates){
-//		Assert.isTrue(actorService.checkAuthority("REFEREE"), "participates.saveFromClassificationEdit.permissionDenied");
-//		
-//		Participates result;
-//		
-//		result = classificationRepository.findOne(participates.getId());
-//		
-//		Assert.isTrue(result.getRace().getLeague().getReferee().equals(refereeService.findByPrincipal()),
-//				"participates.saveFromClassificationEdit.notOwner");
-//		
-//		result.setResult(participates.getResult());
-//		result = this.save(result);
-//		
-//		return result;
-//	}
-//	
-//	/**
-//	 *  Encuentra por runner y race. En caso de que uno o ambos de los valores sean negativos se ignorará para realizar la búsqueda
-//	 * @param sponsorId
-//	 * @param leagueId
-//	 * @return
-//	 */
-//	private Collection<Participates> findAllByRunnerIdAndRaceId(int runnerId, int raceId, int refereeId, int clubId){
-//		Collection<Participates> result;
-//		
-//		result = classificationRepository.findAllByRunnerIdRaceIdAndRefereeId(runnerId, raceId, refereeId, clubId);
-//				
-//		return result;
-//	}
-	
 	/**
 	 *  Encuentra por club y race. En caso de que uno o ambos de los valores sean negativos se ignorará para realizar la búsqueda
 	 * @param sponsorId
@@ -122,6 +85,7 @@ public class ClassificationService {
 		Race race;
 		Map<Club, Map<String, Integer>> raceClassification;
 		List<Integer> clubTotal;
+		Integer[] points = {25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
 		
 		race = raceService.findOne(raceId);
 		
@@ -131,7 +95,6 @@ public class ClassificationService {
 		clubTotal = new ArrayList<Integer>();
 		
 		for(Participates p:race.getParticipates()){
-			System.out.println("Resultado de participante '" + p.getRunner().getUserAccount().getUsername() + "' : "+ p.getResult());
 			Map<String, Integer> clubClassi;
 			Club actClub;
 			
@@ -158,13 +121,14 @@ public class ClassificationService {
 			clubClassi = raceClassification.get(i);
 			clubTotal.add(clubClassi.get("totalClub") / clubClassi.get("runners"));
 		}
-		Comparator<Integer> comparador = Collections.reverseOrder();
-		Collections.sort(clubTotal, comparador);
+//		Comparator<Integer> comparador = Collections.reverseOrder();
+//		Collections.sort(clubTotal, comparador);
+		Collections.sort(clubTotal);
 
 		for(Club i:raceClassification.keySet()){
 			Iterator<Classification> ja2 = this.findAllByClubIdAndRaceId(i.getId(), raceId).iterator();
 			Classification actClassi;
-			Integer average;
+			Integer pos;
 			Map<String, Integer> clubClassi;
 
 			clubClassi = raceClassification.get(i);
@@ -178,11 +142,14 @@ public class ClassificationService {
 				actClassi.setClub(i);
 				actClassi.setRace(race);
 			}
-			average = clubClassi.get("totalClub") / clubClassi.get("runners");
+			pos = clubTotal.indexOf(clubClassi.get("totalClub") / clubClassi.get("runners"));
 
-			actClassi.setPosition(clubTotal.indexOf(average) + 1);
-			actClassi.setPoints(average);
-			System.out.println("Club: '" + actClassi.getClub().getName() + "', Position: '" + actClassi.getPosition() + "', Points: '" + actClassi.getPoints() + "'");
+			actClassi.setPosition(pos + 1);
+			if(pos <= points.length - 1)
+				actClassi.setPoints(points[pos]);
+			else
+				actClassi.setPoints(1);
+			
 			this.save(actClassi);
 		}
 	}

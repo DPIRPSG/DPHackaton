@@ -5,8 +5,6 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
@@ -20,17 +18,7 @@ import domain.League;
 public class FeePaymentForm {
 	
 	// FeePayment Attributes -------------------------------------------------------------
-	private double amount;
 	private Date paymentMoment;
-	
-	@Min(value = 0)
-	@Digits(integer = 9, fraction = 2)
-	public double getAmount() {
-		return amount;
-	}
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)

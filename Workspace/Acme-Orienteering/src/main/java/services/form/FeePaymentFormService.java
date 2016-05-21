@@ -69,7 +69,6 @@ public class FeePaymentFormService {
 		
 		result.setLeague(league);
 		result.setClub(club);
-		result.setAmount(0.0);
 		result.setPaymentMoment(new Date()); // Ponemos ahora la fecha porque no puede ser null, pero se debe poner la "real" en el save.
 		
 		return result;
@@ -98,7 +97,7 @@ public class FeePaymentFormService {
 		Assert.isTrue(checkCreditCard(creditCard), "Sorry, your credit card has expired. Please enter a valid credit card.");
 		
 		result.setCreditCard(creditCard);
-		result.setAmount(feePaymentForm.getAmount());
+		result.setAmount(feePaymentForm.getLeague().getAmount());
 		result.setPaymentMoment(new Date());
 		result.setClub(feePaymentForm.getClub());
 		result.setLeague(feePaymentForm.getLeague());

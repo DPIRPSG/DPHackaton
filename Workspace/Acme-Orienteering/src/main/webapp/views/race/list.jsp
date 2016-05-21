@@ -68,13 +68,13 @@
 	<spring:message code="race.participates" var="leagueHeader" />
 	<display:column title="${leagueHeader}">
 		<security:authorize access="hasRole('MANAGER')">
-			<acme:link href="participates/manager/list.do" code="race.participates.view"/>
+			<acme:link href="participates/manager/list.do?raceId=${row_Race.id}" code="race.participates.view"/>
 		</security:authorize>
 		<security:authorize access="hasRole('RUNNER')">
-			<acme:link href="participates/runner/list.do" code="race.participates.view"/>
+			<acme:link href="participates/runner/list.do?raceId=${row_Race.id}" code="race.participates.view"/>
 		</security:authorize>
 		<security:authorize access="hasRole('REFEREE')">
-			<acme:link href="participates/referee/list.do" code="race.participates.view"/>
+			<acme:link href="participates/referee/list.do?raceId=${row_Race.id}" code="race.participates.view"/>
 		</security:authorize>
 	</display:column>
 	</security:authorize>
