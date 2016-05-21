@@ -3,6 +3,7 @@ package services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.CommentedEntityRepository;
 import domain.CommentedEntity;
@@ -18,6 +19,9 @@ public class CommentedEntityService {
 	
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public CommentedEntityService(){
@@ -32,6 +36,13 @@ public class CommentedEntityService {
 		result = commentedEntityRepository.findOneById(commentedEntityId);
 		
 		return result;
+	}
+
+	public void save(CommentedEntity commentedEntity) {
+		Assert.notNull(commentedEntity);
+		Assert.isTrue(actorService.checkLogin(), "Only an authenticated user can save comments");
+	
+		commentedEntityRepository.save(commentedEntity);
 	}
 	
 	// Other business methods -------------------------------------------------
