@@ -132,10 +132,15 @@
 		<property name="sent">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
 			</list>
 		</property>
 		<property name="received">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -278,11 +283,18 @@
 		</property>
 		<property name="sent">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 		<property name="received">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -426,6 +438,102 @@
 		</property>
 	</bean>
 	
+	<bean id="message100" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 0"/>
+		<property name="body" value="Welcome to Acme Orienteering!"/>
+		<property name="sentMoment" value="2016/05/02 12:20"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message101" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 1"/>
+		<property name="body" value="Gracias !"/>
+		<property name="sentMoment" value="2016/05/02 12:25"/>
+		<property name="sender" ref="runner1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1"/>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder1"/>
+				<ref bean="folder7"/>
+				<ref bean="folder8"/>
+			</list>
+		</property>
+	</bean>
+	
+		
+	<bean id="message102" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 2"/>
+		<property name="body" value="De nada"/>
+		<property name="sentMoment" value="2016/05/02 12:30"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message103" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 3"/>
+		<property name="body" value="¿Como se llama?"/>
+		<property name="sentMoment" value="2016/05/02 12:35"/>
+		<property name="sender" ref="runner1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1"/>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder1"/>
+				<ref bean="folder7"/>
+				<ref bean="folder8"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message104" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 4"/>
+		<property name="body" value="Mi nombre de usuario es admin"/>
+		<property name="sentMoment" value="2016/05/02 12:40"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+
+	
 	<!-- Folder -->
 	
 	<bean id="folder1" class="domain.Folder">
@@ -434,6 +542,8 @@
 		<property name="actor" ref="administrator1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 	</bean>
@@ -445,6 +555,9 @@
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
 			</list>
 		</property>
 	</bean>
@@ -496,6 +609,11 @@
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 	</bean>
@@ -506,6 +624,8 @@
 		<property name="actor" ref="runner1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 	</bean>

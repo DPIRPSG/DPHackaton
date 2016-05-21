@@ -79,6 +79,7 @@ public class FolderService {
 		Assert.notNull(folder);
 		Assert.isTrue(actorService.checkLogin(),
 				"folder.saveToEdit.Error.NotAuthenticated");
+		Assert.isTrue(!folder.getIsSystem(), "folder.saveToEdit.Error.isSystem");
 
 		Folder result;
 
@@ -88,6 +89,8 @@ public class FolderService {
 		}else
 			result = this.findOne(folder.getId());
 		
+		Assert.isTrue(!result.getIsSystem(), "folder.saveToEdit.Error.isSystem");
+
 		result.setName(folder.getName());
 				
 		result = this.save(result);
