@@ -2,9 +2,12 @@ package controllers.manager;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +66,42 @@ public class EnteredManagerController extends AbstractController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int enteredId) {
+		ModelAndView result;
+		Entered entered;
+
+		entered = enteredService.findOne(enteredId);
+		Assert.notNull(entered);
+		result = createEditModelAndView(entered);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Entered entered, BindingResult binding) {
+		ModelAndView result;
+		String report;
+		Entered enteredPreSave;
+		
+		report = entered.getReport();
+		enteredPreSave = enteredService.findOne(entered.getId());
+		enteredPreSave.setReport(report);
+		
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(entered);
+		} else {
+			try {
+				enteredService.save(enteredPreSave);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(entered, "race.commit.error");				
+			}
+		}
+
+		return result;
+	}
+	
 	/**
 	 * 
 	 * @param enteredId
@@ -83,10 +122,10 @@ public class EnteredManagerController extends AbstractController{
 		try{
 			enteredService.accept(entered);
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.accept.ok");
+			result.addObject("messageStatus", "entered.commit.ok");
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.accept.error");
+			result.addObject("messageStatus", "entered.commit.error");
 		}
 		
 		return result;
@@ -112,12 +151,61 @@ public class EnteredManagerController extends AbstractController{
 		try{
 			enteredService.deny(entered);
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.deny.ok");
+			result.addObject("messageStatus", "entered.commit.ok");
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageStatus", "entered.deny.error");
+			result.addObject("messageStatus", "entered.commit.error");
 		}
 		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param enteredId
+	 * @see 22.
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Expulsar a un corredor de su club.
+	 * @return the view with the entered accepted
+	 */
+	@RequestMapping(value = "/expel", method = RequestMethod.GET)
+	public ModelAndView expel(@RequestParam int enteredId){
+		
+		ModelAndView result;
+		Entered entered;
+		
+		entered = enteredService.findOne(enteredId);
+		Assert.notNull(entered);
+		
+		try{
+			enteredService.expel(entered);
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "entered.commit.ok");
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageStatus", "entered.commit.error");
+		}
+		
+		return result;
+	}
+	
+	// Ancillary methods ------------------------------------------------------
+	
+	protected ModelAndView createEditModelAndView(Entered entered) {
+		ModelAndView result;
+
+		result = createEditModelAndView(entered, null);
+		
+		return result;
+	}	
+	
+	protected ModelAndView createEditModelAndView(Entered entered, String message) {
+		ModelAndView result;
+		
+		result = new ModelAndView("entered/edit");
+		result.addObject("entered", entered);
+		result.addObject("message", message);
+
 		return result;
 	}
 
