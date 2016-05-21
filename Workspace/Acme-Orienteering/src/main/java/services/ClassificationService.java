@@ -121,8 +121,9 @@ public class ClassificationService {
 			clubClassi = raceClassification.get(i);
 			clubTotal.add(clubClassi.get("totalClub") / clubClassi.get("runners"));
 		}
-		Comparator<Integer> comparador = Collections.reverseOrder();
-		Collections.sort(clubTotal, comparador);
+//		Comparator<Integer> comparador = Collections.reverseOrder();
+//		Collections.sort(clubTotal, comparador);
+		Collections.sort(clubTotal);
 
 		for(Club i:raceClassification.keySet()){
 			Iterator<Classification> ja2 = this.findAllByClubIdAndRaceId(i.getId(), raceId).iterator();

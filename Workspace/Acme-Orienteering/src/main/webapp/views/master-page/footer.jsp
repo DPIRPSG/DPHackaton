@@ -82,3 +82,17 @@
 	}
 
 </script>
+
+<jstl:if test="${messageStatus == Null || messageStatus != ''}">
+	<jstl:set var="messageStatus"
+		value='<%=request.getParameter("messageStatus")%>' />
+</jstl:if>
+
+<jstl:if test="${messageStatus != Null && messageStatus != ''}">
+	<spring:message code="${messageStatus}" var="showAlert" />
+	<script  type="text/javascript">$(document).ready(function(){
+		alert("${showAlert}");
+	});
+	</script>
+</jstl:if>
+
