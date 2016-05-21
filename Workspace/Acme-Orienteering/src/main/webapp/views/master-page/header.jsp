@@ -28,6 +28,8 @@
 					<li><a href="race/administrator/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 					<li><a href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
+					<li><a href="referee/administrator/create.do"><spring:message code="master.page.create.referee" /></a></li>
+					<li><a href="manager/administrator/create.do"><spring:message code="master.page.create.manager" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
