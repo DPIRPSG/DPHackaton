@@ -66,15 +66,21 @@
 	
 	<security:authorize access="hasAnyRole('MANAGER, RUNNER, REFEREE')">
 	<spring:message code="race.participates" var="leagueHeader" />
+					
+	<jstl:set value="race.participates.viewJoin" var="participatesView" />
+	<jstl:if test="${today.time gt row_Race.moment.time}">
+		<jstl:set value="race.participates.viewResult" var="participatesView" />
+	</jstl:if>
+	
 	<display:column title="${leagueHeader}">
 		<security:authorize access="hasRole('MANAGER')">
-			<acme:link href="participates/manager/list.do?raceId=${row_Race.id}" code="race.participates.view"/>
+			<acme:link href="participates/manager/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
 		</security:authorize>
 		<security:authorize access="hasRole('RUNNER')">
-			<acme:link href="participates/runner/list.do?raceId=${row_Race.id}" code="race.participates.view"/>
+			<acme:link href="participates/runner/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
 		</security:authorize>
 		<security:authorize access="hasRole('REFEREE')">
-			<acme:link href="participates/referee/list.do?raceId=${row_Race.id}" code="race.participates.view"/>
+			<acme:link href="participates/referee/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
 		</security:authorize>
 	</display:column>
 	</security:authorize>
