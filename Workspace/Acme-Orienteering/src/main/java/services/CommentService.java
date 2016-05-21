@@ -69,16 +69,27 @@ public class CommentService {
 	 * Guarda un comment creado
 	 */
 	
-	public void save(Comment comment){
+	public Comment save(Comment comment){
 		Assert.isTrue(actorService.checkLogin(), "Only an authenticated user can save comments");
 		Assert.isTrue(comment.getDeleted() == false);
-		Assert.notNull(comment);
-		
+		Assert.notNull(comment);	
 		Assert.isTrue(comment.getActor().getId() == actorService.findByPrincipal().getId(), "The actor must be the one logged");
+		
+		CommentedEntity commentedEntity;
+		Collection<Comment> comments;
 		
 		comment.setMoment(new Date());
 		
-		commentRepository.save(comment);
+		comment = commentRepository.save(comment);
+		
+		commentedEntity = comment.getCommentedEntity();
+		comments = commentedEntity.getComments();
+		comments.add(comment);
+		commentedEntity.setComments(comments);
+		
+		commentedEntityService.save(commentedEntity);
+		
+		return comment;
 	}
 
 	
