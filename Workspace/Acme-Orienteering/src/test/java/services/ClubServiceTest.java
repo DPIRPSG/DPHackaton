@@ -64,6 +64,37 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar los distintos clubes y
+	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
+	 *  el gerente de este, y 
+	 *  en que ligas y 
+	 *  carreras han participado y 
+	 *  están participando.
+	 *  
+	 *  Positive test: Se muestran los clubes.
+	 */
+	@Test
+	public void testListClub2(){
+		
+		// Declare variable
+		Collection<Club> result;
+		
+		// Load object to test
+		authenticate("runner1");
+		
+		// Execution of test
+		result = clubService.findAll();
+		
+		// Check result
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
+		clubService.flush();
+		
+	}
+	
+	/**
 	 * @see 19.c
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar las distintas ligas, 
@@ -91,6 +122,40 @@ public class ClubServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.size() == 2);
+		leagueService.flush();
+		clubService.flush();
+	}
+	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestran los clubes de la liga coleccionada.
+	 */
+	@Test
+	public void testListClubByLeague2(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Collection<League> allLeagues;
+		League league;
+		
+		// Load object to test
+		authenticate("runner1");
+		allLeagues = leagueService.findAll();
+		league = allLeagues.iterator().next();
+		
+		// Execution of test
+		result = clubService.findAllByLeagueId(league.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
 		leagueService.flush();
 		clubService.flush();
 	}

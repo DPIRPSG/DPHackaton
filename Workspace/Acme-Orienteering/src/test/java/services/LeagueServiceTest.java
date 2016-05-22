@@ -96,4 +96,68 @@ public class LeagueServiceTest extends AbstractTest{
 		leagueService.flush();
 	}
 	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar los distintos clubes y
+	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
+	 *  el gerente de este, y 
+	 *  en que ligas y 
+	 *  carreras han participado y 
+	 *  están participando.
+	 *  
+	 *  Positive test: Se muestran las ligas del club seleccionado.
+	 */
+	@Test
+	public void testListLeagueByClub2(){
+		
+		// Declare variable
+		Collection<League> result;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		authenticate("runner1");
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		result = leagueService.findAllByClubId(club.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+		leagueService.flush();
+		clubService.flush();
+		
+	}
+	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestran las ligas.
+	 */
+	@Test
+	public void testListLeague2(){
+		
+		// Declare variable
+		Collection<League> result;
+		
+		// Load object to test
+		authenticate("runner1");
+		
+		// Execution of test
+		result = leagueService.findAll();
+		
+		// Check result
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
+		leagueService.flush();
+	}
 }

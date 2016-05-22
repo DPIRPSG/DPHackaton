@@ -70,4 +70,39 @@ public class ManagerServiceTest extends AbstractTest{
 		
 	}
 	
+	/**
+	 * @see 20.a
+	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
+	 *  Listar los distintos clubes y
+	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
+	 *  el gerente de este, y 
+	 *  en que ligas y 
+	 *  carreras han participado y 
+	 *  están participando.
+	 *  
+	 *  Positive test: Se muestra el manager del club seleccionado.
+	 */
+	@Test
+	public void testListManagerByClub2(){
+		
+		// Declare variable
+		Manager manager;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		authenticate("runner1");
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		manager = club.getManager();
+		
+		// Check result
+		Assert.isTrue(manager.getName().equals("Guillermo"));
+		unauthenticate();
+		clubService.flush();
+		
+	}
+	
 }

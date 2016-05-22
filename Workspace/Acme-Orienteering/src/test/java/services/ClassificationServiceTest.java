@@ -82,4 +82,51 @@ public class ClassificationServiceTest extends AbstractTest{
 		clubService.flush();
 		
 	}
+	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestra la clasificación de una liga.
+	 */
+	@Test
+	public void testListClassificationPerLeague2(){
+		
+		// Declare variable
+		Collection<ArrayList<Integer>> result;
+		Collection<League> allLeagues;
+		Collection<Club> allClubs;
+		League league;
+		Club club = null;
+		ArrayList<Integer> resultByClub;
+		
+		// Load object to test
+		authenticate("runner1");
+		allLeagues = leagueService.findAll();
+		allClubs = clubService.findAll();
+		league = allLeagues.iterator().next();
+		for(Club c:allClubs){
+			if(c.getName().equals("Los Imperdibles")){
+				club = c;
+			}
+		}
+		result = clubService.calculateRankingByLeague(league.getId());
+		
+		// Execution of test
+		resultByClub = result.iterator().next();
+			
+		// Check result
+		Assert.isTrue(resultByClub.get(0) == 0);
+		Assert.isTrue(resultByClub.get(1) == club.getId());
+		Assert.isTrue(resultByClub.get(2) == 25);
+		unauthenticate();
+		leagueService.flush();
+		clubService.flush();
+		
+	}
 }

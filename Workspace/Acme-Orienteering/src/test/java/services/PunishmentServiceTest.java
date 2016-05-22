@@ -76,6 +76,36 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar las distintas sanciones impuestas a los clubes en cada liga.
+	 *  
+	 *  Positive Test: Se muestran las sanciones impuestas a un club.
+	 */
+	@Test
+	public void testListPunishmentByClub2(){
+		
+		// Declare variable
+		Collection<Punishment> result;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		authenticate("runner1");
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		result = club.getPunishments();
+
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+		clubService.flush();
+
+	}
+	
+	/**
 	 * Acme-Orienteering - 
 	 */
 	
