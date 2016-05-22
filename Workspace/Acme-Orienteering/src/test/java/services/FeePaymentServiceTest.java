@@ -2,6 +2,7 @@ package services;
 
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.ConstraintViolationException;
 
@@ -75,7 +76,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+		
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -130,7 +138,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -184,7 +199,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -288,7 +310,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -344,7 +373,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -400,7 +436,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -456,7 +499,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+		
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -512,7 +562,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+		
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -568,7 +625,14 @@ public class FeePaymentServiceTest extends AbstractTest {
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
-		league = leagues.iterator().next();
+		
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().after(new Date())) {
+				league = l;
+				break;
+			}
+		}
 		
 		numPreLeague = league.getFeePayments().size();
 			
@@ -581,6 +645,67 @@ public class FeePaymentServiceTest extends AbstractTest {
 		//feePaymentForm.setNumber("4719068196160163");
 		feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 		feePaymentService.flush();
+		
+		numPostClub = manager.getClub().getFeePayments().size();
+		
+		league = leagueService.findOne(league.getId());
+		numPostLeague = league.getFeePayments().size();
+		
+		Assert.isTrue(manager.getClub().getFeePayments().contains(feePayment));
+		Assert.isTrue(league.getFeePayments().contains(feePayment));
+		Assert.isTrue((numPreClub +1) == numPostClub);
+		Assert.isTrue((numPreLeague +1) == numPostLeague);
+		
+		authenticate(null);
+	}
+	
+	/**
+	 * Acme-Orienteering - 
+	 */
+	
+	/**
+	 * Test que comprueba que si un manager intenta apuntar
+	 * a su club a una liga ya empezada, falla
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testCreateFeePaymentError10() {
+		FeePaymentForm feePaymentForm;
+		FeePayment feePayment;
+		Collection<League> leagues;
+		League league;
+		Manager manager;
+		int numPreClub, numPostClub;
+		int numPreLeague, numPostLeague;
+		
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		
+		numPreClub = manager.getClub().getFeePayments().size();
+		
+		leagues = leagueService.findAll();
+		for(FeePayment fee : manager.getClub().getFeePayments()) {
+			leagues.remove(fee.getLeague());
+		}
+		
+		league = null;
+		for(League l : leagues) {
+			if(l.getStartedMoment().before(new Date())) {
+				league = l;
+				break;
+			}
+		}
+		
+		numPreLeague = league.getFeePayments().size();
+			
+		feePaymentForm = feePaymentFormService.create(league.getId());
+		feePaymentForm.setHolderName("Test");
+		feePaymentForm.setBrandName("Test");
+		feePaymentForm.setCvvCode(444);
+		feePaymentForm.setExpirationMonth(12);
+		feePaymentForm.setExpirationYear(2017);
+		feePaymentForm.setNumber("4719068196160163");
+		feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 		
 		numPostClub = manager.getClub().getFeePayments().size();
 		
