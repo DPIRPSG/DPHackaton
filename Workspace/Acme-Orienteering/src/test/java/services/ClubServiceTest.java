@@ -2,17 +2,23 @@ package services;
 
 import java.util.Collection;
 
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Bulletin;
 import domain.Club;
 import domain.League;
+import domain.Manager;
+import domain.Runner;
 
 import utilities.AbstractTest;
 
@@ -31,6 +37,9 @@ public class ClubServiceTest extends AbstractTest{
 	// Other services needed -----------------------
 	@Autowired
 	private LeagueService leagueService;
+	
+	@Autowired
+	private ManagerService managerService;
 	
 	// Tests ---------------------------------------
 
@@ -158,6 +167,325 @@ public class ClubServiceTest extends AbstractTest{
 		unauthenticate();
 		leagueService.flush();
 		clubService.flush();
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club se ha creado correctamente.
+	 */
+	@Test
+	public void testCreateClub1(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager3");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club no se ha creado correctamente porque no estamos autenticados.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateClub2(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		//authenticate("manager3");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		//unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club no se ha creado correctamente porque estamos autenticados como corredor.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateClub3(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("runner1");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club no se ha creado correctamente porque estamos autenticados como administrador.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateClub4(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("admin");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club no se ha creado correctamente porque estamos autenticados como árbitro.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateClub5(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("admin");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club no se ha creado correctamente porque hemos dejado atributos sin poner.
+	 */
+	@Test(expected = ConstraintViolationException.class)
+	@Rollback(value = true)
+	public void testCreateClub6(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager3");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		//club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Positive test: El club no se ha creado correctamente porque hemos dejado atributos sin poner.
+	 */
+	@Test(expected = ConstraintViolationException.class)
+	@Rollback(value = true)
+	public void testCreateClub7(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager3");
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		//club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
+	}
+	
+	/**
+	 * @see 22.a
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Crear un club, siempre que no sea el gerente de otro.
+	 * 
+	 * Negative test: El club no se ha creado correctamente porque el manager ya posee otro club.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateClub8(){
+		
+		// Declare variable
+		Club result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		//result = manager.getClub();
+		//Assert.isNull(result);
+		
+		// Execution of test
+		club = clubService.create();
+		club.setName("Prueba");
+		club.setDescription("Prueba");
+		clubService.save(club);
+		
+		// Check result
+		manager = managerService.findByPrincipal();
+		result = manager.getClub();
+		Assert.notNull(result);
+		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
+		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
+		unauthenticate();
+		managerService.flush();
+		clubService.flush();
+
 	}
 	
 }

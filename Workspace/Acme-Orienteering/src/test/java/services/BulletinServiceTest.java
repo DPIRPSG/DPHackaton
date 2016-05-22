@@ -127,7 +127,7 @@ public class BulletinServiceTest extends AbstractTest{
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
-	 *  Negative test: No se crea un boletín correctamente porque no estamos autenticados.
+	 *  Negative test: No se crea un boletín correctamente porque estamos autenticados como administrador.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	@Rollback(value = true)
@@ -140,7 +140,7 @@ public class BulletinServiceTest extends AbstractTest{
 		Club club;
 		
 		// Load object to test
-		//authenticate("runner1");
+		authenticate("admin");
 		runner = runnerService.findByPrincipal();
 		club = clubService.findOneByRunnerId(runner.getId());
 		result = bulletinService.findAllByClubId(club.getId());
@@ -155,7 +155,47 @@ public class BulletinServiceTest extends AbstractTest{
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
-		//unauthenticate();
+		unauthenticate();
+		runnerService.flush();
+		clubService.flush();
+		bulletinService.flush();
+		
+	}
+	
+	/**
+	 * @see 21.c
+	 *  Un usuario que haya iniciado sesión como corredor debe poder:
+	 *  Crear y ver boletines en el tablón de su club.
+	 *  
+	 *  Negative test: No se crea un boletín correctamente porque estamos autenticados como árbitro.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateBulletin4(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Runner runner;
+		Club club;
+		
+		// Load object to test
+		authenticate("referee1");
+		runner = runnerService.findByPrincipal();
+		club = clubService.findOneByRunnerId(runner.getId());
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = bulletinService.create();
+		bulletin.setTitle("Prueba");
+		bulletin.setDescription("Prueba");
+		bulletinService.save(bulletin);	
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
 		runnerService.flush();
 		clubService.flush();
 		bulletinService.flush();
@@ -171,7 +211,7 @@ public class BulletinServiceTest extends AbstractTest{
 	 */
 	@Test(expected = ConstraintViolationException.class)
 	@Rollback(value = true)
-	public void testCreateBulletin4(){
+	public void testCreateBulletin5(){
 		
 		// Declare variable
 		Collection<Bulletin> result;
@@ -211,7 +251,7 @@ public class BulletinServiceTest extends AbstractTest{
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	@Rollback(value = true)
-	public void testCreateBulletin5(){
+	public void testCreateBulletin6(){
 		
 		// Declare variable
 		Collection<Bulletin> result;
