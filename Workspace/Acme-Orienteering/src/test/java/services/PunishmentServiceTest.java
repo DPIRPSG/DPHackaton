@@ -111,13 +111,13 @@ public class PunishmentServiceTest extends AbstractTest {
 		Punishment punishment;
 		League league;
 		Club club;
-		Referee referee;
+		//Referee referee;
 		int numPreSaveClub, numPostSaveClub;
 		int numPreSaveLeague, numPostSaveLeague;
 				
 		league = leagueService.findAll().iterator().next();
 		club = league.getFeePayments().iterator().next().getClub();
-		referee = league.getReferee();
+		//referee = league.getReferee();
 		
 		numPreSaveClub = club.getPunishments().size();
 		numPreSaveLeague = league.getPunishments().size();
@@ -181,7 +181,7 @@ public class PunishmentServiceTest extends AbstractTest {
 		punishment = punishmentService.create(club.getId());
 		punishment.setReason("Prueba");
 		punishment.setPoints(10);
-		punishment.setLeague(league);
+		punishment.setLeague(league);		
 		punishment = punishmentService.save(punishment);
 		
 		league = leagueService.findOne(league.getId());
