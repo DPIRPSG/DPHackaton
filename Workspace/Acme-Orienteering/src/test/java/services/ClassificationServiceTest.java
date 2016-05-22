@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -22,47 +23,21 @@ import utilities.AbstractTest;
 		"classpath:spring/config/packages.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-public class ClubServiceTest extends AbstractTest{
+public class ClassificationServiceTest extends AbstractTest{
 	
 	// Service under test -------------------------
 	@Autowired
-	private ClubService clubService;
+	private ClassificationService classificationService;
 	
 	// Other services needed -----------------------
+	@Autowired
+	private ClubService clubService;
+	
 	@Autowired
 	private LeagueService leagueService;
 	
 	// Tests ---------------------------------------
 
-	/**
-	 * @see 19.b
-	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
-	 *  Listar los distintos clubes y
-	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
-	 *  el gerente de este, y 
-	 *  en que ligas y 
-	 *  carreras han participado y 
-	 *  están participando.
-	 *  
-	 *  Positive test: Se muestran los clubes.
-	 */
-	@Test
-	public void testListClub1(){
-		
-		// Declare variable
-		Collection<Club> result;
-		
-		// Load object to test
-		
-		// Execution of test
-		result = clubService.findAll();
-		
-		// Check result
-		Assert.isTrue(result.size() == 2);
-		clubService.flush();
-		
-	}
-	
 	/**
 	 * @see 19.c
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
@@ -72,27 +47,39 @@ public class ClubServiceTest extends AbstractTest{
 	 *  los clubes que participan en ella y 
 	 *  el árbitro que la dirige.
 	 *  
-	 *  Positive test: Se muestran los clubes de la liga coleccionada.
+	 *  Positive test: Se muestra la clasificación de una liga.
 	 */
 	@Test
-	public void testListClubByLeague1(){
+	public void testListClassificationPerLeague1(){
 		
 		// Declare variable
-		Collection<Club> result;
+		Collection<ArrayList<Integer>> result;
 		Collection<League> allLeagues;
+		Collection<Club> allClubs;
 		League league;
+		Club club = null;
+		ArrayList<Integer> resultByClub;
 		
 		// Load object to test
 		allLeagues = leagueService.findAll();
+		allClubs = clubService.findAll();
 		league = allLeagues.iterator().next();
+		for(Club c:allClubs){
+			if(c.getName().equals("Los Imperdibles")){
+				club = c;
+			}
+		}
+		result = clubService.calculateRankingByLeague(league.getId());
 		
 		// Execution of test
-		result = clubService.findAllByLeagueId(league.getId());
-		
+		resultByClub = result.iterator().next();
+			
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(resultByClub.get(0) == 0);
+		Assert.isTrue(resultByClub.get(1) == club.getId());
+		Assert.isTrue(resultByClub.get(2) == 25);
 		leagueService.flush();
 		clubService.flush();
+		
 	}
-	
 }

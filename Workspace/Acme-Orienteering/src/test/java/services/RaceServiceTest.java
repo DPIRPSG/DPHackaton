@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Club;
+import domain.League;
 import domain.Race;
 
 import utilities.AbstractTest;
@@ -33,6 +34,9 @@ public class RaceServiceTest extends AbstractTest{
 	@Autowired
 	private ClubService clubService;
 	
+	@Autowired
+	private LeagueService leagueService;
+	
 	// Tests ---------------------------------------
 
 	/**
@@ -45,7 +49,7 @@ public class RaceServiceTest extends AbstractTest{
 	 *  carreras han participado y 
 	 *  están participando.
 	 *  
-	 *  Positive test: Se muestran los corredores del club seleccionado.
+	 *  Positive test: Se muestran las carreras del club seleccionado.
 	 */
 	@Test
 	public void testListRaceByClub1(){
@@ -66,6 +70,38 @@ public class RaceServiceTest extends AbstractTest{
 		Assert.isTrue(result.size() == 1);
 		raceService.flush();
 		clubService.flush();
+		
+	}
+	
+	/**
+	 * @see 19.c
+	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestran las carreras de la liga coleccionada.
+	 */
+	@Test
+	public void testListRaceByLeague1(){
+		
+		// Declare variable
+		Collection<Race> result;
+		Collection<League> allLeagues;
+		League league; 
+		
+		// Load object to test
+		allLeagues = leagueService.findAll();
+		league = allLeagues.iterator().next();
+		
+		// Execution of test
+		result = league.getRacing();
+		
+		// Check result
+		Assert.isTrue(result.size() == 3);
+		leagueService.flush();
 		
 	}
 }

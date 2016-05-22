@@ -45,7 +45,7 @@ public class LeagueServiceTest extends AbstractTest{
 	 *  carreras han participado y 
 	 *  están participando.
 	 *  
-	 *  Positive test: Se muestran los corredores del club seleccionado.
+	 *  Positive test: Se muestran las ligas del club seleccionado.
 	 */
 	@Test
 	public void testListLeagueByClub1(){
@@ -68,4 +68,32 @@ public class LeagueServiceTest extends AbstractTest{
 		clubService.flush();
 		
 	}
+	
+	/**
+	 * @see 19.c
+	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestran las ligas.
+	 */
+	@Test
+	public void testListLeague1(){
+		
+		// Declare variable
+		Collection<League> result;
+		
+		// Load object to test
+		
+		// Execution of test
+		result = leagueService.findAll();
+		
+		// Check result
+		Assert.isTrue(result.size() == 2);
+		leagueService.flush();
+	}
+	
 }

@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import domain.Club;
 import domain.League;
+import domain.Referee;
 
 import utilities.AbstractTest;
 
@@ -22,46 +23,17 @@ import utilities.AbstractTest;
 		"classpath:spring/config/packages.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback = false)
-public class ClubServiceTest extends AbstractTest{
+public class RefereeServiceTest extends AbstractTest{
 	
 	// Service under test -------------------------
 	@Autowired
-	private ClubService clubService;
+	private RefereeService refereeService;
 	
 	// Other services needed -----------------------
 	@Autowired
 	private LeagueService leagueService;
 	
 	// Tests ---------------------------------------
-
-	/**
-	 * @see 19.b
-	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
-	 *  Listar los distintos clubes y
-	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
-	 *  el gerente de este, y 
-	 *  en que ligas y 
-	 *  carreras han participado y 
-	 *  están participando.
-	 *  
-	 *  Positive test: Se muestran los clubes.
-	 */
-	@Test
-	public void testListClub1(){
-		
-		// Declare variable
-		Collection<Club> result;
-		
-		// Load object to test
-		
-		// Execution of test
-		result = clubService.findAll();
-		
-		// Check result
-		Assert.isTrue(result.size() == 2);
-		clubService.flush();
-		
-	}
 	
 	/**
 	 * @see 19.c
@@ -72,13 +44,13 @@ public class ClubServiceTest extends AbstractTest{
 	 *  los clubes que participan en ella y 
 	 *  el árbitro que la dirige.
 	 *  
-	 *  Positive test: Se muestran los clubes de la liga coleccionada.
+	 *  Positive test: Se muestran el árbitro de la liga coleccionada.
 	 */
 	@Test
-	public void testListClubByLeague1(){
+	public void testListRefereeByLeague1(){
 		
 		// Declare variable
-		Collection<Club> result;
+		Referee result;
 		Collection<League> allLeagues;
 		League league;
 		
@@ -87,12 +59,12 @@ public class ClubServiceTest extends AbstractTest{
 		league = allLeagues.iterator().next();
 		
 		// Execution of test
-		result = clubService.findAllByLeagueId(league.getId());
+		result = league.getReferee();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.getName().equals("Carlos"));
 		leagueService.flush();
-		clubService.flush();
+		
 	}
 	
 }
