@@ -96,9 +96,13 @@
 					</jstl:if>
 				</jstl:forEach>
 				<jstl:if test="${pagado != true}">
-					<a href="feePayment/manager/create.do?leagueId=${row_League.id}">
-						<spring:message code="league.feePayment" />
-					</a>
+					<jsp:useBean id="current" class="java.util.Date" />
+
+					<jstl:if test="${current.time < row_League.startedMoment}">
+					    <a href="feePayment/manager/create.do?leagueId=${row_League.id}">
+							<spring:message code="league.feePayment" />
+						</a>
+					</jstl:if>
 				</jstl:if>
 			</display:column>
 		</jstl:if>
