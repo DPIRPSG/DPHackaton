@@ -64,7 +64,8 @@ public class FeePaymentServiceTest extends AbstractTest {
 	 */
 	
 	/**
-	 * 
+	 * Test que comprueba que un manager puede apuntar
+	 * a su club a una liga en condiciones normales
 	 */
 	@Test
 	public void testCreateFeePaymentOk() {
@@ -73,18 +74,21 @@ public class FeePaymentServiceTest extends AbstractTest {
 		Collection<League> leagues;
 		League league;
 		Manager manager;
-		int numPre, numPost;
+		int numPreClub, numPostClub;
+		int numPreLeague, numPostLeague;
 		
 		authenticate("manager1");
 		manager = managerService.findByPrincipal();
 		
-		numPre = manager.getClub().getFeePayments().size();
+		numPreClub = manager.getClub().getFeePayments().size();
 		
 		leagues = leagueService.findAll();
 		for(FeePayment fee : manager.getClub().getFeePayments()) {
 			leagues.remove(fee.getLeague());
 		}
 		league = leagues.iterator().next();
+		
+		numPreLeague = league.getFeePayments().size();
 			
 		feePaymentForm = feePaymentFormService.create(league.getId());
 		feePaymentForm.setHolderName("Test");
@@ -95,13 +99,15 @@ public class FeePaymentServiceTest extends AbstractTest {
 		feePaymentForm.setNumber("4719068196160163");
 		feePayment = feePaymentFormService.reconstruct(feePaymentForm);
 		
-		numPost = manager.getClub().getFeePayments().size();
+		numPostClub = manager.getClub().getFeePayments().size();
 		
-		System.out.println("numPre: "+numPre);
-		System.out.println("numPost: "+numPost);
+		league = leagueService.findOne(league.getId());
+		numPostLeague = league.getFeePayments().size();
 		
 		Assert.isTrue(manager.getClub().getFeePayments().contains(feePayment));
-		Assert.isTrue((numPre +1) == numPost);
+		Assert.isTrue(league.getFeePayments().contains(feePayment));
+		Assert.isTrue((numPreClub +1) == numPostClub);
+		Assert.isTrue((numPreLeague +1) == numPostLeague);
 		
 		authenticate(null);
 	}
