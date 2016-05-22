@@ -22,9 +22,6 @@ public interface ClubRepository extends JpaRepository<Club, Integer> {
 	
 	// DASHBOARD
 	
-	@Query("")
-	Collection<Club> findAllWhoHaveWonMoreLeagues();
-	
 	@Query("select c1 from Club c1 left join c1.classifications cl1 where cl1.position = 1 group by c1 having count(cl1) >= all(select count(cl2) from Club c2 left join c2.classifications cl2 where cl2.position = 1 group by c2)")
 	Collection<Club> findAllWhoHaveWonMoreRaces();
 	
