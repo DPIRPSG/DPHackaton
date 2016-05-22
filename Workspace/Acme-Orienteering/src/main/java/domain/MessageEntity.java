@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -14,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -42,7 +44,10 @@ public class MessageEntity extends DomainEntity{
 	
 	@NotBlank
 	@NotNull
-	@Lob
+//	@Lob
+//	@Size(max=255)
+	@Size(max=10485760)
+	@Column(length=10485760)
 	public String getBody() {
 		return body;
 	}

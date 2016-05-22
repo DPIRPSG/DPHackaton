@@ -1,6 +1,11 @@
-drop database if exists `Acme-Orienteering`;
-create database `Acme-Orienteering`;
-grant select, insert, update, delete
-on `Acme-Orienteering`.* to 'acme-user'@'%';
-grant select, insert, update, delete, create, drop, references, index, alter, create temporary tables, lock tables, create view, create routine, alter routine, execute, trigger, show view
-on `Acme-Orienteering`.* to 'acme-manager'@'%';
+create user "acme-user" password 'ACME-Us3r-P@ssw0rd';
+create user "acme-manager" password 'ACME-M@n@ger-6874';
+
+drop database if exists "Acme-Orienteering";
+create database "Acme-Orienteering" owner "acme-manager";
+
+grant all on database "Acme-Orienteering" to "acme-user";
+grant all on database "Acme-Orienteering" to postgres;
+
+#conectarse a "Acme-Orienteering" con usuario postgres y ejecutar: 
+alter schema public owner to "acme-manager";
