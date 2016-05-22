@@ -80,7 +80,7 @@ public class EnteredService {
 		Assert.notNull(entered);
 		Assert.isTrue(actorService.checkAuthorities("RUNNER,MANAGER"));
 		
-		enteredRepository.save(entered);
+		entered = enteredRepository.save(entered);
 		
 		return entered;
 	}
@@ -267,6 +267,20 @@ public class EnteredService {
 		result = enteredRepository.findOne(enteredId);
 		
 		return result;
+	}
+	
+	/**
+	 * Necesario para los test
+	 * @return
+	 */
+	public Collection<Entered> findAll(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAll();
+		
+		return result;		
 	}
 	
 	public void flush(){
