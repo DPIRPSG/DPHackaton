@@ -120,15 +120,11 @@ public class DatabaseUtil {
 		String[] statements;		
 		
 		databaseScript = new ArrayList<String>();
-//		databaseScript.add(String.format("drop database if exists \"%s\"", databaseName));
-//		databaseScript.add(String.format("create database \"%s\"", databaseName));
 		databaseScript.add(String.format("drop schema public cascade"));
 		databaseScript.add(String.format("create schema public"));
-//		databaseScript.add(String.format("create schema public"));
 		executeScript(databaseScript);
-//		
+
 		schemaScript = new ArrayList<String>();
-//		schemaScript.add(String.format("use '%s'", databaseName));
 		statements = configuration.generateSchemaCreationScript(databaseDialect);
 		schemaScript.addAll(Arrays.asList(statements));
 		schemaScript.add(String.format("grant select, insert, update, delete on all tables in schema public to \"acme-user\""));
@@ -143,8 +139,6 @@ public class DatabaseUtil {
 			@Override
 			public void execute(Connection connection) throws SQLException {
 				Statement statement;
-				
-//				connection.setAutoCommit(true);
 				
 				statement = connection.createStatement();
 				for (String line : script) {

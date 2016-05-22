@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -45,7 +44,6 @@ public class MessageEntity extends DomainEntity{
 	@NotBlank
 	@NotNull
 //	@Lob
-//	@Size(max=255)
 	@Size(max=10485760)
 	@Column(length=10485760)
 	public String getBody() {
