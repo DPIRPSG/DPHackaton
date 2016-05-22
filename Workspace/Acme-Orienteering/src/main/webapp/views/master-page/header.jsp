@@ -28,10 +28,13 @@
 					<li><a href="race/administrator/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 					<li><a href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
+					<li><a href="referee/administrator/create.do"><spring:message code="master.page.create.referee" /></a></li>
+					<li><a href="manager/administrator/create.do"><spring:message code="master.page.create.manager" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
+			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('RUNNER')">
@@ -89,7 +92,8 @@
 			        (<security:authentication property="principal.username" />)
 				</a>
 				<ul>
-					<li class="arrow"></li>			
+					<li class="arrow"></li>	
+					<li><a href="actor/actor/display.do"><spring:message code="master.page.profile.display" /> </a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

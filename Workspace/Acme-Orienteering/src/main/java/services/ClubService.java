@@ -3,6 +3,8 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import domain.Club;
 import domain.Comment;
 import domain.Entered;
 import domain.FeePayment;
+import domain.League;
 import domain.Manager;
 import domain.Punishment;
 import domain.Referee;
@@ -44,6 +47,9 @@ public class ClubService {
 	
 	@Autowired
 	private RefereeService refereeService;
+	
+	@Autowired
+	private LeagueService leagueService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -286,5 +292,121 @@ public class ClubService {
 			}
 		}
 	}
+	
+	// DASHBOARD
+	
+	public Collection<Club> findAllWhoHaveWonMoreLeagues(){
+		Collection<Club> result = new ArrayList<>();
+		Collection<Club> allClubs;
+		Map<League, Map<Club, Double>> maxPointsPerLeague = new HashMap<>();
+		Map<Club, Integer> counter = new HashMap<>();
+		int max = 0;
+		
+				
+		allClubs = findAll();
+		
+		for(Club c:allClubs){
+			for(Classification cl: c.getClassifications()){
+				// Si la liga ya está en el map.
+				if(maxPointsPerLeague.containsKey(cl.getRace().getLeague())){
+					// Si el club ya está en el submap.
+					if(maxPointsPerLeague.get(cl.getRace().getLeague()).containsKey(c)){
+						maxPointsPerLeague.get(cl.getRace().getLeague()).put(c, maxPointsPerLeague.get(cl.getRace().getLeague()).get(c) + cl.getPoints());
+					}else{
+						maxPointsPerLeague.get(cl.getRace().getLeague()).put(c, 0.0 + cl.getPoints());
+					}
+				// Si la liga no está en el map.
+				}else{
+					maxPointsPerLeague.put(cl.getRace().getLeague(), new HashMap<Club,Double>());
+				}
+			}
+		}
+		
+		// Recorro cada liga
+		for(League l:maxPointsPerLeague.keySet()){
+			Club winner = null;
+			Double maxPointsInLeague = 0.0;
+			// Metemos en result al campeón de cada liga
+			for(Club c: maxPointsPerLeague.get(l).keySet()){
+				if(maxPointsInLeague < maxPointsPerLeague.get(l).get(c)){
+					winner = c;
+					maxPointsInLeague = maxPointsPerLeague.get(l).get(c);
+				}
+			}
+			if(winner != null){
+				result.add(winner);
+			}
+			
+		}
+		
+		for(Club c:result){
+			if(counter.containsKey(c)){
+				counter.put(c, counter.get(c)+1);
+			}else{
+				counter.put(c, 1);
+			}
+			if(counter.get(c) > max){
+				max = counter.get(c);
+			}
+			
+		}	
+		
+		result.clear();
+		
+		for(Club c:allClubs){
+			if(counter.get(c) == max){
+				result.add(c);
+			}
+		}
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveWonMoreRaces(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveWonMoreRaces();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveMoreDeniedEntered(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveMoreDeniedEntered();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveMorePunishments(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveMorePunishments();
+		
+		return result;
+	}
+	
+	public Double ratioOfClubsByLeague(){
+		Double result;
+		
+		result = clubRepository.ratioOfClubsByLeague();
+		
+		return result;
+	}
 
+	public Collection<Club> findAllWithMorePoints(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWithMorePoints();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWithLessPoint(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWithLessPoint();
+		
+		return result;
+	}
 }

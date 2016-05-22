@@ -11,21 +11,22 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="participates/referee/edit.do" modelAttribute="participates">
+<form:form action="entered/manager/edit.do" modelAttribute="entered">
 	<!-- Hidden Attributes -->
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
-	<form:hidden path="runner"/>
-	<form:hidden path="race"/>
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+
+	<form:hidden path="isMember" />
+	<form:hidden path="isDenied" />
+	<form:hidden path="registerMoment" />
+	<form:hidden path="acceptedMoment" />
+	<form:hidden path="runner" />
+	<form:hidden path="club" />
 
 	<!-- Editable Attributes -->
+	<acme:textarea code="entered.report" path="report"/>
 	
-	<acme:textbox code="participates.result" path="result"/>
-
-	<!-- Action buttons -->
-	<br />
-	<acme:submit name="save" code="participates.save"/>
-	
-	<acme:cancel code="participates.cancel" url="${redirectUrl}"/>
+	<acme:submit name="save" code="entered.save"/>
+	<acme:cancel code="entered.cancel" url="entered/runner/list.do"/>
 	
 </form:form>

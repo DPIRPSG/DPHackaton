@@ -16,5 +16,10 @@ public interface RaceRepository extends JpaRepository<Race, Integer> {
 	
 	@Query("select r from Race r left join r.participates p where p.runner.id = ?1")
 	Collection<Race> findAllByRunnerId(int runnerId);
+	
+	// DASHBOARD
+	
+	@Query("select (count(distinct r1)*1.0)/(count(distinct l1)*1.0) from Race r1 left join r1.league l1")
+	Double ratioOfRacesByLeague();
 
 }

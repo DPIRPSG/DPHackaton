@@ -27,7 +27,9 @@
 
 
 		<!-- Attributes -->
-		<acme:displayColumn value="${row_folder.name}" title="folder.name"/>
+				<spring:message code="folder.name" var="nameHeader" />
+		
+		<acme:displayColumn value="${row_folder.name}" title="${nameHeader}" sorteable="true"/>
 
 		<spring:message code="folder.messages" var="messageHeader" />
 		<display:column>

@@ -1,12 +1,16 @@
 package services;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.FeePaymentRepository;
+import domain.Club;
 import domain.FeePayment;
+import domain.League;
 
 @Service
 @Transactional
@@ -21,6 +25,12 @@ public class FeePaymentService {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private ClubService clubService;
+	
+	@Autowired
+	private LeagueService leagueService;
 
 	//Constructors -----------------------------------------------------------
 	
@@ -46,14 +56,32 @@ public class FeePaymentService {
 		Assert.notNull(feePayment);
 		
 		FeePayment result;
+		League league;
+		Club club;
+		Collection<FeePayment> feePaymentsClub, feePaymentsLeague;
 		
 		result = feePaymentRepository.save(feePayment);
+		
+		club = result.getClub();
+		league = result.getLeague();
+		
+		feePaymentsClub = club.getFeePayments();
+		feePaymentsClub.add(result);
+		club.setFeePayments(feePaymentsClub);
+		clubService.save(club);
+		
+		feePaymentsLeague = league.getFeePayments();
+		feePaymentsLeague.add(result);
+		league.setFeePayments(feePaymentsLeague);
+		leagueService.save(league);
 		
 		return result;
 	}
 	
 	//Other business methods -----------------------------------------------
 	
-	
+	public void flush() {
+		feePaymentRepository.flush();
+	}
 	
 }

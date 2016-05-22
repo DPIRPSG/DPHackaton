@@ -114,6 +114,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="referee2" />
+		<property name="password" value="4f556d5a66f4fe0d058523a7b8e19d91" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REFEREE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -132,10 +144,15 @@
 		<property name="sent">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
 			</list>
 		</property>
 		<property name="received">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -271,19 +288,35 @@
 				<ref bean="folder7"/>
 				<ref bean="folder8"/>
 				<ref bean="folder9"/>
+				<ref bean="folder100"/>
+				<ref bean="folder101"/>
+				<ref bean="folder102"/>
 			</list>
 		</property>
 		<property name="sent">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 		<property name="received">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment1"/>
+				<ref bean="comment2"/>
+				<ref bean="comment3"/>
+				<ref bean="comment4"/>
+				<ref bean="comment5"/>
+				<ref bean="comment6"/>
 			</list>
 		</property>
 		<property name="entered">
@@ -403,6 +436,33 @@
 		<property name="curriculum" ref="curriculum3"/>
 	</bean>
 	
+	<bean id="referee2" class="domain.Referee">
+		<property name="name" value="Jose"/>
+		<property name="surname" value="Cortes"/>
+		<property name="phone" value="669988147"/>
+		<property name="nif" value="66851247H"/>
+		<property name="userAccount" ref="userAccount9"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder25"/>
+				<ref bean="folder26"/>
+				<ref bean="folder27"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- MessageEntity -->
 	
 	<bean id="message1" class="domain.MessageEntity">
@@ -423,6 +483,102 @@
 		</property>
 	</bean>
 	
+	<bean id="message100" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 0"/>
+		<property name="body" value="Welcome to Acme Orienteering!"/>
+		<property name="sentMoment" value="2016/05/02 12:20"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message101" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 1"/>
+		<property name="body" value="Gracias !"/>
+		<property name="sentMoment" value="2016/05/02 12:25"/>
+		<property name="sender" ref="runner1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1"/>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder1"/>
+				<ref bean="folder7"/>
+				<ref bean="folder8"/>
+			</list>
+		</property>
+	</bean>
+	
+		
+	<bean id="message102" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 2"/>
+		<property name="body" value="De nada"/>
+		<property name="sentMoment" value="2016/05/02 12:30"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message103" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 3"/>
+		<property name="body" value="¿Como se llama?"/>
+		<property name="sentMoment" value="2016/05/02 12:35"/>
+		<property name="sender" ref="runner1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1"/>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder1"/>
+				<ref bean="folder7"/>
+				<ref bean="folder8"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message104" class="domain.MessageEntity">
+		<property name="subject" value="Mensaje 4"/>
+		<property name="body" value="Mi nombre de usuario es admin"/>
+		<property name="sentMoment" value="2016/05/02 12:40"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder2"/>
+				<ref bean="folder7"/>
+			</list>
+		</property>
+	</bean>
+
+	
 	<!-- Folder -->
 	
 	<bean id="folder1" class="domain.Folder">
@@ -431,6 +587,8 @@
 		<property name="actor" ref="administrator1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 	</bean>
@@ -442,6 +600,9 @@
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
 			</list>
 		</property>
 	</bean>
@@ -493,6 +654,11 @@
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message100"/>
+				<ref bean="message102"/>
+				<ref bean="message104"/>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 	</bean>
@@ -503,6 +669,8 @@
 		<property name="actor" ref="runner1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message101"/>
+				<ref bean="message103"/>
 			</list>
 		</property>
 	</bean>
@@ -667,6 +835,66 @@
 		</property>
 	</bean>
 	
+	<bean id="folder25" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder26" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder27" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder100" class="domain.Folder">
+		<property name="name" value="Mi carpeta 1"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder101" class="domain.Folder">
+		<property name="name" value="Mi carpeta 2"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder102" class="domain.Folder">
+		<property name="name" value="Mi carpeta 3"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Club -->
 	
 	<bean id="club1" class="domain.Club">
@@ -708,6 +936,7 @@
 		<property name="comments">
 			<list>
 				<ref bean="comment1"/>
+				<ref bean="comment2"/>
 			</list>
 		</property>
 	</bean>
@@ -757,6 +986,7 @@
 	<bean id="entered1" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="true"/>
+		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
 		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner1"/>
@@ -766,6 +996,7 @@
 	<bean id="entered2" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2016/05/05 12:10"/>
 <!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner2"/>
@@ -775,6 +1006,7 @@
 	<bean id="entered3" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="true"/>
+		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
 		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner3"/>
@@ -841,6 +1073,8 @@
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment3"/>
+				<ref bean="comment4"/>
 			</list>
 		</property>
 	</bean>
@@ -901,6 +1135,8 @@
 		</property>
 		<property name="comments">
 			<list>
+				<ref bean="comment5"/>
+				<ref bean="comment6"/>
 			</list>
 		</property>
 	</bean>
@@ -1064,6 +1300,51 @@
 		<property name="deleted" value="false"/>
 		<property name="actor" ref="runner1"/>
 		<property name="commentedEntity" ref="club1"/>
+	</bean>
+	
+	<bean id="comment2" class="domain.Comment">
+		<property name="text" value="Los demás miembros no valen."/>
+		<property name="moment" value="2016/03/09 19:30"/>
+		<property name="starRating" value="1"/>
+		<property name="deleted" value="true"/>
+		<property name="actor" ref="runner1"/>
+		<property name="commentedEntity" ref="club1"/>
+	</bean>
+	
+	<bean id="comment3" class="domain.Comment">
+		<property name="text" value="Es la mejor liga del mundo."/>
+		<property name="moment" value="2016/04/09 19:45"/>
+		<property name="starRating" value="5"/>
+		<property name="deleted" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="commentedEntity" ref="league1"/>
+	</bean>
+	
+	<bean id="comment4" class="domain.Comment">
+		<property name="text" value="Es la peor liga del mundo."/>
+		<property name="moment" value="2016/03/09 19:45"/>
+		<property name="starRating" value="0"/>
+		<property name="deleted" value="true"/>
+		<property name="actor" ref="runner1"/>
+		<property name="commentedEntity" ref="league1"/>
+	</bean>
+	
+	<bean id="comment5" class="domain.Comment">
+		<property name="text" value="La carrera estaba bien."/>
+		<property name="moment" value="2016/04/09 20:45"/>
+		<property name="starRating" value="3"/>
+		<property name="deleted" value="false"/>
+		<property name="actor" ref="runner1"/>
+		<property name="commentedEntity" ref="race1"/>
+	</bean>
+	
+	<bean id="comment6" class="domain.Comment">
+		<property name="text" value="La carrera era demasiado mala."/>
+		<property name="moment" value="2016/04/08 20:45"/>
+		<property name="starRating" value="0"/>
+		<property name="deleted" value="true"/>
+		<property name="actor" ref="runner1"/>
+		<property name="commentedEntity" ref="race1"/>
 	</bean>
 	
 </beans>
