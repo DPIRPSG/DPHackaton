@@ -80,6 +80,8 @@ public class FeePaymentService {
 	
 	//Other business methods -----------------------------------------------
 	
-	
+	public void flush() {
+		feePaymentRepository.flush();
+	}
 	
 }
