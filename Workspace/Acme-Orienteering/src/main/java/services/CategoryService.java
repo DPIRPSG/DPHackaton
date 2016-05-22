@@ -83,4 +83,14 @@ public class CategoryService {
 	public void flush() {
 		categoryRepository.flush();
 	}
+	
+	// DASHBOARD
+	
+	public Collection<Category> findAllMostFrequentInRaces(){
+		Collection<Category> result;
+		
+		result = categoryRepository.findAllMostFrequentInRaces();
+		
+		return result;
+	}
 }
