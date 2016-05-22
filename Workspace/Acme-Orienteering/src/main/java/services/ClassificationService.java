@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -97,6 +96,8 @@ public class ClassificationService {
 		for(Participates p:race.getParticipates()){
 			Map<String, Integer> clubClassi;
 			Club actClub;
+			
+			Assert.isTrue(p.getResult() > 0, "classification.calculateClassification.runnerWithNoResult");
 			
 			actClub = runnerService.getClub(p.getRunner());
 			

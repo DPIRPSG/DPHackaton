@@ -80,7 +80,9 @@
 			<acme:link href="participates/runner/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
 		</security:authorize>
 		<security:authorize access="hasRole('REFEREE')">
-			<acme:link href="participates/referee/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
+			<jstl:if test="${referee.id == row_Race.league.referee.id}">
+				<acme:link href="participates/referee/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
+			</jstl:if>
 		</security:authorize>
 	</display:column>
 	</security:authorize>
@@ -88,7 +90,9 @@
 	<security:authorize access="hasRole('REFEREE')">
 	<spring:message code="race.calculateClassification" var="calculateClassificationHeader" />
 	<display:column title="${calculateClassificationHeader}">
-		<acme:link href="classification/referee/calculateClassification.do?raceId=${row_Race.id}" code="race.calculateClassification.view"/>
+		<jstl:if test="${referee.id == row_Race.league.referee.id}">
+			<acme:link href="classification/referee/calculateClassification.do?raceId=${row_Race.id}&fromUrl=${requestURI}" code="race.calculateClassification.view"/>
+		</jstl:if>
 	</display:column>
 	</security:authorize>
 

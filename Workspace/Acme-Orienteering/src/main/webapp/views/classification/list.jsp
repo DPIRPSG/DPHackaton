@@ -30,10 +30,10 @@
 	<!-- Attributes -->
 	
 	<spring:message code="classification.position" var="positionHeader"/>
-	<acme:displayColumn value="${row_Classification.position}" title="${positionHeader}" />
+	<acme:displayColumn value="${row_Classification.position}" title="${positionHeader}" sorteable="true"/>
 	
 	<spring:message code="classification.points" var="pointsHeader"/>
-	<acme:displayColumn value="${row_Classification.points}" title="${pointsHeader}" />
+	<acme:displayColumn value="${row_Classification.points}" title="${pointsHeader}" sorteable="true"/>
 	
 	<spring:message code="classification.club" var="clubHeader" />
 	<display:column title="${clubHeader}" sortable="false">
