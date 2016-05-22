@@ -48,7 +48,7 @@ public class RaceServiceTest extends AbstractTest{
 	 *  Positive test: Se muestran los corredores del club seleccionado.
 	 */
 	@Test
-	public void testListLeagueByClub1(){
+	public void testListRaceByClub1(){
 		
 		// Declare variable
 		Collection<Race> result;
