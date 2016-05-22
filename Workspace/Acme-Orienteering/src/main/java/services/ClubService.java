@@ -3,8 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -296,65 +295,38 @@ public class ClubService {
 	// DASHBOARD
 	
 	public Collection<Club> findAllWhoHaveWonMoreLeagues(){
-		Collection<Club> result = new ArrayList<>();
-		Collection<Club> allClubs;
-		Map<League, Map<Club, Double>> maxPointsPerLeague = new HashMap<>();
-		Map<Club, Integer> counter = new HashMap<>();
-		int max = 0;
+		Collection<Club> result = new HashSet<>();
+		Collection<League> allLeagues = new HashSet<>();
+		Collection<Club> allClubs = new HashSet<>();
+		Collection<Club> allWinners = new ArrayList<>();
+		Collection<ArrayList<Integer>> ranking = new ArrayList<ArrayList<Integer>>();
+		int maxWinner = 0;
 		
-				
+		allLeagues = leagueService.findAll();
 		allClubs = findAll();
 		
-		for(Club c:allClubs){
-			for(Classification cl: c.getClassifications()){
-				// Si la liga ya está en el map.
-				if(maxPointsPerLeague.containsKey(cl.getRace().getLeague())){
-					// Si el club ya está en el submap.
-					if(maxPointsPerLeague.get(cl.getRace().getLeague()).containsKey(c)){
-						maxPointsPerLeague.get(cl.getRace().getLeague()).put(c, maxPointsPerLeague.get(cl.getRace().getLeague()).get(c) + cl.getPoints());
-					}else{
-						maxPointsPerLeague.get(cl.getRace().getLeague()).put(c, 0.0 + cl.getPoints());
-					}
-				// Si la liga no está en el map.
-				}else{
-					maxPointsPerLeague.put(cl.getRace().getLeague(), new HashMap<Club,Double>());
+		for(League l:allLeagues){
+			ranking = calculateRankingByLeague(l.getId());
+			for(ArrayList<Integer> ai:ranking){
+				if(ai.get(0) == 0){
+					Club club = findOne(ai.get(1));
+					allWinners.add(club);
 				}
 			}
 		}
 		
-		// Recorro cada liga
-		for(League l:maxPointsPerLeague.keySet()){
-			Club winner = null;
-			Double maxPointsInLeague = 0.0;
-			// Metemos en result al campeón de cada liga
-			for(Club c: maxPointsPerLeague.get(l).keySet()){
-				if(maxPointsInLeague < maxPointsPerLeague.get(l).get(c)){
-					winner = c;
-					maxPointsInLeague = maxPointsPerLeague.get(l).get(c);
+		for(Club c:allClubs){
+			int max = 0;
+			for(Club c2:allWinners){
+				if(c.equals(c2)){
+					max++;
 				}
 			}
-			if(winner != null){
-				result.add(winner);
-			}
-			
-		}
-		
-		for(Club c:result){
-			if(counter.containsKey(c)){
-				counter.put(c, counter.get(c)+1);
-			}else{
-				counter.put(c, 1);
-			}
-			if(counter.get(c) > max){
-				max = counter.get(c);
-			}
-			
-		}	
-		
-		result.clear();
-		
-		for(Club c:allClubs){
-			if(counter.get(c) == max){
+			if(max > maxWinner){
+				maxWinner = max;
+				result.clear();
+				result.add(c);
+			}else if(max == maxWinner){
 				result.add(c);
 			}
 		}

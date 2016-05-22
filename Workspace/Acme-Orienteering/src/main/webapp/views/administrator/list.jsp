@@ -11,17 +11,17 @@
 
 <security:authorize access="hasRole('ADMIN')">
 
-<%-- 	<h3><spring:message code="administrator.findAllWhoHaveWonMoreLeagues"/></h3> --%>
-<!-- 	<!-- Listing grid --> -->
-<%-- 	<display:table pagesize="5" class="displaytag" keepStatus="true" --%>
-<%--    		name="findAllWhoHaveWonMoreLeagues" requestURI="${requestURI}" id="row1"> --%>
-<!-- 		<!-- Attributes --> -->
-<%-- 		<spring:message code="club.name" var="nameHeader" /> --%>
-<%-- 		<display:column title="${nameHeader}"  --%>
-<%--    			sortable="false" > --%>
-<%--  			<jstl:out value="${row1.name}"/> --%>
-<%--    		</display:column> --%>
-<%--    	</display:table> --%>
+	<h3><spring:message code="administrator.findAllWhoHaveWonMoreLeagues"/></h3>
+	<!-- Listing grid -->
+	<display:table pagesize="5" class="displaytag" keepStatus="true"
+    		name="findAllWhoHaveWonMoreLeagues" requestURI="${requestURI}" id="row1">
+		<!-- Attributes -->
+		<spring:message code="club.name" var="nameHeader" />
+		<display:column title="${nameHeader}" 
+    			sortable="false" >
+  			<jstl:out value="${row1.name}"/>
+    		</display:column>
+    	</display:table>
    	
    	<h3><spring:message code="administrator.findAllWhoHaveWonMoreRaces"/></h3>
 	<!-- Listing grid -->

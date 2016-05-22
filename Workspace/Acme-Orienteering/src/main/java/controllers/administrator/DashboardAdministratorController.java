@@ -49,7 +49,7 @@ public class DashboardAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		// Declaración de variables
-		//Collection<Club> findAllWhoHaveWonMoreLeagues;
+		Collection<Club> findAllWhoHaveWonMoreLeagues;
 		Collection<Club> findAllWhoHaveWonMoreRaces;
 		Collection<Club> findAllWhoHaveMoreDeniedEntered;
 		Collection<Club> findAllWhoHaveMorePunishments;
@@ -63,7 +63,7 @@ public class DashboardAdministratorController extends AbstractController {
 		
 		// Llamamos a los servicios	
 		
-		//findAllWhoHaveWonMoreLeagues = clubService.findAllWhoHaveWonMoreLeagues();
+		findAllWhoHaveWonMoreLeagues = clubService.findAllWhoHaveWonMoreLeagues();
 		findAllWhoHaveWonMoreRaces = clubService.findAllWhoHaveWonMoreRaces();
 		findAllWhoHaveMoreDeniedEntered = clubService.findAllWhoHaveMoreDeniedEntered();
 		findAllWhoHaveMorePunishments = clubService.findAllWhoHaveMorePunishments();
@@ -78,7 +78,7 @@ public class DashboardAdministratorController extends AbstractController {
 		result = new ModelAndView("administrator/list");
 				
 		// Lo añadimos a la vista
-		//result.addObject("findAllWhoHaveWonMoreLeagues", findAllWhoHaveWonMoreLeagues);
+		result.addObject("findAllWhoHaveWonMoreLeagues", findAllWhoHaveWonMoreLeagues);
 		result.addObject("findAllWhoHaveWonMoreRaces", findAllWhoHaveWonMoreRaces);
 		result.addObject("findAllWhoHaveMoreDeniedEntered", findAllWhoHaveMoreDeniedEntered);
 		result.addObject("findAllWhoHaveMorePunishments", findAllWhoHaveMorePunishments);
