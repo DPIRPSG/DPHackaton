@@ -63,6 +63,8 @@ public class FeePaymentFormService {
 		
 		league = leagueService.findOne(leagueId);
 		
+		Assert.isTrue(league.getStartedMoment().after(new Date()), "You can't join your Club to a League that have already started.");
+		
 		club = manager.getClub();
 		
 		Assert.isTrue(!leagueService.findAllByClubId(club.getId()).contains(league), "Your club is already registered for this league.");
@@ -79,6 +81,7 @@ public class FeePaymentFormService {
 	public FeePayment reconstruct(FeePaymentForm feePaymentForm) {
 		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can pay for a league.");
 		Assert.notNull(feePaymentForm);
+		Assert.isTrue(feePaymentForm.getLeague().getStartedMoment().after(new Date()), "You can't join your Club to a League that have already started.");
 		
 		FeePayment result;
 		CreditCard creditCard;
