@@ -114,6 +114,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="referee2" />
+		<property name="password" value="4f556d5a66f4fe0d058523a7b8e19d91" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REFEREE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -422,6 +434,33 @@
 			</list>
 		</property>
 		<property name="curriculum" ref="curriculum3"/>
+	</bean>
+	
+	<bean id="referee2" class="domain.Referee">
+		<property name="name" value="Jose"/>
+		<property name="surname" value="Cortes"/>
+		<property name="phone" value="669988147"/>
+		<property name="nif" value="66851247H"/>
+		<property name="userAccount" ref="userAccount9"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder25"/>
+				<ref bean="folder26"/>
+				<ref bean="folder27"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<!-- MessageEntity -->
@@ -790,6 +829,36 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager3"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder25" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder26" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder27" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="referee2"/>
 		<property name="messages">
 			<list>
 			</list>

@@ -63,6 +63,9 @@ public class PunishmentService {
 		Punishment result;
 		Collection<League> leagues;
 		Actor referee;
+		League league;
+		Club club;
+		Collection<Punishment> punishmentsClub, punishmentsLeague;
 		
 		referee = actorService.findByPrincipal();
 		
@@ -71,6 +74,19 @@ public class PunishmentService {
 		Assert.isTrue(leagues.contains(punishment.getLeague()), "You can't sanction a League that is not asigned to you or a League where the club didn't/doesn't participate.");
 		
 		result = punishmentRepository.save(punishment);
+		
+		club = result.getClub();
+		league = result.getLeague();
+		
+		punishmentsClub = club.getPunishments();
+		punishmentsClub.add(result);
+		club.setPunishments(punishmentsClub);
+		clubService.save(club);
+		
+		punishmentsLeague = league.getPunishments();
+		punishmentsLeague.add(result);
+		league.setPunishments(punishmentsLeague);
+		leagueService.save(league);
 		
 		return result;
 	}
