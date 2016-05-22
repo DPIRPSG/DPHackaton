@@ -1087,7 +1087,7 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/11/06 13:00"/>
-		<property name="startedMoment" value="2016/02/02 10:30"/>
+		<property name="startedMoment" value="2016/12/12 10:30"/>
 		<property name="amount" value="150"/>
 		<property name="punishments">
 			<list>
@@ -1103,6 +1103,39 @@
 			</list>
 		</property>
 		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league3" class="domain.League">
+		<property name="description" value="The most important junior american league!"/>
+		<property name="name" value="First Junior Orienteering American League (FJOAL)"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/11/06 13:00"/>
+		<property name="startedMoment" value="2015/12/12 10:30"/>
+		<property name="amount" value="50"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee2"/>
 		<property name="finances">
 			<list>
 			</list>
@@ -1184,7 +1217,7 @@
 	<bean id="race4" class="domain.Race">
 		<property name="description" value="Carrera de orientación perteneciente a la liga junior"/>
 		<property name="name" value="Primera carrera de la liga junior"/>
-		<property name="moment" value="2016/05/05 20:30"/>
+		<property name="moment" value="2017/01/01 20:30"/>
 		<property name="classifications">
 			<list>
 			</list>
