@@ -150,6 +150,15 @@ public class ClubService {
 		return club;
 	}
 	
+	public Club saveFromOthers(Club club) {
+		Assert.notNull(club);
+		Assert.isTrue(actorService.checkAuthority("RUNNER"));
+		
+		club = clubRepository.save(club);
+		
+		return club;
+	}
+	
 	public void delete(Club club, int managerId) {
 		Assert.notNull(club);
 		Assert.isTrue(club.getId() != 0);
