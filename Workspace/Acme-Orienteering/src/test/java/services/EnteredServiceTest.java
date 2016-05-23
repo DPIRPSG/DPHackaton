@@ -416,6 +416,61 @@ public class EnteredServiceTest extends AbstractTest {
 	 * Acme-Orienteering - 22.d
 	 *  Aceptar peticiones de acceso.
 	 *  
+	 *  Negativo: aceptarlo en manager de otro club 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testAcceptEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		manager = null;
+		otherManager = null;
+		entered = null;
+		try{
+	
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null && otherManager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		
+		enteredService.accept(entered);
+		
+		// Checks results
+
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Aceptar peticiones de acceso.
+	 *  
 	 *  Negativo: Corredor con petición ya aceptada
 	 */
 	@Test(expected=IllegalArgumentException.class)
@@ -599,8 +654,60 @@ public class EnteredServiceTest extends AbstractTest {
 		Assert.isTrue(!entered.getIsMember() && entered.getAcceptedMoment() == null
 				&& entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Denegar peticiones de acceso.
+	 *  
+	 *  Negativo: manager de otro club 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDenyEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
 		
+		// Load objects to test
 		authenticate("admin");
+		
+		manager = null;
+		entered = null;
+		otherManager = null;
+		try{
+	
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		
+		enteredService.deny(entered);
+		
+		// Checks results
 	}
 	
 	/**
@@ -697,6 +804,64 @@ public class EnteredServiceTest extends AbstractTest {
 				"No se han rellenado correctamente los campos");
 		
 		authenticate("admin");
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Expulsar de un club.
+	 *  
+	 *  Negativo: Hacerlo otro Manager 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testExplEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		manager = null;
+		entered = null;
+		otherManager = null;
+		
+		try{
+
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) != null
+					&& b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		
+		enteredService.expel(entered);
+		
+		// Checks results
+
 	}
 	
 	/**
@@ -951,6 +1116,67 @@ public class EnteredServiceTest extends AbstractTest {
 				"Se han modificado otros campos");
 		
 		Assert.isTrue(entered.getReport().equals(textReport), "El texto no coincide");
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Escribir un report sobre el estado de la petición de acceso.
+	 *  
+	 *  Negativo: Realizarlo otro manager 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testReportEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
+		String textReport;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		manager = null;
+		entered = null;
+		otherManager = null;
+		
+		try{
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
+					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
+					&& b.getIsMember()){ // Que el usuario sea miembro del club 
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		textReport = "Este es un report de ejemplo";
+		
+		entered.setReport(textReport);		
+		
+		entered = enteredService.save(entered);
+		
+		// Checks results		
 	}
 	
 	/**
