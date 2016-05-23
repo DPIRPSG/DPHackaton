@@ -64,8 +64,7 @@ public class RunnerServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.size() == 1);
-		runnerService.flush();
-		clubService.flush();
+
 		
 	}
 	
@@ -100,8 +99,6 @@ public class RunnerServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
 		
 	}
 	

@@ -488,4 +488,250 @@ public class ClubServiceTest extends AbstractTest{
 
 	}
 	
+	/**
+	 * @see 22.b
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
+	 *  
+	 *  Positive test: El club se edita correctamente.
+	 */
+	@Test
+	public void testEditClub1(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isTrue(result.contains(club));
+		
+		// Execution of test
+		club.setName("Modificado");
+		clubService.save(club);
+		clubService.flush();
+
+		// Check result
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isTrue(club.getName().equals("Modificado"));
+		unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 22.b
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
+	 *  
+	 *  Negative test: El club no se edita correctamente porque no estamos logueados.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testEditClub2(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		//authenticate("manager1");
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isTrue(result.contains(club));
+		
+		// Execution of test
+		club.setName("Modificado");
+		clubService.save(club);
+		clubService.flush();
+
+
+		// Check result
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isTrue(club.getName().equals("Modificado"));
+		//unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 22.b
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
+	 *  
+	 *  Negative test: El club no se edita correctamente porque el manager no dirije ese club.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testEditClub3(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Manager manager;
+		Club club = null;
+		
+		// Load object to test
+		authenticate("manager1");
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		for(Club c:result){
+			if(!c.getName().equals("Los Imperdibles")){
+				club = c;
+			}
+		}
+		Assert.isTrue(result.contains(club));
+		
+		// Execution of test
+		club.setName("Modificado");
+		clubService.save(club);
+		clubService.flush();
+
+		// Check result
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isTrue(club.getName().equals("Modificado"));
+		unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 22.b
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
+	 *  
+	 *  Positive test: El club se cambia de manos correctamente.
+	 */
+	@Test
+	public void testDeleteClub1(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Collection<Manager> allManagerWithoutClub;
+		Manager manager;
+		Manager managerWithoutClub;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		allManagerWithoutClub = managerService.findAllWithoutClub();
+		managerWithoutClub = allManagerWithoutClub.iterator().next();
+		Assert.isTrue(result.contains(club));
+		Assert.isTrue(club.getName().equals("Los Imperdibles"));
+		Assert.notNull(managerWithoutClub);
+		
+		// Execution of test
+		clubService.delete(club, managerWithoutClub.getId());
+		clubService.flush();
+
+		// Check result
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isNull(club);
+		managerWithoutClub = managerService.findOne(managerWithoutClub.getId());
+		club = managerWithoutClub.getClub();
+		Assert.isTrue(club.getName().equals("Los Imperdibles"));
+		unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 22.b
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
+	 *  
+	 *  Negative test: El club se no cambia de manos correctamente ya que no estamos autenticados.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testDeleteClub2(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Collection<Manager> allManagerWithoutClub;
+		Manager manager;
+		Manager managerWithoutClub;
+		Club club;
+		
+		// Load object to test
+		//authenticate("manager1");
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		allManagerWithoutClub = managerService.findAllWithoutClub();
+		managerWithoutClub = allManagerWithoutClub.iterator().next();
+		Assert.isTrue(result.contains(club));
+		Assert.isTrue(club.getName().equals("Los Imperdibles"));
+		Assert.notNull(managerWithoutClub);
+		
+		// Execution of test
+		clubService.delete(club, managerWithoutClub.getId());
+		clubService.flush();
+
+		// Check result
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isNull(club);
+		managerWithoutClub = managerService.findOne(managerWithoutClub.getId());
+		club = managerWithoutClub.getClub();
+		Assert.isTrue(club.getName().equals("Los Imperdibles"));
+		//unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 22.b
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
+	 *  
+	 *  Negative test: El club no se cambia de manos correctamente porque el nuevo manager no ya tiene un club.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testDeleteClub3(){
+		
+		// Declare variable
+		Collection<Club> result;
+		Manager manager;
+		Manager managerWithClub;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager2");
+		managerWithClub = managerService.findByPrincipal();
+		unauthenticate();
+		authenticate("manager1");
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isTrue(result.contains(club));
+		Assert.isTrue(club.getName().equals("Los Imperdibles"));
+		Assert.notNull(managerWithClub);
+		
+		// Execution of test
+		clubService.delete(club, managerWithClub.getId());
+		clubService.flush();
+
+		// Check result
+		result = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		Assert.isNull(club);
+		managerWithClub = managerService.findOne(managerWithClub.getId());
+		club = managerWithClub.getClub();
+		Assert.isTrue(club.getName().equals("Los Imperdibles"));
+		unauthenticate();
+		
+	}
+	
 }

@@ -16,7 +16,6 @@ import org.springframework.util.Assert;
 
 import domain.Bulletin;
 import domain.Club;
-import domain.League;
 import domain.Runner;
 
 import utilities.AbstractTest;
@@ -70,15 +69,13 @@ public class BulletinServiceTest extends AbstractTest{
 		bulletin = bulletinService.create();
 		bulletin.setTitle("Prueba");
 		bulletin.setDescription("Prueba");
-		bulletinService.save(bulletin);	
+		bulletinService.save(bulletin);
+		bulletinService.flush();
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
 		
 	}
 	
@@ -110,16 +107,13 @@ public class BulletinServiceTest extends AbstractTest{
 		bulletin = bulletinService.create();
 		bulletin.setTitle("Prueba");
 		bulletin.setDescription("Prueba");
-		bulletinService.save(bulletin);	
+		bulletinService.save(bulletin);
+		bulletinService.flush();
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
 		//unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
-		
 	}
 	
 	/**
@@ -151,14 +145,12 @@ public class BulletinServiceTest extends AbstractTest{
 		bulletin.setTitle("Prueba");
 		bulletin.setDescription("Prueba");
 		bulletinService.save(bulletin);	
+		bulletinService.flush();
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
 		
 	}
 	
@@ -190,15 +182,13 @@ public class BulletinServiceTest extends AbstractTest{
 		bulletin = bulletinService.create();
 		bulletin.setTitle("Prueba");
 		bulletin.setDescription("Prueba");
-		bulletinService.save(bulletin);	
+		bulletinService.save(bulletin);
+		bulletinService.flush();
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
 		
 	}
 	
@@ -230,15 +220,13 @@ public class BulletinServiceTest extends AbstractTest{
 		bulletin = bulletinService.create();
 		//bulletin.setTitle("Prueba");
 		//bulletin.setDescription("Prueba");
-		bulletinService.save(bulletin);	
+		bulletinService.save(bulletin);
+		bulletinService.flush();
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
 		
 	}
 	
@@ -279,14 +267,12 @@ public class BulletinServiceTest extends AbstractTest{
 		//bulletin.setTitle("Prueba");
 		//bulletin.setDescription("Prueba");
 		bulletinService.save(bulletin);	
+		bulletinService.flush();
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
 		Assert.isTrue(result.size() == 2);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
 		
 	}
 	
@@ -316,9 +302,7 @@ public class BulletinServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
+		
 	}
 	
 	/**
@@ -348,9 +332,7 @@ public class BulletinServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		//unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
+
 	}
 	
 	/**
@@ -380,9 +362,7 @@ public class BulletinServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
+
 	}
 	
 	/**
@@ -420,9 +400,7 @@ public class BulletinServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		runnerService.flush();
-		clubService.flush();
-		bulletinService.flush();
+
 	}
 	
 }

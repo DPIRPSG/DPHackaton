@@ -68,8 +68,6 @@ public class RaceServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.size() == 1);
-		raceService.flush();
-		clubService.flush();
 		
 	}
 	
@@ -101,7 +99,6 @@ public class RaceServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.size() == 3);
-		leagueService.flush();
 		
 	}
 	
@@ -136,8 +133,7 @@ public class RaceServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		raceService.flush();
-		clubService.flush();
+
 		
 	}
 	
@@ -171,7 +167,6 @@ public class RaceServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 3);
 		unauthenticate();
-		leagueService.flush();
 		
 	}
 }

@@ -64,8 +64,6 @@ public class LeagueServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.size() == 1);
-		leagueService.flush();
-		clubService.flush();
 		
 	}
 	
@@ -92,8 +90,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
-		leagueService.flush();
+		Assert.isTrue(result.size() == 3);
 	}
 	
 	/**
@@ -127,8 +124,6 @@ public class LeagueServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		leagueService.flush();
-		clubService.flush();
 		
 	}
 	
@@ -156,8 +151,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 3);
 		unauthenticate();
-		leagueService.flush();
 	}
 }
