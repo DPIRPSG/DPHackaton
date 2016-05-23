@@ -71,7 +71,8 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		club = null;
-		
+		try{
+
 		for (Runner b:runnerService.findAll()){
 			if(runnerService.getClub(b) == null){ // Que no tenga un club
 				for (Club c:clubService.findAll()){
@@ -95,7 +96,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(club != null && runner != null,
 					"No existe una combinación de corredor y club que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -143,7 +143,8 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		club = null;
-		
+		try{
+
 		for (Runner b:runnerService.findAll()){
 			if(runnerService.getClub(b) == null){ // Que no tenga un club
 				for (Club c:clubService.findAll()){
@@ -166,7 +167,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(club != null && runner != null,
 					"No existe una combinación de corredor y club que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -224,6 +224,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		club = null;
+		try{
 		
 		for (Runner b:runnerService.findAll()){
 			if(runnerService.getClub(b) != null){ // Que tenga un club
@@ -247,7 +248,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(club != null && runner != null,
 					"No existe una combinación de corredor y club que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -284,6 +284,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		calculateResult = null;
+		try{
 		
 		for (Runner b : runnerService.findAll()) {
 			if (b.getEntered().size() > 3) {
@@ -294,7 +295,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 
 		// Checks basic requirements
-		try{
 			Assert.isTrue(runner != null,
 					"No existe un corredor que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -331,6 +331,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		manager = null;
 		calculateResult = null;
+		try{
 		
 		for (Manager b : managerService.findAll()) {
 			if (b.getClub() != null) {
@@ -343,7 +344,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 
 		// Checks basic requirements
-		try{
 			Assert.isTrue(manager != null,
 					"No existe un manager que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -379,6 +379,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		manager = null;
 		entered = null;
+		try{
 		
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
@@ -389,7 +390,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -409,7 +409,6 @@ public class EnteredServiceTest extends AbstractTest {
 				&& !entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
-		authenticate("admin");
 	}
 	
 	/**
@@ -486,6 +485,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& !b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -496,7 +496,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -531,6 +530,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -541,7 +541,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -575,6 +574,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
@@ -584,7 +584,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -604,7 +603,6 @@ public class EnteredServiceTest extends AbstractTest {
 				&& entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
-		authenticate("admin");
 	}
 	
 	/**
@@ -625,6 +623,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& !b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -635,7 +634,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -729,6 +727,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null){ // Que el usuario esté en ningún club
 				manager = b.getClub().getManager();
@@ -738,7 +737,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -773,6 +771,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -783,7 +782,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -803,7 +801,6 @@ public class EnteredServiceTest extends AbstractTest {
 				&& !entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
-		authenticate("admin");
 	}
 	
 	/**
@@ -883,6 +880,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
@@ -892,7 +890,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -928,6 +925,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& !b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -938,7 +936,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -975,6 +972,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
@@ -986,7 +984,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -1029,6 +1026,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
@@ -1040,7 +1038,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -1083,6 +1080,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
@@ -1094,7 +1092,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -1199,6 +1196,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& !b.getIsMember()){ // Que el usuario no sea miembro del club 
@@ -1209,7 +1207,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {

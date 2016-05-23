@@ -71,6 +71,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		runner = null;
 		race = null;
+		try{
 		
 		for (Runner b : runnerService.findAll()) {
 			for (Race c : raceService.findAll()) {
@@ -99,7 +100,6 @@ public class ParticipatesServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(race != null && runner != null,
 					"No existe una combinación de corredor y carrera que cumpla los requisitos");			
 		}catch (Exception e) {
