@@ -14,11 +14,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Bulletin;
 import domain.Club;
 import domain.League;
 import domain.Manager;
-import domain.Runner;
 
 import utilities.AbstractTest;
 
@@ -199,6 +197,8 @@ public class ClubServiceTest extends AbstractTest{
 		// Check result
 		manager = managerService.findByPrincipal();
 		result = manager.getClub();
+		System.out.println(manager);
+		System.out.println(manager.getClub());
 		Assert.notNull(result);
 		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
 		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
@@ -395,6 +395,7 @@ public class ClubServiceTest extends AbstractTest{
 		//club.setName("Prueba");
 		club.setDescription("Prueba");
 		clubService.save(club);
+		clubService.flush();
 		
 		// Check result
 		manager = managerService.findByPrincipal();
@@ -404,7 +405,6 @@ public class ClubServiceTest extends AbstractTest{
 		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
 		unauthenticate();
 		managerService.flush();
-		clubService.flush();
 
 	}
 	
@@ -435,6 +435,7 @@ public class ClubServiceTest extends AbstractTest{
 		club.setName("Prueba");
 		//club.setDescription("Prueba");
 		clubService.save(club);
+		clubService.flush();
 		
 		// Check result
 		manager = managerService.findByPrincipal();
@@ -444,7 +445,6 @@ public class ClubServiceTest extends AbstractTest{
 		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));
 		unauthenticate();
 		managerService.flush();
-		clubService.flush();
 
 	}
 	

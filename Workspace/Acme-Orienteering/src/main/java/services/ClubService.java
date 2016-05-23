@@ -133,9 +133,13 @@ public class ClubService {
 		}
 		
 		if(club.getId() == 0) {
+			manager = managerService.findByPrincipal();
+			Assert.isTrue(manager.getClub() == null);
+			
 			club = clubRepository.save(club);
 			
 			manager = club.getManager();
+			manager.setClub(club);
 			managerService.saveFromOthers(manager);
 		} else {
 			club = clubRepository.save(club);
