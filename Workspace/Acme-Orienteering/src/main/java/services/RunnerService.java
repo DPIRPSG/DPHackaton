@@ -115,10 +115,10 @@ public class RunnerService {
 	}
 	
 	/**
-	 * Lista los customers registrados
+	 * Lista los runners registrados
 	 */
 	public Collection<Runner> findAll(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list customers");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list runners");
 		
 		Collection<Runner> result;
 		
