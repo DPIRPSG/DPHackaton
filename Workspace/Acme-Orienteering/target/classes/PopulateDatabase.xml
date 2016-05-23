@@ -288,6 +288,7 @@
 				<ref bean="folder7"/>
 				<ref bean="folder8"/>
 				<ref bean="folder9"/>
+				<ref bean="folder28"/>
 				<ref bean="folder100"/>
 				<ref bean="folder101"/>
 				<ref bean="folder102"/>
@@ -483,6 +484,23 @@
 		</property>
 	</bean>
 	
+	<bean id="message2" class="domain.MessageEntity">
+		<property name="subject" value="Welcome!"/>
+		<property name="body" value="You were registered successfully! Welcome to Acme Orienteering!"/>
+		<property name="sentMoment" value="2016/05/02 12:15"/>
+		<property name="sender" ref="administrator1"/>
+		<property name="recipients">
+			<list>
+				<ref bean="runner1"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder3"/>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="message100" class="domain.MessageEntity">
 		<property name="subject" value="Mensaje 0"/>
 		<property name="body" value="Welcome to Acme Orienteering!"/>
@@ -600,6 +618,7 @@
 		<property name="messages">
 			<list>
 				<ref bean="message1"/>
+				<ref bean="message2"/>
 				<ref bean="message100"/>
 				<ref bean="message102"/>
 				<ref bean="message104"/>
@@ -681,6 +700,7 @@
 		<property name="actor" ref="runner1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -859,6 +879,16 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="referee2"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder28" class="domain.Folder">
+		<property name="name" value="MyBox"/>
+		<property name="isSystem" value="false"/>
+		<property name="actor" ref="runner1"/>
 		<property name="messages">
 			<list>
 			</list>
