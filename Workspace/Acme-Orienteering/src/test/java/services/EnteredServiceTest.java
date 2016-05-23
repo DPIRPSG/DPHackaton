@@ -71,7 +71,8 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		club = null;
-		
+		try{
+
 		for (Runner b:runnerService.findAll()){
 			if(runnerService.getClub(b) == null){ // Que no tenga un club
 				for (Club c:clubService.findAll()){
@@ -95,7 +96,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(club != null && runner != null,
 					"No existe una combinación de corredor y club que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -143,7 +143,8 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		club = null;
-		
+		try{
+
 		for (Runner b:runnerService.findAll()){
 			if(runnerService.getClub(b) == null){ // Que no tenga un club
 				for (Club c:clubService.findAll()){
@@ -166,7 +167,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(club != null && runner != null,
 					"No existe una combinación de corredor y club que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -224,6 +224,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		club = null;
+		try{
 		
 		for (Runner b:runnerService.findAll()){
 			if(runnerService.getClub(b) != null){ // Que tenga un club
@@ -247,7 +248,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(club != null && runner != null,
 					"No existe una combinación de corredor y club que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -284,6 +284,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		runner = null;
 		calculateResult = null;
+		try{
 		
 		for (Runner b : runnerService.findAll()) {
 			if (b.getEntered().size() > 3) {
@@ -294,7 +295,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 
 		// Checks basic requirements
-		try{
 			Assert.isTrue(runner != null,
 					"No existe un corredor que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -331,6 +331,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		manager = null;
 		calculateResult = null;
+		try{
 		
 		for (Manager b : managerService.findAll()) {
 			if (b.getClub() != null) {
@@ -343,7 +344,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 
 		// Checks basic requirements
-		try{
 			Assert.isTrue(manager != null,
 					"No existe un manager que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -379,6 +379,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		manager = null;
 		entered = null;
+		try{
 		
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
@@ -389,7 +390,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -409,7 +409,61 @@ public class EnteredServiceTest extends AbstractTest {
 				&& !entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Aceptar peticiones de acceso.
+	 *  
+	 *  Negativo: aceptarlo en manager de otro club 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testAcceptEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
+		
+		// Load objects to test
 		authenticate("admin");
+		
+		manager = null;
+		otherManager = null;
+		entered = null;
+		try{
+	
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null && otherManager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		
+		enteredService.accept(entered);
+		
+		// Checks results
+
 	}
 	
 	/**
@@ -431,6 +485,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& !b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -441,7 +496,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -476,6 +530,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -486,7 +541,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -520,6 +574,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
@@ -529,7 +584,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -549,7 +603,6 @@ public class EnteredServiceTest extends AbstractTest {
 				&& entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
-		authenticate("admin");
 	}
 	
 	/**
@@ -570,6 +623,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& !b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -580,7 +634,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -599,8 +652,60 @@ public class EnteredServiceTest extends AbstractTest {
 		Assert.isTrue(!entered.getIsMember() && entered.getAcceptedMoment() == null
 				&& entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Denegar peticiones de acceso.
+	 *  
+	 *  Negativo: manager de otro club 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testDenyEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
 		
+		// Load objects to test
 		authenticate("admin");
+		
+		manager = null;
+		entered = null;
+		otherManager = null;
+		try{
+	
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		
+		enteredService.deny(entered);
+		
+		// Checks results
 	}
 	
 	/**
@@ -622,6 +727,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null){ // Que el usuario esté en ningún club
 				manager = b.getClub().getManager();
@@ -631,7 +737,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -666,6 +771,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -676,7 +782,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -696,7 +801,64 @@ public class EnteredServiceTest extends AbstractTest {
 				&& !entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Expulsar de un club.
+	 *  
+	 *  Negativo: Hacerlo otro Manager 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testExplEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
+		
+		// Load objects to test
 		authenticate("admin");
+		
+		manager = null;
+		entered = null;
+		otherManager = null;
+		
+		try{
+
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) != null
+					&& b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		
+		enteredService.expel(entered);
+		
+		// Checks results
+
 	}
 	
 	/**
@@ -718,6 +880,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
@@ -727,7 +890,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -763,6 +925,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null
 					&& !b.getClub().equals(runnerService.getClub(b.getRunner()))){ // Que el usuario no esté en ningún club
@@ -773,7 +936,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -810,6 +972,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
@@ -821,7 +984,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -864,6 +1026,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
@@ -875,7 +1038,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -918,6 +1080,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
@@ -929,7 +1092,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
@@ -957,6 +1119,67 @@ public class EnteredServiceTest extends AbstractTest {
 	 * Acme-Orienteering - 22.d
 	 *  Escribir un report sobre el estado de la petición de acceso.
 	 *  
+	 *  Negativo: Realizarlo otro manager 
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
+	public void testReportEnteredErrorOtherManager() {
+		// Declare variables
+		Manager manager, otherManager;
+		Entered entered;
+		String textReport;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		manager = null;
+		entered = null;
+		otherManager = null;
+		
+		try{
+		for (Entered b:enteredService.findAll()){
+			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
+					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
+					&& b.getIsMember()){ // Que el usuario sea miembro del club 
+				manager = b.getClub().getManager();
+				entered = b;
+				break;
+			}
+		}
+		
+		Assert.isTrue(entered != null && manager != null,
+				"No existe una combinación de manager y entered que cumpla los requisitos");			
+		
+		for (Manager m:managerService.findAll()){
+			if(!m.equals(manager) //No es el mismo manager
+					&& m.getClub() != null){ //Tiene un club asignado
+				otherManager = m;
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(entered != null && manager != null,
+					"No existe una combinación de manager y entered que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(otherManager.getUserAccount().getUsername());
+		textReport = "Este es un report de ejemplo";
+		
+		entered.setReport(textReport);		
+		
+		entered = enteredService.save(entered);
+		
+		// Checks results		
+	}
+	
+	/**
+	 * Acme-Orienteering - 22.d
+	 *  Escribir un report sobre el estado de la petición de acceso.
+	 *  
 	 *  Negativo: cambia si es miembro del club 
 	 */
 	@Test(expected=IllegalArgumentException.class)
@@ -973,6 +1196,7 @@ public class EnteredServiceTest extends AbstractTest {
 		manager = null;
 		entered = null;
 		
+		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& !b.getIsMember()){ // Que el usuario no sea miembro del club 
@@ -983,7 +1207,6 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 		
 		// Checks basic requirements
-		try{
 			Assert.isTrue(entered != null && manager != null,
 					"No existe una combinación de manager y entered que cumpla los requisitos");			
 		}catch (Exception e) {
