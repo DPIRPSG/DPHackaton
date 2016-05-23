@@ -26,6 +26,9 @@ public class SponsorService {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private FinancesService financesService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public SponsorService() {
@@ -79,6 +82,8 @@ public class SponsorService {
 		Assert.notNull(sponsor);
 		Assert.isTrue(sponsor.getId() != 0);
 		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can delete sponsors");
+		
+		financesService.deleteBySponsor(sponsor);
 		
 		sponsorRepository.delete(sponsor);
 	}
