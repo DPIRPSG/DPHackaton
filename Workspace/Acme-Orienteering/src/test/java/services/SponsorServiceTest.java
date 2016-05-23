@@ -76,8 +76,9 @@ public class SponsorServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Positive test case: Listar los Sponsor
+	 * Positive test case: Listar los Sponsor como Admin
 	 * 		- Acción
+	 *  	+ Autenticarse en el sistema como Admin
 	 * 		+ Listar los Sponsor del sistema
 	 * 		- Comprobación
 	 * 		+ Comprobar que el número de Sponsors es el esperado.
@@ -110,8 +111,9 @@ public class SponsorServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Positive test case: Listar los Sponsor
+	 * Positive test case: Listar los Sponsor como Runner
 	 * 		- Acción
+	 *		+ Autenticarse en el sistema como Runner
 	 * 		+ Listar los Sponsor del sistema
 	 * 		- Comprobación
 	 * 		+ Comprobar que el número de Sponsors es el esperado.
