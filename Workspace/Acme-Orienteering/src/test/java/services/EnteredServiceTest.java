@@ -184,7 +184,6 @@ public class EnteredServiceTest extends AbstractTest {
 		entered = enteredService.save(entered);
 		
 		// Checks results
-		
 		Assert.isTrue(!((!entered.getIsMember()) && (entered.getAcceptedMoment() == null)),
 				"Se han corregido los cambios");
 
@@ -797,7 +796,7 @@ public class EnteredServiceTest extends AbstractTest {
 
 		entered = enteredService.findOne(entered.getId());
 		
-		Assert.isTrue(entered.getIsMember() && entered.getAcceptedMoment() != null
+		Assert.isTrue(!entered.getIsMember() && entered.getAcceptedMoment() != null
 				&& !entered.getIsDenied(),
 				"No se han rellenado correctamente los campos");
 		
