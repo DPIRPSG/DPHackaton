@@ -66,7 +66,6 @@ public class ManagerServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(manager.getName().equals("Guillermo"));
-		clubService.flush();
 		
 	}
 	
@@ -101,7 +100,6 @@ public class ManagerServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(manager.getName().equals("Guillermo"));
 		unauthenticate();
-		clubService.flush();
 		
 	}
 	

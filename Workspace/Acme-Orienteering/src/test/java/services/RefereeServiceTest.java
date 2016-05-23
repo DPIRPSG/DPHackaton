@@ -63,7 +63,6 @@ public class RefereeServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.getName().equals("Carlos"));
-		leagueService.flush();
 		
 	}
 	
@@ -97,7 +96,6 @@ public class RefereeServiceTest extends AbstractTest{
 		// Check result
 		Assert.isTrue(result.getName().equals("Carlos"));
 		unauthenticate();
-		leagueService.flush();
 		
 	}
 	

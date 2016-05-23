@@ -71,7 +71,6 @@ public class PunishmentServiceTest extends AbstractTest {
 
 		// Check result
 		Assert.isTrue(result.size() == 1);
-		clubService.flush();
 
 	}
 	
@@ -101,7 +100,6 @@ public class PunishmentServiceTest extends AbstractTest {
 		// Check result
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
-		clubService.flush();
 
 	}
 	
