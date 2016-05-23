@@ -35,7 +35,7 @@
 	<acme:displayColumn value="${row_League.name }" title="${nameHeader}"/>
 	
 	<spring:message code="league.description" var="descriptionHeader"/>
-	<acme:displayColumn value="${row_League.description }" title="${descriptionHeader}"/>
+	<acme:displayColumn value="${row_League.description }" title="${descriptionHeader}" sorteable="true"/>
 
 	<spring:message code="league.pictures" var="pictureHeader"/>
 	<display:column title="${pictureHeader}"
@@ -56,7 +56,9 @@
 	</display:column>
 	
 	<spring:message code="league.amount" var="amountHeader"/>
-	<acme:displayColumn value="${row_League.amount}" title="${amountHeader}" sorteable="true"/>
+	<display:column title="${amountHeader }" sortable="true">
+		<fmt:formatNumber value="${row_League.amount}" minIntegerDigits="4" maxFractionDigits="2" minFractionDigits="2" type="number"/> Euros
+	</display:column>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
 	<display:column title="${refereeHeader }" sortable="true">
