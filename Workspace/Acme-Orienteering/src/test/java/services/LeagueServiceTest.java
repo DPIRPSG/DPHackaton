@@ -92,7 +92,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 3);
 		leagueService.flush();
 	}
 	
@@ -156,7 +156,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 3);
 		unauthenticate();
 		leagueService.flush();
 	}
