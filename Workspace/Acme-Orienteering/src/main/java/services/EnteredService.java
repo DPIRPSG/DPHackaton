@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import domain.Club;
 import domain.Entered;
+import domain.Manager;
 import domain.Runner;
 
 import repositories.EnteredRepository;
@@ -30,6 +31,12 @@ public class EnteredService {
 	
 	@Autowired
 	private RunnerService runnerService;
+	
+	@Autowired
+	private ManagerService managerService;
+	
+	@Autowired
+	private ClubService clubService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -78,9 +85,53 @@ public class EnteredService {
 	public Entered save(Entered entered){
 		
 		Assert.notNull(entered);
-		Assert.isTrue(actorService.checkAuthorities("RUNNER,MANAGER"));
 		
-		enteredRepository.save(entered);
+		if(entered.getId() == 0) {
+			Assert.isTrue(actorService.checkAuthorities("RUNNER"));
+			
+			Runner runner;
+			Club club;
+			Collection<Entered> enteredRunner, enteredClub;
+			
+			runner = runnerService.findByPrincipal();
+			
+			club = clubService.findOneByRunnerId(runner.getId());
+			Assert.isNull(club);
+			
+			entered.setRunner(runner);		
+			entered.setIsMember(false);
+			entered.setIsDenied(false);
+			entered.setRegisterMoment(new Date());
+			entered.setAcceptedMoment(null);
+			entered.setReport(null);
+			
+			entered = enteredRepository.save(entered);
+			
+			enteredRunner = runner.getEntered();
+			enteredRunner.add(entered);
+			runner.setEntered(enteredRunner);
+			runnerService.saveFromEdit(runner);
+			
+			club = entered.getClub();
+			
+			enteredClub = club.getEntered();
+			enteredClub.add(entered);
+			club.setEntered(enteredClub);
+			clubService.saveFromOthers(club);
+			
+		} else {
+			Assert.isTrue(actorService.checkAuthorities("MANAGER"));
+			
+			Manager manager;
+			
+			manager = managerService.findByPrincipal();
+			
+			Assert.isTrue(manager.getId() == entered.getClub().getManager().getId());
+			
+			entered = enteredRepository.save(entered);
+		}
+		
+		
 		
 		return entered;
 	}
@@ -119,7 +170,7 @@ public class EnteredService {
 		entered.setIsMember(true);
 		entered.setIsDenied(false);
 		entered.setAcceptedMoment(new Date());
-		enteredRepository.save(entered);
+		this.save(entered);
 		
 	}
 	
@@ -140,7 +191,7 @@ public class EnteredService {
 		
 		entered.setIsMember(false);
 		entered.setIsDenied(true);
-		enteredRepository.save(entered);
+		this.save(entered);
 	}
 	
 	/**
@@ -159,7 +210,7 @@ public class EnteredService {
 		
 		entered.setIsMember(false);
 		entered.setIsDenied(false);
-		enteredRepository.save(entered);
+		this.save(entered);
 	}
 		
 	/**
@@ -267,6 +318,20 @@ public class EnteredService {
 		result = enteredRepository.findOne(enteredId);
 		
 		return result;
+	}
+	
+	/**
+	 * Necesario para los test
+	 * @return
+	 */
+	public Collection<Entered> findAll(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAll();
+		
+		return result;		
 	}
 	
 	public void flush(){

@@ -60,7 +60,7 @@ public class ParticipatesService {
 		if(participates.getResult() != 0)
 			Assert.isTrue(participates.getRace().getMoment().before(new Date()), "participates.save.resultNot0");
 			
-		participatesRepository.save(participates);
+		participates = participatesRepository.save(participates);
 		
 		return participates;
 	}
@@ -81,7 +81,7 @@ public class ParticipatesService {
 		return result;
 	}
 	
-	public void joinRace(int raceId){
+	public Participates joinRace(int raceId){
 		
 		Assert.isTrue(actorService.checkAuthority("RUNNER"));
 				
@@ -89,7 +89,7 @@ public class ParticipatesService {
 		Runner runner;
 		Race race;
 		
-		Collection<Participates> allParticipatesByRunner;
+		Collection<Participates> allParticipatesByRunner, allParticipatesByRace;
 		Collection<Runner> allRunnerWhoCanJoinARace;
 		Boolean flag;
 		
@@ -119,8 +119,19 @@ public class ParticipatesService {
 		result.setRace(race);
 		result.setResult(0);
 		result.setRunner(runner);
-		save(result);
+		result = save(result);
 		
+		allParticipatesByRace = race.getParticipates();
+		allParticipatesByRace.add(result);
+		race.setParticipates(allParticipatesByRace);
+		raceService.save(race);
+		
+		allParticipatesByRunner = runner.getParticipates();
+		allParticipatesByRunner.add(result);
+		runner.setParticipates(allParticipatesByRunner);
+		runnerService.saveFromEdit(runner);
+		
+		return result;
 	}
 	
 	/**
@@ -186,5 +197,19 @@ public class ParticipatesService {
 	
 	public void flush(){
 		participatesRepository.flush();
+	}
+
+	/**
+	 * Necesario para los test
+	 * @return
+	 */
+	public Collection<Participates> findAll() {
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		Collection<Participates> result;
+		
+		result = participatesRepository.findAll();
+		
+		return result;
 	}
 }

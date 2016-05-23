@@ -99,6 +99,7 @@ public class LeagueServiceTest extends AbstractTest{
 		
 		// Check result
 		Assert.isTrue(result.size() == 3);
+		leagueService.flush();
 	}
 	
 	/**
