@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 
 import domain.Bulletin;
 import domain.Club;
+import domain.Manager;
 import domain.Runner;
 
 import utilities.AbstractTest;
@@ -38,6 +39,9 @@ public class BulletinServiceTest extends AbstractTest{
 	
 	@Autowired
 	private ClubService clubService;
+	
+	@Autowired
+	private ManagerService managerService;
 	
 	
 	// Tests ---------------------------------------
@@ -264,8 +268,164 @@ public class BulletinServiceTest extends AbstractTest{
 		
 		// Execution of test
 		bulletin = bulletinService.create();
+		bulletin.setTitle("Prueba");
+		bulletin.setDescription("Prueba");
+		bulletinService.save(bulletin);	
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Positive Test: El boletín se crea correctamente.
+	 */
+	@Test
+	public void testCreateBulletin7(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = bulletinService.create();
+		bulletin.setTitle("Prueba");
+		bulletin.setDescription("Prueba");
+		bulletinService.save(bulletin);
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Negative test: El club no se crea correctamente porque no estamos autenticados.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateBulletin8(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		//authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = bulletinService.create();
+		bulletin.setTitle("Prueba");
+		bulletin.setDescription("Prueba");
+		bulletinService.save(bulletin);
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 2);
+		//unauthenticate();
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Negative test: El club no se crea correctamente porque dejamos campos vacíos.
+	 */
+	@Test(expected = ConstraintViolationException.class)
+	@Rollback(value = true)
+	public void testCreateBulletin9(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = bulletinService.create();
 		//bulletin.setTitle("Prueba");
 		//bulletin.setDescription("Prueba");
+		bulletinService.save(bulletin);
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 2);
+		unauthenticate();
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Negative test: El club no se crea correctamente porque dejamos campos vacíos.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testCreateBulletin10(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Collection<Club> allClubs;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		Club fakeClub = null;
+		
+		// Load object to test
+		authenticate("manager1");
+		allClubs = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		for(Club c:allClubs){
+			if(c.getId() != club.getId()){
+				fakeClub = c;
+			}
+		}
+		result = bulletinService.findAllByClubId(fakeClub.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = bulletinService.create();
+		bulletin.setTitle("Prueba");
+		bulletin.setDescription("Prueba");
 		bulletinService.save(bulletin);	
 		bulletinService.flush();
 		
@@ -401,6 +561,239 @@ public class BulletinServiceTest extends AbstractTest{
 		Assert.isTrue(result.size() == 1);
 		unauthenticate();
 
+	}
+	
+	/**
+	 * @see 21.c
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear y ver boletines en el tablón de su club.
+	 *  
+	 *  Positive test: Se muestran los boletines del club.
+	 */
+	@Test
+	public void testListBulletinByClub5(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		
+		// Execution of test
+		result = bulletinService.findAllByClubId(club.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+		
+	}
+	
+	/**
+	 * @see 21.c
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear y ver boletines en el tablón de su club.
+	 *  
+	 *  Negative test: No se muestran los boletines del club porque no está autenticado.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testListBulletinByClub6(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		//authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		
+		// Execution of test
+		result = bulletinService.findAllByClubId(club.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		//unauthenticate();
+
+	}
+	
+	/**
+	 * @see 21.c
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear y ver boletines en el tablón de su club.
+	 *  
+	 *  Negative test: No se muestran los boletines del club porque el manager no tiene club.
+	 */
+	@Test(expected = NullPointerException.class)
+	@Rollback(value = true)
+	public void testListBulletinByClub7(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager3");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		
+		// Execution of test
+		result = bulletinService.findAllByClubId(club.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+
+	}
+	
+	/**
+	 * @see 21.c
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear y ver boletines en el tablón de su club.
+	 *  
+	 *  Negative test: No se muestran los boletines del club porque no es el club del manager.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testListBulletinByClub8(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Collection<Club> allClubs;
+		Manager manager;
+		Club club;
+		Club fakeClub = null;
+		
+		// Load object to test
+		authenticate("manager1");
+		allClubs = clubService.findAll();
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		for(Club c:allClubs){
+			if(c.getId() != club.getId()){
+				fakeClub = c;
+			}
+		}
+		
+		// Execution of test
+		result = bulletinService.findAllByClubId(fakeClub.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Positive Test: El boletín se borra correctamente.
+	 */
+	@Test
+	public void testDeleteBulletin1(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = result.iterator().next();
+		bulletinService.delete(bulletin);
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 0);
+		unauthenticate();
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Negative Test: El boletín no se borra correctamente porque no estamos autenticados.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback
+	public void testDeleteBulletin2(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		//authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = result.iterator().next();
+		bulletinService.delete(bulletin);
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 0);
+		//unauthenticate();
+	}
+	
+	/**
+	 * @see 22.e
+	 *  Un usuario que haya iniciado sesión como gerente debe poder:
+	 *  Crear, ver y borrar boletines en el tablón de su club.
+	 *  
+	 *  Negative Test: El boletín no se borra correctamente porque no es su club.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	@Rollback
+	public void testDeleteBulletin3(){
+		
+		// Declare variable
+		Collection<Bulletin> result;
+		Bulletin bulletin;
+		Manager manager;
+		Club club;
+		
+		// Load object to test
+		authenticate("manager1");
+		manager = managerService.findByPrincipal();
+		club = manager.getClub();
+		unauthenticate();
+		authenticate("manager2");
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 1);
+		
+		// Execution of test
+		bulletin = result.iterator().next();
+		bulletinService.delete(bulletin);
+		bulletinService.flush();
+		
+		// Check result
+		result = bulletinService.findAllByClubId(club.getId());
+		Assert.isTrue(result.size() == 0);
+		unauthenticate();
 	}
 	
 }
