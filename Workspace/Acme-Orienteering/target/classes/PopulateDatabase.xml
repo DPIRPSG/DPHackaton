@@ -1527,6 +1527,105 @@
 		</property>
 	</bean>
 	
+	<bean id="league4" class="domain.League">
+		<property name="description" value="Para españoles de nacimiento."/>
+		<property name="name" value="Liga española de orientación"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/03/06 12:00"/>
+		<property name="startedMoment" value="2016/12/01 04:30"/>
+		<property name="amount" value="125"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee2"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league5" class="domain.League">
+		<property name="description" value="Para españoles Junior."/>
+		<property name="name" value="Liga española de orientación Junior"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/02/06 13:00"/>
+		<property name="startedMoment" value="2016/11/01 05:30"/>
+		<property name="amount" value="300"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league6" class="domain.League">
+		<property name="description" value="Ready?"/>
+		<property name="name" value="Pro League International (PLI)"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/03/06 12:00"/>
+		<property name="startedMoment" value="2015/12/01 04:30"/>
+		<property name="amount" value="780"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee2"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
