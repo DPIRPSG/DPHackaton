@@ -168,6 +168,30 @@ public class LeagueServiceTest extends AbstractTest{
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
+	 *  Positive Test: Se muestran las ligas del sistema.
+	 */
+	@Test
+	public void testListLeague3(){
+		
+		// Declare variable
+		Collection<League> result;
+		
+		// Load object to test
+		authenticate("admin");
+		
+		// Execution of test
+		result = leagueService.findAll();
+		
+		// Check result
+		Assert.isTrue(result.size() == 3);
+		unauthenticate();
+	}
+	
+	/**
+	 * @see 24.c
+	 *  Un usuario que haya iniciado sesión como administrador debe poder:
+	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
+	 *  
 	 *  Positive Test: La liga se crea correctamente.
 	 */
 	@Test
