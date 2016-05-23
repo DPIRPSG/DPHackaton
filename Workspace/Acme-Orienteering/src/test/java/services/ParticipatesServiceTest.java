@@ -129,6 +129,71 @@ public class ParticipatesServiceTest extends AbstractTest {
 	 * Acme-Orienteering - 21.D
 	 *  En caso de estar en un club, inscribirse en carreras.
 	 *  
+	 *  Negativo: Un corredor no puede apuntarse a una carrera si ya está apuntado 
+	 */
+	@Test 
+	public void testJoinRaceErrorMultipleJoin() {
+		// Declare variables
+		Runner runner;
+		Race race;
+		Participates participates;
+		
+		// Load objects to test
+		authenticate("admin");
+		
+		runner = null;
+		race = null;
+		try{
+		
+		for (Runner b : runnerService.findAll()) {
+			for (Race c : raceService.findAll()) {
+				boolean contain = false;
+				if (c.getMoment().after(new Date()) // Que no haya pasado
+					&& clubService.findAllByLeagueId(c.getLeague().getId())
+					.contains(runnerService.getClub(b))) { // Que su club esté inscrito en esa liga
+					for (Participates e : b.getParticipates()) {
+						// escanear todos para comprobar que está inscrito
+						if (e.getRace().equals(c)) {
+							contain = true;
+							break;
+						}
+					}
+				}
+				if (contain) {
+					race = c;
+					runner = b;
+					break;
+				}
+			}
+			if(race != null && runner != null){
+				break;
+			}
+		}
+		
+		// Checks basic requirements
+			Assert.isTrue(race != null && runner != null,
+					"No existe una combinación de corredor y carrera que cumpla los requisitos");			
+		}catch (Exception e) {
+			throw new InvalidPreTestException(e.getMessage());
+		}
+
+		// Execution of test
+		authenticate(runner.getUserAccount().getUsername());
+		
+		participates = participatesService.joinRace(race.getId());
+				
+		// Checks results
+
+		Assert.isTrue(
+				participatesService.findAllClubByRunnerIdAndRaceId(runner.getId(), race.getId())
+						.size() != 1, "Se ha guardado múltiples veces");
+
+	}
+	
+	/**
+	 * Acme-Orienteering - 21.D
+	 *  En caso de estar en un club, inscribirse en carreras.
+	 *  
 	 *  Negativo: Inscribirse en una carrera en la que no está inscrito su club 
 	 */
 	@Test(expected=IllegalArgumentException.class)
