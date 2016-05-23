@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import security.TypeOfAuthority;
 import services.form.ActorFormService;
 import utilities.AbstractTest;
 import domain.Actor;
+import domain.Club;
+import domain.Runner;
 import domain.form.ActorForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)

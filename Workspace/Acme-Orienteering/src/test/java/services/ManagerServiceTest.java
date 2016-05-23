@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
@@ -16,6 +18,8 @@ import security.TypeOfAuthority;
 import services.form.ActorFormService;
 import utilities.AbstractTest;
 import domain.Actor;
+import domain.Club;
+import domain.Manager;
 import domain.form.ActorForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,9 +39,6 @@ public class ManagerServiceTest extends AbstractTest {
 	
 	@Autowired
 	private ManagerService managerService;
-
-	@Autowired
-	private RunnerService runnerService;
 
 	@Autowired
 	private ClubService clubService;

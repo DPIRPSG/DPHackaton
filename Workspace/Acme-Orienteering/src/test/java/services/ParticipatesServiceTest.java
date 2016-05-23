@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +16,16 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import utilities.AbstractTest;
+import utilities.InvalidPreTestException;
+import domain.Actor;
+import domain.Club;
+import domain.FeePayment;
+import domain.League;
 import domain.Manager;
 import domain.Participates;
 import domain.Race;
 import domain.Runner;
-import utilities.AbstractTest;
-import utilities.InvalidPreTestException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {

@@ -1,5 +1,7 @@
 package services;
 
+import java.util.Collection;
+
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
@@ -16,6 +18,8 @@ import security.TypeOfAuthority;
 import services.form.ActorFormService;
 import utilities.AbstractTest;
 import domain.Actor;
+import domain.League;
+import domain.Referee;
 import domain.form.ActorForm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
