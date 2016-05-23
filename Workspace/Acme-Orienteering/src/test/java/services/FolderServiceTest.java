@@ -45,8 +45,8 @@ public class FolderServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Barter - Level C - 10.3
-	 * Actors can create additional folders, rename, or delete them.
+	 * Acme-Orienteering - CORREGIR
+	 * Administrar sus mensajes y carpetas
 	 */
 	
 	/**
@@ -365,6 +365,7 @@ public class FolderServiceTest extends AbstractTest {
 		Collection<Folder> newActorFolders;
 		String oldFolderName;
 		Boolean existNewFolderName;
+		Iterator<Folder> folderIterator;
 		
 		// Load objects to test
 		authenticate("runner1");
@@ -376,7 +377,17 @@ public class FolderServiceTest extends AbstractTest {
 		
 		// Execution of test
 		actorFolders = folderService.findAllByActor();
-		folder = actorFolders.iterator().next();
+//		folder = actorFolders.iterator().next();
+		
+		folderIterator = actorFolders.iterator();
+		folder = folderIterator.next();
+		
+		while(folder.getIsSystem() && folderIterator.hasNext()){
+			folder = folderIterator.next();
+		}
+		
+		Assert.isTrue(!folder.getIsSystem(), "No hay carpetas que no sean del sistema llamada \"MyBox\" para el runner1 para testear.");
+		
 		oldFolderName = folder.getName();
 		
 		folder.setName("Carpeta renombrada");
@@ -422,13 +433,14 @@ public class FolderServiceTest extends AbstractTest {
 		Actor runner;
 		Folder folder;
 //		Folder renamedFolder;
-//		Collection<Folder> actorFolders;
+		Collection<Folder> actorFolders;
 //		Collection<Folder> newActorFolders;
 //		String oldFolderName;
 //		Boolean existNewFolderName;
+		Iterator<Folder> folderIterator;
 		
 		// Load objects to test
-		authenticate("runner1");
+		authenticate("runner2");
 		runner = actorService.findByPrincipal();
 //		existNewFolderName = false;
 		
@@ -436,7 +448,22 @@ public class FolderServiceTest extends AbstractTest {
 		Assert.notNull(runner, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		folder = folderService.findOne(87); // Id de la carpeta InBox del runner2
+		unauthenticate();
+//		folder = folderService.findOne(87); // Id de la carpeta InBox del runner2
+		authenticate("runner1");
+		actorFolders = folderService.findAllByActor();
+		unauthenticate();
+		
+		folderIterator = actorFolders.iterator();
+		folder = folderIterator.next();
+		
+		while((folder.getIsSystem() || !folder.getName().equals("MyBox")) && folderIterator.hasNext()){
+			folder = folderIterator.next();
+		}
+		
+		Assert.isTrue(!folder.getIsSystem(), "No hay carpetas que no sean del sistema llamada \"MyBox\" para el runner1 para testear.");
+		
+		authenticate("runner2");
 //		oldFolderName = folder.getName();
 		
 		folder.setName("Carpeta renombrada");
@@ -579,6 +606,7 @@ public class FolderServiceTest extends AbstractTest {
 				folder = f;
 			}
 		}
+		Assert.notNull(folder, "No hay ninguna carpeta como con la que se pretende testear.");
 		folderName = folder.getName();
 		
 		folderService.delete(folder);
@@ -722,8 +750,8 @@ public class FolderServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Barter - Level C - 10.3
-	 * When a message is deleted from a folder other than "trash box", it is moved to "trash box"
+	 * Acme-Orienteering - CORREGIR
+	 * Administrar sus mensajes y carpetas
 	 */
 	
 	/**
@@ -739,6 +767,7 @@ public class FolderServiceTest extends AbstractTest {
 	 * 		+ Cerrar su sesión
 	 */
 	
+	//CORREGIR
 	@Test 
 	public void testDeleteMessage() {
 		// Declare variables
@@ -747,6 +776,7 @@ public class FolderServiceTest extends AbstractTest {
 		Collection<Folder> actorFolders;
 		MessageEntity message;
 		Collection<Folder> newActorFolders;
+		boolean contained;
 		
 		// Load objects to test
 		authenticate("runner1");
@@ -768,7 +798,10 @@ public class FolderServiceTest extends AbstractTest {
 		
 		message = null;
 		for(MessageEntity m: folder.getMessages()){
-			message = m;
+			if(m.getSubject().equals("Mensaje 0")){
+				message = m;
+				break;
+			}
 		}
 		Assert.notNull(message, "No hay ningún mensaje en la carpeta, necesario para realizar el test.");
 		
@@ -793,7 +826,14 @@ public class FolderServiceTest extends AbstractTest {
 			}
 		}
 		
-		Assert.isTrue(folder.getMessages().contains(message), "La carpeta TrashBox no contiene el mensaje eliminado."); // Second check
+		contained = false;
+		for(MessageEntity m: folder.getMessages()){
+			if(m.getId() == message.getId()){
+				contained = true;
+			}
+		}
+		
+		Assert.isTrue(contained, "La carpeta TrashBox no contiene el mensaje eliminado."); // Second check
 		
 		unauthenticate();
 
