@@ -81,7 +81,7 @@ public class ParticipatesService {
 		return result;
 	}
 	
-	public void joinRace(int raceId){
+	public Participates joinRace(int raceId){
 		
 		Assert.isTrue(actorService.checkAuthority("RUNNER"));
 				
@@ -121,6 +121,7 @@ public class ParticipatesService {
 		result.setRunner(runner);
 		save(result);
 		
+		return result;
 	}
 	
 	/**
@@ -186,5 +187,19 @@ public class ParticipatesService {
 	
 	public void flush(){
 		participatesRepository.flush();
+	}
+
+	/**
+	 * Necesario para los test
+	 * @return
+	 */
+	public Collection<Participates> findAll() {
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		Collection<Participates> result;
+		
+		result = participatesRepository.findAll();
+		
+		return result;
 	}
 }

@@ -98,6 +98,19 @@ public class ManagerService {
 		this.save(manager);
 	}
 	
+	/**
+	 * Necesario para los test
+	 * @return
+	 */
+	public Collection<Manager> findAll(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		Collection<Manager> result;
+		
+		result = managerRepository.findAll();
+		
+		return result;
+	}
+	
 	//Other business methods -------------------------------------------------
 
 	/**
@@ -137,6 +150,11 @@ public class ManagerService {
 		}
 		
 		return result;
+	}
+	
+	public void flush(){
+		managerRepository.flush();
+		
 	}
 	
 
