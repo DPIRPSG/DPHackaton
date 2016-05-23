@@ -123,6 +123,14 @@ public class ManagerService {
 		
 		return result;
 	}
+	
+	public Collection<Manager> findAll() {
+		Collection<Manager> result;
+		
+		result = managerRepository.findAll();
+		
+		return result;
+	}
 
 	public Collection<Manager> findAllWithoutClub() {
 		Collection<Manager> result, managers;

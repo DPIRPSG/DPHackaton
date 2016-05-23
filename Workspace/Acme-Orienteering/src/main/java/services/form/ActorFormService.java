@@ -103,22 +103,24 @@ public class ActorFormService {
 		return result;
 	}
 
-	public void saveForm(ActorForm input) {
+	public Actor saveForm(ActorForm input) {
 		if (input.getPassword() != null)
 			Assert.isTrue(
 					input.getPassword().equals(input.getRepeatedPassword()),
 					"actorForm.error.passwordMismatch");
 		
 		if (actorService.checkLogin() && input.getAuthority() == null) {
-			this.saveActor(input);
+			return this.saveActor(input);
 		} else {
-			this.saveRegistration(input);
+			return this.saveRegistration(input);
 		}
 	}
 
-	private void saveActor(ActorForm input) {
+	private Actor saveActor(ActorForm input) {
 		UserAccount acount;
 		String pass;
+		Actor saved;
+		int actorId;
 
 		acount = actorService.findByPrincipal().getUserAccount();
 		pass = input.getPassword();
@@ -143,7 +145,7 @@ public class ActorFormService {
 			result.setUserAccount(acount);
 			result.setNif(input.getNif());
 
-			runnerService.saveFromEdit(result);
+			actorId = runnerService.saveFromEdit(result).getId();
 			break;
 
 		case ADMIN:
@@ -157,7 +159,7 @@ public class ActorFormService {
 			result1.setUserAccount(acount);
 			result1.setNif(input.getNif());
 
-			administratorService.saveFromEdit(result1);
+			actorId = administratorService.saveFromEdit(result1).getId();
 			break;
 
 		case MANAGER:
@@ -171,7 +173,7 @@ public class ActorFormService {
 			result11.setUserAccount(acount);
 			result11.setNif(input.getNif());
 
-			managerService.saveFromEdit(result11);
+			actorId = managerService.saveFromEdit(result11).getId();
 			break;
 
 		case REFEREE:
@@ -185,9 +187,14 @@ public class ActorFormService {
 			result111.setUserAccount(acount);
 			result111.setNif(input.getNif());
 
-			refereeService.saveFromEdit(result111);
+			actorId = refereeService.saveFromEdit(result111).getId();
 			break;
+		default:
+			actorId = 0;
 		}
+		saved = actorService.findOne(actorId);
+		
+		return saved;
 	}
 
 	/**
@@ -195,7 +202,7 @@ public class ActorFormService {
 	 * 
 	 * @param input
 	 */
-	private void saveRegistration(ActorForm input) {
+	private Actor saveRegistration(ActorForm input) {
 		UserAccount acount;
 		@SuppressWarnings("unused")
 		Collection<Folder> folders;
@@ -265,6 +272,9 @@ public class ActorFormService {
 		saved = actorService.findOne(actorId);
 
 		folderService.save(folderService.initializeSystemFolder(saved));
+		
+		return saved;
+		
 	}
 
 }
