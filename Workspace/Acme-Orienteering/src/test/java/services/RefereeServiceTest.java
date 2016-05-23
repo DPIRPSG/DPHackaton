@@ -38,6 +38,9 @@ public class RefereeServiceTest extends AbstractTest {
 	
 	@Autowired
 	private ActorService actorService;
+
+	@Autowired
+	private LeagueService leagueService;
 	
 	// Tests ---------------------------------------
 	
@@ -229,5 +232,68 @@ public class RefereeServiceTest extends AbstractTest {
 
 	}
 	
+	/**
+	 * @see 19.c
+	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestran el árbitro de la liga coleccionada.
+	 */
+	@Test
+	public void testListRefereeByLeague1(){
+		
+		// Declare variable
+		Referee result;
+		Collection<League> allLeagues;
+		League league;
+		
+		// Load object to test
+		allLeagues = leagueService.findAll();
+		league = allLeagues.iterator().next();
+		
+		// Execution of test
+		result = league.getReferee();
+		
+		// Check result
+		Assert.isTrue(result.getName().equals("Carlos"));
+		
+	}
+	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar las distintas ligas, 
+	 *  ver la clasificación, 
+	 *  las carreras que la componen, 
+	 *  los clubes que participan en ella y 
+	 *  el árbitro que la dirige.
+	 *  
+	 *  Positive test: Se muestran el árbitro de la liga coleccionada.
+	 */
+	@Test
+	public void testListRefereeByLeague2(){
+		
+		// Declare variable
+		Referee result;
+		Collection<League> allLeagues;
+		League league;
+		
+		// Load object to test
+		authenticate("runner1");
+		allLeagues = leagueService.findAll();
+		league = allLeagues.iterator().next();
+		
+		// Execution of test
+		result = league.getReferee();
+		
+		// Check result
+		Assert.isTrue(result.getName().equals("Carlos"));
+		unauthenticate();
+		
+	}
 	
 }

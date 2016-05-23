@@ -126,6 +126,18 @@ public class RunnerService {
 		
 		return result;
 	}
+	
+	/**
+	 * Necesario para los test
+	 */
+	public Runner findOne(int id){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		Runner result;
+		
+		result = runnerRepository.findOne(id);
+		
+		return result;
+	}
 
 	//Other business methods -------------------------------------------------
 
@@ -175,7 +187,7 @@ public class RunnerService {
 		
 		res = null;
 		for(Entered e:input.getEntered()){
-			if(e.getIsMember() && e.getAcceptedMoment() != null)
+			if(e.getIsMember() && e.getAcceptedMoment() != null && !e.getIsDenied())
 				res = e.getClub();
 		}
 				

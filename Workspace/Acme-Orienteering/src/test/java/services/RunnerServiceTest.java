@@ -36,6 +36,9 @@ public class RunnerServiceTest extends AbstractTest {
 	
 	@Autowired
 	private ActorService actorService;
+
+	@Autowired
+	private ClubService clubService;
 	
 	// Tests ---------------------------------------
 	
@@ -226,6 +229,74 @@ public class RunnerServiceTest extends AbstractTest {
 //		
 //		unauthenticate();
 
+	}
+
+
+	/**
+	 * @see 19.b
+	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
+	 *  Listar los distintos clubes y
+	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
+	 *  el gerente de este, y 
+	 *  en que ligas y 
+	 *  carreras han participado y 
+	 *  están participando.
+	 *  
+	 *  Positive test: Se muestran los corredores del club seleccionado.
+	 */
+	@Test
+	public void testListRunnerByClub1(){
+		
+		// Declare variable
+		Collection<Runner> result;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		result = runnerService.findAllByClubId(club.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+
+		
+	}
+	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar los distintos clubes y
+	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
+	 *  el gerente de este, y 
+	 *  en que ligas y 
+	 *  carreras han participado y 
+	 *  están participando.
+	 *  
+	 *  Positive test: Se muestran los corredores del club seleccionado.
+	 */
+	@Test
+	public void testListRunnerByClub2(){
+		
+		// Declare variable
+		Collection<Runner> result;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		authenticate("runner1");
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		result = runnerService.findAllByClubId(club.getId());
+		
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+		
 	}
 	
 }
