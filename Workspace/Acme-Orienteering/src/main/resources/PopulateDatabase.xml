@@ -126,6 +126,42 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="manager4"/>
+		<property name="password" value="e1ec6fc941af3ba79a4ac5242dd39735" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="manager5" />
+		<property name="password" value="029cb1d27c0b9c551703ccba2591c334" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="manager6" />
+		<property name="password" value="46bae9ead851e0f288529e6322f4fd77" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -259,6 +295,87 @@
 				<ref bean="folder22"/>
 				<ref bean="folder23"/>
 				<ref bean="folder24"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager4" class="domain.Manager">
+		<property name="name" value="Pepe"/>
+		<property name="surname" value="García"/>
+		<property name="phone" value="655322988"/>
+		<property name="nif" value="98865524G"/>
+		<property name="userAccount" ref="userAccount10"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder29"/>
+				<ref bean="folder30"/>
+				<ref bean="folder31"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager5" class="domain.Manager">
+		<property name="name" value="Javier"/>
+		<property name="surname" value="Santos"/>
+		<property name="phone" value="645978312"/>
+		<property name="nif" value="24513587L"/>
+		<property name="userAccount" ref="userAccount11"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder32"/>
+				<ref bean="folder33"/>
+				<ref bean="folder34"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager6" class="domain.Manager">
+		<property name="name" value="Ubaldo"/>
+		<property name="surname" value="Mata"/>
+		<property name="phone" value="633522411"/>
+		<property name="nif" value="45215789H"/>
+		<property name="userAccount" ref="userAccount12"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder35"/>
+				<ref bean="folder36"/>
+				<ref bean="folder37"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -895,6 +1012,96 @@
 		</property>
 	</bean>
 	
+	<bean id="folder29" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager4"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder30" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager4"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder31" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager4"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder32" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder33" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder34" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager5"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder35" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder36" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder37" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="folder100" class="domain.Folder">
 		<property name="name" value="Mi carpeta 1"/>
 		<property name="isSystem" value="false"/>
@@ -1003,6 +1210,150 @@
 		<property name="feePayments">
 			<list>
 				<ref bean="feePayment2"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="club3" class="domain.Club">
+		<property name="description" value="RMOC, encuentra tu camino."/>
+		<property name="name" value="Reina Mercedes OC"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/05/15 11:00"/>
+		<property name="deleted" value="false"/>
+		<property name="manager" ref="manager3"/>
+		<property name="bulletins">
+			<list>
+			</list>
+		</property>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+			</list>
+		</property>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="club4" class="domain.Club">
+		<property name="description" value="Todo profesional se orienta, sólo los mejores lo hacen en tiempo record."/>
+		<property name="name" value="Orienracing Faster Team"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/12/02 08:00"/>
+		<property name="deleted" value="false"/>
+		<property name="manager" ref="manager4"/>
+		<property name="bulletins">
+			<list>
+			</list>
+		</property>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+			</list>
+		</property>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="club5" class="domain.Club">
+		<property name="description" value="Club para los más peques, ¡de todas las edades!."/>
+		<property name="name" value="Orientación Mairena"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/01/01 15:00"/>
+		<property name="deleted" value="false"/>
+		<property name="manager" ref="manager5"/>
+		<property name="bulletins">
+			<list>
+			</list>
+		</property>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+			</list>
+		</property>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="club6" class="domain.Club">
+		<property name="description" value="Be proffesional, follow your instinct."/>
+		<property name="name" value="Prorienteering Club"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2013/03/13 13:00"/>
+		<property name="deleted" value="false"/>
+		<property name="manager" ref="manager6"/>
+		<property name="bulletins">
+			<list>
+			</list>
+		</property>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+			</list>
+		</property>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
 			</list>
 		</property>
 		<property name="comments">
@@ -1153,6 +1504,105 @@
 		<property name="creationMoment" value="2015/11/06 13:00"/>
 		<property name="startedMoment" value="2015/12/12 10:30"/>
 		<property name="amount" value="50"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee2"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league4" class="domain.League">
+		<property name="description" value="Para españoles de nacimiento."/>
+		<property name="name" value="Liga española de orientación"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/03/06 12:00"/>
+		<property name="startedMoment" value="2016/12/01 04:30"/>
+		<property name="amount" value="125"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee2"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league5" class="domain.League">
+		<property name="description" value="Para españoles Junior."/>
+		<property name="name" value="Liga española de orientación Junior"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/02/06 13:00"/>
+		<property name="startedMoment" value="2016/11/01 05:30"/>
+		<property name="amount" value="300"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="league6" class="domain.League">
+		<property name="description" value="Ready?"/>
+		<property name="name" value="Pro League International (PLI)"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2015/03/06 12:00"/>
+		<property name="startedMoment" value="2015/12/01 04:30"/>
+		<property name="amount" value="780"/>
 		<property name="punishments">
 			<list>
 			</list>
