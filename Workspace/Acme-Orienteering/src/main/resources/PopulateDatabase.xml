@@ -1416,6 +1416,26 @@
 		<property name="name" value="Junior"/>
 	</bean>
 	
+	<bean id="category3" class="domain.Category">
+		<property name="description" value="Only for Senior runners."/>
+		<property name="name" value="Senior"/>
+	</bean>
+	
+	<bean id="category4" class="domain.Category">
+		<property name="description" value="Only for Cadete runners."/>
+		<property name="name" value="Cadete"/>
+	</bean>
+	
+	<bean id="category5" class="domain.Category">
+		<property name="description" value="Only for Infantil runners."/>
+		<property name="name" value="Infantil"/>
+	</bean>
+	
+	<bean id="category6" class="domain.Category">
+		<property name="description" value="Only for Benjamín runners."/>
+		<property name="name" value="Benjamín"/>
+	</bean>
+	
 	<!-- League -->
 	
 	<bean id="league1" class="domain.League">
@@ -1739,6 +1759,41 @@
 		<property name="club" ref="club1"/>
 	</bean>
 	
+	<bean id="punishment2" class="domain.Punishment">
+		<property name="reason" value="A runner was catched cheating on the last race."/>
+		<property name="points" value="50"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="punishment3" class="domain.Punishment">
+		<property name="reason" value="A runner was catched cheating on the start"/>
+		<property name="points" value="50"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="punishment4" class="domain.Punishment">
+		<property name="reason" value="A runner was catched cheating on the third race."/>
+		<property name="points" value="50"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="punishment5" class="domain.Punishment">
+		<property name="reason" value="A runner was catched doping."/>
+		<property name="points" value="60"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="punishment6" class="domain.Punishment">
+		<property name="reason" value="The full club was catched doping."/>
+		<property name="points" value="250"/>
+		<property name="league" ref="league1"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
 	<!-- FeePayment -->
 	
 	<bean id="feePayment1" class="domain.FeePayment">
@@ -1750,16 +1805,110 @@
 	</bean>
 	
 	<bean id="feePayment2" class="domain.FeePayment">
-		<property name="creditCard" ref="creditCard1"/>
+		<property name="creditCard" ref="creditCard2"/>
 		<property name="amount" value="350"/>
-		<property name="paymentMoment" value="2016/02/05 12:12"/>
+		<property name="paymentMoment" value="2016/02/05 12:55"/>
 		<property name="league" ref="league1"/>
 		<property name="club" ref="club2"/>
+	</bean>
+	
+	<bean id="feePayment3" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard3"/>
+		<property name="amount" value="150"/>
+		<property name="paymentMoment" value="2016/02/03 16:16"/>
+		<property name="league" ref="league2"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="feePayment4" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard4"/>
+		<property name="amount" value="50"/>
+		<property name="paymentMoment" value="2016/02/13 17:12"/>
+		<property name="league" ref="league3"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="feePayment5" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard5"/>
+		<property name="amount" value="125"/>
+		<property name="paymentMoment" value="2016/02/16 15:12"/>
+		<property name="league" ref="league4"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="feePayment6" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard6"/>
+		<property name="amount" value="300"/>
+		<property name="paymentMoment" value="2016/02/20 12:30"/>
+		<property name="league" ref="league5"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="feePayment7" class="domain.FeePayment">
+		<property name="creditCard" ref="creditCard7"/>
+		<property name="amount" value="780"/>
+		<property name="paymentMoment" value="2016/02/25 12:00"/>
+		<property name="league" ref="league6"/>
+		<property name="club" ref="club1"/>
 	</bean>
 	
 	<!-- CreditCard -->
 	
 	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Manolo López"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
+	
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Adrián Martínez"/>
+		<property name="brandName" value="MASTER CARD"/>
+		<property name="number" value="1234432156988965"/>
+		<property name="expirationMonth" value="08"/>
+		<property name="expirationYear" value="2022"/>
+		<property name="cvvCode" value="553"/>
+	</bean>
+	
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="Manolo López"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
+	
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="Manolo López"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
+	
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Manolo López"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="Manolo López"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="1111222233334444"/>
+		<property name="expirationMonth" value="07"/>
+		<property name="expirationYear" value="2020"/>
+		<property name="cvvCode" value="303"/>
+	</bean>
+	
+	<bean id="creditCard7" class="domain.CreditCard">
 		<property name="holderName" value="Manolo López"/>
 		<property name="brandName" value="VISA"/>
 		<property name="number" value="1111222233334444"/>
@@ -1795,12 +1944,97 @@
 		</property>
 	</bean>
 	
+	<bean id="sponsor2" class="domain.Sponsor">
+		<property name="name" value="Facebook"/>
+		<property name="description" value="Your Social Network."/>
+		<property name="logo" value="http://www.gratisdescargarfacebook.com/wp-content/uploads/2016/01/ee.png"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor3" class="domain.Sponsor">
+		<property name="name" value="Aquarius"/>
+		<property name="description" value="Your time is now."/>
+		<property name="logo" value="http://cms.ual.es/idc/groups/public/@serv/@deportes/documents/imagen/ceu12almeria_logo_aquarius.jpg"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor4" class="domain.Sponsor">
+		<property name="name" value="BMW"/>
+		<property name="description" value="¿Te gusta conducir?"/>
+		<property name="logo" value="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2000px-BMW.svg.png"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor5" class="domain.Sponsor">
+		<property name="name" value="Intel"/>
+		<property name="description" value="01001001 01001110 01010100 01000101 01001100"/>
+		<property name="logo" value="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Intel-logo.svg/245px-Intel-logo.svg.png"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sponsor6" class="domain.Sponsor">
+		<property name="name" value="Toldos Manoli"/>
+		<property name="description" value="Los quitasoles de Andalucía con más de 20 años de experiencia."/>
+		<property name="logo" value="http://aluminiosnoustil.com/wp-content/uploads/2015/11/toldos-sabadell-toldos-terrassa1.jpg"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Finances -->
 	
 	<bean id="finances1" class="domain.Finances">
 		<property name="amount" value="1500"/>
-		<property name="paymentMoment" value="2015/12/12 17:06"/>
+		<property name="paymentMoment" value="2016/04/12 17:06"/>
 		<property name="sponsor" ref="sponsor1"/>
+		<property name="league" ref="league1"/>
+	</bean>
+	
+	<bean id="finances2" class="domain.Finances">
+		<property name="amount" value="2500"/>
+		<property name="paymentMoment" value="2016/04/05 01:01"/>
+		<property name="sponsor" ref="sponsor2"/>
+		<property name="league" ref="league1"/>
+	</bean>
+	
+	<bean id="finances3" class="domain.Finances">
+		<property name="amount" value="3100"/>
+		<property name="paymentMoment" value="2016/04/08 22:00"/>
+		<property name="sponsor" ref="sponsor3"/>
+		<property name="league" ref="league1"/>
+	</bean>
+	
+	<bean id="finances4" class="domain.Finances">
+		<property name="amount" value="5000"/>
+		<property name="paymentMoment" value="2016/04/01 20:05"/>
+		<property name="sponsor" ref="sponsor4"/>
+		<property name="league" ref="league1"/>
+	</bean>
+	
+	<bean id="finances5" class="domain.Finances">
+		<property name="amount" value="3000"/>
+		<property name="paymentMoment" value="2016/04/22 17:05"/>
+		<property name="sponsor" ref="sponsor5"/>
+		<property name="league" ref="league1"/>
+	</bean>
+	
+	<bean id="finances6" class="domain.Finances">
+		<property name="amount" value="100"/>
+		<property name="paymentMoment" value="2016/04/25 13:06"/>
+		<property name="sponsor" ref="sponsor6"/>
 		<property name="league" ref="league1"/>
 	</bean>
 	
