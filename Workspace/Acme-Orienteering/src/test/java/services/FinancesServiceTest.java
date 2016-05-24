@@ -293,14 +293,16 @@ public class FinancesServiceTest extends AbstractTest {
 		
 		finances = financesService.create(sponsor.getId(), league.getId());
 		
-		finances.setAmount(-0.01);
+		finances.setAmount(-0.9);
 		
 		newFinances = financesService.saveFromEdit(finances);
 		
 		// Checks results
+		financesService.flush();
+		
 		System.out.println(newFinances.getAmount());
 		
-		financesService.flush();
+		
 //		newFinancesSize = financesService.findAll().size();
 //		
 //		Assert.isTrue(financesSize + 1 == newFinancesSize, "El nuevo número de Finances no es el mismo de antes + 1");

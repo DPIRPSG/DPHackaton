@@ -96,6 +96,8 @@ public class MessageServiceTest extends AbstractTest {
 		
 		sentMessage = messageService.firstSaveNormalSend(message);
 		
+//		messageService.flush();
+		
 		// Checks results
 		for(Folder f: runner.getFolders()){
 			if(f.getName().equals("OutBox")){
