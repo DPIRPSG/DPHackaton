@@ -162,6 +162,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount13" class="security.UserAccount">
+		<property name="username" value="manager7" />
+		<property name="password" value="cc544735a88ba804fdd65113230c6e32" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -376,6 +388,33 @@
 				<ref bean="folder35"/>
 				<ref bean="folder36"/>
 				<ref bean="folder37"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager7" class="domain.Manager">
+		<property name="name" value="Miriam"/>
+		<property name="surname" value="Luna"/>
+		<property name="phone" value="666555333"/>
+		<property name="nif" value="74851481T"/>
+		<property name="userAccount" ref="userAccount13"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder38"/>
+				<ref bean="folder39"/>
+				<ref bean="folder40"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -1096,6 +1135,36 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager6"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder38" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder39" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder40" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager7"/>
 		<property name="messages">
 			<list>
 			</list>
