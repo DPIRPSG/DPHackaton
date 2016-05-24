@@ -636,7 +636,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		raceIterator = raceService.findAllByRunnerId(runner.getId()).iterator();
 		
 		race = raceIterator.next(); // Carrera que debe estar en la liga seleccionada
-		while(race.getLeague() == league && raceIterator.hasNext()){ // Nos aseguramos de que la carrera estï¿½ en la liga escogida
+		while(race.getLeague() == league && raceIterator.hasNext()){ // Nos aseguramos de que la carrera está en la liga escogida
 			race = raceIterator.next();
 		}
 		
