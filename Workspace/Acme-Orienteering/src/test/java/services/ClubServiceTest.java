@@ -65,7 +65,7 @@ public class ClubServiceTest extends AbstractTest{
 		result = clubService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		clubService.flush();
 		
 	}
@@ -95,7 +95,7 @@ public class ClubServiceTest extends AbstractTest{
 		result = clubService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 		clubService.flush();
 		
@@ -183,7 +183,7 @@ public class ClubServiceTest extends AbstractTest{
 		Club club;
 		
 		// Load object to test
-		authenticate("manager3");
+		authenticate("manager7");
 		manager = managerService.findByPrincipal();
 		result = manager.getClub();
 		Assert.isNull(result);
@@ -385,7 +385,7 @@ public class ClubServiceTest extends AbstractTest{
 		Club club;
 		
 		// Load object to test
-		authenticate("manager3");
+		authenticate("manager7");
 		manager = managerService.findByPrincipal();
 		result = manager.getClub();
 		Assert.isNull(result);
@@ -425,7 +425,7 @@ public class ClubServiceTest extends AbstractTest{
 		Club club;
 		
 		// Load object to test
-		authenticate("manager3");
+		authenticate("manager7");
 		manager = managerService.findByPrincipal();
 		result = manager.getClub();
 		Assert.isNull(result);

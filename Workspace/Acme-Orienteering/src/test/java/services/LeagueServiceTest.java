@@ -98,7 +98,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		leagueService.flush();
 	}
 	
@@ -160,7 +160,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 	}
 	
@@ -184,7 +184,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 	}
 	
@@ -214,7 +214,7 @@ public class LeagueServiceTest extends AbstractTest{
 				break;
 			}
 		}
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		league = leagueService.create();
@@ -228,7 +228,7 @@ public class LeagueServiceTest extends AbstractTest{
 		
 		// Check result
 		result = leagueService.findAll();
-		Assert.isTrue(result.size() == 4);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 	}
 	
@@ -443,7 +443,7 @@ public class LeagueServiceTest extends AbstractTest{
 				break;
 			}
 		}
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		league = leagueService.create();
@@ -457,7 +457,7 @@ public class LeagueServiceTest extends AbstractTest{
 		
 		// Check result
 		result = leagueService.findAll();
-		Assert.isTrue(result.size() == 4);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 		
 	}
@@ -607,7 +607,7 @@ public class LeagueServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = leagueService.findAll();
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		for(League l:result){
 			if(l.getName().equals("First Junior Orienteering American League (FJOAL)")){
 				league = l;
@@ -620,7 +620,7 @@ public class LeagueServiceTest extends AbstractTest{
 		
 		// Check result
 		result = leagueService.findAll();
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 5);
 		unauthenticate();
 	}
 	
@@ -787,7 +787,7 @@ public class LeagueServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = leagueService.findAll();
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 6);
 		for(League l:result){
 			if(l.getName().equals("First Orienteering League (FOL)")){
 				league = l;
@@ -800,7 +800,7 @@ public class LeagueServiceTest extends AbstractTest{
 		
 		// Check result
 		result = leagueService.findAll();
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 5);
 		unauthenticate();
 	}
 }
