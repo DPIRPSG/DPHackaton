@@ -71,7 +71,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAllByClubId(club.getId());
 		
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		
 	}
 	
@@ -131,7 +131,7 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAllByClubId(club.getId());
 		
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 		
 	}
@@ -609,8 +609,9 @@ public class LeagueServiceTest extends AbstractTest{
 		result = leagueService.findAll();
 		Assert.isTrue(result.size() == 6);
 		for(League l:result){
-			if(l.getName().equals("First Junior Orienteering American League (FJOAL)")){
+			if(l.getRacing().isEmpty() && l.getFeePayments().isEmpty()){
 				league = l;
+				break;
 			}
 		}
 		
