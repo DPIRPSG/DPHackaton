@@ -639,7 +639,7 @@ public class BulletinServiceTest extends AbstractTest{
 		Club club;
 		
 		// Load object to test
-		authenticate("manager3");
+		authenticate("manager7");
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
 		
