@@ -48,6 +48,62 @@ public class PunishmentServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
+	 * @see 19.d
+	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
+	 *  Listar las distintas sanciones impuestas a los clubes en cada liga.
+	 *  
+	 *  Positive Test: Se muestran las sanciones impuestas a un club.
+	 */
+	@Test
+	public void testListPunishmentByClub1(){
+		
+		// Declare variable
+		Collection<Punishment> result;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		result = club.getPunishments();
+
+		// Check result
+		Assert.isTrue(result.size() == 1);
+
+	}
+	
+	/**
+	 * @see 20.a
+	 *  Un usuario autenticado en el sistema debe poder:
+	 *  Listar las distintas sanciones impuestas a los clubes en cada liga.
+	 *  
+	 *  Positive Test: Se muestran las sanciones impuestas a un club.
+	 */
+	@Test
+	public void testListPunishmentByClub2(){
+		
+		// Declare variable
+		Collection<Punishment> result;
+		Collection<Club> allClubs;
+		Club club;
+		
+		// Load object to test
+		authenticate("runner1");
+		allClubs = clubService.findAll();
+		club = allClubs.iterator().next();
+		
+		// Execution of test
+		result = club.getPunishments();
+
+		// Check result
+		Assert.isTrue(result.size() == 1);
+		unauthenticate();
+
+	}
+	
+	/**
 	 * Acme-Orienteering - 
 	 */
 	
@@ -111,13 +167,13 @@ public class PunishmentServiceTest extends AbstractTest {
 		Punishment punishment;
 		League league;
 		Club club;
-		Referee referee;
+		//Referee referee;
 		int numPreSaveClub, numPostSaveClub;
 		int numPreSaveLeague, numPostSaveLeague;
 				
 		league = leagueService.findAll().iterator().next();
 		club = league.getFeePayments().iterator().next().getClub();
-		referee = league.getReferee();
+		//referee = league.getReferee();
 		
 		numPreSaveClub = club.getPunishments().size();
 		numPreSaveLeague = league.getPunishments().size();
@@ -181,7 +237,7 @@ public class PunishmentServiceTest extends AbstractTest {
 		punishment = punishmentService.create(club.getId());
 		punishment.setReason("Prueba");
 		punishment.setPoints(10);
-		punishment.setLeague(league);
+		punishment.setLeague(league);		
 		punishment = punishmentService.save(punishment);
 		
 		league = leagueService.findOne(league.getId());

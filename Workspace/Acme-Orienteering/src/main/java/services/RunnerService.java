@@ -115,14 +115,26 @@ public class RunnerService {
 	}
 	
 	/**
-	 * Lista los customers registrados
+	 * Lista los runners registrados
 	 */
 	public Collection<Runner> findAll(){
-		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list customers");
+		Assert.isTrue(actorService.checkAuthority("ADMIN"), "Only an admin can list runners");
 		
 		Collection<Runner> result;
 		
 		result = runnerRepository.findAll();
+		
+		return result;
+	}
+	
+	/**
+	 * Necesario para los test
+	 */
+	public Runner findOne(int id){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		Runner result;
+		
+		result = runnerRepository.findOne(id);
 		
 		return result;
 	}
@@ -175,7 +187,7 @@ public class RunnerService {
 		
 		res = null;
 		for(Entered e:input.getEntered()){
-			if(e.getIsMember() && e.getAcceptedMoment() != null)
+			if(e.getIsMember() && e.getAcceptedMoment() != null && !e.getIsDenied())
 				res = e.getClub();
 		}
 				

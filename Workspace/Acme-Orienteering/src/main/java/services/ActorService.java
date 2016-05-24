@@ -164,4 +164,10 @@ public class ActorService {
 		return result;
 	}
 	
+	public void flush(){
+
+		actorRepository.flush();
+		
+	}
+	
 }

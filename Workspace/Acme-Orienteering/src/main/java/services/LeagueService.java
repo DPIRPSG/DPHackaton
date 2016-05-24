@@ -135,5 +135,23 @@ public class LeagueService {
 				
 		return result;
 	}
+	
+	// DASHBOARD
+	
+	public Collection<League> findAllWhoHaveMoreRaces(){
+		Collection<League> result;
+		
+		result = leagueRepository.findAllWhoHaveMoreRaces();
+		
+		return result;
+	}
+	
+	public Collection<League> findAllWhoHaveMoreClubs(){
+		Collection<League> result;
+		
+		result = leagueRepository.findAllWhoHaveMoreClubs();
+		
+		return result;
+	}
 
 }

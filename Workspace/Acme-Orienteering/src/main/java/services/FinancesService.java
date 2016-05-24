@@ -141,6 +141,18 @@ public class FinancesService {
 				
 		return result;
 	}
+	
+	/**
+	 * Borra todo lo que haya patrocinado un sponsor
+	 */
+	public void deleteBySponsor(Sponsor sponsor){
+		Assert.notNull(sponsor);
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		for (Finances f:sponsor.getFinances()){
+			this.delete(f);
+		}
+	}
 
 	
 

@@ -157,4 +157,14 @@ public class RaceService {
 		return result;
 	}
 
+	// DASHBOARD
+	
+	public Double ratioOfRacesByLeague(){
+		Double result;
+		
+		result = raceRepository.ratioOfRacesByLeague();
+		
+		return result;
+	}
+	
 }

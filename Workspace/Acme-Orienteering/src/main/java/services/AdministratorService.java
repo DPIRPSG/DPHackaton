@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Actor;
 import domain.Administrator;
 
 import repositories.AdministratorRepository;
@@ -32,12 +33,12 @@ public class AdministratorService {
 	
 	//Simple CRUD methods ----------------------------------------------------
 
-	private void save(Administrator administrator){
-		administratorRepository.save(administrator);
+	private Actor save(Administrator administrator){
+		return administratorRepository.save(administrator);
 	}
 	
-	public void saveFromEdit(Administrator administrator){
-		this.save(administrator);
+	public Actor saveFromEdit(Administrator administrator){
+		return this.save(administrator);
 	}
 	//Other business methods -------------------------------------------------
  

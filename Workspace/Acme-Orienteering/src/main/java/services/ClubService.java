@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import domain.Club;
 import domain.Comment;
 import domain.Entered;
 import domain.FeePayment;
+import domain.League;
 import domain.Manager;
 import domain.Punishment;
 import domain.Referee;
@@ -44,6 +46,9 @@ public class ClubService {
 	
 	@Autowired
 	private RefereeService refereeService;
+	
+	@Autowired
+	private LeagueService leagueService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -128,9 +133,13 @@ public class ClubService {
 		}
 		
 		if(club.getId() == 0) {
+			manager = managerService.findByPrincipal();
+			Assert.isTrue(manager.getClub() == null);
+			
 			club = clubRepository.save(club);
 			
 			manager = club.getManager();
+			manager.setClub(club);
 			managerService.saveFromOthers(manager);
 		} else {
 			club = clubRepository.save(club);
@@ -138,6 +147,15 @@ public class ClubService {
 		
 		
 			
+		return club;
+	}
+	
+	public Club saveFromOthers(Club club) {
+		Assert.notNull(club);
+		Assert.isTrue(actorService.checkAuthority("RUNNER"));
+		
+		club = clubRepository.save(club);
+		
 		return club;
 	}
 	
@@ -286,5 +304,94 @@ public class ClubService {
 			}
 		}
 	}
+	
+	// DASHBOARD
+	
+	public Collection<Club> findAllWhoHaveWonMoreLeagues(){
+		Collection<Club> result = new HashSet<>();
+		Collection<League> allLeagues = new HashSet<>();
+		Collection<Club> allClubs = new HashSet<>();
+		Collection<Club> allWinners = new ArrayList<>();
+		Collection<ArrayList<Integer>> ranking = new ArrayList<ArrayList<Integer>>();
+		int maxWinner = 0;
+		
+		allLeagues = leagueService.findAll();
+		allClubs = findAll();
+		
+		for(League l:allLeagues){
+			ranking = calculateRankingByLeague(l.getId());
+			for(ArrayList<Integer> ai:ranking){
+				if(ai.get(0) == 0){
+					Club club = findOne(ai.get(1));
+					allWinners.add(club);
+				}
+			}
+		}
+		
+		for(Club c:allClubs){
+			int max = 0;
+			for(Club c2:allWinners){
+				if(c.equals(c2)){
+					max++;
+				}
+			}
+			if(max > maxWinner){
+				maxWinner = max;
+				result.clear();
+				result.add(c);
+			}else if(max == maxWinner){
+				result.add(c);
+			}
+		}
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveWonMoreRaces(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveWonMoreRaces();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveMoreDeniedEntered(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveMoreDeniedEntered();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWhoHaveMorePunishments(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWhoHaveMorePunishments();
+		
+		return result;
+	}
+	
+	public Double ratioOfClubsByLeague(){
+		Double result;
+		
+		result = clubRepository.ratioOfClubsByLeague();
+		
+		return result;
+	}
 
+	public Collection<Club> findAllWithMorePoints(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWithMorePoints();
+		
+		return result;
+	}
+	
+	public Collection<Club> findAllWithLessPoint(){
+		Collection<Club> result;
+		
+		result = clubRepository.findAllWithLessPoint();
+		
+		return result;
+	}
 }
