@@ -645,7 +645,7 @@
 			<list>
 				<ref bean="folder44"/>
 				<ref bean="folder45"/>
-				<ref bean="folder56"/>
+				<ref bean="folder46"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -1385,6 +1385,11 @@
 		<property name="bulletins">
 			<list>
 				<ref bean="bulletin1"/>
+				<ref bean="bulletin2"/>
+				<ref bean="bulletin3"/>
+				<ref bean="bulletin4"/>
+				<ref bean="bulletin5"/>
+				<ref bean="bulletin6"/>
 			</list>
 		</property>
 		<property name="classifications">
@@ -1395,22 +1400,42 @@
 		<property name="entered">
 			<list>
 				<ref bean="entered1"/>
+				<ref bean="entered2"/>
+				<ref bean="entered4"/>
+				<ref bean="entered5"/>
+				<ref bean="entered6"/>
+				<ref bean="entered7"/>
 			</list>
 		</property>
 		<property name="punishments">
 			<list>
 				<ref bean="punishment1"/>
+				<ref bean="punishment2"/>
+				<ref bean="punishment3"/>
+				<ref bean="punishment4"/>
+				<ref bean="punishment5"/>
+				<ref bean="punishment6"/>
 			</list>
 		</property>
 		<property name="feePayments">
 			<list>
 				<ref bean="feePayment1"/>
+				<ref bean="feePayment3"/>
+				<ref bean="feePayment4"/>
+				<ref bean="feePayment5"/>
+				<ref bean="feePayment6"/>
+				<ref bean="feePayment7"/>
 			</list>
 		</property>
 		<property name="comments">
 			<list>
 				<ref bean="comment1"/>
 				<ref bean="comment2"/>
+				<ref bean="comment7"/>
+				<ref bean="comment8"/>
+				<ref bean="comment9"/>
+				<ref bean="comment10"/>
+				<ref bean="comment11"/>
 			</list>
 		</property>
 	</bean>
@@ -1631,12 +1656,92 @@
 		<property name="club" ref="club2"/>
 	</bean>
 	
+	<bean id="entered4" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/05 12:10"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="entered5" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/06 22:10"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner4"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="entered6" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/07 12:08"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner5"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="entered7" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/08 12:00"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner6"/>
+		<property name="club" ref="club1"/>
+	</bean>
+	
 	<!-- Bulletin -->
 	
 	<bean id="bulletin1" class="domain.Bulletin">
 		<property name="title" value="Thank you!"/>
 		<property name="description" value="Our club have obtain the best classifications of 2015!"/>
 		<property name="creationMoment" value="2016/01/01 00:16"/>
+		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
+	</bean>
+	
+	<bean id="bulletin2" class="domain.Bulletin">
+		<property name="title" value="Next meeting!"/>
+		<property name="description" value="Please go to the Meeting Room at 20:00"/>
+		<property name="creationMoment" value="2016/02/21 21:16"/>
+		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
+	</bean>
+	
+	<bean id="bulletin3" class="domain.Bulletin">
+		<property name="title" value="Congratulations!"/>
+		<property name="description" value="Another cup for this year!"/>
+		<property name="creationMoment" value="2015/11/11 00:00"/>
+		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
+	</bean>
+	
+	<bean id="bulletin4" class="domain.Bulletin">
+		<property name="title" value="Information"/>
+		<property name="description" value="Our club installation will be close the next Sunday."/>
+		<property name="creationMoment" value="2015/09/09 11:11"/>
+		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
+	</bean>
+	
+	<bean id="bulletin5" class="domain.Bulletin">
+		<property name="title" value="Pay Atention!"/>
+		<property name="description" value="One of our members lost his mobile phone, please take it to the concierge."/>
+		<property name="creationMoment" value="2016/07/01 12:05"/>
+		<property name="club" ref="club1"/>
+		<property name="actor" ref="manager1"/>
+	</bean>
+	
+	<bean id="bulletin6" class="domain.Bulletin">
+		<property name="title" value="Important meeting"/>
+		<property name="description" value="The delivery of diplomas for our best runners will take place on the Meeting Room at 20th January 2016"/>
+		<property name="creationMoment" value="2015/12/02 12:00"/>
 		<property name="club" ref="club1"/>
 		<property name="actor" ref="manager1"/>
 	</bean>
@@ -1886,9 +1991,9 @@
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
-		<property name="description" value="Carrera de orientación perteneciente a la liga"/>
-		<property name="name" value="Primera carrera de la liga"/>
-		<property name="moment" value="2016/02/03 12:12"/>
+		<property name="description" value="Primera carrera de la liga"/>
+		<property name="name" value="Round 1"/>
+		<property name="moment" value="2016/01/01 12:00"/>
 		<property name="classifications">
 			<list>
 				<ref bean="classification1"/>
@@ -1900,7 +2005,11 @@
 		<property name="participates">
 			<list>
 				<ref bean="participates1"/>
-				<ref bean="participates2"/>
+				<ref bean="participates3"/>
+				<ref bean="participates4"/>
+				<ref bean="participates5"/>
+				<ref bean="participates6"/>
+				<ref bean="participates7"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -1912,17 +2021,18 @@
 	</bean>
 	
 	<bean id="race2" class="domain.Race">
-		<property name="description" value="Carrera de orientación perteneciente a la liga"/>
-		<property name="name" value="Segunda carrera de la liga"/>
-		<property name="moment" value="2016/03/03 12:12"/>
+		<property name="description" value="Segunda carrera de la liga"/>
+		<property name="name" value="Round 2"/>
+		<property name="moment" value="2016/03/01 12:00"/>
 		<property name="classifications">
 			<list>
 			</list>
 		</property>
-		<property name="category" ref="category1"/>
+		<property name="category" ref="category2"/>
 		<property name="league" ref="league1"/>
 		<property name="participates">
 			<list>
+				<ref bean="participates2"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -1932,14 +2042,14 @@
 	</bean>
 	
 	<bean id="race3" class="domain.Race">
-		<property name="description" value="Carrera de orientación perteneciente a la liga"/>
-		<property name="name" value="Última carrera de la liga"/>
-		<property name="moment" value="2016/09/09 12:12"/>
+		<property name="description" value="Tercera carrera de la liga"/>
+		<property name="name" value="Round 3"/>
+		<property name="moment" value="2016/05/01 12:00"/>
 		<property name="classifications">
 			<list>
 			</list>
 		</property>
-		<property name="category" ref="category1"/>
+		<property name="category" ref="category3"/>
 		<property name="league" ref="league1"/>
 		<property name="participates">
 			<list>
@@ -1952,6 +2062,66 @@
 	</bean>
 	
 	<bean id="race4" class="domain.Race">
+		<property name="description" value="Cuarta carrera de la liga"/>
+		<property name="name" value="Round 4"/>
+		<property name="moment" value="2016/07/01 12:00"/>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="category" ref="category4"/>
+		<property name="league" ref="league1"/>
+		<property name="participates">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="race5" class="domain.Race">
+		<property name="description" value="Quinta carrera de la liga"/>
+		<property name="name" value="Round 5"/>
+		<property name="moment" value="2016/09/01 12:00"/>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="category" ref="category5"/>
+		<property name="league" ref="league1"/>
+		<property name="participates">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="race6" class="domain.Race">
+		<property name="description" value="Sexta carrera de la liga"/>
+		<property name="name" value="Round 6"/>
+		<property name="moment" value="2016/09/09 12:12"/>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="category" ref="category6"/>
+		<property name="league" ref="league1"/>
+		<property name="participates">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="race7" class="domain.Race">
 		<property name="description" value="Carrera de orientación perteneciente a la liga junior"/>
 		<property name="name" value="Primera carrera de la liga junior"/>
 		<property name="moment" value="2017/01/01 20:30"/>
@@ -2103,7 +2273,7 @@
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holderName" value="Adrián Martínez"/>
 		<property name="brandName" value="MASTER CARD"/>
-		<property name="number" value="1234432156988965"/>
+		<property name="number" value="4716637707340143"/>
 		<property name="expirationMonth" value="08"/>
 		<property name="expirationYear" value="2022"/>
 		<property name="cvvCode" value="553"/>
