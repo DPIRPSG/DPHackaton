@@ -12,6 +12,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<jsp:useBean id="today" class="java.util.Date" />
 
 <!-- Listing grid -->
 <display:table pagesize="5" class="displaytag" keepStatus="false"
@@ -98,9 +99,7 @@
 					</jstl:if>
 				</jstl:forEach>
 				<jstl:if test="${pagado != true}">
-					<jsp:useBean id="current" class="java.util.Date" />
-
-					<jstl:if test="${current.time < row_League.startedMoment}">
+					<jstl:if test="${!(today.time gt row_League.startedMoment.time)}">
 					    <a href="feePayment/manager/create.do?leagueId=${row_League.id}">
 							<spring:message code="league.feePayment" />
 						</a>
