@@ -44,7 +44,9 @@
 	</display:column>
 
 	<spring:message code="finances.amount" var="amountHeader"/>
-	<acme:displayColumn value="${row_Finances.amount}" title="${amountHeader}" sorteable="true"/>
+	<display:column title="${amountHeader }" sortable="true">
+		<fmt:formatNumber value="${row_Finances.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/> Euros
+	</display:column>
 	
 	<spring:message code="finances.paymentMoment" var="momentHeader" />
 	<display:column title="${momentHeader}" sortable="true">
