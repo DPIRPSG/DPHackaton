@@ -19,4 +19,7 @@ public interface ParticipatesRepository extends JpaRepository<Participates, Inte
 			" (?4 < 0 or e.club.id = ?4)")
 	Collection<Participates> findAllByRunnerIdRaceIdAndRefereeId(int runnerId, int raceId, int refereeId, int clubId);
 
+	@Query("select p from Participates p where p.race.id = ?1")
+	Collection<Participates> findAllByRaceId(int raceId);
+
 }

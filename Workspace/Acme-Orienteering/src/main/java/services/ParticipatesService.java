@@ -212,4 +212,12 @@ public class ParticipatesService {
 		
 		return result;
 	}
+
+	public Collection<Participates> findAllByRaceId(int raceId) {
+		Collection<Participates> result;
+		
+		result = participatesRepository.findAllByRaceId(raceId);
+		
+		return result;
+	}
 }
