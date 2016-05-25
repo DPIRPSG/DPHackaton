@@ -67,7 +67,7 @@ public class BulletinServiceTest extends AbstractTest{
 		runner = runnerService.findByPrincipal();
 		club = clubService.findOneByRunnerId(runner.getId());
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		bulletin = bulletinService.create();
@@ -78,7 +78,7 @@ public class BulletinServiceTest extends AbstractTest{
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 		
 	}
@@ -218,7 +218,7 @@ public class BulletinServiceTest extends AbstractTest{
 		runner = runnerService.findByPrincipal();
 		club = clubService.findOneByRunnerId(runner.getId());
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		bulletin = bulletinService.create();
@@ -229,7 +229,7 @@ public class BulletinServiceTest extends AbstractTest{
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 		
 	}
@@ -301,7 +301,7 @@ public class BulletinServiceTest extends AbstractTest{
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		bulletin = bulletinService.create();
@@ -312,7 +312,7 @@ public class BulletinServiceTest extends AbstractTest{
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 	}
 	
@@ -375,7 +375,7 @@ public class BulletinServiceTest extends AbstractTest{
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		bulletin = bulletinService.create();
@@ -386,7 +386,7 @@ public class BulletinServiceTest extends AbstractTest{
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 	}
 	
@@ -460,7 +460,7 @@ public class BulletinServiceTest extends AbstractTest{
 		result = bulletinService.findAllByClubId(club.getId());
 		
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 		
 	}
@@ -587,7 +587,7 @@ public class BulletinServiceTest extends AbstractTest{
 		result = bulletinService.findAllByClubId(club.getId());
 		
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 		
 	}
@@ -711,7 +711,7 @@ public class BulletinServiceTest extends AbstractTest{
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		bulletin = result.iterator().next();
@@ -720,7 +720,7 @@ public class BulletinServiceTest extends AbstractTest{
 		
 		// Check result
 		result = bulletinService.findAllByClubId(club.getId());
-		Assert.isTrue(result.size() == 0);
+		Assert.isTrue(result.size() == 5);
 		unauthenticate();
 	}
 	

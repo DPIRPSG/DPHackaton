@@ -767,7 +767,6 @@ public class FolderServiceTest extends AbstractTest {
 	 * 		+ Cerrar su sesión
 	 */
 	
-	//CORREGIR
 	@Test 
 	public void testDeleteMessage() {
 		// Declare variables
@@ -838,11 +837,6 @@ public class FolderServiceTest extends AbstractTest {
 		unauthenticate();
 
 	}
-	
-	/**
-	 * Acme-Barter - Level C - 10.3
-	 * when it is deleted from "trash box", it is actually removed from the system.
-	 */
 	
 	/**
 	 * Positive test case: Borrar un mensaje de la carpeta TrashBox
