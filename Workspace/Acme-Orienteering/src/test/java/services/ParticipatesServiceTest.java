@@ -365,7 +365,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
-			if (runnerService.getClub(b.getRunner()).equals(
+			if (runnerService.getClub(b.getRunner()) != null && runnerService.getClub(b.getRunner()).equals(
 					runnerService.getClub(runner))) { // Está en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
