@@ -301,8 +301,6 @@ public class FinancesServiceTest extends AbstractTest {
 		// Checks results
 		financesService.flush();
 		
-		System.out.println(newFinances.getAmount());
-		
 		
 //		newFinancesSize = financesService.findAll().size();
 //		

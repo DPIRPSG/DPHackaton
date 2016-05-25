@@ -345,11 +345,6 @@ public class ClassificationServiceTest extends AbstractTest {
 		resultByClub = result.iterator().next();
 			
 		// Check result
-		System.out.println(resultByClub.get(0));
-		System.out.println(resultByClub.get(1));
-		System.out.println(club.getId());
-		System.out.println(resultByClub.get(2));
-		
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
 		Assert.isTrue(resultByClub.get(2) == 663);
