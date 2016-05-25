@@ -1866,6 +1866,11 @@
 		<property name="punishments">
 			<list>
 				<ref bean="punishment1"/>
+				<ref bean="punishment2"/>
+				<ref bean="punishment3"/>
+				<ref bean="punishment4"/>
+				<ref bean="punishment5"/>
+				<ref bean="punishment6"/>
 			</list>
 		</property>
 		<property name="feePayments">
@@ -1879,12 +1884,20 @@
 				<ref bean="race1"/>
 				<ref bean="race2"/>
 				<ref bean="race3"/>
+				<ref bean="race4"/>
+				<ref bean="race5"/>
+				<ref bean="race6"/>
 			</list>
 		</property>
 		<property name="referee" ref="referee1"/>
 		<property name="finances">
 			<list>
 				<ref bean="finances1"/>
+				<ref bean="finances2"/>
+				<ref bean="finances3"/>
+				<ref bean="finances4"/>
+				<ref bean="finances5"/>
+				<ref bean="finances6"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -1911,6 +1924,7 @@
 		</property>
 		<property name="feePayments">
 			<list>
+				<ref bean="feePayment3"/>
 			</list>
 		</property>
 		<property name="racing">
@@ -1945,6 +1959,7 @@
 		</property>
 		<property name="feePayments">
 			<list>
+				<ref bean="feePayment4"/>
 			</list>
 		</property>
 		<property name="racing">
@@ -1978,6 +1993,7 @@
 		</property>
 		<property name="feePayments">
 			<list>
+				<ref bean="feePayment5"/>
 			</list>
 		</property>
 		<property name="racing">
@@ -2011,6 +2027,7 @@
 		</property>
 		<property name="feePayments">
 			<list>
+				<ref bean="feePayment6"/>
 			</list>
 		</property>
 		<property name="racing">
@@ -2044,6 +2061,7 @@
 		</property>
 		<property name="feePayments">
 			<list>
+				<ref bean="feePayment7"/>
 			</list>
 		</property>
 		<property name="racing">
@@ -2071,6 +2089,10 @@
 			<list>
 				<ref bean="classification1"/>
 				<ref bean="classification2"/>
+				<ref bean="classification3"/>
+				<ref bean="classification4"/>
+				<ref bean="classification5"/>
+				<ref bean="classification6"/>
 			</list>
 		</property>
 		<property name="category" ref="category1"/>
