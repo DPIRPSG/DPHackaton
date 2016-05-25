@@ -83,6 +83,15 @@
 		<acme:link href="club/list.do?leagueId=${row_League.id}" code="league.club.view"/>
 	</display:column>
 	
+	<spring:message code="league.sponsors" var="sponHeader" />
+	<display:column title="${sponHeader}" sortable="false">
+		<jstl:forEach items="${row_League.finances}" var="ent">
+			<jstl:if test="${ent.sponsor.logo != null}">
+				<a href="finances/list.do?sponsorId=${ent.sponsor.id}"><img src="${ent.sponsor.logo}" style="width:40px;"/></a>
+			</jstl:if>
+		</jstl:forEach>
+	</display:column>
+	
 	<spring:message code="league.financess" var="financesHeader" />
 	<display:column title="${financesHeader}" sortable="false">
 		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>

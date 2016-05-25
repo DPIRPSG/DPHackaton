@@ -46,15 +46,21 @@
 	<spring:message code="race.category" var="categoryHeader" />
 	<display:column title="${categoryHeader}" sortable="true">
 		<jstl:out value="${row_Race.category.name}"></jstl:out>
-		<br/>
+		<br />
 		<jstl:out value="${row_Race.category.description}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="race.league" var="leagueHeader" />
 	<display:column title="${leagueHeader}" sortable="true">
 		<jstl:out value="${row_Race.league.name}"></jstl:out>
-		<br/>
+		<br />
 		<jstl:out value="${row_Race.league.description}"></jstl:out>
+		<br />
+		<jstl:forEach items="${row_Race.league.finances}" var="ent">
+			<jstl:if test="${ent.sponsor.logo != null}">
+			<a href="finances/list.do?sponsorId=${ent.sponsor.id}"><img src="${ent.sponsor.logo}" style="width:40px;"/></a>
+			</jstl:if>
+		</jstl:forEach>
 	</display:column>
 
 	<spring:message code="race.comments" var="commentsHeader" />
