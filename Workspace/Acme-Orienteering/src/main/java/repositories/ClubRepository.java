@@ -31,7 +31,7 @@ public interface ClubRepository extends JpaRepository<Club, Integer> {
 	@Query("select c1 from Club c1 left join c1.punishments p1 group by c1 having count(p1) >= all(select count(p2) from Club c2 left join c2.punishments p2 group by c2)")
 	Collection<Club> findAllWhoHaveMorePunishments();
 	
-	@Query("select (count(distinct c1)*1.0)/(count(distinct l1)*1.0) from Club c1, League l1 left join c1.feePayments f1 left join f1.league l2")
+	@Query("select (count(distinct f1)*1.0)/(count(distinct l1)*1.0) from Club c1, League l1 left join c1.feePayments f1")
 	Double ratioOfClubsByLeague();
 	
 	@Query("select c1 from Club c1 left join c1.classifications cl1 where cl1.points >= all(select cl2.points from Club c2 left join c2.classifications cl2 group by cl2) group by cl1")
