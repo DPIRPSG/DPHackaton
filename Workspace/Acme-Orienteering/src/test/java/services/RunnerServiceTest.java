@@ -264,7 +264,7 @@ public class RunnerServiceTest extends AbstractTest {
 		result = runnerService.findAllByClubId(club.getId());
 		
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 2);
 
 		
 	}
@@ -298,7 +298,7 @@ public class RunnerServiceTest extends AbstractTest {
 		result = runnerService.findAllByClubId(club.getId());
 		
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 2);
 		unauthenticate();
 		
 	}
