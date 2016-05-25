@@ -67,7 +67,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -128,7 +128,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		authenticate(null);
 		
@@ -188,11 +188,11 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		authenticate(null);
 		
-		authenticate("manager2");
+		authenticate("manager1");
 		numPreClub = manager.getClub().getFeePayments().size();
 		
 		leagues = leagueService.findAll();
@@ -301,7 +301,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -364,7 +364,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -427,7 +427,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -490,7 +490,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -553,7 +553,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -616,7 +616,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();
@@ -678,7 +678,7 @@ public class FeePaymentServiceTest extends AbstractTest {
 		int numPreClub, numPostClub;
 		int numPreLeague, numPostLeague;
 		
-		authenticate("manager1");
+		authenticate("manager2");
 		manager = managerService.findByPrincipal();
 		
 		numPreClub = manager.getClub().getFeePayments().size();

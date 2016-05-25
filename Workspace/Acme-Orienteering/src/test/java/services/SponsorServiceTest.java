@@ -58,7 +58,7 @@ public class SponsorServiceTest extends AbstractTest {
 		int expectedSponsorsSize;
 		
 		// Load objects to test
-		expectedSponsorsSize = 1; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedSponsorsSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
 //		authenticate("admin");
 //		admin = actorService.findByPrincipal();
 		
@@ -93,7 +93,7 @@ public class SponsorServiceTest extends AbstractTest {
 		int expectedSponsorsSize;
 		
 		// Load objects to test
-		expectedSponsorsSize = 1; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedSponsorsSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
 		authenticate("admin");
 		admin = actorService.findByPrincipal();
 		
@@ -128,7 +128,7 @@ public class SponsorServiceTest extends AbstractTest {
 		int expectedSponsorsSize;
 		
 		// Load objects to test
-		expectedSponsorsSize = 1; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedSponsorsSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
 		authenticate("runner1");
 		runner = actorService.findByPrincipal();
 		

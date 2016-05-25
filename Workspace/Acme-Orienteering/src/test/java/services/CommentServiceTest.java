@@ -1012,7 +1012,7 @@ public class CommentServiceTest extends AbstractTest {
 		
 		comments = commentService.findAllByCommentedEntityId(commentedEntityId);
 		
-		Assert.isTrue(comments.size() == 1);
+		Assert.isTrue(comments.size() == 6);
 	}
 	
 	/**
