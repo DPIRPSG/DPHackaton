@@ -27,9 +27,9 @@ Queries DPHackaton:
 9) Categoría más frecuente en carreras. -> ESTÁ BIEN
 - select c1 from Race r1 left join r1.category c1 group by c1 having count(c1) >= all(select count(c2) from Race r2 left join r2.category c2 group by c2);
 
-10) Club con mayor puntuación contando todas las ligas.
-- select c1 from Club c1 left join c1.classifications cl1 where cl1.points >= all(select cl2.points from Club c2 left join c2.classifications cl2 group by cl2) group by cl1;
+10) Club con mayor puntuación contando todas las ligas. -> CORREGIDO
+- select c1 from Club c1 join c1.classifications cl1 group by c1 having sum(cl1.points) >= all(select sum(cl1.points) from Club c1 join c1.classifications cl1 group by c1);
 
-11) Club con menor puntuación contando todas las ligas.
-- select c1 from Club c1 left join c1.classifications cl1 where cl1.points <= all(select cl2.points from Club c2 left join c2.classifications cl2 group by cl2) group by cl1;
+11) Club con menor puntuación contando todas las ligas. -> CORREGIDO
+- select c1 from Club c1 join c1.classifications cl1 group by c1 having sum(cl1.points) <= all(select sum(cl1.points) from Club c1 join c1.classifications cl1 group by c1);
 
