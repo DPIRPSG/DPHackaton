@@ -3,8 +3,8 @@ Queries DPHackaton:
 1) Club que ha ganado más ligas. -> POR SERVICIOS
 - 
 
-2) Club que ha ganado más carreras.
-- select c1 from Club c1 left join c1.classifications cl1 where cl1.position = 1 group by c1 having count(cl1) >= all(select count(cl2) from Club c2 left join c2.classifications cl2 where cl2.position = 1 group by c2);
+2) Club que ha ganado más carreras. -> CORREGIR EN JAVA
+- select c1 from Club c1 join c1.classifications cl1 where cl1.position = 1 group by c1 having count(cl1) >= all(select count(cl2) from Club c2 join c2.classifications cl2 where cl2.position = 1 group by cl2);
 
 3) Club con más peticiones rechazadas. -> ESTÁ BIEN
 - select c1 from Club c1 left join c1.entered e1 where e1.isMember IS FALSE AND e1.isDenied IS TRUE AND e1.acceptedMoment IS NULL group by c1 having count(e1) >= all(select count(e2) from Club c2 left join c2.entered e2 where e2.isMember IS FALSE AND e2.isDenied IS TRUE AND e2.acceptedMoment IS NULL group by c2);
