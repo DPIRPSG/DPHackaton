@@ -68,7 +68,7 @@ public class FinancesServiceTest extends AbstractTest {
 		int expectedfinancesSize;
 		
 		// Load objects to test
-		expectedfinancesSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedfinancesSize = 7; // SUSTITUIR POR EL NÚMERO ESPERADO
 //		authenticate("admin");
 //		admin = actorService.findByPrincipal();
 		
@@ -103,7 +103,7 @@ public class FinancesServiceTest extends AbstractTest {
 		int expectedfinancesSize;
 		
 		// Load objects to test
-		expectedfinancesSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedfinancesSize = 7; // SUSTITUIR POR EL NÚMERO ESPERADO
 		authenticate("manager1");
 		manager = actorService.findByPrincipal();
 		
@@ -138,7 +138,7 @@ public class FinancesServiceTest extends AbstractTest {
 		int expectedfinancesSize;
 		
 		// Load objects to test
-		expectedfinancesSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedfinancesSize = 7; // SUSTITUIR POR EL NÚMERO ESPERADO
 		authenticate("referee1");
 		referee = actorService.findByPrincipal();
 		
@@ -261,12 +261,13 @@ public class FinancesServiceTest extends AbstractTest {
 	 * 	 	+ Autenticarse en el sistema como Admin
 	 * 		+ Crear una nueva Finances con cantidad negativa
 	 * 		- Comprobación
-	 * 		+ Comprobar que salta una excepción del tipo: 
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR
-	@Test 
+//	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
 	public void testNewFinancesLowAmount() {
 		// Declare variables
 		Actor admin;
@@ -299,8 +300,6 @@ public class FinancesServiceTest extends AbstractTest {
 		
 		// Checks results
 		financesService.flush();
-		
-		System.out.println(newFinances.getAmount());
 		
 		
 //		newFinancesSize = financesService.findAll().size();
