@@ -56,7 +56,7 @@ public class CategoryServiceTest extends AbstractTest{
 		result = categoryService.findAll();
 		
 		// Check result
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 	}
 	
@@ -77,7 +77,7 @@ public class CategoryServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		category = categoryService.create();
@@ -88,7 +88,7 @@ public class CategoryServiceTest extends AbstractTest{
 		
 		// Check result
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 	}
 	
@@ -242,7 +242,7 @@ public class CategoryServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		
 		// Execution of test
 		category = categoryService.create();
@@ -253,7 +253,7 @@ public class CategoryServiceTest extends AbstractTest{
 		
 		// Check result
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 3);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();
 	}
 	
@@ -488,7 +488,7 @@ public class CategoryServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		for(Category c:result){
 			if(c.getName().equals("Junior")){
 				category = c;
@@ -501,7 +501,7 @@ public class CategoryServiceTest extends AbstractTest{
 		
 		// Check result
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 5);
 		unauthenticate();
 	}
 	
@@ -663,7 +663,7 @@ public class CategoryServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 2);
+		Assert.isTrue(result.size() == 6);
 		for(Category c:result){
 			if(c.getName().equals("Junior")){
 				category = c;
@@ -676,7 +676,7 @@ public class CategoryServiceTest extends AbstractTest{
 		
 		// Check result
 		result = categoryService.findAll();
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 5);
 		unauthenticate();
 	}
 	
