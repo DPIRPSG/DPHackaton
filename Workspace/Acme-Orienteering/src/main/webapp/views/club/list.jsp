@@ -57,14 +57,14 @@
 		<display:column title="${possitionHeader}" sortable="true">
 			<jstl:forEach var="possition" items="${ranking }">
 				<jstl:if test="${possition[1] == row_Club.id}">
-					<jstl:out value="${possition[0] + 1}" />
+					<fmt:formatNumber value="${possition[0] + 1}" minIntegerDigits="2" />
 				</jstl:if>
 			</jstl:forEach>
 		</display:column>
 	</jstl:if>
 
 	<spring:message code="club.name" var="nameHeader" />
-	<acme:displayColumn value="${row_Club.name }" title="${nameHeader}" />
+	<acme:displayColumn value="${row_Club.name }" title="${nameHeader}" sorteable="true"/>
 
 	<jstl:if test="${ranking == null}">
 		<spring:message code="club.description" var="descriptionHeader" />
@@ -79,7 +79,7 @@
 		</display:column>
 
 		<spring:message code="club.creationMoment" var="creationMomentHeader" />
-		<display:column title="${creationMomentHeader}" sortable="true">
+		<display:column title="${creationMomentHeader}" sortable="false">
 			<fmt:formatDate value="${row_Club.creationMoment}"
 				pattern="dd-MM-yyyy" />
 		</display:column>
@@ -129,7 +129,7 @@
 
 	<jstl:if test="${ranking != null}">
 		<spring:message code="club.points" var="pointsHeader" />
-		<display:column title="${pointsHeader}" sortable="true">
+		<display:column title="${pointsHeader}" sortable="false">
 			<jstl:forEach var="possition" items="${ranking }" >
 				<jstl:if test="${possition[1] == row_Club.id}">
 					<jstl:out value="${possition[2]}" />
