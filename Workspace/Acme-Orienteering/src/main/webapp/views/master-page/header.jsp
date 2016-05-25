@@ -43,6 +43,7 @@
 			<li><a class="fNiv" href="race/runner/list.do"><spring:message code="master.page.administrator.myRaces" /></a></li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
+			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 			<li><a class="fNiv" href="curriculum/actor/list.do"><spring:message code="master.page.actor.curriculum" /></a></li>
