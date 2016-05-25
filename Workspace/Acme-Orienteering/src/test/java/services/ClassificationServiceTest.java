@@ -152,7 +152,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		allClubs = clubService.findAll();
 		league = allLeagues.iterator().next();
 		for(Club c:allClubs){
-			if(c.getName().equals("Los Imperdibles")){
+			if(c.getName().equals("Triana OC")){
 				club = c;
 			}
 		}
@@ -162,9 +162,14 @@ public class ClassificationServiceTest extends AbstractTest {
 		resultByClub = result.iterator().next();
 			
 		// Check result
+		System.out.println(resultByClub.get(0));
+		System.out.println(resultByClub.get(1));
+		System.out.println(club.getId());
+		System.out.println(resultByClub.get(2));
+		
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
-		Assert.isTrue(resultByClub.get(2) == 25);
+		Assert.isTrue(resultByClub.get(2) == 663);
 		leagueService.flush();
 		clubService.flush();
 		
@@ -198,7 +203,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		allClubs = clubService.findAll();
 		league = allLeagues.iterator().next();
 		for(Club c:allClubs){
-			if(c.getName().equals("Los Imperdibles")){
+			if(c.getName().equals("Triana OC")){
 				club = c;
 			}
 		}
@@ -210,7 +215,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		// Check result
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
-		Assert.isTrue(resultByClub.get(2) == 25);
+		Assert.isTrue(resultByClub.get(2) == 663);
 		unauthenticate();
 		leagueService.flush();
 		clubService.flush();
