@@ -520,6 +520,7 @@
 		<property name="participates">
 			<list>
 				<ref bean="participates1"/>
+				<ref bean="participates9"/>
 			</list>
 		</property>
 		<property name="curriculum" ref="curriculum2"/>
@@ -1987,7 +1988,7 @@
 		</property>
 		<property name="racing">
 			<list>
-				<ref bean="race4"/>
+				<ref bean="race7"/>
 			</list>
 		</property>
 		<property name="referee" ref="referee2"/>
@@ -2170,6 +2171,40 @@
 		</property>
 	</bean>
 	
+	<bean id="league8" class="domain.League">
+		<property name="description" value="Free For All League"/>
+		<property name="name" value="Free League"/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/04/06 13:00"/>
+		<property name="startedMoment" value="2016/11/01 00:30"/>
+		<property name="amount" value="0"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+				<ref bean="race8"/>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
@@ -2318,6 +2353,27 @@
 		</property>
 		<property name="category" ref="category2"/>
 		<property name="league" ref="league2"/>
+		<property name="participates">
+			<list>
+				<ref bean="participates9"/>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="race8" class="domain.Race">
+		<property name="description" value="The World First Free Race"/>
+		<property name="name" value="Free Race"/>
+		<property name="moment" value="2016/12/25 20:30"/>
+		<property name="classifications">
+			<list>
+			</list>
+		</property>
+		<property name="category" ref="category2"/>
+		<property name="league" ref="league8"/>
 		<property name="participates">
 			<list>
 			</list>
@@ -2587,6 +2643,12 @@
 		<property name="result" value="0"/>
 		<property name="race" ref="race6"/>
 		<property name="runner" ref="runner6"/>
+	</bean>
+	
+	<bean id="participates9" class="domain.Participates">
+		<property name="result" value="0"/>
+		<property name="race" ref="race7"/>
+		<property name="runner" ref="runner1"/>
 	</bean>
 	
 	<!-- Sponsor -->
