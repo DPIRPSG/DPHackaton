@@ -560,6 +560,7 @@
 		<property name="participates">
 			<list>
 				<ref bean="participates3"/>
+				<ref bean="participates10"/>
 			</list>
 		</property>
 		<property name="curriculum" ref="curriculum4"/>
@@ -2337,6 +2338,7 @@
 		<property name="participates">
 			<list>
 				<ref bean="participates8"/>
+				<ref bean="participates10"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -2651,6 +2653,12 @@
 		<property name="result" value="0"/>
 		<property name="race" ref="race7"/>
 		<property name="runner" ref="runner1"/>
+	</bean>
+	
+	<bean id="participates10" class="domain.Participates">
+		<property name="result" value="0"/>
+		<property name="race" ref="race6"/>
+		<property name="runner" ref="runner2"/>
 	</bean>
 	
 	<!-- Sponsor -->
