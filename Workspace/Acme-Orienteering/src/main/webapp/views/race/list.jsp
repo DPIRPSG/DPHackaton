@@ -33,13 +33,13 @@
 	<!-- Attributes -->
 
 	<spring:message code="race.name" var="nameHeader"/>
-	<acme:displayColumn value="${row_Race.name }" title="${nameHeader}"/>
+	<acme:displayColumn value="${row_Race.name }" title="${nameHeader}" sorteable="true"/>
 	
 	<spring:message code="race.description" var="descriptionHeader"/>
-	<acme:displayColumn value="${row_Race.description }" title="${descriptionHeader}"/>
+	<acme:displayColumn value="${row_Race.description }" title="${descriptionHeader}" sorteable="true"/>
 	
 	<spring:message code="race.moment" var="momentHeader" />
-	<display:column title="${momentHeader}" sortable="true">
+	<display:column title="${momentHeader}" sortable="false">
 		<fmt:formatDate value="${row_Race.moment}" pattern="dd-MM-yyyy hh:mm"/>
 	</display:column>
 	

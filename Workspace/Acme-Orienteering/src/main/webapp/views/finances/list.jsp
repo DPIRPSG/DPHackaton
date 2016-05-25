@@ -45,7 +45,7 @@
 
 	<spring:message code="finances.amount" var="amountHeader"/>
 	<display:column title="${amountHeader }" sortable="true">
-		<fmt:formatNumber value="${row_Finances.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/> Euros
+		<fmt:formatNumber value="${row_Finances.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/>&#8364;
 	</display:column>
 	
 	<spring:message code="finances.paymentMoment" var="momentHeader" />
