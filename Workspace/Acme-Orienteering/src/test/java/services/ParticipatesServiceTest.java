@@ -697,11 +697,11 @@ public class ParticipatesServiceTest extends AbstractTest {
 		Participates participates;
 		Participates newParticipates;
 //		Iterator<Race> raceIterator;
-		Collection<League> leagues;
-		League league;
-		Club club;
-		Collection<FeePayment> feePayments;
-		boolean clubJoined;
+//		Collection<League> leagues;
+//		League league;
+//		Club club;
+//		Collection<FeePayment> feePayments;
+//		boolean clubJoined;
 		
 		// Load objects to test
 		authenticate("referee1");

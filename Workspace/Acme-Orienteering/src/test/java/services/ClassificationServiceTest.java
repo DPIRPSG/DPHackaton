@@ -63,6 +63,7 @@ public class ClassificationServiceTest extends AbstractTest {
 	 * 		+ Cerrar su sesión
 	 */
 	
+	// CORREGIR
 	@Test 
 	public void testUpdateClassification() {
 		// Declare variables
@@ -124,6 +125,10 @@ public class ClassificationServiceTest extends AbstractTest {
 		unauthenticate();
 
 	}
+	
+	// CORREGIR : Primer test negativo
+	
+	// CORREGIR : Segundo test negativo
 
 	/**
 	 * @see 19.c
