@@ -583,12 +583,12 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera
+	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera cuya liga no dirige dicho árbitro
 	 * 		- Acciï¿½n
 	 * 		+ Autenticarse en el sistema como Referee
 	 * 		+ Rellenar la clasificaciï¿½n de un corredor en una carrera
 	 * 		- Comprobaciï¿½n
-	 * 		+ Comprobar que la clasificaciï¿½n se ha actualizado
+	 * 		+ Comprobar que salta una excepción del tipo: 
 	 * 		+ Cerrar su sesiï¿½n
 	 */
 	
@@ -656,7 +656,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera
+	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera en una liga en la que no participa su Club
 	 * 		- Acciï¿½n
 	 * 		+ Autenticarse en el sistema como Referee
 	 * 		+ Rellenar la clasificaciï¿½n de un corredor en una carrera

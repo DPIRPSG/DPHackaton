@@ -61,7 +61,6 @@ public class MessageServiceTest extends AbstractTest {
 	 * 		+ Cerrar sus sesiones
 	 */
 	
-//	CORREGIR
 	@Test 
 //	@Rollback(value = true)
 	public void testExchangeMessage() {
