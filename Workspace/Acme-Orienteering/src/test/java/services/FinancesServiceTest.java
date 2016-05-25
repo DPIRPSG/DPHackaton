@@ -68,7 +68,7 @@ public class FinancesServiceTest extends AbstractTest {
 		int expectedfinancesSize;
 		
 		// Load objects to test
-		expectedfinancesSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedfinancesSize = 7; // SUSTITUIR POR EL NÚMERO ESPERADO
 //		authenticate("admin");
 //		admin = actorService.findByPrincipal();
 		
@@ -103,7 +103,7 @@ public class FinancesServiceTest extends AbstractTest {
 		int expectedfinancesSize;
 		
 		// Load objects to test
-		expectedfinancesSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedfinancesSize = 7; // SUSTITUIR POR EL NÚMERO ESPERADO
 		authenticate("manager1");
 		manager = actorService.findByPrincipal();
 		
@@ -138,7 +138,7 @@ public class FinancesServiceTest extends AbstractTest {
 		int expectedfinancesSize;
 		
 		// Load objects to test
-		expectedfinancesSize = 6; // SUSTITUIR POR EL NÚMERO ESPERADO
+		expectedfinancesSize = 7; // SUSTITUIR POR EL NÚMERO ESPERADO
 		authenticate("referee1");
 		referee = actorService.findByPrincipal();
 		
