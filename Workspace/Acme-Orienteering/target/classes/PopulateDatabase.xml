@@ -2662,6 +2662,7 @@
 		<property name="finances">
 			<list>
 				<ref bean="finances1"/>
+				<ref bean="finances7"/>
 			</list>
 		</property>
 	</bean>
