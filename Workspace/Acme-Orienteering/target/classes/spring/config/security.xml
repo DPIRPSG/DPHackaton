@@ -75,6 +75,7 @@
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/club/runner/*" access="hasRole('RUNNER')" />
+		<security:intercept-url pattern="/race/runner/*" access="hasRole('RUNNER')" />
 		<security:intercept-url pattern="/bulletin/runner/*" access="hasRole('RUNNER')" />
 		<security:intercept-url pattern="/participates/runner/*" access="hasRole('RUNNER')" />
 		<security:intercept-url pattern="/entered/runner/**" access="hasRole('RUNNER')" />
