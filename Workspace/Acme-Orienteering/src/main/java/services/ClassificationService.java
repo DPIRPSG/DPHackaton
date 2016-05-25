@@ -69,7 +69,7 @@ public class ClassificationService {
 	 * @return
 	 */
 	public Collection<Classification> findAllByClubIdAndRaceId(int clubId, int raceId){
-		// Assert.isTrue(actorService.checkAuthority("REFEREE"), "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
+//		Assert.isTrue(actorService.checkAuthority("REFEREE"), "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
 		
 		Collection<Classification> result;
 	
@@ -113,6 +113,8 @@ public class ClassificationService {
 			clubClassi.put("runners", clubClassi.get("runners") + 1);
 			clubClassi.put("totalClub", clubClassi.get("totalClub") + p.getResult());
 			
+//			System.out.println("actor: " +p.getRunner().getUserAccount().getUsername() + "; club: " + actClub);
+			
 			raceClassification.put(actClub, clubClassi);
 		}
 		
@@ -133,8 +135,8 @@ public class ClassificationService {
 			Map<String, Integer> clubClassi;
 
 			clubClassi = raceClassification.get(i);
+//			System.out.println("i: " + i + "; raceId: " + raceId);
 
-			
 			if(ja2.hasNext()){
 				actClassi = ja2.next();
 			} else {
