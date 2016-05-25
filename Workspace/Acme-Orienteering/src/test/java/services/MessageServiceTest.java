@@ -185,8 +185,6 @@ public class MessageServiceTest extends AbstractTest {
 		
 		unauthenticate();
 		
-//		System.out.println(sentMessage.getRecipients());
-		
 //		for(Actor a: recipients){
 //			authenticate(a.getUserAccount().getUsername());
 //			for(Folder f: a.getMessageBoxes()){
