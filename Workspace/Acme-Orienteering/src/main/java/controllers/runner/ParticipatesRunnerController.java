@@ -53,7 +53,7 @@ public class ParticipatesRunnerController extends AbstractController{
 		try{
 			participatesService.joinRace(raceId);
 			
-			parts = participatesService.findAllByRaceId(raceId);
+			parts = participatesService.findAllClubByRunnerIdAndRaceId(-1, raceId);
 
 			result = new ModelAndView("participates/list");
 			result.addObject("participatess", parts);
