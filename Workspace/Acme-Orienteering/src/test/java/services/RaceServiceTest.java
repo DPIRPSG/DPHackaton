@@ -224,7 +224,7 @@ public class RaceServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = raceService.findAll();
-		Assert.isTrue(result.size() == 7);
+		Assert.isTrue(result.size() == 8);
 		allLeagues = leagueService.findAll();
 		for(League l:allLeagues){
 			if(l.getName().equals("First Orienteering League (FOL)")){
@@ -252,7 +252,7 @@ public class RaceServiceTest extends AbstractTest{
 		
 		// Check result
 		result = raceService.findAll();
-		Assert.isTrue(result.size() == 8);
+		Assert.isTrue(result.size() == 9);
 		unauthenticate();
 	}
 	
@@ -451,7 +451,7 @@ public class RaceServiceTest extends AbstractTest{
 		// Load object to test
 		authenticate("admin");
 		result = raceService.findAll();
-		Assert.isTrue(result.size() == 7);
+		Assert.isTrue(result.size() == 8);
 		allLeagues = leagueService.findAll();
 		for(League l:allLeagues){
 			if(l.getName().equals("First Orienteering League (FOL)")){
@@ -480,7 +480,7 @@ public class RaceServiceTest extends AbstractTest{
 		
 		// Check result
 		result = raceService.findAll();
-		Assert.isTrue(result.size() == 8);
+		Assert.isTrue(result.size() == 9);
 		unauthenticate();
 	}
 	
@@ -703,11 +703,11 @@ public class RaceServiceTest extends AbstractTest{
 		authenticate("admin");
 		result = raceService.findAll();
 		for(Race r:result){
-			if(r.getName().equals("Primera carrera de la liga junior")){
+			if(r.getClassifications().isEmpty() && r.getParticipates().isEmpty()){
 				race = r;
 			}
 		}
-		Assert.isTrue(result.size() == 7);
+		Assert.isTrue(result.size() == 8);
 		
 		// Execution of test
 		raceService.delete(race);
@@ -716,7 +716,7 @@ public class RaceServiceTest extends AbstractTest{
 		
 		// Check result
 		result = raceService.findAll();
-		Assert.isTrue(result.size() == 6);
+		Assert.isTrue(result.size() == 7);
 		unauthenticate();	
 		
 	}
