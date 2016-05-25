@@ -143,7 +143,8 @@ public class ParticipatesServiceTest extends AbstractTest {
 	 *  
 	 *  Negativo: Un corredor no puede apuntarse a una carrera si ya est� apuntado 
 	 */
-	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
 	public void testJoinRaceErrorMultipleJoin() {
 		// Declare variables
 		Runner runner;
