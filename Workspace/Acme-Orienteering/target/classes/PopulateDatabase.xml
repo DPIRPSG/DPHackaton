@@ -1917,6 +1917,7 @@
 		<property name="name" value="First Orienteering League (FOL)"/>
 		<property name="pictures">
 			<list>
+				<value>http://www.fedo.org/web/images/banners/anuncios/logo-laliga-3.gif</value>
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/11/06 13:00"/>
@@ -1972,6 +1973,7 @@
 		<property name="name" value="First Junior Orienteering League (FJOL)"/>
 		<property name="pictures">
 			<list>
+			<value>http://dizw242ufxqut.cloudfront.net/images/product/music/album/image5/liga-26768226-frntl.png</value>
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/11/06 13:00"/>
@@ -2660,6 +2662,7 @@
 		<property name="finances">
 			<list>
 				<ref bean="finances1"/>
+				<ref bean="finances7"/>
 			</list>
 		</property>
 	</bean>
@@ -2756,6 +2759,13 @@
 		<property name="paymentMoment" value="2016/04/25 13:06"/>
 		<property name="sponsor" ref="sponsor6"/>
 		<property name="league" ref="league1"/>
+	</bean>
+	
+	<bean id="finances7" class="domain.Finances">
+		<property name="amount" value="1600"/>
+		<property name="paymentMoment" value="2016/04/20 17:50"/>
+		<property name="sponsor" ref="sponsor1"/>
+		<property name="league" ref="league2"/>
 	</bean>
 	
 	<!-- Comment -->

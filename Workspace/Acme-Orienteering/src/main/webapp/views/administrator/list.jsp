@@ -38,11 +38,11 @@
    	<h3><spring:message code="administrator.findAllWhoHaveMoreDeniedEntered"/></h3>
 	<!-- Listing grid -->
 	<display:table pagesize="5" class="displaytag" keepStatus="true"
-    		name="findAllWhoHaveMoreDeniedEntered" requestURI="${requestURI}" id="row3"> --%>
+    		name="findAllWhoHaveMoreDeniedEntered" requestURI="${requestURI}" id="row3">
 		<!-- Attributes -->
 		<spring:message code="club.name" var="nameHeader" />
 		<display:column title="${nameHeader}" 
-    			sortable="false" > --%>
+    			sortable="false" >
   			<jstl:out value="${row3.name}"/>
     		</display:column>
     	</display:table>

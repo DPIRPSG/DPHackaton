@@ -33,7 +33,7 @@
 	<!-- Attributes -->
 
 	<spring:message code="league.name" var="nameHeader"/>
-	<acme:displayColumn value="${row_League.name }" title="${nameHeader}"/>
+	<acme:displayColumn value="${row_League.name }" title="${nameHeader}" sorteable="true"/>
 	
 	<spring:message code="league.description" var="descriptionHeader"/>
 	<acme:displayColumn value="${row_League.description }" title="${descriptionHeader}" sorteable="true"/>
@@ -47,18 +47,18 @@
 	</display:column>
 	
 	<spring:message code="league.creationMoment" var="creationMomentHeader" />
-	<display:column title="${creationMomentHeader}" sortable="true">
+	<display:column title="${creationMomentHeader}" sortable="false">
 		<fmt:formatDate value="${row_League.creationMoment}" pattern="dd-MM-yyyy"/>
 	</display:column>
 	
 	<spring:message code="league.startedMoment" var="startedMomentHeader" />
-	<display:column title="${startedMomentHeader}" sortable="true">
+	<display:column title="${startedMomentHeader}" sortable="false">
 		<fmt:formatDate value="${row_League.startedMoment}" pattern="dd-MM-yyyy"/>
 	</display:column>
 	
 	<spring:message code="league.amount" var="amountHeader"/>
-	<display:column title="${amountHeader }" sortable="true">
-		<fmt:formatNumber value="${row_League.amount}" minIntegerDigits="4" maxFractionDigits="2" minFractionDigits="2" type="number"/> Euros
+	<display:column title="${amountHeader }" sortable="false">
+		<fmt:formatNumber value="${row_League.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/>&#8364;
 	</display:column>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
