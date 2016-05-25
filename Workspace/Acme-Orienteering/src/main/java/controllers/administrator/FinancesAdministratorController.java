@@ -93,7 +93,10 @@ public class FinancesAdministratorController extends AbstractController {
 				financesService.saveFromEdit(input);				
 				result = new ModelAndView("redirect:../../finances/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(input, "finances.commit.error");				
+				if (oops.getMessage().equals("finances.invalid.amount"))
+					result = createEditModelAndView(input, "finances.invalid.amount");
+				else
+					result = createEditModelAndView(input, "finances.commit.error");				
 			}
 		}
 
