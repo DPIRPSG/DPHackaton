@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import domain.Club;
+import domain.Entered;
 import domain.Participates;
 import domain.Race;
 import domain.Runner;
@@ -193,13 +194,27 @@ public class ParticipatesService {
 		Runner runner;
 		Club club;
 		
-		runner = runnerService.findByPrincipal();
-		club = clubService.findOneByRunnerId(runner.getId());
+		runner = null;
+		club = null;
 		
+		if (actorService.checkAuthority("RUNNER")) {
+			runner = runnerService.findByPrincipal();
+			club = clubService.findOneByRunnerId(runner.getId());
+		} else if (actorService.checkAuthority("MANAGER")) {
+			club = managerService.findByPrincipal().getClub();
+			if (club != null) {
+				for (Entered e : club.getEntered()) {
+					if (e.getIsMember() == true) {
+						runner = e.getRunner();
+						break;
+					}
+				}
+			}
+		}
 		if(club == null) {
 			res = new ArrayList<Participates>();
 		} else {
-			res = this.findAllByRunnerIdAndRaceId(runner.getId(), raceId, -1, club.getId());
+			res = this.findAllByRunnerIdAndRaceId(runnerId, raceId, -1, club.getId());
 		}
 		
 		return res;

@@ -1,5 +1,8 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
@@ -14,6 +17,7 @@ import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
 import domain.Actor;
+import domain.Finances;
 import domain.Sponsor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,6 +37,9 @@ public class SponsorServiceTest extends AbstractTest {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private FinancesService financesService;
 	
 	// Tests ---------------------------------------
 	
@@ -515,18 +522,20 @@ public class SponsorServiceTest extends AbstractTest {
 	 * 		+ Eliminar un Sponsor existente
 	 * 		- Comprobación
 	 * 		+ Comprobar que el número de Sponsor de ahora es el de antes menos uno.
+	 * 		+ Comprobar que se han eliminado también las Finances de ese Sponsor.
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR
 	@Test 
-	@Rollback(value = true)
 	public void testDeleteSponsor() {
 		// Declare variables
 		Actor admin;
 		Sponsor sponsor;
 		int sponsorsSize;
 		int newSponsorsSize;
+		Collection<Finances> finances;
+		Collection<Finances> sponsorFinances;
+		int sponsorId;
 		
 		// Load objects to test
 		authenticate("admin");
@@ -540,6 +549,8 @@ public class SponsorServiceTest extends AbstractTest {
 		
 		sponsor = sponsorService.findAll().iterator().next();
 		
+		sponsorId = sponsor.getId();
+		
 		sponsorService.delete(sponsor);
 		
 		// Checks results
@@ -547,13 +558,143 @@ public class SponsorServiceTest extends AbstractTest {
 		
 		Assert.isTrue(sponsorsSize - 1 == newSponsorsSize, "El nuevo número de Sponsors no es el mismo de antes - 1");
 		
+//		financesService.flush();
+//		sponsorService.flush();
+		
+		finances = financesService.findAll();
+		
+		sponsorFinances = new ArrayList<>();
+		
+		for(Finances f: finances){
+			if(f.getSponsor().getId() == sponsorId){
+				sponsorFinances.add(f);
+			}
+		}
+		
+		Assert.isTrue(sponsorFinances.isEmpty(), "No se han borrado todas las Finances del Sponsor.");
+		
 		unauthenticate();
 
 	}
 	
-	// CORREGIR : Falta primer test negativo de Delete Sponsor
+	/**
+	 * Negative test case: Eliminar un Sponsor como usuario no autenticado.
+	 * 		- Acción
+	 * 		+ Eliminar un Sponsor existente
+	 * 		- Comprobación
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
 	
-	// CORREGIR : Falta segundo test negativo de Delete Sponsor
+//	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testDeleteSponsorAsAuthenticated() {
+		// Declare variables
+//		Actor admin;
+		Sponsor sponsor;
+		int sponsorsSize;
+		int newSponsorsSize;
+		Collection<Finances> finances;
+		Collection<Finances> sponsorFinances;
+		int sponsorId;
+		
+		// Load objects to test
+//		authenticate("admin");
+//		admin = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+//		Assert.notNull(admin, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		sponsorsSize = sponsorService.findAll().size();
+		
+		sponsor = sponsorService.findAll().iterator().next();
+		
+		sponsorId = sponsor.getId();
+		
+		sponsorService.delete(sponsor);
+		
+		// Checks results
+		newSponsorsSize = sponsorService.findAll().size();
+		
+		Assert.isTrue(sponsorsSize - 1 == newSponsorsSize, "El nuevo número de Sponsors no es el mismo de antes - 1");
+		
+		finances = financesService.findAll();
+		
+		sponsorFinances = new ArrayList<>();
+		
+		for(Finances f: finances){
+			if(f.getSponsor().getId() == sponsorId){
+				sponsorFinances.add(f);
+			}
+		}
+		
+		Assert.isTrue(sponsorFinances.isEmpty(), "No se han borrado todas las Finances del Sponsor.");
+		
+//		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Eliminar un Sponsor como Manager.
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Manager
+	 * 		+ Eliminar un Sponsor existente
+	 * 		- Comprobación
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+//	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+	public void testDeleteSponsorAsManager() {
+		// Declare variables
+		Actor manager;
+		Sponsor sponsor;
+		int sponsorsSize;
+		int newSponsorsSize;
+		Collection<Finances> finances;
+		Collection<Finances> sponsorFinances;
+		int sponsorId;
+		
+		// Load objects to test
+		authenticate("manager1");
+		manager = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(manager, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		sponsorsSize = sponsorService.findAll().size();
+		
+		sponsor = sponsorService.findAll().iterator().next();
+		
+		sponsorId = sponsor.getId();
+		
+		sponsorService.delete(sponsor);
+		
+		// Checks results
+		newSponsorsSize = sponsorService.findAll().size();
+		
+		Assert.isTrue(sponsorsSize - 1 == newSponsorsSize, "El nuevo número de Sponsors no es el mismo de antes - 1");
+		
+		finances = financesService.findAll();
+		
+		sponsorFinances = new ArrayList<>();
+		
+		for(Finances f: finances){
+			if(f.getSponsor().getId() == sponsorId){
+				sponsorFinances.add(f);
+			}
+		}
+		
+		Assert.isTrue(sponsorFinances.isEmpty(), "No se han borrado todas las Finances del Sponsor.");
+		
+		unauthenticate();
+
+	}
 	
 	
 }

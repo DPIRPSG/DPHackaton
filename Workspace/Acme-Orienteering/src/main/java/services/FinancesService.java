@@ -74,6 +74,8 @@ public class FinancesService {
 	private Finances save(Finances input) {
 		Assert.notNull(input);
 		
+		Assert.isTrue(input.getAmount() >= 0, "finances.invalid.amount");
+		
 		input = financesRepository.save(input);
 			
 		return input;
