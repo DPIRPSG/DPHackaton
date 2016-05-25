@@ -592,6 +592,11 @@
 		<property name="entered">
 			<list>
 				<ref bean="entered3"/>
+				<ref bean="entered4"/>
+				<ref bean="entered8"/>
+				<ref bean="entered9"/>
+				<ref bean="entered10"/>
+				<ref bean="entered11"/>
 			</list>
 		</property>
 		<property name="participates">
@@ -629,6 +634,7 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered5"/>
 			</list>
 		</property>
 		<property name="participates">
@@ -665,6 +671,7 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered6"/>
 			</list>
 		</property>
 		<property name="participates">
@@ -701,11 +708,13 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered7"/>
 			</list>
 		</property>
 		<property name="participates">
 			<list>
 				<ref bean="participates7"/>
+				<ref bean="participates8"/>
 			</list>
 		</property>
 	</bean>
@@ -1570,6 +1579,7 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered8"/>
 			</list>
 		</property>
 		<property name="punishments">
@@ -1607,6 +1617,7 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered9"/>
 			</list>
 		</property>
 		<property name="punishments">
@@ -1644,6 +1655,7 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered10"/>
 			</list>
 		</property>
 		<property name="punishments">
@@ -1681,6 +1693,7 @@
 		</property>
 		<property name="entered">
 			<list>
+				<ref bean="entered11"/>
 			</list>
 		</property>
 		<property name="punishments">
@@ -1761,12 +1774,52 @@
 	
 	<bean id="entered7" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2016/05/08 12:00"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="acceptedMoment" value="2016/05/08 13:55"/>
 		<property name="runner" ref="runner6"/>
 		<property name="club" ref="club1"/>
+	</bean>
+	
+	<bean id="entered8" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="true"/>
+		<property name="registerMoment" value="2016/05/05 12:30"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club3"/>
+	</bean>
+	
+	<bean id="entered9" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/05 12:50"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club4"/>
+	</bean>
+	
+	<bean id="entered10" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/05 13:10"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club5"/>
+	</bean>
+	
+	<bean id="entered11" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/05/05 13:25"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club6"/>
 	</bean>
 	
 	<!-- Bulletin -->
@@ -1851,6 +1904,11 @@
 		<property name="name" value="Benjamín"/>
 	</bean>
 	
+	<bean id="category7" class="domain.Category">
+		<property name="description" value="Only for Juvenil runners."/>
+		<property name="name" value="Juvenil"/>
+	</bean>
+	
 	<!-- League -->
 	
 	<bean id="league1" class="domain.League">
@@ -1932,7 +1990,7 @@
 				<ref bean="race4"/>
 			</list>
 		</property>
-		<property name="referee" ref="referee1"/>
+		<property name="referee" ref="referee2"/>
 		<property name="finances">
 			<list>
 			</list>
@@ -2079,6 +2137,39 @@
 		</property>
 	</bean>
 	
+	<bean id="league7" class="domain.League">
+		<property name="description" value="New League for new experiences."/>
+		<property name="name" value="New future league."/>
+		<property name="pictures">
+			<list>
+			</list>
+		</property>
+		<property name="creationMoment" value="2016/03/06 13:00"/>
+		<property name="startedMoment" value="2016/12/01 00:30"/>
+		<property name="amount" value="500"/>
+		<property name="punishments">
+			<list>
+			</list>
+		</property>
+		<property name="feePayments">
+			<list>
+			</list>
+		</property>
+		<property name="racing">
+			<list>
+			</list>
+		</property>
+		<property name="referee" ref="referee1"/>
+		<property name="finances">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Race -->
 	
 	<bean id="race1" class="domain.Race">
@@ -2208,6 +2299,7 @@
 		<property name="league" ref="league1"/>
 		<property name="participates">
 			<list>
+				<ref bean="participates8"/>
 			</list>
 		</property>
 		<property name="comments">
@@ -2488,6 +2580,12 @@
 	<bean id="participates7" class="domain.Participates">
 		<property name="result" value="44"/>
 		<property name="race" ref="race1"/>
+		<property name="runner" ref="runner6"/>
+	</bean>
+	
+	<bean id="participates8" class="domain.Participates">
+		<property name="result" value="0"/>
+		<property name="race" ref="race6"/>
 		<property name="runner" ref="runner6"/>
 	</bean>
 	
