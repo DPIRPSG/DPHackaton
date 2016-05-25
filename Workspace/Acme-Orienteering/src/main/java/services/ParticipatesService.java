@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -39,6 +40,8 @@ public class ParticipatesService {
 	@Autowired
 	private RaceService raceService;
 	
+	@Autowired
+	private ClubService clubService;
 	// Constructors -----------------------------------------------------------
 	
 	public ParticipatesService(){
@@ -162,7 +165,7 @@ public class ParticipatesService {
 	}
 	
 	public Collection<Participates> findAllClubByRunnerIdAndRaceId(int runnerId, int raceId){
-		boolean res;
+		/*boolean res;
 		
 		res = actorService.checkAuthorities("MANAGER, RUNNER");
 		Assert.isTrue(res, "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
@@ -182,7 +185,24 @@ public class ParticipatesService {
 		
 		result = this.findAllByRunnerIdAndRaceId(runnerId, raceId, -1, clubId);
 		
-		return result;
+		return result;*/
+			
+		Assert.isTrue(actorService.checkAuthorities("MANAGER, RUNNER"), "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
+		
+		Collection<Participates> res;
+		Runner runner;
+		Club club;
+		
+		runner = runnerService.findByPrincipal();
+		club = clubService.findOneByRunnerId(runner.getId());
+		
+		if(club == null) {
+			res = new ArrayList<Participates>();
+		} else {
+			res = this.findAllByRunnerIdAndRaceId(runner.getId(), raceId, -1, club.getId());
+		}
+		
+		return res;
 	}
 	
 	
