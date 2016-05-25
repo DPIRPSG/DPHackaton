@@ -36,6 +36,9 @@ public class MessageServiceTest extends AbstractTest {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private FolderService folderService;
+	
 	// Tests ---------------------------------------
 	
 	/**
@@ -69,6 +72,7 @@ public class MessageServiceTest extends AbstractTest {
 		Date sentMoment;
 		Collection<Actor> allActors;
 		Collection<Actor> recipients;
+		Collection<Folder> folders;
 		
 		// Load objects to test
 		authenticate("runner1");
@@ -95,23 +99,26 @@ public class MessageServiceTest extends AbstractTest {
 		message.setRecipients(recipients);
 		
 		sentMessage = messageService.firstSaveNormalSend(message);
-		
+		messageService.flush();
+				
 //		messageService.flush();
+				
+		folders = new ArrayList<Folder>();
+		folders.addAll(folderService.findAllByActor());
 		
 		// Checks results
-		for(Folder f: runner.getFolders()){
+		for(Folder f: folders){
 			if(f.getName().equals("OutBox")){
-				Assert.isTrue(f.getMessages().contains(sentMessage), "El mensaje no ha sido añadido a la carpeta OutBox del emisor");
+				Assert.isTrue(messageService.findAllByFolder(f).contains(sentMessage), "El mensaje no ha sido añadido a la carpeta OutBox del emisor");
 			}
 		}
 		
 		unauthenticate();
-		
 		for(Actor a: recipients){
 			authenticate(a.getUserAccount().getUsername());
-			for(Folder f: a.getFolders()){
+			for(Folder f: folderService.findAllByActorId(a.getId())){
 				if(f.getName().equals("InBox")){
-					Assert.isTrue(f.getMessages().contains(sentMessage), "El mensaje no ha sido añadido a la carpeta InBox del receptor");
+					Assert.isTrue(messageService.findAllByFolder(f).contains(sentMessage), "El mensaje no ha sido añadido a la carpeta InBox del receptor");
 				}
 			}
 			unauthenticate();
