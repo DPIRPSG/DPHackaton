@@ -58,7 +58,7 @@
 	
 	<spring:message code="league.amount" var="amountHeader"/>
 	<display:column title="${amountHeader }" sortable="false">
-		<fmt:formatNumber value="${row_League.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/> Euros
+		<fmt:formatNumber value="${row_League.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/>&#8364;
 	</display:column>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
