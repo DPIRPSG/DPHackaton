@@ -261,12 +261,13 @@ public class FinancesServiceTest extends AbstractTest {
 	 * 	 	+ Autenticarse en el sistema como Admin
 	 * 		+ Crear una nueva Finances con cantidad negativa
 	 * 		- Comprobación
-	 * 		+ Comprobar que salta una excepción del tipo: 
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR
-	@Test 
+//	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
 	public void testNewFinancesLowAmount() {
 		// Declare variables
 		Actor admin;
