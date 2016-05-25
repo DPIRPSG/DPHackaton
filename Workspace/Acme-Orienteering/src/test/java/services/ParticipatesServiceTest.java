@@ -333,7 +333,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	
 	/**
 	 * Acme-Orienteering - 21.D
-	 *  En caso de estar en un club , ver en cuales estï¿½ inscrito.
+	 *  En caso de estar en un club , ver en cuales está inscrito.
 	 *  
 	 *  Positivo: 
 	 */
@@ -365,7 +365,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
 			if (runnerService.getClub(b.getRunner()).equals(
-					runnerService.getClub(runner))) { // Estï¿½ en el mismo club que el corredor seleccionado
+					runnerService.getClub(runner))) { // Está en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
 		}
@@ -421,7 +421,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
-			if (runnerService.getClub(b.getRunner()).equals(
+			if (runnerService.getClub(b.getRunner()) != null && runnerService.getClub(b.getRunner()).equals(
 					runnerService.getClub(runner))) { // Estï¿½ en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
@@ -481,7 +481,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
-			if (runnerService.getClub(b.getRunner()).equals(
+			if (runnerService.getClub(b.getRunner()) != null && runnerService.getClub(b.getRunner()).equals(
 					runnerService.getClub(runner))) { // Estï¿½ en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
