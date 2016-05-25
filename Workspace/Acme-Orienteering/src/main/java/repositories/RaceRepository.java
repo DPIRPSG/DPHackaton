@@ -19,7 +19,7 @@ public interface RaceRepository extends JpaRepository<Race, Integer> {
 	
 	// DASHBOARD
 	
-	@Query("select (count(distinct r1)*1.0)/(count(distinct l1)*1.0) from Race r1 left join r1.league l1")
+	@Query("select (count(distinct r1)*1.0)/(count(distinct l1)*1.0) from Race r1, League l1")
 	Double ratioOfRacesByLeague();
 
 }

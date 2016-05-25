@@ -44,7 +44,7 @@ public class ClassificationRefereeController extends AbstractController{
 			result.addObject("messageStatus", "classification.commit.ok");
 		}catch (Throwable oops) {
 			result = new ModelAndView("redirect:../../" + fromUrl);
-			if (oops.getMessage().equals("classification.calculateClassification.runnerWithNoResult"))
+			if (oops.getMessage() != null && oops.getMessage().equals("classification.calculateClassification.runnerWithNoResult"))
 				result.addObject("messageStatus", "classification.commit.error.result0");			
 			else
 				result.addObject("messageStatus", "classification.commit.error");
