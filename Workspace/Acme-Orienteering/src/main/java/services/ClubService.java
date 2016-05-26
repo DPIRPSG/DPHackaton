@@ -85,7 +85,6 @@ public class ClubService {
 		result.setManager(manager);
 		result.setPictures(pictures);
 		result.setCreationMoment(new Date());
-		result.setDeleted(false);
 		result.setBulletins(bulletins);
 		result.setClassifications(classifications);
 		result.setEntered(entereds);
