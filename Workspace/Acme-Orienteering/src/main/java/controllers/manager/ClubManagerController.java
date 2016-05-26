@@ -170,7 +170,7 @@ public class ClubManagerController extends AbstractController {
 		ModelAndView result;
 		
 		result = new ModelAndView("club/edit");
-		result.addObject("clubForm", clubForm);
+		result.addObject("clubFormm", clubForm);
 		result.addObject("message", message);
 
 		return result;

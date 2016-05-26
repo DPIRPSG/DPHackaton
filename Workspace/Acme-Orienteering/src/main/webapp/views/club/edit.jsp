@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="club/manager/edit.do" modelAttribute="clubForm">
+<form:form action="club/manager/edit.do" modelAttribute="clubFormm">
 	<!-- Hidden Attributes -->
 	<form:hidden path="clubId"/>
 
