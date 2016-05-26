@@ -82,6 +82,15 @@ public class ClassificationService {
 		return result;
 	}
 	
+	public void deleteAll(Collection<Classification> input){
+		Assert.notNull(input);
+		Assert.isTrue(actorService.checkAuthority("REFEREE"));
+		
+		classificationRepository.delete(input);
+		
+		this.flush();
+	}
+	
 	public void calculateClassification(int raceId) {
 		Assert.isTrue(actorService.checkAuthority("REFEREE"), "calculateClassification.NotReferee");
 		
@@ -109,11 +118,18 @@ public class ClassificationService {
 			isOk = actClub != null;
 			if(isOk){
 				isOk = false;
-				for(Entered e:enteredService.findAllByRunner(p.getRunner().getId())){
-					if(e.getClub().equals(actClub) && e.getAcceptedMoment().after(race.getMoment())){
-						isOk = true;
+//				System.out.println("Corredor: " + p.getRunner().getUserAccount().getUsername());
+//				System.out.println("Número de entereds: " + enteredService.findAllByRunnerFromReferee(p.getRunner().getId()).size());
+				for(Entered e:enteredService.findAllByRunnerFromReferee(p.getRunner().getId())){
+//					System.out.println("Entered: " + e.getClub().getName() + "; momentoAceptación: "+(e.getAcceptedMoment() != null) + "; isDenied: " + e.getIsDenied() + "; isMember:" + e.getIsMember());
+					if (e.getClub().equals(actClub)
+							&& e.getAcceptedMoment() != null){
+						if (e.getAcceptedMoment().after(race.getMoment())) 
+							isOk = true;
 					}
 				}
+			}else {
+				isOk = false;
 			}
 			
 			if (isOk) {
@@ -130,9 +146,9 @@ public class ClassificationService {
 				clubClassi.put("totalClub",
 						clubClassi.get("totalClub") + p.getResult());
 
-				// System.out.println("actor: "
-				// +p.getRunner().getUserAccount().getUsername() + "; club: " +
-				// actClub);
+//				 System.out.println("actor: "
+//				 +p.getRunner().getUserAccount().getUsername() + "; club: " +
+//				 actClub.getName());
 
 				raceClassification.put(actClub, clubClassi);
 			}
@@ -147,7 +163,10 @@ public class ClassificationService {
 //		Comparator<Integer> comparador = Collections.reverseOrder();
 //		Collections.sort(clubTotal, comparador);
 		Collections.sort(clubTotal);
-
+		
+//		System.out.println("Eliminando todas las clasificaciones antigus...");
+		this.deleteAll(this.findAllByClubIdAndRaceId(-1, raceId));
+		
 		for(Club i:raceClassification.keySet()){
 			Iterator<Classification> ja2 = this.findAllByClubIdAndRaceId(i.getId(), raceId).iterator();
 			Classification actClassi;
