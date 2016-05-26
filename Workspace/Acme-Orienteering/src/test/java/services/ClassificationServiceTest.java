@@ -17,6 +17,7 @@ import domain.Actor;
 import domain.Classification;
 import domain.Club;
 import domain.League;
+import domain.Race;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -72,9 +73,11 @@ public class ClassificationServiceTest extends AbstractTest {
 		League league;
 		Club club;
 		Collection<Classification> classifications;
-		Collection<Classification> newClassifications;
+//		Collection<Classification> newClassifications;
 		Classification classification;
 		int points;
+//		Race race;
+		int classificationId;
 		
 		// Load objects to test
 		authenticate("referee1");
@@ -108,7 +111,11 @@ public class ClassificationServiceTest extends AbstractTest {
 			}
 		}
 		
+		classificationId = classification.getId();
+		
 		Assert.notNull(classification, "No hay ninguna clasificación como con la que se pretende testear.");
+		
+//		race = classification.getRace(); // Carrera de la clasifiación escogida
 		
 		points = classification.getPoints();
 		
@@ -116,21 +123,23 @@ public class ClassificationServiceTest extends AbstractTest {
 		
 //		classifications = club.getClassifications();
 		
-		clubService.calculateRankingByLeague(league.getId()); // Recalculamos los puntos
+		classificationService.calculateClassification(classification.getRace().getId()); // Recalculamos los puntos
 		
 //		club = clubService.findOne(club.getId());
 		
-		newClassifications = club.getClassifications();
-		
-		classification = null;
-		for(Classification c: newClassifications){
-			if(c.getRace().getLeague() == league){
-				classification = c;
-				break;
-			}
-		}
-		
 		// Checks results
+//		newClassifications = club.getClassifications();
+//		
+//		classification = null;
+//		for(Classification c: newClassifications){
+//			if(c.getRace().getLeague() == league){
+//				classification = c;
+//				break;
+//			}
+//		}
+		
+		classification = classificationService.findOne(classificationId);
+		
 		Assert.isTrue(classification.getPoints() == points, "Las clasificaciones no se han actualizado correctamente.");
 		Assert.isTrue(classification.getPoints() != 999999999, "La clasificación del club mantiene los puntos editados a mano.");
 		
