@@ -46,6 +46,6 @@
 		<acme:submit_confirm name="delete" code="league.delete" codeConfirm="league.confirm.delete"/>
 	</jstl:if>
 	
-	<acme:cancel code="league.cancel" url="league/administrator/list.do"/>
+	<acme:cancel code="league.cancel" url="legal-terms/index.do"/>
 	
 </form:form>
