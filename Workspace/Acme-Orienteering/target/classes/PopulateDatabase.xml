@@ -2392,42 +2392,42 @@
 	
 	<bean id="classification1" class="domain.Classification">
 		<property name="position" value="1"/>
-		<property name="points" value="725"/>
+		<property name="points" value="25"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="classification2" class="domain.Classification">
 		<property name="position" value="2"/>
-		<property name="points" value="663"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club2"/>
 	</bean>
 	
 	<bean id="classification3" class="domain.Classification">
 		<property name="position" value="3"/>
-		<property name="points" value="556"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club3"/>
 	</bean>
 	
 	<bean id="classification4" class="domain.Classification">
 		<property name="position" value="4"/>
-		<property name="points" value="444"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club4"/>
 	</bean>
 	
 	<bean id="classification5" class="domain.Classification">
 		<property name="position" value="5"/>
-		<property name="points" value="280"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club5"/>
 	</bean>
 	
 	<bean id="classification6" class="domain.Classification">
 		<property name="position" value="6"/>
-		<property name="points" value="110"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club6"/>
 	</bean>
