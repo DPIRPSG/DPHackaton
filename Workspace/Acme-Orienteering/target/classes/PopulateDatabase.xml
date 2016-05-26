@@ -1726,50 +1726,50 @@
 	
 	<bean id="entered2" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 12:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/05 12:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:56"/>
 		<property name="runner" ref="runner2"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="entered3" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="true"/>
+		<property name="isMember" value="false"/>
 		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
-		<property name="acceptedMoment" value="2016/01/10 18:55"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club2"/>
 	</bean>
 	
 	<bean id="entered4" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 12:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/05 12:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="entered5" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/06 22:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2012/12/06 22:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner4"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="entered6" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/07 12:08"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/07 12:08"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner5"/>
 		<property name="club" ref="club1"/>
 	</bean>
@@ -1778,7 +1778,7 @@
 		<property name="report" value=""/>
 		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/08 12:00"/>
+		<property name="registerMoment" value="2015/12/08 12:00"/>
 		<property name="acceptedMoment" value="2016/05/08 13:55"/>
 		<property name="runner" ref="runner6"/>
 		<property name="club" ref="club1"/>
@@ -1808,8 +1808,8 @@
 		<property name="report" value=""/>
 		<property name="isMember" value="false"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 13:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/05 13:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club5"/>
 	</bean>
@@ -1817,8 +1817,8 @@
 	<bean id="entered11" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="false"/>
-		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 13:25"/>
+		<property name="isDenied" value="true"/>
+		<property name="registerMoment" value="2015/12/05 13:25"/>
 <!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club6"/>
@@ -2392,42 +2392,42 @@
 	
 	<bean id="classification1" class="domain.Classification">
 		<property name="position" value="1"/>
-		<property name="points" value="725"/>
+		<property name="points" value="25"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="classification2" class="domain.Classification">
 		<property name="position" value="2"/>
-		<property name="points" value="663"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club2"/>
 	</bean>
 	
 	<bean id="classification3" class="domain.Classification">
 		<property name="position" value="3"/>
-		<property name="points" value="556"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club3"/>
 	</bean>
 	
 	<bean id="classification4" class="domain.Classification">
 		<property name="position" value="4"/>
-		<property name="points" value="444"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club4"/>
 	</bean>
 	
 	<bean id="classification5" class="domain.Classification">
 		<property name="position" value="5"/>
-		<property name="points" value="280"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club5"/>
 	</bean>
 	
 	<bean id="classification6" class="domain.Classification">
 		<property name="position" value="6"/>
-		<property name="points" value="110"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club6"/>
 	</bean>
