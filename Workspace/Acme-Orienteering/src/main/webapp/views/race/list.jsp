@@ -36,7 +36,9 @@
 	<acme:displayColumn value="${row_Race.name }" title="${nameHeader}" sorteable="true"/>
 	
 	<spring:message code="race.description" var="descriptionHeader"/>
-	<acme:displayColumn value="${row_Race.description }" title="${descriptionHeader}" sorteable="true"/>
+	<display:column title="${descriptionHeader}" sortable="true">
+		${row_Race.description}
+	</display:column>
 	
 	<spring:message code="race.moment" var="momentHeader" />
 	<display:column title="${momentHeader}" sortable="false">
