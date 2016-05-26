@@ -210,6 +210,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount17" class="security.UserAccount">
+		<property name="username" value="manager8" />
+		<property name="password" value="d23c835597b48c694269b6a7590dc5b1" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -451,6 +463,33 @@
 				<ref bean="folder47"/>
 				<ref bean="folder48"/>
 				<ref bean="folder49"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager8" class="domain.Manager">
+		<property name="name" value="Jose"/>
+		<property name="surname" value="Pozo"/>
+		<property name="phone" value="635784147"/>
+		<property name="nif" value="12345678A"/>
+		<property name="userAccount" ref="userAccount17"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder50"/>
+				<ref bean="folder51"/>
+				<ref bean="folder52"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -1390,7 +1429,7 @@
 	</bean>
 	
 	<bean id="folder47" class="domain.Folder">
-		<property name="name" value="TrashBox"/>
+		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager7"/>
 		<property name="messages">
@@ -1400,7 +1439,7 @@
 	</bean>
 	
 	<bean id="folder48" class="domain.Folder">
-		<property name="name" value="TrashBox"/>
+		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager7"/>
 		<property name="messages">
@@ -1413,6 +1452,36 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder50" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager8"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder51" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager8"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder52" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager8"/>
 		<property name="messages">
 			<list>
 			</list>
