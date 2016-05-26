@@ -14,7 +14,7 @@
 <h3><spring:message code="bulletin.club"/>: <jstl:out value="${club.name}" /></h3>
 
 <!-- Listing grid -->
-<display:table pagesize="5" class="displaytag" keepStatus="false"
+<display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="bulletins" requestURI="${requestURI}" id="row_Bulletin">
 	<!-- Action links -->
 
