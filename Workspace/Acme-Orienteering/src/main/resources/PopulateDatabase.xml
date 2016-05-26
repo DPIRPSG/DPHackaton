@@ -1460,7 +1460,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2014/06/16 13:05"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager1"/>
 		<property name="bulletins">
 			<list>
@@ -1529,7 +1528,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/01/16 13:05"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager2"/>
 		<property name="bulletins">
 			<list>
@@ -1568,7 +1566,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/05/15 11:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager3"/>
 		<property name="bulletins">
 			<list>
@@ -1606,7 +1603,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/12/02 08:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager4"/>
 		<property name="bulletins">
 			<list>
@@ -1644,7 +1640,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2016/01/01 15:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager5"/>
 		<property name="bulletins">
 			<list>
@@ -1682,7 +1677,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2013/03/13 13:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager6"/>
 		<property name="bulletins">
 			<list>
