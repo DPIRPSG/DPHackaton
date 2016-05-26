@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
+import services.LeagueService;
 import controllers.AbstractController;
 import domain.Category;
+import domain.League;
 
 @Controller
 @RequestMapping("/category/administrator")
@@ -35,6 +37,9 @@ public class CategoryAdministratorController extends AbstractController {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private LeagueService leagueService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -87,13 +92,19 @@ public class CategoryAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Category category, BindingResult binding) {
 		ModelAndView result;
+		Collection<League> leagues;
 
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(category);
 		} else {
 			try {
-				categoryService.save(category);				
-				result = new ModelAndView("redirect:list.do");
+				categoryService.save(category);	
+				
+				leagues = leagueService.findAll();
+				result = new ModelAndView("league/list");
+				result.addObject("requestURI", "league/administrator/list.do");
+				result.addObject("leagues", leagues);
+				
 			} catch (Throwable oops) {
 				result = createEditModelAndView(category, "category.commit.error");				
 			}
