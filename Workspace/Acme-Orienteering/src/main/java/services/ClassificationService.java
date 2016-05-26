@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import domain.Classification;
 import domain.Club;
+import domain.Entered;
 import domain.Participates;
 import domain.Race;
 import repositories.ClassificationRepository;
@@ -37,6 +38,9 @@ public class ClassificationService {
 	
 	@Autowired
 	private RaceService raceService;
+	
+	@Autowired
+	private EnteredService enteredService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -84,6 +88,7 @@ public class ClassificationService {
 		Race race;
 		Map<Club, Map<String, Integer>> raceClassification;
 		List<Integer> clubTotal;
+		boolean isOk;
 		Integer[] points = {25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
 		
 		race = raceService.findOne(raceId);
@@ -96,26 +101,41 @@ public class ClassificationService {
 		for(Participates p:race.getParticipates()){
 			Map<String, Integer> clubClassi;
 			Club actClub;
-			
-			Assert.isTrue(p.getResult() > 0, "classification.calculateClassification.runnerWithNoResult");
-			
+			Assert.isTrue(p.getResult() > 0,
+					"classification.calculateClassification.runnerWithNoResult");
+
 			actClub = runnerService.getClub(p.getRunner());
 			
-			if(raceClassification.containsKey(actClub))
-				clubClassi = raceClassification.get(actClub);
-			else{
-				clubClassi = new HashMap<String, Integer>();
-				clubClassi.put("position", 0);
-				clubClassi.put("runners", 0);
-				clubClassi.put("totalClub", 0);
+			isOk = actClub != null;
+			if(isOk){
+				isOk = false;
+				for(Entered e:enteredService.findAllByRunner(p.getRunner().getId())){
+					if(e.getClub().equals(actClub) && e.getAcceptedMoment().after(race.getMoment())){
+						isOk = true;
+					}
+				}
 			}
 			
-			clubClassi.put("runners", clubClassi.get("runners") + 1);
-			clubClassi.put("totalClub", clubClassi.get("totalClub") + p.getResult());
-			
-//			System.out.println("actor: " +p.getRunner().getUserAccount().getUsername() + "; club: " + actClub);
-			
-			raceClassification.put(actClub, clubClassi);
+			if (isOk) {
+				if (raceClassification.containsKey(actClub))
+					clubClassi = raceClassification.get(actClub);
+				else {
+					clubClassi = new HashMap<String, Integer>();
+					clubClassi.put("position", 0);
+					clubClassi.put("runners", 0);
+					clubClassi.put("totalClub", 0);
+				}
+
+				clubClassi.put("runners", clubClassi.get("runners") + 1);
+				clubClassi.put("totalClub",
+						clubClassi.get("totalClub") + p.getResult());
+
+				// System.out.println("actor: "
+				// +p.getRunner().getUserAccount().getUsername() + "; club: " +
+				// actClub);
+
+				raceClassification.put(actClub, clubClassi);
+			}
 		}
 		
 		
