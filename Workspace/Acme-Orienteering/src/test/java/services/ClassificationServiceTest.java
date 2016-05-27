@@ -384,7 +384,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		// Check result
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
-		Assert.isTrue(resultByClub.get(2) == 663);
+		Assert.isTrue(resultByClub.get(2) == 0);
 		leagueService.flush();
 		clubService.flush();
 		
@@ -430,7 +430,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		// Check result
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
-		Assert.isTrue(resultByClub.get(2) == 663);
+		Assert.isTrue(resultByClub.get(2) == 0);
 		unauthenticate();
 		leagueService.flush();
 		clubService.flush();
