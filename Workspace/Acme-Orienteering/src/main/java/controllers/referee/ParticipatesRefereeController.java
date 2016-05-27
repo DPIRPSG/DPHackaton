@@ -1,6 +1,7 @@
 package controllers.referee;
 
 import java.util.Collection;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -67,11 +68,16 @@ public class ParticipatesRefereeController extends AbstractController{
 	public ModelAndView save(@Valid Participates input, BindingResult binding){
 		
 		ModelAndView result;
+		Random  rnd;
+		
+		rnd = new Random();
 		
 		if(binding.hasErrors()){
 			result = createEditModelAndView(input, "participates/referee/list.do?raceId=" + input.getRace().getId());
 		} else {
 			try {
+				input.setResult(input.getResult() + Math.abs(rnd.nextInt()));
+				
 				participatesService.saveFromClassificationEdit(input);
 				result = new ModelAndView("redirect:list.do?raceId=" + input.getRace().getId());
 			} catch (Throwable oops){

@@ -38,17 +38,17 @@ public class ClassificationRefereeController extends AbstractController{
 			@RequestParam(defaultValue = "classification/list.do") String fromUrl) {
 		ModelAndView result;
 
-		try {
+//		try {
 			classificationService.calculateClassification(raceId);
 			result = new ModelAndView("redirect:../list.do?raceId=" + raceId);
 			result.addObject("messageStatus", "classification.commit.ok");
-		}catch (Throwable oops) {
-			result = new ModelAndView("redirect:../../" + fromUrl);
-			if (oops.getMessage() != null && oops.getMessage().equals("classification.calculateClassification.runnerWithNoResult"))
-				result.addObject("messageStatus", "classification.commit.error.result0");			
-			else
-				result.addObject("messageStatus", "classification.commit.error");
-		}
+//		}catch (Throwable oops) {
+//			result = new ModelAndView("redirect:../../" + fromUrl);
+//			if (oops.getMessage() != null && oops.getMessage().equals("classification.calculateClassification.runnerWithNoResult"))
+//				result.addObject("messageStatus", "classification.commit.error.result0");			
+//			else
+//				result.addObject("messageStatus", "classification.commit.error");
+//		}
 		
 		return result;
 	}

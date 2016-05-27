@@ -48,6 +48,11 @@
 		<fmt:formatNumber value="${row_Finances.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/>&#8364;
 	</display:column>
 	
+	<spring:message code="finances.amount" var="amountHeader"/>
+	<display:column title="${amountHeader }" sortable="true">
+		<fmt:formatNumber value="${row_Finances.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/>&#8364;
+	</display:column>
+	
 	<spring:message code="finances.paymentMoment" var="momentHeader" />
 	<display:column title="${momentHeader}" sortable="true">
 		<fmt:formatDate value="${row_Finances.paymentMoment}" pattern="dd-MM-yyyy"/>

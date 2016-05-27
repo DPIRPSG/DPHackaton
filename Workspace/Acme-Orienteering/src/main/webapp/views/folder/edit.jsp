@@ -29,7 +29,13 @@
 		<acme:submit_confirm name="delete" code="folder.delete" codeConfirm="folder.confirm.delete" />
 		&nbsp;
 	</jstl:if>
-	<acme:cancel url="folder/actor/list.do" code="folder.cancel"/>
+	<jstl:if test="${folder.id == 0}">
+		<acme:cancel url="folder/actor/list.do" code="folder.cancel"/>
+	</jstl:if>
+	<jstl:if test="${folder.id != 0}">
+		<acme:cancel url="actor/actor/display.do" code="folder.cancel"/>
+	</jstl:if>
+	
 	<br />
 
 </form:form>
