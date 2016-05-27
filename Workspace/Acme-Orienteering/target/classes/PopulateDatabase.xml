@@ -210,6 +210,30 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount17" class="security.UserAccount">
+		<property name="username" value="manager8" />
+		<property name="password" value="d23c835597b48c694269b6a7590dc5b1" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount18" class="security.UserAccount">
+		<property name="username" value="runner7" />
+		<property name="password" value="4ec99c3180fb64d5a06200ec6486183e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="RUNNER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->	
 	
 	<bean id="administrator1" class="domain.Administrator">
@@ -451,6 +475,33 @@
 				<ref bean="folder47"/>
 				<ref bean="folder48"/>
 				<ref bean="folder49"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="manager8" class="domain.Manager">
+		<property name="name" value="Jose"/>
+		<property name="surname" value="Pozo"/>
+		<property name="phone" value="635784147"/>
+		<property name="nif" value="12345678A"/>
+		<property name="userAccount" ref="userAccount17"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder50"/>
+				<ref bean="folder51"/>
+				<ref bean="folder52"/>
 			</list>
 		</property>
 		<property name="sent">
@@ -717,6 +768,41 @@
 			<list>
 				<ref bean="participates7"/>
 				<ref bean="participates8"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="runner7" class="domain.Runner">
+		<property name="name" value="Maria"/>
+		<property name="surname" value="Mata"/>
+		<property name="phone" value="741852963"/>
+		<property name="nif" value="4185296E"/>
+		<property name="userAccount" ref="userAccount18"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder53"/>
+				<ref bean="folder54"/>
+				<ref bean="folder55"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+			</list>
+		</property>
+		<property name="participates">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -1390,7 +1476,7 @@
 	</bean>
 	
 	<bean id="folder47" class="domain.Folder">
-		<property name="name" value="TrashBox"/>
+		<property name="name" value="InBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager7"/>
 		<property name="messages">
@@ -1400,7 +1486,7 @@
 	</bean>
 	
 	<bean id="folder48" class="domain.Folder">
-		<property name="name" value="TrashBox"/>
+		<property name="name" value="OutBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager7"/>
 		<property name="messages">
@@ -1413,6 +1499,66 @@
 		<property name="name" value="TrashBox"/>
 		<property name="isSystem" value="true"/>
 		<property name="actor" ref="manager7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder50" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager8"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder51" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager8"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder52" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="manager8"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder53" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder54" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner7"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder55" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner7"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -1460,7 +1606,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2014/06/16 13:05"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager1"/>
 		<property name="bulletins">
 			<list>
@@ -1529,7 +1674,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/01/16 13:05"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager2"/>
 		<property name="bulletins">
 			<list>
@@ -1568,7 +1712,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/05/15 11:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager3"/>
 		<property name="bulletins">
 			<list>
@@ -1606,7 +1749,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2015/12/02 08:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager4"/>
 		<property name="bulletins">
 			<list>
@@ -1644,7 +1786,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2016/01/01 15:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager5"/>
 		<property name="bulletins">
 			<list>
@@ -1682,7 +1823,6 @@
 			</list>
 		</property>
 		<property name="creationMoment" value="2013/03/13 13:00"/>
-		<property name="deleted" value="false"/>
 		<property name="manager" ref="manager6"/>
 		<property name="bulletins">
 			<list>
@@ -1726,50 +1866,50 @@
 	
 	<bean id="entered2" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 12:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/05 12:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:56"/>
 		<property name="runner" ref="runner2"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="entered3" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="true"/>
+		<property name="isMember" value="false"/>
 		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
-		<property name="acceptedMoment" value="2016/01/10 18:55"/>
+<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club2"/>
 	</bean>
 	
 	<bean id="entered4" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 12:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/05 12:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="entered5" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/06 22:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2012/12/06 22:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner4"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="entered6" class="domain.Entered">
 		<property name="report" value=""/>
-		<property name="isMember" value="false"/>
+		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/07 12:08"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/07 12:08"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner5"/>
 		<property name="club" ref="club1"/>
 	</bean>
@@ -1778,7 +1918,7 @@
 		<property name="report" value=""/>
 		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/08 12:00"/>
+		<property name="registerMoment" value="2015/12/08 12:00"/>
 		<property name="acceptedMoment" value="2016/05/08 13:55"/>
 		<property name="runner" ref="runner6"/>
 		<property name="club" ref="club1"/>
@@ -1808,8 +1948,8 @@
 		<property name="report" value=""/>
 		<property name="isMember" value="false"/>
 		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 13:10"/>
-<!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
+		<property name="registerMoment" value="2015/12/05 13:10"/>
+		<property name="acceptedMoment" value="2016/01/10 18:55"/>
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club5"/>
 	</bean>
@@ -1817,8 +1957,8 @@
 	<bean id="entered11" class="domain.Entered">
 		<property name="report" value=""/>
 		<property name="isMember" value="false"/>
-		<property name="isDenied" value="false"/>
-		<property name="registerMoment" value="2016/05/05 13:25"/>
+		<property name="isDenied" value="true"/>
+		<property name="registerMoment" value="2015/12/05 13:25"/>
 <!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner3"/>
 		<property name="club" ref="club6"/>
@@ -2392,42 +2532,42 @@
 	
 	<bean id="classification1" class="domain.Classification">
 		<property name="position" value="1"/>
-		<property name="points" value="725"/>
+		<property name="points" value="25"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club1"/>
 	</bean>
 	
 	<bean id="classification2" class="domain.Classification">
 		<property name="position" value="2"/>
-		<property name="points" value="663"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club2"/>
 	</bean>
 	
 	<bean id="classification3" class="domain.Classification">
 		<property name="position" value="3"/>
-		<property name="points" value="556"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club3"/>
 	</bean>
 	
 	<bean id="classification4" class="domain.Classification">
 		<property name="position" value="4"/>
-		<property name="points" value="444"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club4"/>
 	</bean>
 	
 	<bean id="classification5" class="domain.Classification">
 		<property name="position" value="5"/>
-		<property name="points" value="280"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club5"/>
 	</bean>
 	
 	<bean id="classification6" class="domain.Classification">
 		<property name="position" value="6"/>
-		<property name="points" value="110"/>
+		<property name="points" value="0"/>
 		<property name="race" ref="race1"/>
 		<property name="club" ref="club6"/>
 	</bean>

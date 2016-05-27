@@ -664,7 +664,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 //		participates = participatesService.findAllRefereeByRunnerIdAndRaceId(runner.getId(), race.getId()).iterator().next();
 		
-		participates = participatesService.findOne(169); // Cogemos la participación de una carrera de una liga que NO dirija el referee1, pero que tenga carreras en las que participe el runner 1.
+		participates = participatesService.findOne(179); // Cogemos la participación de una carrera de una liga que NO dirija el referee1, pero que tenga carreras en las que participe el runner 1.
 		
 		participates.setResult(999);
 		

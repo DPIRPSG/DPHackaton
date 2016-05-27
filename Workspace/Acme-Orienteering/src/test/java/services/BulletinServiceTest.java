@@ -512,7 +512,7 @@ public class BulletinServiceTest extends AbstractTest{
 		Club club;
 		
 		// Load object to test
-		authenticate("runner2");
+		authenticate("runner7");
 		runner = runnerService.findByPrincipal();
 		club = clubService.findOneByRunnerId(runner.getId());
 		
