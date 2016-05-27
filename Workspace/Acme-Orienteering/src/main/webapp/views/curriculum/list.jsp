@@ -44,12 +44,11 @@
 	
 		<spring:message code="curriculum.null" />
 		<br>
-		<jstl:if test="${isMine}">
-	    	<acme:link code="curriculum.create" href="curriculum/actor/create.do"/>
-	    </jstl:if>
-		
 		
 	</jstl:if>
+	<jstl:if test="${isMine}">
+    	<acme:link code="curriculum.create" href="curriculum/actor/create.do"/>
+    </jstl:if>
 	
 	
 </security:authorize>

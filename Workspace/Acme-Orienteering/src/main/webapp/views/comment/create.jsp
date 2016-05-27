@@ -28,7 +28,7 @@
 		<!-- Action buttons -->
 		<acme:submit name="save" code="comment.create.save"/>
 		&nbsp;
-		<acme:cancel code="comment.create.cancel" url="/comment/list.do?commentedEntityId=${commentedEntity.id}"/>
+		<acme:cancel code="comment.create.cancel" url="/club/list.do"/>
 		
 	</form:form>
 

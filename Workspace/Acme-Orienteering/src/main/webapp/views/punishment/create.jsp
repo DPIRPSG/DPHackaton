@@ -23,7 +23,12 @@
 		<h3><spring:message code="punishment.concerningClub" /> "<jstl:out value="${punishment.club.name}"/>"</h3>
 		
 		<acme:textbox code="punishment.reason" path="reason" />
-		<acme:textbox code="punishment.points" path="points" />
+<%-- 		<acme:textbox code="punishment.points" path="points" /> --%>
+		<form:label path="points">
+			<spring:message code="punishment.points" />: &nbsp;
+		</form:label>	
+		<form:input path="points" readonly="false"/>
+		<br>
 		
 		<form:label path="league">
 			<spring:message code="punishment.league" />:
