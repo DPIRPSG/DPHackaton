@@ -1,0 +1,10 @@
+mysqldump -uroot -pV3rY=$tR0nG=P@$$w0rd$ Acme-Orienteering > C:\Temp\Create-Acme-Orienteering.sql
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < c:\temp\create-acme-orienteering.sql
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < c:\temp\delete-acme-orienteering.sql
+
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < "C:\Documents and Settings\Boss\Desktop\create-acme-orienteering.sql"
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < "C:\Documents and Settings\Boss\Desktop\delete-acme-orienteering.sql"
