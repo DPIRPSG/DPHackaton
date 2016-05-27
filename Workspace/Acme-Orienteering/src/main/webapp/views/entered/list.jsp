@@ -29,12 +29,12 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('MANAGER')">
-	<spring:message code="entered.accept" var="acceptHeader"/>
+	<spring:message code="entered.deny" var="acceptHeader"/>
 		<display:column title="${acceptHeader}">
 			<div>
 				<jstl:if test="${row_Entered.isMember == false && row_Entered.isDenied == false && row_Entered.acceptedMoment == null}">	
 					<b><a href="entered/manager/accept.do?enteredId=${row_Entered.id}"> <spring:message
-								code="entered.accept" />
+								code="entered.deny" />
 					</a></b>
 				</jstl:if>
 			</div>
@@ -42,12 +42,12 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('MANAGER')">
-	<spring:message code="entered.deny" var="denyHeader"/>
+	<spring:message code="entered.accept" var="denyHeader"/>
 		<display:column title="${denyHeader}">
 			<div>
 				<jstl:if test="${row_Entered.isMember == false && row_Entered.isDenied == false && row_Entered.acceptedMoment == null}">	
 					<b><a href="entered/manager/deny.do?enteredId=${row_Entered.id}"> <spring:message
-								code="entered.deny" />
+								code="entered.accept" />
 					</a></b>
 				</jstl:if>				
 			</div>
@@ -80,7 +80,8 @@
 	</security:authorize>
 	
 	<spring:message code="entered.report" var="reportHeader"/>
-	<acme:displayColumn value="${row_Entered.report}" title="${reportHeader}"/>
+<%-- 	<acme:displayColumn value="${row_Entered.report}" title="${reportHeader}"/>	 --%>
+	<display:column property="report" title="${reportHeader}" sortable="true" />
 	
 	<spring:message code="entered.isMember" var="isMemberHeader"/>
 	<acme:displayColumn value="${row_Entered.isMember}" title="${isMemberHeader}"/>

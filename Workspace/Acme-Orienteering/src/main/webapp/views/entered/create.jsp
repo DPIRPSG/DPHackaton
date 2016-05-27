@@ -24,6 +24,6 @@
 	<acme:select items="${allClubs}" itemLabel="name" code="entered.club" path="club"/>
 	
 	<acme:submit name="save" code="entered.save"/>
-	<acme:cancel code="entered.cancel" url="entered/runner/list.do"/>
+	<acme:cancel code="entered.cancel" url="entered/runner/create.do"/>
 	
 </form:form>
