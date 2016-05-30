@@ -76,7 +76,8 @@ public class ClassificationServiceTest extends AbstractTest {
 //		Collection<Classification> newClassifications;
 		Classification classification;
 		int points;
-//		Race race;
+		int raceId;
+		int clubId;
 		int classificationId;
 		
 		// Load objects to test
@@ -100,6 +101,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		Assert.notNull(league, "No hay ninguna liga para el referee1 para testear.");
 		
 		club = clubService.findAllByLeagueId(league.getId()).iterator().next(); // Un club que participa en esa liga
+		clubId = club.getId();
 		
 		classifications = club.getClassifications(); // Clasificaciones del club en todas las ligas que ha perticipados
 		
@@ -115,15 +117,18 @@ public class ClassificationServiceTest extends AbstractTest {
 		
 		Assert.notNull(classification, "No hay ninguna clasificación como con la que se pretende testear.");
 		
-//		race = classification.getRace(); // Carrera de la clasifiación escogida
+		raceId = classification.getRace().getId(); // Carrera de la clasifiación escogida
 		
 		points = classification.getPoints();
-		
+//		System.out.println("Points: " + points);
 		classification.setPoints(999999999); // Asignamos puntos errónos
-		
+//		System.out.println("Set Points: " + classification.getPoints());
 //		classifications = club.getClassifications();
 		
 		classificationService.calculateClassification(classification.getRace().getId()); // Recalculamos los puntos
+		
+		classificationService.flush();
+//		System.out.println("After Points: " + classification.getPoints());
 		
 //		club = clubService.findOne(club.getId());
 		
@@ -138,7 +143,16 @@ public class ClassificationServiceTest extends AbstractTest {
 //			}
 //		}
 		
-		classification = classificationService.findOne(classificationId);
+		classification = classificationService.findAllByClubIdAndRaceId(clubId, raceId).iterator().next();
+//		System.out.println(classificationService.findAllByClubIdAndRaceId(clubId, raceId));
+		
+//		for(Classification cl: classificationService.findAllByClubIdAndRaceId(clubId, raceId)){
+//			System.out.println("ClasssssS: " + cl);
+//		}
+		
+//		classification = classificationService.findOne(classificationId);
+		
+//		System.out.println("Class: " + classification);
 		
 		Assert.isTrue(classification.getPoints() == points, "Las clasificaciones no se han actualizado correctamente.");
 		Assert.isTrue(classification.getPoints() != 999999999, "La clasificación del club mantiene los puntos editados a mano.");
