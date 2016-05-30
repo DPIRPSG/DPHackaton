@@ -381,7 +381,9 @@ public class EnteredServiceTest extends AbstractTest {
 		try{
 		
 		for (Entered b:enteredService.findAll()){
-			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+				if (runnerService.getClub(b.getRunner()) == null
+						&& !b.getIsDenied() && b.getAcceptedMoment() == null) { 
+					// Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
 				entered = b;
 				break;
@@ -432,7 +434,9 @@ public class EnteredServiceTest extends AbstractTest {
 		try{
 	
 		for (Entered b:enteredService.findAll()){
-			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+			if(runnerService.getClub(b.getRunner()) == null
+					&& !b.getIsDenied() && b.getAcceptedMoment() == null) { 
+				// Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
 				entered = b;
 				break;

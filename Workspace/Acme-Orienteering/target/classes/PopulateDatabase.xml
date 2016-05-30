@@ -233,6 +233,18 @@
 			</list>
 		</property>
 	</bean>
+
+	<bean id="userAccount20" class="security.UserAccount">
+		<property name="username" value="runner20" />
+		<property name="password" value="1b3c805d0c08c503e5db1951d3075798" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="RUNNER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- Administrator -->	
 	
@@ -799,6 +811,41 @@
 		</property>
 		<property name="entered">
 			<list>
+			</list>
+		</property>
+		<property name="participates">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="runner20" class="domain.Runner">
+		<property name="name" value="Maria20"/>
+		<property name="surname" value="Mata20"/>
+		<property name="phone" value="741852920"/>
+		<property name="nif" value="4185220E"/>
+		<property name="userAccount" ref="userAccount20"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder201"/>
+				<ref bean="folder202"/>
+				<ref bean="folder203"/>
+			</list>
+		</property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+		<property name="received">
+			<list>
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+		<property name="entered">
+			<list>
+				<ref bean="entered201"/>
 			</list>
 		</property>
 		<property name="participates">
@@ -1595,6 +1642,36 @@
 		</property>
 	</bean>
 	
+	<bean id="folder201" class="domain.Folder">
+		<property name="name" value="InBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner20"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder202" class="domain.Folder">
+		<property name="name" value="OutBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner20"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder203" class="domain.Folder">
+		<property name="name" value="TrashBox"/>
+		<property name="isSystem" value="true"/>
+		<property name="actor" ref="runner20"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Club -->
 	
 	<bean id="club1" class="domain.Club">
@@ -1836,6 +1913,7 @@
 		<property name="entered">
 			<list>
 				<ref bean="entered11"/>
+				<ref bean="entered201"/>
 			</list>
 		</property>
 		<property name="punishments">
@@ -1961,6 +2039,15 @@
 		<property name="registerMoment" value="2015/12/05 13:25"/>
 <!-- 		<property name="acceptedMoment" value="2016/01/10 18:55"/> -->
 		<property name="runner" ref="runner3"/>
+		<property name="club" ref="club6"/>
+	</bean>
+	
+	<bean id="entered201" class="domain.Entered">
+		<property name="report" value=""/>
+		<property name="isMember" value="false"/>
+		<property name="isDenied" value="false"/>
+		<property name="registerMoment" value="2016/02/05 13:25"/>
+		<property name="runner" ref="runner20"/>
 		<property name="club" ref="club6"/>
 	</bean>
 	
