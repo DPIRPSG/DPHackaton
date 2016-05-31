@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="club/manager/delete.do" modelAttribute="deleteClubForm">
+<form:form action="club/gerente/delete.do" modelAttribute="deleteClubForm">
 	<!-- Hidden Attributes -->
 	<form:hidden path="clubId"/>
 
@@ -35,6 +35,6 @@
 		<acme:submit name="delete" code="club.delete"/>
 	</jstl:if>
 	
-	<acme:cancel code="club.cancel" url="club/manager/list.do"/>
+	<acme:cancel code="club.cancel" url="club/gerente/list.do"/>
 	
 </form:form>

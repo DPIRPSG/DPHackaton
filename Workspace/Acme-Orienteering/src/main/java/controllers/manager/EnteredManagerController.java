@@ -22,7 +22,7 @@ import domain.Entered;
 import domain.Manager;
 
 @Controller
-@RequestMapping("/entered/manager")
+@RequestMapping("/entered/gerente")
 public class EnteredManagerController extends AbstractController{
 	
 	// Services ---------------------------------------------------------------
@@ -60,7 +60,7 @@ public class EnteredManagerController extends AbstractController{
 		entereds = enteredService.findAllByClub(club.getId());
 		
 		result = new ModelAndView("entered/list");
-		result.addObject("requestURI", "entered/manager/list.do");
+		result.addObject("requestURI", "entered/gerente/list.do");
 		result.addObject("entereds", entereds);		
 		
 		return result;

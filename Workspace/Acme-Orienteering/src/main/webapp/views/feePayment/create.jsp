@@ -12,7 +12,7 @@
 
 <security:authorize access = "hasRole('MANAGER')">
 	<!-- Form -->
-	<form:form action="feePayment/manager/create.do" modelAttribute="feePaymentForm">
+	<form:form action="feePayment/gerente/create.do" modelAttribute="feePaymentForm">
 		<!-- Hidden Attributes -->
 		
 		<form:hidden path="paymentMoment"/>
