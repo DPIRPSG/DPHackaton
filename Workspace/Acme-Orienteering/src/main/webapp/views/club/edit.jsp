@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="club/manager/edit.do" modelAttribute="clubForm">
+<form:form action="club/gerente/edit.do" modelAttribute="clubForm">
 	<!-- Hidden Attributes -->
 	<form:hidden path="clubId"/>
 
@@ -26,6 +26,6 @@
 	<!-- Action buttons -->
 	<acme:submit name="save" code="club.save"/>
 	
-	<acme:cancel code="club.cancel" url="club/manager/list.do"/>
+	<acme:cancel code="club.cancel" url="club/gerente/list.do"/>
 	
 </form:form>

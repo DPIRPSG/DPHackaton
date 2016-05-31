@@ -15,7 +15,7 @@ import controllers.AbstractController;
 import domain.form.FeePaymentForm;
 
 @Controller
-@RequestMapping("/feePayment/manager")
+@RequestMapping("/feePayment/gerente")
 public class FeePaymentManagerController extends AbstractController {
 
 	// Services ----------------------------------------------------------
