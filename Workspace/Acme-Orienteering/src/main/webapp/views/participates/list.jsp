@@ -35,7 +35,7 @@
 <%-- 	<jstl:if test="${today.time gt row_Participates.race.moment.time}"> --%>
 
 		<spring:message code="participates.result" var="resultHeader"/>
-		<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" sorteable="true" />
+		<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" sorteable="false" />
 <%-- 	</jstl:if> --%>
 	
 	
