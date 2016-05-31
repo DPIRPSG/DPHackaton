@@ -35,12 +35,12 @@
 <%-- 	<jstl:if test="${today.time gt row_Participates.race.moment.time}"> --%>
 
 		<spring:message code="participates.result" var="resultHeader"/>
-		<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" />
+		<acme:displayColumn value="${row_Participates.result}" title="${resultHeader}" sorteable="true" />
 <%-- 	</jstl:if> --%>
 	
 	
 	<spring:message code="participates.runner" var="runnerHeader" />
-	<display:column title="${runnerHeader}" sortable="false">
+	<display:column title="${runnerHeader}" sortable="true">
 <%-- 		<a href="${requestURI}?runnerId=${row_Participates.runner.id}"> --%>
 			<jstl:out value="${row_Participates.runner.name}"/>
 			(<jstl:out value="${row_Participates.runner.userAccount.username}"/>)
@@ -48,7 +48,7 @@
 	</display:column>
 	
 	<spring:message code="participates.race" var="raceHeader" />
-	<display:column title="${raceHeader}" sortable="false">
+	<display:column title="${raceHeader}" sortable="true">
 <%-- 		<a href="${requestURI}?raceId=${row_Participates.race.id}"> --%>
 			<jstl:out value="${row_Participates.race.name}"/>
 <!-- 		</a> -->
