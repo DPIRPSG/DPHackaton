@@ -1937,7 +1937,7 @@
 		<property name="isMember" value="true"/>
 		<property name="isDenied" value="false"/>
 		<property name="registerMoment" value="2015/12/05 12:10"/>
-		<property name="acceptedMoment" value="2016/01/10 18:55"/>
+		<property name="acceptedMoment" value="2015/12/10 18:55"/>
 		<property name="runner" ref="runner1"/>
 		<property name="club" ref="club1"/>
 	</bean>
@@ -2440,7 +2440,7 @@
 	<bean id="race1" class="domain.Race">
 		<property name="description" value="Primera carrera de la liga"/>
 		<property name="name" value="Round 1"/>
-		<property name="moment" value="2016/01/01 12:00"/>
+		<property name="moment" value="2016/01/11 12:00"/>
 		<property name="classifications">
 			<list>
 				<ref bean="classification1"/>
