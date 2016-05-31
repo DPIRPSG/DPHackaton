@@ -70,7 +70,7 @@ public class PunishmentServiceTest extends AbstractTest {
 		result = club.getPunishments();
 
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 
 	}
 	
@@ -98,7 +98,7 @@ public class PunishmentServiceTest extends AbstractTest {
 		result = club.getPunishments();
 
 		// Check result
-		Assert.isTrue(result.size() == 1);
+		Assert.isTrue(result.size() == 6);
 		unauthenticate();
 
 	}
@@ -139,11 +139,6 @@ public class PunishmentServiceTest extends AbstractTest {
 		
 		numPostSaveClub = club.getPunishments().size();
 		numPostSaveLeague = league.getPunishments().size();
-		
-		System.out.println("numPreSaveClub: "+numPreSaveClub);
-		System.out.println("numPostSaveClub: "+numPostSaveClub);
-		System.out.println("numPreSaveLeague: "+numPreSaveLeague);
-		System.out.println("numPostSaveLeague: "+numPostSaveLeague);
 		
 		Assert.isTrue((numPreSaveClub + 1) == numPostSaveClub);
 		Assert.isTrue((numPreSaveLeague + 1) == numPostSaveLeague);

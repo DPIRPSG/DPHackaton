@@ -33,28 +33,34 @@
 	<!-- Attributes -->
 
 	<spring:message code="race.name" var="nameHeader"/>
-	<acme:displayColumn value="${row_Race.name }" title="${nameHeader}"/>
+	<acme:displayColumn value="${row_Race.name }" title="${nameHeader}" sorteable="true"/>
 	
 	<spring:message code="race.description" var="descriptionHeader"/>
-	<acme:displayColumn value="${row_Race.description }" title="${descriptionHeader}"/>
+	<acme:displayColumn value="${row_Race.description }" title="${descriptionHeader}" sorteable="true"/>
 	
 	<spring:message code="race.moment" var="momentHeader" />
-	<display:column title="${momentHeader}" sortable="true">
+	<display:column title="${momentHeader}" sortable="false">
 		<fmt:formatDate value="${row_Race.moment}" pattern="dd-MM-yyyy hh:mm"/>
 	</display:column>
 	
 	<spring:message code="race.category" var="categoryHeader" />
 	<display:column title="${categoryHeader}" sortable="true">
 		<jstl:out value="${row_Race.category.name}"></jstl:out>
-		<br/>
+		<br />
 		<jstl:out value="${row_Race.category.description}"></jstl:out>
 	</display:column>
 	
 	<spring:message code="race.league" var="leagueHeader" />
 	<display:column title="${leagueHeader}" sortable="true">
 		<jstl:out value="${row_Race.league.name}"></jstl:out>
-		<br/>
+		<br />
 		<jstl:out value="${row_Race.league.description}"></jstl:out>
+		<br />
+		<jstl:forEach items="${row_Race.league.finances}" var="ent">
+			<jstl:if test="${ent.sponsor.logo != null}">
+			<a href="finances/list.do?sponsorId=${ent.sponsor.id}"><img src="${ent.sponsor.logo}" style="width:40px;"/></a>
+			</jstl:if>
+		</jstl:forEach>
 	</display:column>
 
 	<spring:message code="race.comments" var="commentsHeader" />
@@ -74,7 +80,7 @@
 	
 	<display:column title="${leagueHeader}">
 		<security:authorize access="hasRole('MANAGER')">
-			<acme:link href="participates/manager/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
+			<acme:link href="participates/gerente/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
 		</security:authorize>
 		<security:authorize access="hasRole('RUNNER')">
 			<acme:link href="participates/runner/list.do?raceId=${row_Race.id}" code="${participatesView}"/>

@@ -143,7 +143,8 @@ public class ParticipatesServiceTest extends AbstractTest {
 	 *  
 	 *  Negativo: Un corredor no puede apuntarse a una carrera si ya estï¿½ apuntado 
 	 */
-	@Test 
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value=true)
 	public void testJoinRaceErrorMultipleJoin() {
 		// Declare variables
 		Runner runner;
@@ -333,7 +334,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	
 	/**
 	 * Acme-Orienteering - 21.D
-	 *  En caso de estar en un club , ver en cuales estï¿½ inscrito.
+	 *  En caso de estar en un club , ver en cuales está inscrito.
 	 *  
 	 *  Positivo: 
 	 */
@@ -364,8 +365,8 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
-			if (runnerService.getClub(b.getRunner()).equals(
-					runnerService.getClub(runner))) { // Estï¿½ en el mismo club que el corredor seleccionado
+			if (runnerService.getClub(b.getRunner()) != null && runnerService.getClub(b.getRunner()).equals(
+					runnerService.getClub(runner))) { // Está en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
 		}
@@ -421,7 +422,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
-			if (runnerService.getClub(b.getRunner()).equals(
+			if (runnerService.getClub(b.getRunner()) != null && runnerService.getClub(b.getRunner()).equals(
 					runnerService.getClub(runner))) { // Estï¿½ en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
@@ -481,7 +482,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		calculateResult = new ArrayList<Participates>();
 		for (Participates b : participatesService.findAll()){
-			if (runnerService.getClub(b.getRunner()).equals(
+			if (runnerService.getClub(b.getRunner()) != null && runnerService.getClub(b.getRunner()).equals(
 					runnerService.getClub(runner))) { // Estï¿½ en el mismo club que el corredor seleccionado
 				calculateResult.add(b);
 			}
@@ -552,7 +553,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		league = null;
 		for(League l: leagues){
-			if(l.getReferee() == referee){
+			if(l.getReferee() == referee && !l.getRacing().isEmpty()){
 				league = l;
 				break;
 			}
@@ -560,14 +561,14 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 		Assert.notNull(league, "No hay ninguna liga para el referee1 para testear.");
 		
-		raceIterator = raceService.findAllByRunnerId(runner.getId()).iterator();
+		raceIterator = league.getRacing().iterator();
 		
 		race = raceIterator.next(); // Carrera que debe estar en la liga seleccionada
-		while(race.getLeague() == league && raceIterator.hasNext()){ // Nos aseguramos de que la carrera estï¿½ en la liga escogida
-			race = raceIterator.next();
-		}
+//		while(race.getLeague() == league && raceIterator.hasNext()){ // Nos aseguramos de que la carrera estï¿½ en la liga escogida
+//			race = raceIterator.next();
+//		}
 		
-		Assert.isTrue(race.getLeague() == league, "No hay ninguna carrera en la liga seleccionada");
+//		Assert.isTrue(race.getLeague() == league, "No hay ninguna carrera en la liga seleccionada");
 		
 		participates = participatesService.findAllRefereeByRunnerIdAndRaceId(runner.getId(), race.getId()).iterator().next();
 		
@@ -583,27 +584,31 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera
+	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera cuya liga no dirige dicho árbitro
 	 * 		- Acciï¿½n
 	 * 		+ Autenticarse en el sistema como Referee
 	 * 		+ Rellenar la clasificaciï¿½n de un corredor en una carrera
 	 * 		- Comprobaciï¿½n
-	 * 		+ Comprobar que la clasificaciï¿½n se ha actualizado
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
 	 * 		+ Cerrar su sesiï¿½n
 	 */
 	
-	// CORREGIR
-	@Test 
+//	@Test
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
 	public void testUpdateParticipatesRaceOfLeagueNoOfReferee() {
 		// Declare variables
 		Actor referee;
-		Actor runner;
-		Race race;
+//		Actor runner;
+//		Race race;
 		Participates participates;
-		Participates newParticipates;
-		Iterator<Race> raceIterator;
-		Collection<League> leagues;
-		League league;
+//		Participates newParticipates;
+//		Iterator<Race> raceIterator;
+//		Collection<League> leagues;
+//		League league;
+//		Participates tempParticipates;
+//		Iterator<Participates> participatesIterator;
+//		boolean validRace;
 		
 		// Load objects to test
 		authenticate("referee1");
@@ -613,50 +618,67 @@ public class ParticipatesServiceTest extends AbstractTest {
 		Assert.notNull(referee, "El usuario no se ha logueado correctamente.");
 		
 		// Execution of test
-		unauthenticate();
+//		unauthenticate();
+//		
+//		authenticate("runner1");
+//		runner = actorService.findByPrincipal();
+//		unauthenticate();
+//		
+//		authenticate("referee1");
 		
-		authenticate("runner1");
-		runner = actorService.findByPrincipal();
-		unauthenticate();
+//		leagues = leagueService.findAll();
+//		
+//		league = null;
+//		for(League l: leagues){
+//			if(l.getReferee() != referee && !l.getRacing().isEmpty()){
+//				league = l; // Liga que NO es del referee logueado y que tiene carreras.
+//				break;
+//			}
+//		}
+//		
+//		Assert.notNull(league, "No hay ninguna liga que no sea del referee1 y que tenga carreras para testear.");
+//				
+//		raceIterator = league.getRacing().iterator();
+//		
+//		race = raceIterator.next();
+//		
+//		validRace = false;
+//		
+//		while(!validRace && raceIterator.hasNext()){ // Nos aseguramos de que el runner participe en alguna carrera de esa liga
+//
+//			participatesIterator = race.getParticipates().iterator();
+//			tempParticipates = participatesIterator.next();
+//			while(tempParticipates.getRunner() != runner && participatesIterator.hasNext()){ // Nos aseguramos de que el runner participa en esa carrera
+//				if(tempParticipates.getRunner() == runner){
+//					validRace = true;
+//					break;
+//				}
+//				tempParticipates = participatesIterator.next();
+//			}
+//		
+//		}
+//		
+//		Assert.isTrue(validRace, "No hay ninguna carrera con las características necesarias.");
+				
+//		race = raceService.findOne(139); // Cogemos una carrera de una liga que NO dirija el referee1, pero que tenga carreras en las que participe el runner 1.
 		
-		authenticate("referee1");
+//		participates = participatesService.findAllRefereeByRunnerIdAndRaceId(runner.getId(), race.getId()).iterator().next();
 		
-		leagues = leagueService.findAll();
-		
-		league = null;
-		for(League l: leagues){
-			if(l.getReferee() != referee){
-				league = l; // Liga que NO es del referee logueado
-				break;
-			}
-		}
-		
-		Assert.notNull(league, "No hay ninguna liga que no sea del referee1 para testear.");
-		
-		raceIterator = raceService.findAllByRunnerId(runner.getId()).iterator();
-		
-		race = raceIterator.next(); // Carrera que debe estar en la liga seleccionada
-		while(race.getLeague() == league && raceIterator.hasNext()){ // Nos aseguramos de que la carrera está en la liga escogida
-			race = raceIterator.next();
-		}
-		
-		Assert.isTrue(race.getLeague() == league, "No hay ninguna carrera en la liga seleccionada");
-		
-		participates = participatesService.findAllRefereeByRunnerIdAndRaceId(runner.getId(), race.getId()).iterator().next();
+		participates = participatesService.findOne(185); // Cogemos la participación de una carrera de una liga que NO dirija el referee1, pero que tenga carreras en las que participe el runner 1.
 		
 		participates.setResult(999);
 		
-		newParticipates = participatesService.saveFromClassificationEdit(participates);
+		participatesService.saveFromClassificationEdit(participates);
 		
 		// Checks results
-		Assert.isTrue(newParticipates.getResult() == 999, "Las clasificaciones del corredor no se han actualizado correctamente.");
+//		Assert.isTrue(newParticipates.getResult() == 999, "Las clasificaciones del corredor no se han actualizado correctamente.");
 		
 		unauthenticate();
 
 	}
 	
 	/**
-	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera
+	 * Negative test case: Rellenar clasificaciï¿½n de un corredor en una carrera en una liga en la que no participa su Club
 	 * 		- Acciï¿½n
 	 * 		+ Autenticarse en el sistema como Referee
 	 * 		+ Rellenar la clasificaciï¿½n de un corredor en una carrera
@@ -676,11 +698,11 @@ public class ParticipatesServiceTest extends AbstractTest {
 		Participates participates;
 		Participates newParticipates;
 //		Iterator<Race> raceIterator;
-		Collection<League> leagues;
-		League league;
-		Club club;
-		Collection<FeePayment> feePayments;
-		boolean clubJoined;
+//		Collection<League> leagues;
+//		League league;
+//		Club club;
+//		Collection<FeePayment> feePayments;
+//		boolean clubJoined;
 		
 		// Load objects to test
 		authenticate("referee1");
@@ -697,30 +719,33 @@ public class ParticipatesServiceTest extends AbstractTest {
 		unauthenticate();
 		
 		authenticate("referee1");
+//		
+//		club = clubService.findOneByRunnerId(runner.getId());
+//		
+//		leagues = leagueService.findAll();
+//		
+//		league = null;
+//		for(League l: leagues){ // Cogemos una liga en la que el club del runner1 no estï¿½ apuntado
+//			if(l.getReferee() == referee){
+//				feePayments = l.getFeePayments();
+//				clubJoined = false;
+//				for(FeePayment f: feePayments){
+//					if(f.getClub() == club){
+//						clubJoined = true;
+//						break;
+//					}
+//				}
+//				if(!clubJoined){
+//					league = l;
+//					break;
+//				}
+//			}
+//		}
 		
-		club = clubService.findOneByRunnerId(runner.getId());
 		
-		leagues = leagueService.findAll();
+//		league = leagueService.findOne(132); // Liga que dirija el referee1 en la que el club del runner1 NO participe.
 		
-		league = null;
-		for(League l: leagues){ // Cogemos una liga en la que el club del runner1 no estï¿½ apuntado
-			if(l.getReferee() == referee){
-				feePayments = l.getFeePayments();
-				clubJoined = false;
-				for(FeePayment f: feePayments){
-					if(f.getClub() == club){
-						clubJoined = true;
-						break;
-					}
-				}
-				if(!clubJoined){
-					league = l;
-					break;
-				}
-			}
-		}
-		
-		Assert.notNull(league, "No hay ninguna liga que dirija el referee1 en la que el club del runner1 NO participe para testear.");
+//		Assert.notNull(league, "No hay ninguna liga que dirija el referee1 en la que el club del runner1 NO participe para testear.");
 		
 //		raceIterator = raceService.findAllByRunnerId(runner.getId()).iterator();
 		
@@ -733,7 +758,9 @@ public class ParticipatesServiceTest extends AbstractTest {
 		
 //		participates = participatesService.findAllRefereeByRunnerIdAndRaceId(runner.getId(), race.getId()).iterator().next();
 		
-		race = league.getRacing().iterator().next(); // Cogemos una carrera de la liga seleccionada
+//		race = league.getRacing().iterator().next(); // Cogemos una carrera de la liga seleccionada
+		
+		race = raceService.findOne(141); // Carrera de una Liga que dirija el referee1 en la que el club del runner1 NO participe.
 		
 		participates = participatesService.create();
 		

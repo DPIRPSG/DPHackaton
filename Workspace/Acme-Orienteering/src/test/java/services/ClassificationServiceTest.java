@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -17,6 +18,7 @@ import domain.Actor;
 import domain.Classification;
 import domain.Club;
 import domain.League;
+import domain.Race;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -59,7 +61,7 @@ public class ClassificationServiceTest extends AbstractTest {
 	 * 		+ Autenticarse en el sistema como Referee
 	 * 		+ Rellenar la clasificación de los clubes de una liga
 	 * 		- Comprobación
-	 * 		+ Comprobar que la clasificación se ha actualizado
+	 * 		+ Comprobar que la clasificación se ha actualizado correctamente
 	 * 		+ Cerrar su sesión
 	 */
 	
@@ -71,8 +73,12 @@ public class ClassificationServiceTest extends AbstractTest {
 		League league;
 		Club club;
 		Collection<Classification> classifications;
-		Collection<Classification> newClassifications;
+//		Collection<Classification> newClassifications;
 		Classification classification;
+		int points;
+		int raceId;
+		int clubId;
+		int classificationId;
 		
 		// Load objects to test
 		authenticate("referee1");
@@ -87,39 +93,267 @@ public class ClassificationServiceTest extends AbstractTest {
 		league = null;
 		for(League l: leagues){
 			if(l.getReferee() == referee){
-				league = l;
+				league = l; // Liga que dirige el referee1
 				break;
 			}
 		}
 		
 		Assert.notNull(league, "No hay ninguna liga para el referee1 para testear.");
 		
-		club = clubService.findAllByLeagueId(league.getId()).iterator().next();
+		club = clubService.findAllByLeagueId(league.getId()).iterator().next(); // Un club que participa en esa liga
+		clubId = club.getId();
 		
-		classifications = club.getClassifications();
+		classifications = club.getClassifications(); // Clasificaciones del club en todas las ligas que ha perticipados
 		
 		classification = null;
 		for(Classification c: classifications){
 			if(c.getRace().getLeague() == league){
-				classification = c;
+				classification = c; // La clasificación del club en la liga seleccionada anteriormente
 				break;
 			}
 		}
 		
+		classificationId = classification.getId();
+		
 		Assert.notNull(classification, "No hay ninguna clasificación como con la que se pretende testear.");
 		
-		classification.setPoints(999999999);
+		raceId = classification.getRace().getId(); // Carrera de la clasifiación escogida
 		
-		classifications = club.getClassifications();
+		points = classification.getPoints();
+//		System.out.println("Points: " + points);
+		classification.setPoints(999999999); // Asignamos puntos errónos
+//		System.out.println("Set Points: " + classification.getPoints());
+//		classifications = club.getClassifications();
 		
-		clubService.calculateRankingByLeague(league.getId());
+		classificationService.calculateClassification(classification.getRace().getId()); // Recalculamos los puntos
+		
+		classificationService.flush();
+//		System.out.println("After Points: " + classification.getPoints());
 		
 //		club = clubService.findOne(club.getId());
 		
-		newClassifications = club.getClassifications();
+		// Checks results
+//		newClassifications = club.getClassifications();
+//		
+//		classification = null;
+//		for(Classification c: newClassifications){
+//			if(c.getRace().getLeague() == league){
+//				classification = c;
+//				break;
+//			}
+//		}
+		
+		classification = classificationService.findAllByClubIdAndRaceId(clubId, raceId).iterator().next();
+//		System.out.println(classificationService.findAllByClubIdAndRaceId(clubId, raceId));
+		
+//		for(Classification cl: classificationService.findAllByClubIdAndRaceId(clubId, raceId)){
+//			System.out.println("ClasssssS: " + cl);
+//		}
+		
+//		classification = classificationService.findOne(classificationId);
+		
+//		System.out.println("Class: " + classification);
+		
+		Assert.isTrue(classification.getPoints() == points, "Las clasificaciones no se han actualizado correctamente.");
+		Assert.isTrue(classification.getPoints() != 999999999, "La clasificación del club mantiene los puntos editados a mano.");
+		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Rellenar clasificación de los clubes de una liga que NO dirige.
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Referee
+	 * 		+ Rellenar la clasificación de los clubes de una liga que NO dirija
+	 * 		- Comprobación
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
+	public void testUpdateClassificationOfRaceOfLeagueNoOfReferee() {
+		// Declare variables
+		Actor referee;
+		Actor otherReferee;
+		Collection<League> leagues;
+		League league;
+		Club club;
+		Collection<Classification> classifications;
+//				Collection<Classification> newClassifications;
+		Classification classification;
+		int points;
+//				Race race;
+		int classificationId;
+		
+		// Load objects to test
+		authenticate("referee1");
+		otherReferee = actorService.findByPrincipal();
+		unauthenticate();
+		
+		authenticate("referee2");
+		referee = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(referee, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		leagues = leagueService.findAll();
+		
+		league = null;
+		for(League l: leagues){
+			if(l.getReferee() == otherReferee){
+				league = l; // Liga que dirige el referee1
+				break;
+			}
+		}
+		
+		Assert.notNull(league, "No hay ninguna liga para el referee1 para testear.");
+		
+		club = clubService.findAllByLeagueId(league.getId()).iterator().next(); // Un club que participa en esa liga
+		
+		classifications = club.getClassifications(); // Clasificaciones del club en todas las ligas que ha perticipados
+		
+		classification = null;
+		for(Classification c: classifications){
+			if(c.getRace().getLeague() == league){
+				classification = c; // La clasificación del club en la liga seleccionada anteriormente
+				break;
+			}
+		}
+		
+		classificationId = classification.getId();
+		
+		Assert.notNull(classification, "No hay ninguna clasificación como con la que se pretende testear.");
+		
+//				race = classification.getRace(); // Carrera de la clasifiación escogida
+		
+		points = classification.getPoints();
+		
+		classification.setPoints(999999999); // Asignamos puntos errónos
+		
+//				classifications = club.getClassifications();
+		
+		classificationService.calculateClassification(classification.getRace().getId()); // Recalculamos los puntos
+		
+//				club = clubService.findOne(club.getId());
 		
 		// Checks results
-		Assert.isTrue(!classifications.equals(newClassifications), "Las clasificaciones no se han actualizado");
+//				newClassifications = club.getClassifications();
+//				
+//				classification = null;
+//				for(Classification c: newClassifications){
+//					if(c.getRace().getLeague() == league){
+//						classification = c;
+//						break;
+//					}
+//				}
+		
+		classification = classificationService.findOne(classificationId);
+		
+		Assert.isTrue(classification.getPoints() == points, "Las clasificaciones no se han actualizado correctamente.");
+		Assert.isTrue(classification.getPoints() != 999999999, "La clasificación del club mantiene los puntos editados a mano.");
+		
+		unauthenticate();
+
+	}
+	
+	/**
+	 * Negative test case: Rellenar clasificación de los clubes de una liga como Admin
+	 * 		- Acción
+	 * 		+ Autenticarse en el sistema como Admin
+	 * 		+ Rellenar la clasificación de los clubes de una liga
+	 * 		- Comprobación
+	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Cerrar su sesión
+	 */
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Rollback(value = true)
+//	@Test 
+	public void testUpdateClassificationAsAdmin() {
+		// Declare variables
+		Actor admin;
+		Actor referee;
+		Collection<League> leagues;
+		League league;
+		Club club;
+		Collection<Classification> classifications;
+//		Collection<Classification> newClassifications;
+		Classification classification;
+		int points;
+//		Race race;
+		int classificationId;
+		
+		// Load objects to test
+		authenticate("referee1");
+		referee = actorService.findByPrincipal();
+		unauthenticate();
+		
+		authenticate("admin");
+		admin = actorService.findByPrincipal();
+		
+		// Checks basic requirements
+		Assert.notNull(admin, "El usuario no se ha logueado correctamente.");
+		
+		// Execution of test
+		leagues = leagueService.findAll();
+		
+		league = null;
+		for(League l: leagues){
+			if(l.getReferee() == referee){
+				league = l; // Liga que dirige el referee1
+				break;
+			}
+		}
+		
+		Assert.notNull(league, "No hay ninguna liga para el referee1 para testear.");
+		
+		club = clubService.findAllByLeagueId(league.getId()).iterator().next(); // Un club que participa en esa liga
+		
+		classifications = club.getClassifications(); // Clasificaciones del club en todas las ligas que ha perticipados
+		
+		classification = null;
+		for(Classification c: classifications){
+			if(c.getRace().getLeague() == league){
+				classification = c; // La clasificación del club en la liga seleccionada anteriormente
+				break;
+			}
+		}
+		
+		classificationId = classification.getId();
+		
+		Assert.notNull(classification, "No hay ninguna clasificación como con la que se pretende testear.");
+		
+//		race = classification.getRace(); // Carrera de la clasifiación escogida
+		
+		points = classification.getPoints();
+		
+		classification.setPoints(999999999); // Asignamos puntos errónos
+		
+//		classifications = club.getClassifications();
+		
+		classificationService.calculateClassification(classification.getRace().getId()); // Recalculamos los puntos
+		
+//		club = clubService.findOne(club.getId());
+		
+		// Checks results
+//		newClassifications = club.getClassifications();
+//		
+//		classification = null;
+//		for(Classification c: newClassifications){
+//			if(c.getRace().getLeague() == league){
+//				classification = c;
+//				break;
+//			}
+//		}
+		
+		classification = classificationService.findOne(classificationId);
+		
+		Assert.isTrue(classification.getPoints() == points, "Las clasificaciones no se han actualizado correctamente.");
+		Assert.isTrue(classification.getPoints() != 999999999, "La clasificación del club mantiene los puntos editados a mano.");
 		
 		unauthenticate();
 
@@ -152,7 +386,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		allClubs = clubService.findAll();
 		league = allLeagues.iterator().next();
 		for(Club c:allClubs){
-			if(c.getName().equals("Los Imperdibles")){
+			if(c.getName().equals("Triana OC")){
 				club = c;
 			}
 		}
@@ -164,7 +398,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		// Check result
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
-		Assert.isTrue(resultByClub.get(2) == 25);
+		Assert.isTrue(resultByClub.get(2) == 0);
 		leagueService.flush();
 		clubService.flush();
 		
@@ -198,7 +432,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		allClubs = clubService.findAll();
 		league = allLeagues.iterator().next();
 		for(Club c:allClubs){
-			if(c.getName().equals("Los Imperdibles")){
+			if(c.getName().equals("Triana OC")){
 				club = c;
 			}
 		}
@@ -210,7 +444,7 @@ public class ClassificationServiceTest extends AbstractTest {
 		// Check result
 		Assert.isTrue(resultByClub.get(0) == 0);
 		Assert.isTrue(resultByClub.get(1) == club.getId());
-		Assert.isTrue(resultByClub.get(2) == 25);
+		Assert.isTrue(resultByClub.get(2) == 0);
 		unauthenticate();
 		leagueService.flush();
 		clubService.flush();

@@ -197,8 +197,6 @@ public class ClubServiceTest extends AbstractTest{
 		// Check result
 		manager = managerService.findByPrincipal();
 		result = manager.getClub();
-		System.out.println(manager);
-		System.out.println(manager.getClub());
 		Assert.notNull(result);
 		Assert.isTrue(manager.getClub().getName().equals("Prueba"));
 		Assert.isTrue(manager.getClub().getDescription().equals("Prueba"));

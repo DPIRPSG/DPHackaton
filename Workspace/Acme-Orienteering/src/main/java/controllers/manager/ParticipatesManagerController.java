@@ -15,7 +15,7 @@ import domain.Participates;
 import services.ParticipatesService;
 
 @Controller
-@RequestMapping(value = "/participates/manager")
+@RequestMapping(value = "/participates/gerente")
 public class ParticipatesManagerController extends AbstractController{
 
 	//Services ----------------------------------------------------------
@@ -40,7 +40,7 @@ public class ParticipatesManagerController extends AbstractController{
 		
 		result = new ModelAndView("participates/list");
 		result.addObject("participatess", parts);
-		result.addObject("requestURI", "participates/manager/list.do");
+		result.addObject("requestURI", "participates/gerente/list.do");
 		return result;
 	}
 	

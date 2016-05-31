@@ -18,7 +18,7 @@ import security.TypeOfAuthority;
 import services.form.ActorFormService;
 
 @Controller
-@RequestMapping(value = "/manager/administrator")
+@RequestMapping(value = "/gerente/administrator")
 public class ManagerAdministratorController extends AbstractController{
 
 	//Services ----------------------------------------------------------
@@ -89,7 +89,7 @@ public class ManagerAdministratorController extends AbstractController{
 		result = new ModelAndView("actorForm/create");
 		result.addObject("actorForm", customer);
 		result.addObject("message", message);
-		result.addObject("urlAction", "manager/administrator/create.do");
+		result.addObject("urlAction", "gerente/administrator/create.do");
 		
 		return result;
 	}

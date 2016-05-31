@@ -180,11 +180,10 @@ public class ManagerServiceTest extends AbstractTest {
 	 * 		+ Registrar un nuevo Manager con username nulo
 	 * 		- Comprobación
 	 * 		+ Listar los managers
-	 * 		+ Comprobar que salta una excepción del tipo: IllegalArgumentException
+	 * 		+ Comprobar que salta una excepción del tipo: ConstraintViolationException
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR
 	@Test(expected=ConstraintViolationException.class)
 	@Rollback(value = true)
 //	@Test 

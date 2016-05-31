@@ -47,6 +47,12 @@ public class CurriculumService {
 		Assert.notNull(curriculum);
 		if(curriculum.getId() != 0){ // Si está editando y no creando
 			checkCurriculum(curriculum);
+		}else{ // Está creando
+			Actor actor;
+			
+			actor = actorService.findByPrincipal();
+			
+			Assert.isTrue(actor.getCurriculum() == null, "You have already created a curriculum.");
 		}
 		
 		Actor actor;

@@ -33,7 +33,7 @@
 	<!-- Attributes -->
 
 	<spring:message code="league.name" var="nameHeader"/>
-	<acme:displayColumn value="${row_League.name }" title="${nameHeader}"/>
+	<acme:displayColumn value="${row_League.name }" title="${nameHeader}" sorteable="true"/>
 	
 	<spring:message code="league.description" var="descriptionHeader"/>
 	<acme:displayColumn value="${row_League.description }" title="${descriptionHeader}" sorteable="true"/>
@@ -47,18 +47,18 @@
 	</display:column>
 	
 	<spring:message code="league.creationMoment" var="creationMomentHeader" />
-	<display:column title="${creationMomentHeader}" sortable="true">
+	<display:column title="${creationMomentHeader}" sortable="false">
 		<fmt:formatDate value="${row_League.creationMoment}" pattern="dd-MM-yyyy"/>
 	</display:column>
 	
 	<spring:message code="league.startedMoment" var="startedMomentHeader" />
-	<display:column title="${startedMomentHeader}" sortable="true">
+	<display:column title="${startedMomentHeader}" sortable="false">
 		<fmt:formatDate value="${row_League.startedMoment}" pattern="dd-MM-yyyy"/>
 	</display:column>
 	
 	<spring:message code="league.amount" var="amountHeader"/>
-	<display:column title="${amountHeader }" sortable="true">
-		<fmt:formatNumber value="${row_League.amount}" minIntegerDigits="4" maxFractionDigits="2" minFractionDigits="2" type="number"/> Euros
+	<display:column title="${amountHeader }" sortable="false">
+		<fmt:formatNumber value="${row_League.amount}" maxFractionDigits="2" minFractionDigits="2" type="number"/>&#8364;
 	</display:column>
 	
 	<spring:message code="league.referee" var="refereeHeader"/>
@@ -83,6 +83,15 @@
 		<acme:link href="club/list.do?leagueId=${row_League.id}" code="league.club.view"/>
 	</display:column>
 	
+	<spring:message code="league.sponsors" var="sponHeader" />
+	<display:column title="${sponHeader}" sortable="false">
+		<jstl:forEach items="${row_League.finances}" var="ent">
+			<jstl:if test="${ent.sponsor.logo != null}">
+				<a href="finances/list.do?sponsorId=${ent.sponsor.id}"><img src="${ent.sponsor.logo}" style="width:40px;"/></a>
+			</jstl:if>
+		</jstl:forEach>
+	</display:column>
+	
 	<spring:message code="league.financess" var="financesHeader" />
 	<display:column title="${financesHeader}" sortable="false">
 		<acme:link href="finances/list.do?leagueId=${row_League.id}" code="league.finances.view"/>
@@ -100,7 +109,7 @@
 				</jstl:forEach>
 				<jstl:if test="${pagado != true}">
 					<jstl:if test="${!(today.time gt row_League.startedMoment.time)}">
-					    <a href="feePayment/manager/create.do?leagueId=${row_League.id}">
+					    <a href="feePayment/gerente/create.do?leagueId=${row_League.id}">
 							<spring:message code="league.feePayment" />
 						</a>
 					</jstl:if>

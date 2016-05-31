@@ -233,6 +233,24 @@ public class EnteredService {
 	
 	/**
 	 * 
+	 * @param runnerId
+	 * @see 21.b
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Revisar el estado de las distintas peticiones que haya realizado.
+	 * @return the collection of entered done by a runner
+	 */
+	public Collection<Entered> findAllByRunnerFromReferee(int runnerId){
+		Assert.isTrue(actorService.checkAuthority("REFEREE"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllByRunner(runnerId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
 	 * @param clubId
 	 * @see 22.c
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:

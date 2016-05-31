@@ -22,7 +22,7 @@ public class ParticipatesRunnerController extends AbstractController{
 	
 	@Autowired
 	private ParticipatesService participatesService;
-	
+		
 	//Constructors ----------------------------------------------------------
 	
 	public ParticipatesRunnerController(){
@@ -48,10 +48,17 @@ public class ParticipatesRunnerController extends AbstractController{
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public ModelAndView join(@RequestParam int raceId){
 		ModelAndView result;
+		Collection<Participates> parts;
 		
 		try{
 			participatesService.joinRace(raceId);
-			result = new ModelAndView("redirect:list.do");
+			
+			parts = participatesService.findAllClubByRunnerIdAndRaceId(-1, raceId);
+
+			result = new ModelAndView("participates/list");
+			result.addObject("participatess", parts);
+			result.addObject("requestURI", "participates/runner/list.do");
+			
 			result.addObject("messageStatus", "participates.join.ok");
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:list.do");

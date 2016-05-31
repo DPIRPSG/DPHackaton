@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import domain.Classification;
 import domain.Club;
+import domain.Entered;
 import domain.Participates;
 import domain.Race;
 import repositories.ClassificationRepository;
@@ -37,6 +38,9 @@ public class ClassificationService {
 	
 	@Autowired
 	private RaceService raceService;
+	
+	@Autowired
+	private EnteredService enteredService;
 
 	// Constructors -----------------------------------------------------------
 	
@@ -69,7 +73,7 @@ public class ClassificationService {
 	 * @return
 	 */
 	public Collection<Classification> findAllByClubIdAndRaceId(int clubId, int raceId){
-		// Assert.isTrue(actorService.checkAuthority("REFEREE"), "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
+//		Assert.isTrue(actorService.checkAuthority("REFEREE"), "findAllRefereeByRunnerIdAndRaceId.permissionDenied");
 		
 		Collection<Classification> result;
 	
@@ -78,12 +82,22 @@ public class ClassificationService {
 		return result;
 	}
 	
+	public void deleteAll(Collection<Classification> input){
+		Assert.notNull(input);
+		Assert.isTrue(actorService.checkAuthority("REFEREE"));
+		
+		classificationRepository.delete(input);
+		
+		this.flush();
+	}
+	
 	public void calculateClassification(int raceId) {
 		Assert.isTrue(actorService.checkAuthority("REFEREE"), "calculateClassification.NotReferee");
 		
 		Race race;
 		Map<Club, Map<String, Integer>> raceClassification;
 		List<Integer> clubTotal;
+		boolean isOk;
 		Integer[] points = {25, 18, 15, 12, 10, 8, 6, 4, 2, 1};
 		
 		race = raceService.findOne(raceId);
@@ -96,24 +110,48 @@ public class ClassificationService {
 		for(Participates p:race.getParticipates()){
 			Map<String, Integer> clubClassi;
 			Club actClub;
-			
-			Assert.isTrue(p.getResult() > 0, "classification.calculateClassification.runnerWithNoResult");
-			
+			Assert.isTrue(p.getResult() > 0,
+					"classification.calculateClassification.runnerWithNoResult");
+
 			actClub = runnerService.getClub(p.getRunner());
 			
-			if(raceClassification.containsKey(actClub))
-				clubClassi = raceClassification.get(actClub);
-			else{
-				clubClassi = new HashMap<String, Integer>();
-				clubClassi.put("position", 0);
-				clubClassi.put("runners", 0);
-				clubClassi.put("totalClub", 0);
+			isOk = actClub != null;
+			if(isOk){
+				isOk = false;
+//				System.out.println("Corredor: " + p.getRunner().getUserAccount().getUsername());
+//				System.out.println("Número de entereds: " + enteredService.findAllByRunnerFromReferee(p.getRunner().getId()).size());
+				for(Entered e:enteredService.findAllByRunnerFromReferee(p.getRunner().getId())){
+//					System.out.println("Entered: " + e.getClub().getName() + "; momentoAceptación: "+(e.getAcceptedMoment() != null) + "; isDenied: " + e.getIsDenied() + "; isMember:" + e.getIsMember());
+					if (e.getClub().equals(actClub)
+							&& e.getAcceptedMoment() != null){
+						if (e.getAcceptedMoment().after(race.getMoment())) 
+							isOk = true;
+					}
+				}
+			}else {
+				isOk = false;
 			}
 			
-			clubClassi.put("runners", clubClassi.get("runners") + 1);
-			clubClassi.put("totalClub", clubClassi.get("totalClub") + p.getResult());
-			
-			raceClassification.put(actClub, clubClassi);
+			if (isOk) {
+				if (raceClassification.containsKey(actClub))
+					clubClassi = raceClassification.get(actClub);
+				else {
+					clubClassi = new HashMap<String, Integer>();
+					clubClassi.put("position", 0);
+					clubClassi.put("runners", 0);
+					clubClassi.put("totalClub", 0);
+				}
+
+				clubClassi.put("runners", clubClassi.get("runners") + 1);
+				clubClassi.put("totalClub",
+						clubClassi.get("totalClub") + p.getResult());
+
+//				 System.out.println("actor: "
+//				 +p.getRunner().getUserAccount().getUsername() + "; club: " +
+//				 actClub.getName());
+
+				raceClassification.put(actClub, clubClassi);
+			}
 		}
 		
 		
@@ -125,7 +163,10 @@ public class ClassificationService {
 //		Comparator<Integer> comparador = Collections.reverseOrder();
 //		Collections.sort(clubTotal, comparador);
 		Collections.sort(clubTotal);
-
+		
+//		System.out.println("Eliminando todas las clasificaciones antigus...");
+		this.deleteAll(this.findAllByClubIdAndRaceId(-1, raceId));
+		
 		for(Club i:raceClassification.keySet()){
 			Iterator<Classification> ja2 = this.findAllByClubIdAndRaceId(i.getId(), raceId).iterator();
 			Classification actClassi;
@@ -133,8 +174,8 @@ public class ClassificationService {
 			Map<String, Integer> clubClassi;
 
 			clubClassi = raceClassification.get(i);
+//			System.out.println("i: " + i + "; raceId: " + raceId);
 
-			
 			if(ja2.hasNext()){
 				actClassi = ja2.next();
 			} else {

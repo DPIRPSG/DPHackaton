@@ -184,7 +184,6 @@ public class RefereeServiceTest extends AbstractTest {
 	 * 		+ Cerrar su sesión
 	 */
 	
-	// CORREGIR
 	@Test(expected=ConstraintViolationException.class)
 	@Rollback(value = true)
 //	@Test 

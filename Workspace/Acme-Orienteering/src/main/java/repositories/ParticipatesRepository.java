@@ -16,7 +16,10 @@ public interface ParticipatesRepository extends JpaRepository<Participates, Inte
 			" (?1 < 0 or p.runner.id = ?1) and" +
 			" (?2 < 0 or p.race.id = ?2) and" +
 			" (?3 < 0 or p.race.league.referee.id = ?3) and " +
-			" (?4 < 0 or e.club.id = ?4)")
+			" (?4 < 0 or (e.club.id = ?4 and e.isMember = true))")
 	Collection<Participates> findAllByRunnerIdRaceIdAndRefereeId(int runnerId, int raceId, int refereeId, int clubId);
+
+	@Query("select p from Participates p where p.race.id = ?1")
+	Collection<Participates> findAllByRaceId(int raceId);
 
 }

@@ -381,7 +381,9 @@ public class EnteredServiceTest extends AbstractTest {
 		try{
 		
 		for (Entered b:enteredService.findAll()){
-			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+				if (runnerService.getClub(b.getRunner()) == null
+						&& !b.getIsDenied() && b.getAcceptedMoment() == null) { 
+					// Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
 				entered = b;
 				break;
@@ -432,7 +434,9 @@ public class EnteredServiceTest extends AbstractTest {
 		try{
 	
 		for (Entered b:enteredService.findAll()){
-			if(runnerService.getClub(b.getRunner()) == null){ // Que el usuario no esté en ningún club
+			if(runnerService.getClub(b.getRunner()) == null
+					&& !b.getIsDenied() && b.getAcceptedMoment() == null) { 
+				// Que el usuario no esté en ningún club
 				manager = b.getClub().getManager();
 				entered = b;
 				break;
@@ -1028,7 +1032,7 @@ public class EnteredServiceTest extends AbstractTest {
 		try{
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
-					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
+					&& !runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
 					&& !b.getIsMember() && b.getIsDenied()){ // Que el usuario sea miembro del club 
 				manager = b.getClub().getManager();
 				entered = b;
@@ -1083,7 +1087,7 @@ public class EnteredServiceTest extends AbstractTest {
 		for (Entered b:enteredService.findAll()){
 			if(runnerService.getClub(b.getRunner()) != null // Que el usuario esté en un club
 					&& runnerService.getClub(b.getRunner()).equals(b.getClub()) // Que el usuario esté en el club
-					&& !b.getIsMember() && !b.getIsDenied() && b.getAcceptedMoment() != null){ // Que el usuario sea miembro del club 
+					&& b.getIsMember() && !b.getIsDenied() && b.getAcceptedMoment() != null){ // Que el usuario sea miembro del club 
 				manager = b.getClub().getManager();
 				entered = b;
 				break;
@@ -1107,7 +1111,7 @@ public class EnteredServiceTest extends AbstractTest {
 		
 		// Checks results		
 		
-		Assert.isTrue(!entered.getIsMember() && entered.getAcceptedMoment() != null
+		Assert.isTrue(entered.getIsMember() && entered.getAcceptedMoment() != null
 				&& ! entered.getIsDenied(),
 				"Se han modificado otros campos");
 		

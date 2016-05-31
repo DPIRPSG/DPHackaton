@@ -28,7 +28,6 @@ public class Club extends CommentedEntity {
 	private String name;
 	private Collection<String> pictures;
 	private Date creationMoment;
-	private boolean deleted;
 	
 	@NotNull
 	@NotBlank
@@ -66,13 +65,6 @@ public class Club extends CommentedEntity {
 	}
 	public void setCreationMoment(Date creationMoment) {
 		this.creationMoment = creationMoment;
-	}
-	
-	public boolean isDeleted() {
-		return deleted;
-	}
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
 	}
 	
 	// Relationships ----------------------------------------------------------

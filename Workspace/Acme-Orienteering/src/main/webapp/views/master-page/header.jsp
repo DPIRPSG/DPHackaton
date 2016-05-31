@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href=""><img src="images/logo.png" alt="Acme Orienteering Co., Inc." /></a>
+	<a href=""><img src="images/logo.png" alt="Acme Orienteering Co., Inc." width="500px"/></a>
 </div>
 
 <div>
@@ -29,7 +29,7 @@
 					<li><a href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 					<li><a href="referee/administrator/create.do"><spring:message code="master.page.create.referee" /></a></li>
-					<li><a href="manager/administrator/create.do"><spring:message code="master.page.create.manager" /></a></li>
+					<li><a href="gerente/administrator/create.do"><spring:message code="master.page.create.manager" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
@@ -38,13 +38,14 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('RUNNER')">
-			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="club/runner/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+			<li><a class="fNiv" href="entered/runner/list.do"><spring:message code="master.page.runner.entered" /></a></li>
+			<li><a class="fNiv" href="race/runner/list.do"><spring:message code="master.page.administrator.myRaces" /></a></li>
+			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
 			<li><a class="fNiv" href="league/list.do"><spring:message code="master.page.administrator.league" /></a></li>
 			<li><a class="fNiv" href="race/list.do"><spring:message code="master.page.administrator.race" /></a></li>
 			<li><a class="fNiv" href="punishment/list.do"><spring:message code="master.page.punishment" /></a></li>
 			<li><a class="fNiv" href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
-			<li><a class="fNiv" href="entered/runner/list.do"><spring:message code="master.page.runner.entered" /></a></li>
 			<li><a class="fNiv" href="curriculum/actor/list.do"><spring:message code="master.page.actor.curriculum" /></a></li>
 		</security:authorize>
 		
@@ -52,8 +53,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.manager.myClub" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
-					<li><a href="entered/manager/list.do"><spring:message code="master.page.manager.entered" /></a></li>
+					<li><a href="club/gerente/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+					<li><a href="entered/gerente/list.do"><spring:message code="master.page.manager.entered" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>

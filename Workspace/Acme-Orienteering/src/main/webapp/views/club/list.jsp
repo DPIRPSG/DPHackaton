@@ -31,7 +31,7 @@
 			<display:column>
 				<jstl:if test="${manager.id == row_Club.manager.id }">
 					<div>
-						<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
+						<b><a href="club/gerente/edit.do?clubId=${row_Club.id}"> <spring:message
 									code="club.edit" />
 						</a></b>
 					</div>
@@ -57,14 +57,14 @@
 		<display:column title="${possitionHeader}" sortable="true">
 			<jstl:forEach var="possition" items="${ranking }">
 				<jstl:if test="${possition[1] == row_Club.id}">
-					<jstl:out value="${possition[0] + 1}" />
+					<fmt:formatNumber value="${possition[0] + 1}" minIntegerDigits="2" />
 				</jstl:if>
 			</jstl:forEach>
 		</display:column>
 	</jstl:if>
 
 	<spring:message code="club.name" var="nameHeader" />
-	<acme:displayColumn value="${row_Club.name }" title="${nameHeader}" />
+	<acme:displayColumn value="${row_Club.name }" title="${nameHeader}" sorteable="true"/>
 
 	<jstl:if test="${ranking == null}">
 		<spring:message code="club.description" var="descriptionHeader" />
@@ -79,7 +79,7 @@
 		</display:column>
 
 		<spring:message code="club.creationMoment" var="creationMomentHeader" />
-		<display:column title="${creationMomentHeader}" sortable="true">
+		<display:column title="${creationMomentHeader}" sortable="false">
 			<fmt:formatDate value="${row_Club.creationMoment}"
 				pattern="dd-MM-yyyy" />
 		</display:column>
@@ -129,7 +129,7 @@
 
 	<jstl:if test="${ranking != null}">
 		<spring:message code="club.points" var="pointsHeader" />
-		<display:column title="${pointsHeader}" sortable="true">
+		<display:column title="${pointsHeader}" sortable="false">
 			<jstl:forEach var="possition" items="${ranking }" >
 				<jstl:if test="${possition[1] == row_Club.id}">
 					<jstl:out value="${possition[2]}" />
@@ -155,7 +155,7 @@
 <security:authorize access="hasRole('MANAGER')">
 	<jstl:if test="${clubes == null }">
 		<div>
-			<b><a href="club/manager/create.do"> <spring:message
+			<b><a href="club/gerente/create.do"> <spring:message
 						code="club.create" />
 			</a></b>
 		</div>
@@ -163,7 +163,7 @@
 	<jstl:if test="${requestURI2 != null}">
 		<jstl:if test="${clubes != null  }">
 		<div>
-			<b><a href="club/manager/delete.do?clubId=${clubes.id }"> <spring:message
+			<b><a href="club/gerente/delete.do?clubId=${clubes.id }"> <spring:message
 						code="club.delete" />
 			</a></b>
 		</div>
