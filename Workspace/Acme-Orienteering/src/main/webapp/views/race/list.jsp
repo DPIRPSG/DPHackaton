@@ -80,7 +80,7 @@
 	
 	<display:column title="${leagueHeader}">
 		<security:authorize access="hasRole('MANAGER')">
-			<acme:link href="participates/manager/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
+			<acme:link href="participates/gerente/list.do?raceId=${row_Race.id}" code="${participatesView}"/>
 		</security:authorize>
 		<security:authorize access="hasRole('RUNNER')">
 			<acme:link href="participates/runner/list.do?raceId=${row_Race.id}" code="${participatesView}"/>

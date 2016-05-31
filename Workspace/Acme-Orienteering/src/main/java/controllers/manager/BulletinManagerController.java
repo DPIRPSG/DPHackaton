@@ -30,7 +30,7 @@ import domain.Club;
 import domain.Manager;
 
 @Controller
-@RequestMapping("/bulletin/manager")
+@RequestMapping("/bulletin/gerente")
 public class BulletinManagerController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
@@ -63,8 +63,8 @@ public class BulletinManagerController extends AbstractController {
 		pertenece = true;
 		
 		result = new ModelAndView("bulletin/list");
-		result.addObject("requestURI", "bulletin/manager/list.do");
-		result.addObject("requestURI2", "bulletin/manager/create.do");
+		result.addObject("requestURI", "bulletin/gerente/list.do");
+		result.addObject("requestURI2", "bulletin/gerente/create.do");
 		result.addObject("bulletins", bulletins);
 		result.addObject("club", club);
 		result.addObject("pertenece", pertenece);
@@ -132,8 +132,8 @@ public class BulletinManagerController extends AbstractController {
 		ModelAndView result;
 		
 		result = new ModelAndView("bulletin/create");
-		result.addObject("requestURI1", "bulletin/manager/create.do");
-		result.addObject("requestURI2", "bulletin/manager/list.do");
+		result.addObject("requestURI1", "bulletin/gerente/create.do");
+		result.addObject("requestURI2", "bulletin/gerente/list.do");
 		result.addObject("bulletin", bulletin);
 		result.addObject("message", message);
 

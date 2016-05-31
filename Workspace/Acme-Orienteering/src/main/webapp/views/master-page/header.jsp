@@ -29,7 +29,7 @@
 					<li><a href="sponsor/list.do"><spring:message code="master.page.administrator.sponsor" /></a></li>
 					<li><a href="category/administrator/list.do"><spring:message code="master.page.administrator.category" /></a></li>
 					<li><a href="referee/administrator/create.do"><spring:message code="master.page.create.referee" /></a></li>
-					<li><a href="manager/administrator/create.do"><spring:message code="master.page.create.manager" /></a></li>
+					<li><a href="gerente/administrator/create.do"><spring:message code="master.page.create.manager" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>
@@ -53,8 +53,8 @@
 			<li><a class="fNiv"><spring:message	code="master.page.manager.myClub" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="club/manager/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
-					<li><a href="entered/manager/list.do"><spring:message code="master.page.manager.entered" /></a></li>
+					<li><a href="club/gerente/list.do"><spring:message code="master.page.manager.myClub" /></a></li>
+					<li><a href="entered/gerente/list.do"><spring:message code="master.page.manager.entered" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="club/list.do"><spring:message code="master.page.club" /></a></li>

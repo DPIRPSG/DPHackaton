@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <!-- Form -->
-<form:form action="entered/manager/edit.do" modelAttribute="entered">
+<form:form action="entered/gerente/edit.do" modelAttribute="entered">
 	<!-- Hidden Attributes -->
 	<form:hidden path="id" />
 	<form:hidden path="version" />
