@@ -124,7 +124,7 @@ public class ClassificationService {
 //					System.out.println("Entered: " + e.getClub().getName() + "; momentoAceptación: "+(e.getAcceptedMoment() != null) + "; isDenied: " + e.getIsDenied() + "; isMember:" + e.getIsMember());
 					if (e.getClub().equals(actClub)
 							&& e.getAcceptedMoment() != null){
-						if (e.getAcceptedMoment().after(race.getMoment())) 
+						if (e.getAcceptedMoment().before(race.getMoment())) 
 							isOk = true;
 					}
 				}

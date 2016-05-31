@@ -34,7 +34,7 @@ import domain.form.ClubForm;
 import domain.form.DeleteClubForm;
 
 @Controller
-@RequestMapping("/club/manager")
+@RequestMapping("/club/gerente")
 public class ClubManagerController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
@@ -69,8 +69,8 @@ public class ClubManagerController extends AbstractController {
 		club = manager.getClub();
 		
 		result = new ModelAndView("club/list");
-		result.addObject("requestURI", "club/manager/list.do");
-		result.addObject("requestURI2", "bulletin/manager/list.do");
+		result.addObject("requestURI", "club/gerente/list.do");
+		result.addObject("requestURI2", "bulletin/gerente/list.do");
 		result.addObject("clubes", club);
 		result.addObject("manager", manager);
 

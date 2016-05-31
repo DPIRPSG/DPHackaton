@@ -109,7 +109,7 @@
 				</jstl:forEach>
 				<jstl:if test="${pagado != true}">
 					<jstl:if test="${!(today.time gt row_League.startedMoment.time)}">
-					    <a href="feePayment/manager/create.do?leagueId=${row_League.id}">
+					    <a href="feePayment/gerente/create.do?leagueId=${row_League.id}">
 							<spring:message code="league.feePayment" />
 						</a>
 					</jstl:if>

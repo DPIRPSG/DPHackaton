@@ -5,7 +5,7 @@
 <tiles-definitions>
 	
 	<definition name="feePayment/create" extends="master.page">	
-		<put-attribute name="title" value="Registrar mi club a una liga" />
+		<put-attribute name="title" value="Apuntar mi club a una liga" />
 		<put-attribute name="body" value="/views/feePayment/create.jsp" />
 	</definition>
 	
