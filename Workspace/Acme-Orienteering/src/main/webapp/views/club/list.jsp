@@ -31,7 +31,7 @@
 			<display:column>
 				<jstl:if test="${manager.id == row_Club.manager.id }">
 					<div>
-						<b><a href="club/manager/edit.do?clubId=${row_Club.id}"> <spring:message
+						<b><a href="club/gerente/edit.do?clubId=${row_Club.id}"> <spring:message
 									code="club.edit" />
 						</a></b>
 					</div>
@@ -155,7 +155,7 @@
 <security:authorize access="hasRole('MANAGER')">
 	<jstl:if test="${clubes == null }">
 		<div>
-			<b><a href="club/manager/create.do"> <spring:message
+			<b><a href="club/gerente/create.do"> <spring:message
 						code="club.create" />
 			</a></b>
 		</div>
@@ -163,7 +163,7 @@
 	<jstl:if test="${requestURI2 != null}">
 		<jstl:if test="${clubes != null  }">
 		<div>
-			<b><a href="club/manager/delete.do?clubId=${clubes.id }"> <spring:message
+			<b><a href="club/gerente/delete.do?clubId=${clubes.id }"> <spring:message
 						code="club.delete" />
 			</a></b>
 		</div>

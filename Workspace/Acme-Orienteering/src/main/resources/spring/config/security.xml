@@ -69,7 +69,7 @@
 		<security:intercept-url pattern="/race/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/administrator/*" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/manager/administrator/*" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/gerente/administrator/*" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/referee/administrator/*" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/comment/administrator/delete.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMIN')" />
@@ -85,11 +85,11 @@
 		<security:intercept-url pattern="/classification/referee/*" access="hasRole('REFEREE')" />
 		<security:intercept-url pattern="/punishment/referee/*" access="hasRole('REFEREE')" />
 		 		
-		<security:intercept-url pattern="/club/manager/*" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/bulletin/manager/*" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/participates/manager/*" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/entered/manager/**" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/feePayment/manager/**" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/club/gerente/*" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/bulletin/gerente/*" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/participates/gerente/*" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/entered/gerente/**" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/feePayment/gerente/**" access="hasRole('MANAGER')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

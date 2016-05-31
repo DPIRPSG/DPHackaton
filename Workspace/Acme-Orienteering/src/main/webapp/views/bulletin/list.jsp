@@ -20,7 +20,7 @@
 
 	<security:authorize access="hasRole('MANAGER')">
 		<display:column>
-		<a href="bulletin/manager/delete.do?bulletinId=${row_Bulletin.id}" onclick="return confirm('<spring:message code="bulletin.confirm.delete" />')" > <spring:message
+		<a href="bulletin/gerente/delete.do?bulletinId=${row_Bulletin.id}" onclick="return confirm('<spring:message code="bulletin.confirm.delete" />')" > <spring:message
 				code="bulletin.delete" />
 		</a>
 		</display:column>
