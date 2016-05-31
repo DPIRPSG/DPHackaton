@@ -17,7 +17,7 @@
 	</definition>
 	
 	<definition name="club/delete" extends="master.page">	
-		<put-attribute name="title" value="Delete a Club" />
+		<put-attribute name="title" value="Designate Manager" />
 		<put-attribute name="body" value="/views/club/delete.jsp" />
 	</definition>
 	
