@@ -98,6 +98,8 @@ public class CurriculumService {
 		Actor actorOwner;
 		int curriculumId;
 		
+		Assert.notNull(curriculum);
+		
 		curriculumId = curriculum.getId();
 		actorPrincipal = actorService.findByPrincipal();
 		actorOwner = actorService.findByCurriculumId(curriculumId);
