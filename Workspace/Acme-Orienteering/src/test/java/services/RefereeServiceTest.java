@@ -236,7 +236,7 @@ public class RefereeServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * @see 19.c
+	 * @see 1.C
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
@@ -267,7 +267,7 @@ public class RefereeServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * @see 20.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
