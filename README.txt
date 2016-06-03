@@ -2,13 +2,26 @@ A continuación se detallan lo que hemos considerado aspectos importantes a tener
 
 Respecto a las peticiones de ingreso:
 
-- Si está pendiente -> isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NULL
+- Si la petición de acceso al club está pendiente consideraremos isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NULL
 
-- Si está aceptado -> isMember IS TRUE && isDenied IS FALSE && acceptedMoment IS NOT NULL
+- Si la petición de acceso al club está aceptada consideraremos isMember IS TRUE && isDenied IS FALSE && acceptedMoment IS NOT NULL
 
-- Si está rechazado -> isMember IS FALSE && is Denied IS TRUE && acceptedMoment IS NULL
+- Si la petición de acceso al clubb está rechazada consideraremos isMember IS FALSE && is Denied IS TRUE && acceptedMoment IS NULL
 
-- Si está expulsado -> isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NOT NULL
+- Si la petición de acceso al club está como expulsada consideraremos isMember IS FALSE && isDenied IS FALSE && acceptedMoment IS NOT NULL
+
+=====
+
+Respecto a la gestión de las financiaciones:
+
+En el caso de gestionar las financiaciones de una liga, hemos visto interesante que se puedan editar tras su realización. Hemos tomado esta decisión de diseño con el fin de evitar que se introduzcan valores erróneos sin posibilidad de corregirlo.
+
+=====
+
+Respecto a la clasificación:
+
+En el caso de que se dé una situación en la que varios equipos tengan la misma puntuación dentro de una liga, los clubes se ordenaran siguiendo el orden natural alfabético. Hemos tomado esta decisión basándonos en el sistema de clasificación de otras organizaciones deportivas como puede ser la Liga de Fútbol Profesional. Con esto nos aseguramos una homogeneidad en el sistema de puntos de nuestra organización.
+
 
 =====
 
