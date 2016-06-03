@@ -104,7 +104,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 5.A
+	 * Un usuario que haya iniciado sesión como árbitro
+	 * debe poder imponer una sanción a un club.
 	 */
 	
 	/**
@@ -149,7 +151,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 5.A
+	 * Un usuario que haya iniciado sesión como árbitro
+	 * debe poder imponer una sanción a un club.
 	 */
 	
 	/**
@@ -195,7 +199,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 5.A
+	 * Un usuario que haya iniciado sesión como árbitro
+	 * debe poder imponer una sanción a un club.
 	 */
 	
 	/**
@@ -250,7 +256,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 5.A
+	 * Un usuario que haya iniciado sesión como árbitro
+	 * debe poder imponer una sanción a un club.
 	 */
 	
 	/**
@@ -296,7 +304,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 5.A
+	 * Un usuario que haya iniciado sesión como árbitro
+	 * debe poder imponer una sanción a un club.
 	 */
 	
 	/**
@@ -343,7 +353,9 @@ public class PunishmentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 5.A
+	 * Un usuario que haya iniciado sesión como árbitro
+	 * debe poder imponer una sanción a un club.
 	 */
 	
 	/**
