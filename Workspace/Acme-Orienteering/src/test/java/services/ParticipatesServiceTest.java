@@ -62,10 +62,6 @@ public class ParticipatesServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - 
-	 */
-	
-	/**
 	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, inscribirse en carreras.
 	 *  
@@ -507,7 +503,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 
 	/**
-	 * Acme-Orienteering - CORREGIR
+	 * Acme-Orienteering - 5.c
 	 * Rellenar la clasificaci�n de los corredores en las carreras de las ligas que �l dirige.
 	 */
 	

@@ -38,7 +38,7 @@ public class ActorServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
+	 * Acme-Orienteering - 2.b
 	 * Cambiar la información de su perfil.
 	 */
 	

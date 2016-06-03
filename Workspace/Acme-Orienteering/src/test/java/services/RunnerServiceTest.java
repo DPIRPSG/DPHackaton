@@ -47,7 +47,7 @@ public class RunnerServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
+	 * Acme-Orienteering - 1.a
 	 * Registrarse en el sistema como corredor
 	 */
 	

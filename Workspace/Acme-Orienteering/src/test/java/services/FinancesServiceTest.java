@@ -47,8 +47,9 @@ public class FinancesServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
-	 * CORREGIR
+	 * Acme-Orienteering - 6.f
+	 * Gestionar los patrocinadores. Esto incluye crear, editar, borrar, listar y
+	 * financiar a las ligas.
 	 */
 	
 	/**

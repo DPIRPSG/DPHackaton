@@ -45,8 +45,8 @@ public class FolderServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
-	 * Administrar sus mensajes y carpetas
+	 * Acme-Orienteering - 2.e
+	 * Gestionar sus mensajes y sus carpetas.
 	 */
 	
 	/**
@@ -748,11 +748,6 @@ public class FolderServiceTest extends AbstractTest {
 		unauthenticate();
 
 	}
-	
-	/**
-	 * Acme-Orienteering - CORREGIR
-	 * Administrar sus mensajes y carpetas
-	 */
 	
 	/**
 	 * Positive test case: Borrar un mensaje de una carpeta
