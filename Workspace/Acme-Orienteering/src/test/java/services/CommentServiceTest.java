@@ -53,7 +53,9 @@ public class CommentServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -87,7 +89,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -121,7 +125,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -155,7 +161,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -191,7 +199,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -227,7 +237,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -263,7 +275,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -299,7 +313,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -335,7 +351,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -371,7 +389,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -407,7 +427,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -443,7 +465,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -479,7 +503,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -520,7 +546,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -561,7 +589,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.F
+	 * Un usuario que haya iniciado sesión debe poder
+	 * comentar un club, una liga o una carrera.
 	 */
 	
 	/**
@@ -602,7 +632,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -645,7 +677,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -688,7 +722,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -731,7 +767,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -775,7 +813,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -819,7 +859,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -863,7 +905,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -907,7 +951,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -950,7 +996,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 6.G
+	 * Un usuario que haya iniciado sesión como administrador debe poder
+	 * borrar comentarios, siempre que lo considere adecuado.
 	 */
 	
 	/**
@@ -994,7 +1042,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 1.F
+	 * Un usuario que no haya iniciado sesión en el sistema debe poder
+	 * ver los comentarios tanto de clubes, como de ligas o carreras.
 	 */
 	
 	/**
@@ -1016,7 +1066,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 1.F
+	 * Un usuario que no haya iniciado sesión en el sistema debe poder
+	 * ver los comentarios tanto de clubes, como de ligas o carreras.
 	 */
 	
 	/**
@@ -1038,7 +1090,9 @@ public class CommentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 1.F
+	 * Un usuario que no haya iniciado sesión en el sistema debe poder
+	 * ver los comentarios tanto de clubes, como de ligas o carreras.
 	 */
 	
 	/**
