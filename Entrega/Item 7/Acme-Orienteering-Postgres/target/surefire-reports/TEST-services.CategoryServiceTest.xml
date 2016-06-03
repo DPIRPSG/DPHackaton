@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="30.046" errors="2" skipped="0" tests="19" name="services.CategoryServiceTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_13\jre\bin"/>
+    <property name="java.vm.version" value="23.7-b01"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 2"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="E:\DPHackaton\Workspace\Acme-Orienteering"/>
+    <property name="java.runtime.version" value="1.7.0_13-b20"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.7.0_13\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\DOCUME~1\Student\LOCALS~1\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows XP"/>
+    <property name="classworlds.conf" value="C:\Program Files\Apache Software Foundation\apache-maven-3.1.0\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.7.0_13\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;c:\program files\java\jdk1.7.0_13\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;c:\program files\java\jdk1.7.0_13\bin;C:\Program Files\Apache Software Foundation\apache-maven-3.1.0\bin;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="5.2"/>
+    <property name="user.home" value="C:\Documents and Settings\Student"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="user.name" value="Student"/>
+    <property name="java.class.path" value="C:\Program Files\Apache Software Foundation\apache-maven-3.1.0\boot\plexus-classworlds-2.4.2.jar"/>
+    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="info"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.7.0_13\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install tomcat7:run-war"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_13"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.7.0_13\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.7.0_13\jre\lib\resources.jar;C:\Program Files\Java\jdk1.7.0_13\jre\lib\rt.jar;C:\Program Files\Java\jdk1.7.0_13\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.7.0_13\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.7.0_13\jre\lib\jce.jar;C:\Program Files\Java\jdk1.7.0_13\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.7.0_13\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.7.0_13\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Program Files\Apache Software Foundation\apache-maven-3.1.0"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase time="1.64" classname="services.CategoryServiceTest" name="testDeleteCategory1">
+    <error message="could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:188)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:154)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:417)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:59)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:213)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:147)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.data.jpa.repository.support.LockModeRepositoryPostProcessor$LockModePopulatingMethodIntercceptor.invoke(LockModeRepositoryPostProcessor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207)
+	at sun.proxy.$Proxy93.flush(Unknown Source)
+	at services.CategoryService.flush(CategoryService.java:84)
+	at services.CategoryService$$FastClassByCGLIB$$fd5d227.invoke(&lt;generated&gt;)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:713)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:98)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:262)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:95)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:646)
+	at services.CategoryService$$EnhancerByCGLIB$$b11fa73a.flush(&lt;generated&gt;)
+	at services.CategoryServiceTest.testDeleteCategory1(CategoryServiceTest.java:500)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:72)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:49)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:126)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:112)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:190)
+	at org.hibernate.persister.entity.AbstractEntityPersister.delete(AbstractEntityPersister.java:3403)
+	at org.hibernate.persister.entity.AbstractEntityPersister.delete(AbstractEntityPersister.java:3624)
+	at org.hibernate.action.internal.EntityDeleteAction.execute(EntityDeleteAction.java:113)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:453)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:345)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:350)
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:56)
+	at org.hibernate.internal.SessionImpl.flush(SessionImpl.java:1218)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.flush(AbstractEntityManagerImpl.java:1335)
+	at sun.reflect.GeneratedMethodAccessor587.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:257)
+	at sun.proxy.$Proxy65.flush(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.flush(SimpleJpaRepository.java:405)
+	at sun.reflect.GeneratedMethodAccessor586.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.executeMethodOn(RepositoryFactorySupport.java:358)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:343)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:98)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:262)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:95)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:136)
+	... 55 more
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`acme-orienteering`.`race`, CONSTRAINT `FK_7g7us6gu8le70ke4carod8mlo` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`))
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:525)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1041)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4190)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4122)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2570)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2731)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2818)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2157)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2460)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2377)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2361)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.executeUpdate(NewProxyPreparedStatement.java:147)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:187)
+	... 81 more
+</error>
+    <system-out>PopulateDatabase 1.3
+--------------------
+
+Initialising persistence context `Acme-Orienteering&apos;...
+2016-05-23 20:29:47,496 [main] WARN  org.hibernate.jpa.internal.EntityManagerFactoryRegistry  - HHH000436: Entity manager factory name (Acme-Orienteering) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property &apos;hibernate.ejb.entitymanager_factory_name&apos;
+2016-05-23 20:29:47,496 [main] WARN  org.hibernate.jpa.internal.EntityManagerFactoryRegistry  - HHH000436: Entity manager factory name (Acme-Orienteering) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property &apos;hibernate.ejb.entitymanager_factory_name&apos;
+Creating database `Acme-Orienteering&apos; (org.hibernate.dialect.MySQLDialect)...
+Reading configuration file `PopulateDatabase.xml&apos;...
+Persisting 89 entities...
+
+&gt; userAccount1: security.UserAccount -&gt; id = 1, version = 0
+&gt; userAccount2: security.UserAccount -&gt; id = 2, version = 0
+&gt; userAccount3: security.UserAccount -&gt; id = 3, version = 0
+&gt; userAccount4: security.UserAccount -&gt; id = 4, version = 0
+&gt; userAccount5: security.UserAccount -&gt; id = 5, version = 0
+&gt; userAccount6: security.UserAccount -&gt; id = 6, version = 0
+&gt; userAccount7: security.UserAccount -&gt; id = 7, version = 0
+&gt; userAccount8: security.UserAccount -&gt; id = 8, version = 0
+&gt; userAccount9: security.UserAccount -&gt; id = 9, version = 0
+&gt; administrator1: domain.Administrator -&gt; id = 10, version = 0
+&gt; curriculum1: domain.Curriculum -&gt; id = 11, version = 0
+&gt; curriculum2: domain.Curriculum -&gt; id = 12, version = 0
+&gt; curriculum3: domain.Curriculum -&gt; id = 13, version = 0
+&gt; curriculum4: domain.Curriculum -&gt; id = 14, version = 0
+&gt; manager1: domain.Manager -&gt; id = 15, version = 0
+&gt; manager2: domain.Manager -&gt; id = 16, version = 0
+&gt; manager3: domain.Manager -&gt; id = 17, version = 0
+&gt; runner1: domain.Runner -&gt; id = 18, version = 0
+&gt; runner2: domain.Runner -&gt; id = 19, version = 0
+&gt; runner3: domain.Runner -&gt; id = 20, version = 0
+&gt; referee1: domain.Referee -&gt; id = 21, version = 0
+&gt; referee2: domain.Referee -&gt; id = 22, version = 0
+&gt; message1: domain.MessageEntity -&gt; id = 23, version = 0
+&gt; message100: domain.MessageEntity -&gt; id = 24, version = 0
+&gt; message101: domain.MessageEntity -&gt; id = 25, version = 0
+&gt; message102: domain.MessageEntity -&gt; id = 26, version = 0
+&gt; message103: domain.MessageEntity -&gt; id = 27, version = 0
+&gt; message104: domain.MessageEntity -&gt; id = 28, version = 0
+&gt; folder1: domain.Folder -&gt; id = 29, version = 0
+&gt; folder2: domain.Folder -&gt; id = 30, version = 0
+&gt; folder3: domain.Folder -&gt; id = 31, version = 0
+&gt; folder4: domain.Folder -&gt; id = 32, version = 0
+&gt; folder5: domain.Folder -&gt; id = 33, version = 0
+&gt; folder6: domain.Folder -&gt; id = 34, version = 0
+&gt; folder7: domain.Folder -&gt; id = 35, version = 0
+&gt; folder8: domain.Folder -&gt; id = 36, version = 0
+&gt; folder9: domain.Folder -&gt; id = 37, version = 0
+&gt; folder10: domain.Folder -&gt; id = 38, version = 0
+&gt; folder11: domain.Folder -&gt; id = 39, version = 0
+&gt; folder12: domain.Folder -&gt; id = 40, version = 0
+&gt; folder13: domain.Folder -&gt; id = 41, version = 0
+&gt; folder14: domain.Folder -&gt; id = 42, version = 0
+&gt; folder15: domain.Folder -&gt; id = 43, version = 0
+&gt; folder16: domain.Folder -&gt; id = 44, version = 0
+&gt; folder17: domain.Folder -&gt; id = 45, version = 0
+&gt; folder18: domain.Folder -&gt; id = 46, version = 0
+&gt; folder19: domain.Folder -&gt; id = 47, version = 0
+&gt; folder20: domain.Folder -&gt; id = 48, version = 0
+&gt; folder21: domain.Folder -&gt; id = 49, version = 0
+&gt; folder22: domain.Folder -&gt; id = 50, version = 0
+&gt; folder23: domain.Folder -&gt; id = 51, version = 0
+&gt; folder24: domain.Folder -&gt; id = 52, version = 0
+&gt; folder25: domain.Folder -&gt; id = 53, version = 0
+&gt; folder26: domain.Folder -&gt; id = 54, version = 0
+&gt; folder27: domain.Folder -&gt; id = 55, version = 0
+&gt; folder100: domain.Folder -&gt; id = 56, version = 0
+&gt; folder101: domain.Folder -&gt; id = 57, version = 0
+&gt; folder102: domain.Folder -&gt; id = 58, version = 0
+&gt; club1: domain.Club -&gt; id = 59, version = 0
+&gt; club2: domain.Club -&gt; id = 60, version = 0
+&gt; entered1: domain.Entered -&gt; id = 61, version = 0
+&gt; entered2: domain.Entered -&gt; id = 62, version = 0
+&gt; entered3: domain.Entered -&gt; id = 63, version = 0
+&gt; bulletin1: domain.Bulletin -&gt; id = 64, version = 0
+&gt; category1: domain.Category -&gt; id = 65, version = 0
+&gt; category2: domain.Category -&gt; id = 66, version = 0
+&gt; league1: domain.League -&gt; id = 67, version = 0
+&gt; league2: domain.League -&gt; id = 68, version = 0
+&gt; league3: domain.League -&gt; id = 69, version = 0
+&gt; race1: domain.Race -&gt; id = 70, version = 0
+&gt; race2: domain.Race -&gt; id = 71, version = 0
+&gt; race3: domain.Race -&gt; id = 72, version = 0
+&gt; race4: domain.Race -&gt; id = 73, version = 0
+&gt; classification1: domain.Classification -&gt; id = 74, version = 0
+&gt; classification2: domain.Classification -&gt; id = 75, version = 0
+&gt; punishment1: domain.Punishment -&gt; id = 76, version = 0
+&gt; feePayment1: domain.FeePayment -&gt; id = 77, version = 0
+&gt; feePayment2: domain.FeePayment -&gt; id = 78, version = 0
+&gt; participates1: domain.Participates -&gt; id = 79, version = 0
+&gt; participates2: domain.Participates -&gt; id = 80, version = 0
+&gt; sponsor1: domain.Sponsor -&gt; id = 81, version = 0
+&gt; finances1: domain.Finances -&gt; id = 82, version = 0
+&gt; comment1: domain.Comment -&gt; id = 83, version = 0
+&gt; comment2: domain.Comment -&gt; id = 84, version = 0
+&gt; comment3: domain.Comment -&gt; id = 85, version = 0
+&gt; comment4: domain.Comment -&gt; id = 86, version = 0
+&gt; comment5: domain.Comment -&gt; id = 87, version = 0
+&gt; comment6: domain.Comment -&gt; id = 88, version = 0
+2016-05-23 20:29:48,559 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - SQL Error: 1451, SQLState: 23000
+2016-05-23 20:29:48,559 [main] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - SQL Error: 1451, SQLState: 23000
+2016-05-23 20:29:48,559 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - Cannot delete or update a parent row: a foreign key constraint fails (`acme-orienteering`.`race`, CONSTRAINT `FK_7g7us6gu8le70ke4carod8mlo` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`))
+2016-05-23 20:29:48,559 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper  - Cannot delete or update a parent row: a foreign key constraint fails (`acme-orienteering`.`race`, CONSTRAINT `FK_7g7us6gu8le70ke4carod8mlo` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`))
+2016-05-23 20:29:48,574 [main] WARN  org.springframework.test.context.TestContextManager  - Caught exception while allowing TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener@1647172] to process &apos;after&apos; execution for test: method [public void services.CategoryServiceTest.testDeleteCategory1()], instance [services.CategoryServiceTest@6953f414], exception [org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement]
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:524)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:757)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:726)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener$TransactionContext.endTransaction(TransactionalTestExecutionListener.java:591)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener.endTransaction(TransactionalTestExecutionListener.java:297)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener.afterTestMethod(TransactionalTestExecutionListener.java:192)
+	at org.springframework.test.context.TestContextManager.afterTestMethod(TestContextManager.java:395)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:91)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.hibernate.jpa.internal.TransactionImpl.commit(TransactionImpl.java:74)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:515)
+	... 31 more
+2016-05-23 20:29:48,574 [main] WARN  org.springframework.test.context.TestContextManager  - Caught exception while allowing TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener@1647172] to process &apos;after&apos; execution for test: method [public void services.CategoryServiceTest.testDeleteCategory1()], instance [services.CategoryServiceTest@6953f414], exception [org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement]
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:524)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:757)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:726)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener$TransactionContext.endTransaction(TransactionalTestExecutionListener.java:591)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener.endTransaction(TransactionalTestExecutionListener.java:297)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener.afterTestMethod(TransactionalTestExecutionListener.java:192)
+	at org.springframework.test.context.TestContextManager.afterTestMethod(TestContextManager.java:395)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:91)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.hibernate.jpa.internal.TransactionImpl.commit(TransactionImpl.java:74)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:515)
+	... 31 more
+</system-out>
+  </testcase>
+  <testcase time="1.64" classname="services.CategoryServiceTest" name="testDeleteCategory1">
+    <error message="Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly" type="org.springframework.transaction.TransactionSystemException">org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:524)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:757)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:726)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener$TransactionContext.endTransaction(TransactionalTestExecutionListener.java:591)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener.endTransaction(TransactionalTestExecutionListener.java:297)
+	at org.springframework.test.context.transaction.TransactionalTestExecutionListener.afterTestMethod(TransactionalTestExecutionListener.java:192)
+	at org.springframework.test.context.TestContextManager.afterTestMethod(TestContextManager.java:395)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:91)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.hibernate.jpa.internal.TransactionImpl.commit(TransactionImpl.java:74)
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:515)
+	... 31 more
+</error>
+  </testcase>
+  <testcase time="3.297" classname="services.CategoryServiceTest" name="testDeleteCategory2"/>
+  <testcase time="3.703" classname="services.CategoryServiceTest" name="testDeleteCategory3"/>
+  <testcase time="1.188" classname="services.CategoryServiceTest" name="testDeleteCategory4"/>
+  <testcase time="1.625" classname="services.CategoryServiceTest" name="testDeleteCategory5"/>
+  <testcase time="1.125" classname="services.CategoryServiceTest" name="testDeleteCategory6"/>
+  <testcase time="1.219" classname="services.CategoryServiceTest" name="testListCategory1"/>
+  <testcase time="1.375" classname="services.CategoryServiceTest" name="testCreateCategory1"/>
+  <testcase time="1.359" classname="services.CategoryServiceTest" name="testCreateCategory2"/>
+  <testcase time="1.141" classname="services.CategoryServiceTest" name="testCreateCategory3"/>
+  <testcase time="1.109" classname="services.CategoryServiceTest" name="testCreateCategory4"/>
+  <testcase time="1.156" classname="services.CategoryServiceTest" name="testCreateCategory5"/>
+  <testcase time="1.375" classname="services.CategoryServiceTest" name="testCreateCategory6"/>
+  <testcase time="1.36" classname="services.CategoryServiceTest" name="testEditCategory1"/>
+  <testcase time="1.25" classname="services.CategoryServiceTest" name="testEditCategory2"/>
+  <testcase time="1.484" classname="services.CategoryServiceTest" name="testEditCategory3"/>
+  <testcase time="1.25" classname="services.CategoryServiceTest" name="testEditCategory4"/>
+  <testcase time="1.75" classname="services.CategoryServiceTest" name="testEditCategory5"/>
+</testsuite>
