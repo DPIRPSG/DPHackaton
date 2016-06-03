@@ -145,7 +145,7 @@ public class RaceServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 2.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
