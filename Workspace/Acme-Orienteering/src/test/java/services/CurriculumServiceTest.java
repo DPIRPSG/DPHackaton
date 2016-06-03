@@ -44,7 +44,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -86,7 +88,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -120,7 +124,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -164,7 +170,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -208,7 +216,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -252,7 +262,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -296,7 +308,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -340,7 +354,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -387,7 +403,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -431,7 +449,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -475,7 +495,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -519,7 +541,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -563,7 +587,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -607,7 +633,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -644,7 +672,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**
@@ -682,7 +712,9 @@ public class CurriculumServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 2.C
+	 * Un usuario que haya iniciado sesión debe poder
+	 * gestionar su currículo.
 	 */
 	
 	/**

@@ -37,7 +37,7 @@ public class CategoryServiceTest extends AbstractTest{
 	// Tests ---------------------------------------
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -61,7 +61,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -93,7 +93,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -126,7 +126,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -159,7 +159,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -192,7 +192,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -225,7 +225,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -258,7 +258,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -300,7 +300,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -343,7 +343,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -386,7 +386,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -429,7 +429,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -472,7 +472,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -506,7 +506,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -541,7 +541,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -576,7 +576,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -611,7 +611,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -646,7 +646,7 @@ public class CategoryServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.e
+	 * @see 6.E
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las categorías. Esto incluye crear, editar, borrar y listar.
 	 *  

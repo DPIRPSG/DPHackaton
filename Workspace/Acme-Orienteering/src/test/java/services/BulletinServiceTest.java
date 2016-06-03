@@ -47,7 +47,7 @@ public class BulletinServiceTest extends AbstractTest{
 	// Tests ---------------------------------------
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -84,7 +84,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -121,7 +121,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -159,7 +159,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -197,7 +197,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -235,7 +235,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -281,7 +281,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  
@@ -317,7 +317,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  
@@ -354,7 +354,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  
@@ -391,7 +391,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  
@@ -437,7 +437,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -466,7 +466,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -496,7 +496,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -526,7 +526,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como corredor debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -564,7 +564,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -593,7 +593,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -623,7 +623,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -653,7 +653,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 21.c
+	 * @see 3.C
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear y ver boletines en el tablón de su club.
 	 *  
@@ -691,7 +691,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  
@@ -725,7 +725,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  
@@ -760,7 +760,7 @@ public class BulletinServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.e
+	 * @see 4.E
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Crear, ver y borrar boletines en el tablón de su club.
 	 *  

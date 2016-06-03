@@ -50,7 +50,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -110,7 +112,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -170,7 +174,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -233,7 +239,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -282,7 +290,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -345,7 +355,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -408,7 +420,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -471,7 +485,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -534,7 +550,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -597,7 +615,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
@@ -660,7 +680,9 @@ public class FeePaymentServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 
+	 * Acme-Orienteering - FR 4.F
+	 * Un usuario que haya iniciado sesión como gerente debe poder
+	 * apuntar al club a una liga, siempre que no haya comenzado todavía.
 	 */
 	
 	/**
