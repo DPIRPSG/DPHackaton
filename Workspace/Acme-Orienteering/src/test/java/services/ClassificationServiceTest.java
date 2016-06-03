@@ -50,7 +50,7 @@ public class ClassificationServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
+	 * Acme-Orienteering - 5.e
 	 * Rellenar la clasificación de los clubes en las carreras de las ligas que él dirige,
 	 * con un procedimiento que lo haga automáticamente.
 	 */

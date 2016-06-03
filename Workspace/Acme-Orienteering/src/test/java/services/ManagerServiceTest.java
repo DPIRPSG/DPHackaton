@@ -49,7 +49,7 @@ public class ManagerServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
+	 * Acme-Orienteering - 6.a
 	 * Registrar a un gerente en el sistema.
 	 */
 	

@@ -49,8 +49,8 @@ public class RefereeServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
-	 * Registrar a un gerente en el sistema.
+	 * Acme-Orienteering - 6.b
+	 * Registrar a un árbitro en el sistema.
 	 */
 	
 	/**

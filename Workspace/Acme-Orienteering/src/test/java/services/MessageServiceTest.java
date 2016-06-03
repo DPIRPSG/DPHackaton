@@ -42,8 +42,8 @@ public class MessageServiceTest extends AbstractTest {
 	// Tests ---------------------------------------
 	
 	/**
-	 * Acme-Orienteering - CORREGIR
-	 * Exchange messages with other runners.
+	 * Acme-Orienteering - 2.d
+	 * Intercambiar mensajes con otros actores del sistema.
 	 */
 	
 	/**
