@@ -120,39 +120,14 @@ public class ClassificationServiceTest extends AbstractTest {
 		raceId = classification.getRace().getId(); // Carrera de la clasifiación escogida
 		
 		points = classification.getPoints();
-//		System.out.println("Points: " + points);
 		classification.setPoints(999999999); // Asignamos puntos errónos
-//		System.out.println("Set Points: " + classification.getPoints());
-//		classifications = club.getClassifications();
 		
 		classificationService.calculateClassification(classification.getRace().getId()); // Recalculamos los puntos
 		
 		classificationService.flush();
-//		System.out.println("After Points: " + classification.getPoints());
-		
-//		club = clubService.findOne(club.getId());
-		
-		// Checks results
-//		newClassifications = club.getClassifications();
-//		
-//		classification = null;
-//		for(Classification c: newClassifications){
-//			if(c.getRace().getLeague() == league){
-//				classification = c;
-//				break;
-//			}
-//		}
+
 		
 		classification = classificationService.findAllByClubIdAndRaceId(clubId, raceId).iterator().next();
-//		System.out.println(classificationService.findAllByClubIdAndRaceId(clubId, raceId));
-		
-//		for(Classification cl: classificationService.findAllByClubIdAndRaceId(clubId, raceId)){
-//			System.out.println("ClasssssS: " + cl);
-//		}
-		
-//		classification = classificationService.findOne(classificationId);
-		
-//		System.out.println("Class: " + classification);
 		
 		Assert.isTrue(classification.getPoints() == points, "Las clasificaciones no se han actualizado correctamente.");
 		Assert.isTrue(classification.getPoints() != 999999999, "La clasificación del club mantiene los puntos editados a mano.");
