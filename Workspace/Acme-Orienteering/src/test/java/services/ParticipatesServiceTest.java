@@ -66,7 +66,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	 */
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, inscribirse en carreras.
 	 *  
 	 *  Positivo: 
@@ -138,7 +138,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, inscribirse en carreras.
 	 *  
 	 *  Negativo: Un corredor no puede apuntarse a una carrera si ya estï¿½ apuntado 
@@ -204,7 +204,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, inscribirse en carreras.
 	 *  
 	 *  Negativo: Inscribirse en una carrera en la que no estï¿½ inscrito su club 
@@ -269,7 +269,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, inscribirse en carreras.
 	 *  
 	 *  Negativo: Inscribirse en una carrera que ya ha pasado 
@@ -333,7 +333,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club , ver en cuales está inscrito.
 	 *  
 	 *  Positivo: 
@@ -390,7 +390,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}	
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, ver la clasificaciï¿½n en las distintas carreas de los corredores del club.
 	 *  
 	 *  Positivo: 
@@ -447,7 +447,7 @@ public class ParticipatesServiceTest extends AbstractTest {
 	}	
 	
 	/**
-	 * Acme-Orienteering - 21.D
+	 * Acme-Orienteering - 3.D
 	 *  En caso de estar en un club, ver la clasificaciï¿½n en las distintas carreas de los corredores del club.
 	 *  
 	 *  Positivo: 
