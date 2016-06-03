@@ -57,7 +57,12 @@ public class EnteredManagerController extends AbstractController{
 		
 		manager = managerService.findByPrincipal();
 		club = manager.getClub();
-		entereds = enteredService.findAllByClub(club.getId());
+		if(club != null) {
+			entereds = enteredService.findAllByClub(club.getId());
+		} else {
+			entereds = null;
+		}
+		
 		
 		result = new ModelAndView("entered/list");
 		result.addObject("requestURI", "entered/gerente/list.do");
