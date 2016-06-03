@@ -54,7 +54,7 @@ public class EnteredServiceTest extends AbstractTest {
 	 */
 	
 	/**
-	 * Acme-Orienteering - 21.A
+	 * Acme-Orienteering - 3.A
 	 *  Hacer peticiones de ingreso a los distintos clubes del sistema.
 	 *  
 	 *  Positivo: 
@@ -125,7 +125,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 21.A
+	 * Acme-Orienteering - 3.A
 	 *  Hacer peticiones de ingreso a los distintos clubes del sistema.
 	 *  
 	 *  Negativo: Aceptandose mientras se crea
@@ -205,7 +205,7 @@ public class EnteredServiceTest extends AbstractTest {
 		}
 	}
 	/**
-	 * Acme-Orienteering - 21.A
+	 * Acme-Orienteering - 3.A
 	 *  Hacer peticiones de ingreso a los distintos clubes del sistema.
 	 *  
 	 *  Negativo: Ya es miembro de un club
@@ -266,7 +266,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 21.B
+	 * Acme-Orienteering - 3.B
 	 *  Revisar el estado de las distintas peticiones que haya realizado.
 	 *  
 	 *  Positivo: 
@@ -313,7 +313,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.c
+	 * Acme-Orienteering - 4.C
 	 *  Revisar las distintas peticiones de ingreso que le han hecho al club.
 	 *  
 	 *  Positivo: 
@@ -362,7 +362,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Aceptar peticiones de acceso.
 	 *  
 	 *  Positivo: 
@@ -413,7 +413,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Aceptar peticiones de acceso.
 	 *  
 	 *  Negativo: aceptarlo en manager de otro club 
@@ -470,7 +470,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Aceptar peticiones de acceso.
 	 *  
 	 *  Negativo: Corredor con petición ya aceptada
@@ -515,7 +515,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Aceptar peticiones de acceso.
 	 *  
 	 *  Negativo: Corredor con petición aceptada por ese club
@@ -560,7 +560,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Denegar peticiones de acceso.
 	 *  
 	 *  Positivo: 
@@ -609,7 +609,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Denegar peticiones de acceso.
 	 *  
 	 *  Positivo: estando en un club
@@ -658,7 +658,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Denegar peticiones de acceso.
 	 *  
 	 *  Negativo: manager de otro club 
@@ -712,7 +712,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D
 	 *  Denegar peticiones de acceso.
 	 *  
 	 *  Negativo: es una petición ya aceptada 
@@ -757,8 +757,8 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
-	 *  Expulsar de un club.
+	 * Acme-Orienteering - 4.H
+	 *  Echar a corredores del club si lo considera adecuado.
 	 *  
 	 *  Positivo: 
 	 */
@@ -807,8 +807,8 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
-	 *  Expulsar de un club.
+	 * Acme-Orienteering - 4.H
+	 *  Echar a corredores del club si lo considera adecuado.
 	 *  
 	 *  Negativo: Hacerlo otro Manager 
 	 */
@@ -865,8 +865,8 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
-	 *  Expulsar de un club.
+	 * Acme-Orienteering - 4.H
+	 *  Echar a corredores del club si lo considera adecuado.
 	 *  
 	 *  Negativo: no está en ningún club 
 	 */
@@ -910,8 +910,8 @@ public class EnteredServiceTest extends AbstractTest {
 		
 	}
 	/**
-	 * Acme-Orienteering - 22.d
-	 *  Expulsar de un club.
+	 * Acme-Orienteering - 4.H
+	 *  Echar a corredores del club si lo considera adecuado.
 	 *  
 	 *  Negativo: no está en ese club pero si en otro
 	 */
@@ -957,7 +957,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D, 4.H
 	 *  Escribir un report sobre el estado de la petición de acceso.
 	 *  
 	 *  Positivo: 
@@ -1011,7 +1011,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D, 4.H
 	 *  Escribir un report sobre el estado de la petición de acceso.
 	 *  
 	 *  Positivo: 
@@ -1065,7 +1065,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D, 4.H
 	 *  Escribir un report sobre el estado de la petición de acceso.
 	 *  
 	 *  Positivo: 
@@ -1119,8 +1119,8 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
-	 *  Escribir un report sobre el estado de la petición de acceso.
+	 * Acme-Orienteering - 4.D, 4.H
+	 *  Escribir un report sobre el estado de la petición de acceso.	 
 	 *  
 	 *  Negativo: Realizarlo otro manager 
 	 */
@@ -1180,7 +1180,7 @@ public class EnteredServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * Acme-Orienteering - 22.d
+	 * Acme-Orienteering - 4.D, 4.H
 	 *  Escribir un report sobre el estado de la petición de acceso.
 	 *  
 	 *  Negativo: cambia si es miembro del club 
