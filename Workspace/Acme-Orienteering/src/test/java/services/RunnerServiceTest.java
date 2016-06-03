@@ -237,7 +237,7 @@ public class RunnerServiceTest extends AbstractTest {
 
 
 	/**
-	 * @see 19.b
+	 * @see 1.B
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar los distintos clubes y
 	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
@@ -270,7 +270,7 @@ public class RunnerServiceTest extends AbstractTest {
 	}
 	
 	/**
-	 * @see 20.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar los distintos clubes y
 	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
