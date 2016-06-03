@@ -44,7 +44,7 @@ public class LeagueServiceTest extends AbstractTest{
 	// Tests ---------------------------------------
 
 	/**
-	 * @see 19.b
+	 * @see 1.B
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar los distintos clubes y
 	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
@@ -76,7 +76,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 19.c
+	 * @see 1.C
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
@@ -103,7 +103,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 20.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar los distintos clubes y
 	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
@@ -137,7 +137,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 20.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
@@ -165,7 +165,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -189,7 +189,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -233,7 +233,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -279,7 +279,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -325,7 +325,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -371,7 +371,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -417,7 +417,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -463,7 +463,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -504,7 +504,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -549,7 +549,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -590,7 +590,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -626,7 +626,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -662,7 +662,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -698,7 +698,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -734,7 +734,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
@@ -770,7 +770,7 @@ public class LeagueServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 24.c
+	 * @see 6.C
 	 *  Un usuario que haya iniciado sesión como administrador debe poder:
 	 *  Manejar las ligas. Esto incluye crear, editar, borrar y listar.
 	 *  
