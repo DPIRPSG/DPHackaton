@@ -231,6 +231,7 @@ public class ClubService {
 		Integer points;
 		ArrayList<Integer> result2, result3;
 		Collection<Club> clubes;
+		ArrayList<Integer> introducidos;
 		int index;
 		
 		result = new ArrayList<ArrayList<Integer>>();	
@@ -261,15 +262,19 @@ public class ClubService {
 		}
 		
 		ordSelDesc(arrayPoints);
+		introducidos = new ArrayList<Integer>();
 		
 		for(int i = 0; i < arrayPoints.length; i++) {
 			result3 = new ArrayList<Integer>();
 			for(ArrayList<Integer> list : result1) {
-				if(list.get(1) == arrayPoints[i]) {
+				
+				if((list.get(1) == arrayPoints[i]) && !introducidos.contains(list.get(0))) {
 					result3.add(i);
 					result3.add(list.get(0));
 					result3.add(list.get(1));
 					result.add(result3);
+					introducidos.add(list.get(0));
+					break;
 				}
 			}
 		}
