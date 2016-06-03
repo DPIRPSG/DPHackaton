@@ -42,7 +42,7 @@ public class ClubServiceTest extends AbstractTest{
 	// Tests ---------------------------------------
 
 	/**
-	 * @see 19.b
+	 * @see 1.B
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar los distintos clubes y
 	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
@@ -71,7 +71,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 20.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar los distintos clubes y
 	 *  poder ver los corredores, y toda la información sobre estos (incluyendo su currículo), que están en dicho club, 
@@ -102,7 +102,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 19.c
+	 * @see 1.C
 	 *  Un usuario que no haya iniciado sesión en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
@@ -134,7 +134,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 20.a
+	 * @see 2.A
 	 *  Un usuario autenticado en el sistema debe poder:
 	 *  Listar las distintas ligas, 
 	 *  ver la clasificación, 
@@ -168,7 +168,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -207,7 +207,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -247,7 +247,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -287,7 +287,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -327,7 +327,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -367,7 +367,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -407,7 +407,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -447,7 +447,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.a
+	 * @see 4.A
 	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
 	 * 	Crear un club, siempre que no sea el gerente de otro.
 	 * 
@@ -487,7 +487,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.b
+	 * @see 4.B
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
 	 *  
@@ -522,7 +522,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.b
+	 * @see 4.B
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
 	 *  
@@ -559,7 +559,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.b
+	 * @see 4.B
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
 	 *  
@@ -599,7 +599,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.b
+	 * @see 4.B
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
 	 *  
@@ -643,7 +643,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.b
+	 * @see 4.B
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
 	 *  
@@ -688,7 +688,7 @@ public class ClubServiceTest extends AbstractTest{
 	}
 	
 	/**
-	 * @see 22.b
+	 * @see 4.B
 	 *  Un usuario que haya iniciado sesión como gerente debe poder:
 	 *  Manejar el club, lo cual incluye editarlo y borrarlo.
 	 *  

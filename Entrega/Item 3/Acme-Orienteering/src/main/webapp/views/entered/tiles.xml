@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="entered/list" extends="master.page">	
+		<put-attribute name="title" value="List of Entereds" />
+		<put-attribute name="body" value="/views/entered/list.jsp" />
+	</definition>
+	
+	<definition name="entered/create" extends="master.page">	
+		<put-attribute name="title" value="Create an entered" />
+		<put-attribute name="body" value="/views/entered/create.jsp" />
+	</definition>
+	
+	<definition name="entered/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit an entered" />
+		<put-attribute name="body" value="/views/entered/edit.jsp" />
+	</definition>
+	
+</tiles-definitions>

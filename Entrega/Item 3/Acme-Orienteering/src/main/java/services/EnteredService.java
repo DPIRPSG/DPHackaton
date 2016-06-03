@@ -1,0 +1,358 @@
+package services;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import domain.Club;
+import domain.Entered;
+import domain.Manager;
+import domain.Runner;
+
+import repositories.EnteredRepository;
+
+@Service
+@Transactional
+public class EnteredService {
+	
+	// Managed repository -----------------------------------------------------
+	
+	@Autowired
+	private EnteredRepository enteredRepository;
+	
+	// Supporting services ----------------------------------------------------
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private RunnerService runnerService;
+	
+	@Autowired
+	private ManagerService managerService;
+	
+	@Autowired
+	private ClubService clubService;
+
+	// Constructors -----------------------------------------------------------
+	
+	public EnteredService(){
+		super();
+	}
+	
+	// Simple CRUD methods ----------------------------------------------------
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @see 21.a
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Hacer peticiones de ingreso a los distintos clubes del sistema.
+	 * @return create an entered to a club from the runner logged
+	 */
+	public Entered create(){
+		
+		Assert.isTrue(actorService.checkAuthority("RUNNER"), "Only a runner can create an entered.");
+		
+		Entered result;
+		Runner runner;
+		
+		runner = runnerService.findByPrincipal();
+		
+		result = new Entered();
+		
+		result.setRunner(runner);
+		
+		result.setIsMember(false);
+		result.setIsDenied(false);
+		result.setRegisterMoment(new Date());
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param entered
+	 * @see 21.a
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Hacer peticiones de ingreso a los distintos clubes del sistema.
+	 * @return the entered saved in the database
+	 */
+	public Entered save(Entered entered){
+		
+		Assert.notNull(entered);
+		
+		if(entered.getId() == 0) {
+			Assert.isTrue(actorService.checkAuthorities("RUNNER"));
+			
+			Runner runner;
+			Club club;
+			Collection<Entered> enteredRunner, enteredClub;
+			
+			runner = runnerService.findByPrincipal();
+			
+			club = clubService.findOneByRunnerId(runner.getId());
+			Assert.isNull(club);
+			
+			entered.setRunner(runner);		
+			entered.setIsMember(false);
+			entered.setIsDenied(false);
+			entered.setRegisterMoment(new Date());
+			entered.setAcceptedMoment(null);
+			entered.setReport(null);
+			
+			entered = enteredRepository.save(entered);
+			
+			enteredRunner = runner.getEntered();
+			enteredRunner.add(entered);
+			runner.setEntered(enteredRunner);
+			runnerService.saveFromEdit(runner);
+			
+			club = entered.getClub();
+			
+			enteredClub = club.getEntered();
+			enteredClub.add(entered);
+			club.setEntered(enteredClub);
+			clubService.saveFromOthers(club);
+			
+		} else {
+			Assert.isTrue(actorService.checkAuthorities("MANAGER"));
+			
+			Manager manager;
+			
+			manager = managerService.findByPrincipal();
+			
+			Assert.isTrue(manager.getId() == entered.getClub().getManager().getId());
+			
+			entered = enteredRepository.save(entered);
+		}
+		
+		
+		
+		return entered;
+	}
+	
+	/**
+	 * 
+	 * @param entered
+	 * @see 22.d
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Aceptar o denegar las peticiones.
+	 */
+	public void accept(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can accept a entered");
+		
+		Runner runner;
+		Collection<Entered> runnerEntereds;
+		Collection<Club> runnerClub = new HashSet<>();
+		
+		runner = entered.getRunner();
+		runnerEntereds = enteredRepository.findAllByRunner(runner.getId());
+		
+		for(Entered e:runnerEntereds){
+			if(e.getIsMember() == true){
+				runnerClub.add(e.getClub());
+				break;
+			}
+		}
+		Assert.isTrue(runnerClub.isEmpty(), "You cannot accept a runner who is in another club.");
+		Assert.isTrue(entered.getIsMember() == false, "You can only accept an unaccepted entered");
+		Assert.isTrue(entered.getIsDenied() == false, "You can only accept an undenied entered");
+		Assert.isNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
+		
+		
+		entered.setIsMember(true);
+		entered.setIsDenied(false);
+		entered.setAcceptedMoment(new Date());
+		this.save(entered);
+		
+	}
+	
+	/**
+	 * 
+	 * @param entered
+	 * @see 22.d
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Aceptar o denegar las peticiones.
+	 */
+	public void deny(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can deny a entered");
+		Assert.isTrue(entered.getIsMember() == false, "You can only deny an unaccepted entered");
+		Assert.isTrue(entered.getIsDenied() == false, "You can only deny an undenied entered");
+		Assert.isNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
+		
+		entered.setIsMember(false);
+		entered.setIsDenied(true);
+		this.save(entered);
+	}
+	
+	/**
+	 * 
+	 * @param entered
+	 * @see 22.h
+	 * 	
+	 */
+	public void expel(Entered entered){
+		
+		Assert.notNull(entered);
+		Assert.isTrue(actorService.checkAuthority("MANAGER"), "Only a manager can expel a entered");
+		Assert.isTrue(entered.getIsMember() == true, "You can only expel an accepted entered");
+		Assert.isTrue(entered.getIsDenied() == false, "You can only expel an undenied entered");
+		Assert.notNull(entered.getAcceptedMoment(), "You can only deny an unaccepted entered");
+		
+		entered.setIsMember(false);
+		entered.setIsDenied(false);
+		this.save(entered);
+	}
+		
+	/**
+	 * 
+	 * @param runnerId
+	 * @see 21.b
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Revisar el estado de las distintas peticiones que haya realizado.
+	 * @return the collection of entered done by a runner
+	 */
+	public Collection<Entered> findAllByRunner(int runnerId){
+		Assert.isTrue(actorService.checkAuthority("RUNNER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllByRunner(runnerId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param runnerId
+	 * @see 21.b
+	 * 	Un usuario que haya iniciado sesión como corredor debe poder:
+	 * 	Revisar el estado de las distintas peticiones que haya realizado.
+	 * @return the collection of entered done by a runner
+	 */
+	public Collection<Entered> findAllByRunnerFromReferee(int runnerId){
+		Assert.isTrue(actorService.checkAuthority("REFEREE"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllByRunner(runnerId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @see 22.c
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Revisar las distintas peticiones de ingreso que le han hecho al club.
+	 * @return the collection of entered that a club receive.
+	 */
+	public Collection<Entered> findAllByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllByClub(clubId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @see
+	 * 	Un usuario que haya iniciado sesión como gerente debe poder:
+	 * 	Aceptar o denegar las peticiones.
+	 * @return the collection of entered not accepted yet that a club have received.
+	 */
+	public Collection<Entered> findAllUnresolvedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllUnresolvedByClub(clubId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @return the collection of accepted entered that a club have.
+	 */
+	public Collection<Entered> findAllAcceptedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllAcceptedByClub(clubId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @return the collection of denied entered that a club have.
+	 */
+	public Collection<Entered> findAllDeniedByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllDeniedByClub(clubId);
+		
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param clubId
+	 * @return the collection of expelled entered that a club have.
+	 */
+	public Collection<Entered> findAllExpelledByClub(int clubId){
+		Assert.isTrue(actorService.checkAuthority("MANAGER"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAllExpelledByClub(clubId);
+		
+		return result;
+	}
+	
+	public Entered findOne(int enteredId){
+		Entered result;
+		
+		result = enteredRepository.findOne(enteredId);
+		
+		return result;
+	}
+	
+	/**
+	 * Necesario para los test
+	 * @return
+	 */
+	public Collection<Entered> findAll(){
+		Assert.isTrue(actorService.checkAuthority("ADMIN"));
+		
+		Collection<Entered> result;
+		
+		result = enteredRepository.findAll();
+		
+		return result;		
+	}
+	
+	public void flush(){
+		enteredRepository.flush();
+	}
+}

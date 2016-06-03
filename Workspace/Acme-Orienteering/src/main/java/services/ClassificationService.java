@@ -118,13 +118,10 @@ public class ClassificationService {
 			isOk = actClub != null;
 			if(isOk){
 				isOk = false;
-//				System.out.println("Corredor: " + p.getRunner().getUserAccount().getUsername());
-//				System.out.println("Número de entereds: " + enteredService.findAllByRunnerFromReferee(p.getRunner().getId()).size());
 				for(Entered e:enteredService.findAllByRunnerFromReferee(p.getRunner().getId())){
-//					System.out.println("Entered: " + e.getClub().getName() + "; momentoAceptación: "+(e.getAcceptedMoment() != null) + "; isDenied: " + e.getIsDenied() + "; isMember:" + e.getIsMember());
 					if (e.getClub().equals(actClub)
 							&& e.getAcceptedMoment() != null){
-						if (e.getAcceptedMoment().after(race.getMoment())) 
+						if (e.getAcceptedMoment().before(race.getMoment())) 
 							isOk = true;
 					}
 				}
@@ -146,9 +143,7 @@ public class ClassificationService {
 				clubClassi.put("totalClub",
 						clubClassi.get("totalClub") + p.getResult());
 
-//				 System.out.println("actor: "
-//				 +p.getRunner().getUserAccount().getUsername() + "; club: " +
-//				 actClub.getName());
+
 
 				raceClassification.put(actClub, clubClassi);
 			}
@@ -160,11 +155,8 @@ public class ClassificationService {
 			clubClassi = raceClassification.get(i);
 			clubTotal.add(clubClassi.get("totalClub") / clubClassi.get("runners"));
 		}
-//		Comparator<Integer> comparador = Collections.reverseOrder();
-//		Collections.sort(clubTotal, comparador);
 		Collections.sort(clubTotal);
 		
-//		System.out.println("Eliminando todas las clasificaciones antigus...");
 		this.deleteAll(this.findAllByClubIdAndRaceId(-1, raceId));
 		
 		for(Club i:raceClassification.keySet()){
@@ -174,7 +166,6 @@ public class ClassificationService {
 			Map<String, Integer> clubClassi;
 
 			clubClassi = raceClassification.get(i);
-//			System.out.println("i: " + i + "; raceId: " + raceId);
 
 			if(ja2.hasNext()){
 				actClassi = ja2.next();
